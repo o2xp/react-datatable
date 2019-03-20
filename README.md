@@ -11,7 +11,7 @@
 ### Installation
 
 ```sh
-$ git clone git@github.deutsche-boerse.de:ww720/cs.react-datatable.git
+$ git clone https://github.com/o2xp/react-datatable.git
 $ cd cs.react-datatable
 $ npm i
 ```
@@ -45,6 +45,6 @@ $ npm run deploy-storybook
 
 ## Authors
 
-* **Morgan Dubois** - *Initial work* - [ww720](https://github.deutsche-boerse.de/ww720)
+* **Morgan Dubois** - *Initial work* - [MorganDbs](https://github.com/MorganDbs)
 * **Mohamed Toure**
 * **Mahatch Kerimov**
