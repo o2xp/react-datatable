@@ -14,6 +14,8 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       codecov;
     fi
+before_deploy:
+  - npm run storybook
 deploy:
   provider: pages
   skip_cleanup: true
