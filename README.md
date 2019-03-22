@@ -1,4 +1,4 @@
-# Table of Contents
+# Table of Contents 
 1. [Documentation for usage](#documentation-for-usage)
 2. [Documentation for development](#documentation-for-development)
 
