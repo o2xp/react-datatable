@@ -19,6 +19,7 @@ class Datatable extends Component {
         <button type="button" onClick={() => dispatch({ type: "DECREMENT" })}>
           Decrement
         </button>
+        test
       </div>
     );
   }
