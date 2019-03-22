@@ -59,7 +59,7 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true?
+    "collectCoverage": true,
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/storybook-static/"
