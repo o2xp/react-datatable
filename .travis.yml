@@ -21,3 +21,5 @@ deploy:
   skip_cleanup: true
   github_token: $GH_TOKEN
   local_dir: docs/out
+  on:
+    branch: develop
