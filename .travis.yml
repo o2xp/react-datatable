@@ -12,5 +12,5 @@ script:
   - npm test
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      npm run deploy-storybook && codecov;
+      codecov && npm run deploy-storybook;
     fi
