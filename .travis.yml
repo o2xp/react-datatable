@@ -15,3 +15,8 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       codecov;
     fi
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: docs/out
