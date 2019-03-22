@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+script:
+  - npm run lint
+  - npm test
+  - npm run build
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master"]; then
+      npm run deploy-storybook;
+    fi
