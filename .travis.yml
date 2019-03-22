@@ -9,6 +9,6 @@ script:
   - npm test
   - npm run build
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "develop" && "$TRAVIS_EVENT_TYPE" !== "pull_request"]; then
+  - if [ "$TRAVIS_BRANCH" == "master"]; then
       npm run deploy-storybook;
     fi
