@@ -4,11 +4,14 @@ node_js:
 cache:
   directories:
   - node_modules
+install:
+  - npm install -g codecov
 script:
   - npm run lint
-  - npm test
   - npm run build
+  - npm test
 after_success:
+  - ncodecov
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       npm run deploy-storybook;
     fi
