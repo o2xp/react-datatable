@@ -11,7 +11,6 @@ script:
   - npm run build
   - npm test
 after_success:
-  - codecov
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      npm run deploy-storybook;
+      npm run deploy-storybook && codecov;
     fi
