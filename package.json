@@ -58,6 +58,8 @@
     }
   },
   "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true?
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/storybook-static/"
