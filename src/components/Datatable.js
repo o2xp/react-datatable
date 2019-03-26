@@ -9,6 +9,7 @@ class Datatable extends Component {
   }
 
   render() {
+    console.log('test');
     const { counter, dispatch } = this.props;
     return (
       <div>
