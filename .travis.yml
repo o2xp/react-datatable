@@ -15,11 +15,11 @@ after_success:
       codecov;
     fi
 before_deploy:
-  - npm run storybook
+  - npm run build-storybook
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GH_TOKEN
-  local_dir: docs/out
+  local_dir: storybook-static/
   on:
     branch: develop
