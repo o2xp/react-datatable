@@ -7,7 +7,7 @@
 
 1. [Code of Conduct](#1-code-of-conduct)
     - 1.1 [Our Pledge](#11-our-pledge)
-    - 1.2 [Our Standarts](#12-our-standarts)
+    - 1.2 [Our Standarts](#12-our-standards)
     - 1.3 [Our Responsabilities](#13-our-responsabilities)
     - 1.4 [Scope](#14-scope)
     - 1.5 [Enforcement](#15-enforcement)
@@ -47,7 +47,7 @@ Examples of unacceptable behavior by participants include:
 * Publishing others' private information, such as a physical or electronic address, without explicit permission
 * Other conduct which could reasonably be considered inappropriate in a professional setting
 
-### 1.3 Our Responsibilities
+### 1.3 Our Responsabilities
 
 Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 
@@ -90,6 +90,37 @@ Before creating enhancement / new feature suggestions, please check if it doesn'
 If you want to contribute to the project you need to follow some steps :
 ![HowToContribute](https://user-images.githubusercontent.com/17124328/54755824-b8fe3080-4bde-11e9-8146-bd59703b7c1a.png)
 
+#### Installation
+
+```sh
+$ cd /path/to/react-datatable
+$ npm i
+```
+
+#### Start the project
+
+```sh
+// Start the project
+$ npm start
+
+// Start storybook
+$ npm run storybook
+```
+
+#### Some usefull commands
+
+```sh
+// Run test
+$ npm run test
+
+// Run linter
+$ npm run lint
+$ npm run lintfix
+
+// Build the library
+$ npm run build
+```
+
 ### 2.4 Pull Requests
 
 1. Follow all instructions in [the template](PULL_REQUEST_TEMPLATE.md)
@@ -98,7 +129,6 @@ If you want to contribute to the project you need to follow some steps :
 
 **Prerequisites:**  
 - You have read the [CONTRIBUTING](https://github.com/o2xp/react-datatable/blob/develop/CONTRIBUTING.md) doc
-- You have signed the [CLA]()
 - Lint and unit tests pass locally with your changes
 - You have added tests that prove your fix is effective or that your feature works
 - You have added necessary documentation (if appropriate)
@@ -108,9 +138,11 @@ While the prerequisites above must be satisfied prior to having your pull reques
 ## 3. Styleguides
 ### 3.1 Git Styleguide
 
-Always be sure that what you are writting is easily understable :
-- To name a branch use this pattern : <name of the feature>-#<number of the issue corresponding> (eg search-filter-#3).
-- To name a commit use this pattern: "feat/fix/enhancement (<what you did>) #<number of the issue corresponding>" (eg "feat (search filter implementation) #3").
+Always be sure that what you are writing is easily understable :
+- To name a branch use this pattern : \<name of the feature\>-#\<number of the issue corresponding\> (eg search-filter-#3).
+- To name a commit use this pattern: "feat/fix/enhancement (\<what you did\>) #\<number of the issue corresponding\>" (eg "feat (search filter implementation) #3").
+
+> **Note:** This is not mandatory if you are clear in your branch and commit naming.
 
 ### 3.2 React Styleguide
 
