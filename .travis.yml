@@ -7,12 +7,9 @@ addons:
 cache:
   directories:
   - node_modules
-install:
-  - npm install -g codecov
 before_script:
-  - npm install codeclimate-test-reporter istanbul -g
+  - npm install codeclimate-test-reporter -g
 script:
-  - istanbul cover node_modules/mocha/bin/_mocha -- -R spec
   - npm run lint
   - npm run build
   - npm test
