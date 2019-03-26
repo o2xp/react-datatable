@@ -1,0 +1,88 @@
+{
+  "name": "@o2xp/react-datatable",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-es2016": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
+    "@dump247/storybook-state": "^1.5.2",
+    "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-knobs": "^5.0.1",
+    "@storybook/addon-links": "^5.0.1",
+    "@storybook/addon-notes": "^5.0.1",
+    "@storybook/addons": "^5.0.1",
+    "@storybook/react": "^5.0.1",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-import-resolver-webpack": "^0.11.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "husky": "^1.3.1",
+    "jest": "^24.3.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.16.4",
+    "react-test-renderer": "^16.8.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "scripts": {
+    "build": "webpack --display-error-details",
+    "lint": "eslint **/*.{js,jsx}",
+    "lintfix": "eslint **/*.{js,jsx} --fix",
+    "start": "webpack --watch",
+    "test": "jest --verbose",
+    "storybook": "start-storybook -p 6006",
+    "deploy-storybook": "storybook-to-ghpages",
+    "build-storybook": "build-storybook",
+    "storybook": "build-storybook -c storybook -o docs/out/storybook"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && jest --verbose"
+    }
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/storybook-static/"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/enzyme.conf.js"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint **/*.{js,jsx} --fix",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
