@@ -50,7 +50,8 @@
     "test": "jest --verbose",
     "storybook": "start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "storybook": "build-storybook -c storybook -o docs/out/storybook"
   },
   "husky": {
     "hooks": {
