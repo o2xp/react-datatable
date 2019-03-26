@@ -156,3 +156,4 @@ Prettier enforces a consistent code style (i.e. code formatting that won't affec
 
 #### Husky
 Husky is here to prevent bad commit and push. Before committing any changes, husky will launch eslint and prettier. If there is any error, your commit wont be effective, you need to correct your code and commit again.
+
