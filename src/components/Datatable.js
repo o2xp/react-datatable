@@ -9,13 +9,12 @@ class Datatable extends Component {
   }
 
   render() {
-    console.log('test');
     const { counter, dispatch } = this.props;
     return (
       <div>
         {counter}
         <button type="button" onClick={() => dispatch({ type: "INCREMENT" })}>
-          Increment
+          Increment +1
         </button>
         <button type="button" onClick={() => dispatch({ type: "DECREMENT" })}>
           Decrement
