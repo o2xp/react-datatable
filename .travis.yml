@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+script:
+  - npm run lint
+  - npm run build
+  - npm test
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      codecov;
+    fi
+before_deploy:
+  - npm run build-storybook
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: storybook-static/
+  on:
+    branch: master
