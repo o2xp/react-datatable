@@ -1,0 +1,7 @@
+node_modules/*
+dist/*
+example/node_modules/*
+*.prettierrc
+storybook-static/
+webpack.config.js
+index.js
