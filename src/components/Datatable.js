@@ -14,10 +14,10 @@ class Datatable extends Component {
       <div>
         {counter}
         <button type="button" onClick={() => dispatch({ type: "INCREMENT" })}>
-          Increment
+          Increment +1
         </button>
         <button type="button" onClick={() => dispatch({ type: "DECREMENT" })}>
-          Decrement
+          Decrement -1
         </button>
       </div>
     );
