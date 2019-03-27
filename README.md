@@ -4,6 +4,8 @@
 
 @o2xp/react-datatable is a modulable component to render data in a table with some additionals features !
 
+See a live example [just here](https://o2xp.github.io/react-datatable/).
+
 # Table of Contents
 - [**Getting Started**](#getting-started)
     - [**Installing**](#installing)
