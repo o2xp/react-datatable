@@ -64,7 +64,7 @@
       "/storybook-static/"
     ],
     "setupFilesAfterEnv": [
-      "./test/enzyme.conf.{js,jsx}"
+      "./test/enzyme.conf.js"
     ]
   },
   "lint-staged": {
