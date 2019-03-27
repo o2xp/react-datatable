@@ -20,7 +20,6 @@
     "@storybook/addon-notes": "^5.0.1",
     "@storybook/addons": "^5.0.1",
     "@storybook/react": "^5.0.1",
-    "@storybook/storybook-deployer": "^2.8.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.9.0",
@@ -49,9 +48,8 @@
     "start": "webpack --watch",
     "test": "jest --verbose",
     "storybook": "start-storybook -p 6006",
-    "deploy-storybook": "storybook-to-ghpages",
-    "build-storybook": "build-storybook",
-    "storybook": "build-storybook -c storybook -o docs/out/storybook"
+    "prettier": "prettier --write *.{js,jsx}",
+    "build-storybook": "build-storybook"
   },
   "husky": {
     "hooks": {
@@ -71,7 +69,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
-      "prettier --write",
+      "prettier --write *.{js,jsx}",
       "eslint **/*.{js,jsx} --fix",
       "git add"
     ]
