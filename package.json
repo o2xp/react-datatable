@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "deepmerge": "^3.2.0",
+    "fast-deep-equal": "^2.0.1",
     "react": "^16.8.4",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1"
@@ -14,12 +18,12 @@
     "@babel/preset-es2016": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "@dump247/storybook-state": "^1.5.2",
-    "@storybook/addon-actions": "^5.0.1",
-    "@storybook/addon-knobs": "^5.0.1",
+    "@storybook/addon-actions": "^5.0.6",
+    "@storybook/addon-knobs": "^5.0.6",
     "@storybook/addon-links": "^5.0.1",
-    "@storybook/addon-notes": "^5.0.1",
+    "@storybook/addon-notes": "^5.0.6",
     "@storybook/addons": "^5.0.1",
-    "@storybook/react": "^5.0.1",
+    "@storybook/react": "^5.0.6",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.9.0",
@@ -36,7 +40,8 @@
     "jest": "^24.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "^1.16.4",
-    "react-test-renderer": "^16.8.4",
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
@@ -58,6 +63,13 @@
   },
   "jest": {
     "coverageDirectory": "./coverage/",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/test/data/",
+      "/redux/store/"
+    ],
     "collectCoverage": true,
     "testPathIgnorePatterns": [
       "/node_modules/",

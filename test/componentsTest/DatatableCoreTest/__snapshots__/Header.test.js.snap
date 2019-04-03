@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render without errors 1`] = `
+<thead
+  className="MuiTableHead-root-1"
+>
+  <tr
+    className="MuiTableRow-root-2 MuiTableRow-head-5"
+  >
+    <th
+      aria-sort={null}
+      className="MuiTableCell-root-7 MuiTableCell-head-8 MuiTableCell-alignLeft-15"
+      scope="col"
+    >
+      <div>
+        id
+      </div>
+    </th>
+    <th
+      aria-sort={null}
+      className="MuiTableCell-root-7 MuiTableCell-head-8 MuiTableCell-alignRight-17"
+      scope="col"
+    >
+      <div>
+        name
+      </div>
+    </th>
+    <th
+      aria-sort={null}
+      className="MuiTableCell-root-7 MuiTableCell-head-8 MuiTableCell-alignRight-17"
+      scope="col"
+    >
+      <div>
+        age
+      </div>
+    </th>
+    <th
+      aria-sort={null}
+      className="MuiTableCell-root-7 MuiTableCell-head-8 MuiTableCell-alignRight-17"
+      scope="col"
+    >
+      <div>
+        adult
+      </div>
+    </th>
+    <th
+      aria-sort={null}
+      className="MuiTableCell-root-7 MuiTableCell-head-8 MuiTableCell-alignRight-17"
+      scope="col"
+    >
+      <div>
+        birth date
+      </div>
+    </th>
+  </tr>
+</thead>
+`;
