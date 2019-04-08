@@ -4,23 +4,41 @@ import {
   initializeOptionsPropType,
   optionsPropType
 } from "./proptypes/proptypes";
-import DatatableBuilder from "./DatatableBuilder";
+import DatatableContainer from "./DatatableContainer";
 import { initializeOptions } from "../redux/actions/datatableActions";
+import { initializeCustomComponents } from "../redux/actions/customComponentsActions";
 
 class DatatableInitializer extends Component {
   constructor(props) {
     super(props);
-    props.initializeOptions(props.optionsInit);
+    const {
+      optionsInit,
+      CustomTableBodyCell,
+      CustomTableBodyRow,
+      CustomTableHeaderCell,
+      CustomTableHeaderRow,
+      customDataTypes
+    } = props;
+    props.initializeOptions(optionsInit);
+    props.initializeCustomComponents({
+      CustomTableBodyCell,
+      CustomTableBodyRow,
+      CustomTableHeaderCell,
+      CustomTableHeaderRow,
+      customDataTypes
+    });
   }
 
   render() {
-    return <DatatableBuilder />;
+    return <DatatableContainer />;
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    initializeOptions: state => dispatch(initializeOptions(state))
+    initializeOptions: state => dispatch(initializeOptions(state)),
+    initializeCustomComponents: state =>
+      dispatch(initializeCustomComponents(state))
   };
 };
 

@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import componentReducer from "./componentReducer";
+import customComponentsReducer from "./customComponentsReducer";
 import datatableReducer from "./datatableReducer";
 
 export default combineReducers({
   datatableReducer,
-  componentReducer
+  customComponentsReducer
 });

@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomizedComponentsPropType = PropTypes.func.isRequired;
 
+export const cellValPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.bool
+]).isRequired;
+
 // Options propstype
-export const titlePropType = PropTypes.string.isRequired;
+export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string.isRequired;
 export const heightPropType = PropTypes.string.isRequired;
 export const keyColumnPropType = PropTypes.string.isRequired;
@@ -19,7 +25,8 @@ export const dateFormatPropType = PropTypes.string;
 export const valuesPropType = PropTypes.array;
 export const requiredPropType = PropTypes.boolean;
 export const valueVerificationPropType = PropTypes.func;
-export const rowsPropType = PropTypes.arrayOf(PropTypes.object);
+export const rowPropType = PropTypes.object;
+export const rowsPropType = PropTypes.arrayOf(rowPropType);
 export const canEditPropType = PropTypes.boolean;
 export const canPrintPropType = PropTypes.boolean;
 export const canDownloadPropType = PropTypes.boolean;
@@ -53,7 +60,7 @@ export const bodyPropType = PropTypes.shape({
   height: heightPropType
 });
 
-export const rowPropType = PropTypes.shape({
+export const rowDimensionPropType = PropTypes.shape({
   height: heightPropType
 });
 
@@ -61,23 +68,23 @@ export const dimensionsPropType = PropTypes.shape({
   datatable: datatablePropType,
   header: headerPropType,
   body: bodyPropType,
-  row: rowPropType
+  row: rowDimensionPropType
 });
 
-export const columnsPropType = PropTypes.arrayOf(
-  PropTypes.shape({
-    id: idPropType,
-    label: labelPropType,
-    colSize: colSizePropType,
-    editable: editablePropType,
-    dataType: dataTypePropType,
-    inputType: inputTypePropType,
-    dateFormat: dateFormatPropType,
-    values: valuesPropType,
-    required: requiredPropType,
-    valueVerification: valueVerificationPropType
-  })
-).isRequired;
+export const columnPropType = PropTypes.shape({
+  id: idPropType,
+  label: labelPropType,
+  colSize: colSizePropType,
+  editable: editablePropType,
+  dataType: dataTypePropType,
+  inputType: inputTypePropType,
+  dateFormat: dateFormatPropType,
+  values: valuesPropType,
+  required: requiredPropType,
+  valueVerification: valueVerificationPropType
+});
+
+export const columnsPropType = PropTypes.arrayOf(columnPropType).isRequired;
 
 export const dataPropType = PropTypes.shape({
   columns: columnsPropType,
