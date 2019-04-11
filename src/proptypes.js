@@ -1,23 +1,23 @@
 import PropTypes from "prop-types";
 
 export const initializeOptionsPropType = PropTypes.func.isRequired;
-export const initializeCustomizedComponentsPropType = PropTypes.func.isRequired;
+export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.number,
   PropTypes.bool
-]).isRequired;
+]);
 
 // Options propstype
 export const titlePropType = PropTypes.string;
-export const widthPropType = PropTypes.string.isRequired;
-export const heightPropType = PropTypes.string.isRequired;
-export const keyColumnPropType = PropTypes.string.isRequired;
+export const widthPropType = PropTypes.string;
+export const heightPropType = PropTypes.string;
+export const keyColumnPropType = PropTypes.string;
 export const fontPropType = PropTypes.string;
-export const idPropType = PropTypes.string.isRequired;
-export const labelPropType = PropTypes.string.isRequired;
-export const colSizePropType = PropTypes.number.isRequired;
+export const idPropType = PropTypes.string;
+export const labelPropType = PropTypes.string;
+export const colSizePropType = PropTypes.number;
 export const editablePropType = PropTypes.boolean;
 export const dataTypePropType = PropTypes.string;
 export const inputTypePropType = PropTypes.string;
@@ -42,26 +42,26 @@ export const rowsSelectablePropType = PropTypes.boolean;
 export const selectPageRowsPropType = PropTypes.boolean;
 export const selectAllRowsPropType = PropTypes.boolean;
 export const tooltipPropType = PropTypes.string;
-export const iconPropType = PropTypes.element.isRequired;
+export const iconPropType = PropTypes.element;
 export const positionPropType = PropTypes.number;
-export const onClickPropType = PropTypes.func.isRequired;
+export const onClickPropType = PropTypes.func;
 export const headOfTheTablePropType = PropTypes.element;
 export const bodyOfTheTablePropType = PropTypes.element;
 
 export const datatablePropType = PropTypes.shape({
-  width: widthPropType
+  width: widthPropType.isRequired
 });
 
 export const headerPropType = PropTypes.shape({
-  height: heightPropType
+  height: heightPropType.isRequired
 });
 
 export const bodyPropType = PropTypes.shape({
-  height: heightPropType
+  height: heightPropType.isRequired
 });
 
 export const rowDimensionPropType = PropTypes.shape({
-  height: heightPropType
+  height: heightPropType.isRequired
 });
 
 export const dimensionsPropType = PropTypes.shape({
@@ -72,8 +72,8 @@ export const dimensionsPropType = PropTypes.shape({
 });
 
 export const columnPropType = PropTypes.shape({
-  id: idPropType,
-  label: labelPropType,
+  id: idPropType.isRequired,
+  label: labelPropType.isRequired,
   colSize: colSizePropType,
   editable: editablePropType,
   dataType: dataTypePropType,
@@ -84,12 +84,12 @@ export const columnPropType = PropTypes.shape({
   valueVerification: valueVerificationPropType
 });
 
-export const columnsPropType = PropTypes.arrayOf(columnPropType).isRequired;
+export const columnsPropType = PropTypes.arrayOf(columnPropType);
 
 export const dataPropType = PropTypes.shape({
   columns: columnsPropType,
   rows: rowsPropType
-}).isRequired;
+});
 
 export const userConfigurationPropType = PropTypes.shape({
   columnsOrder: columnsOrderPropType,
@@ -109,16 +109,16 @@ export const selectionPropType = PropTypes.shape({
 
 export const additionalIconsPropType = PropTypes.shape({
   tooltip: tooltipPropType,
-  icon: iconPropType,
+  icon: iconPropType.isRequired,
   position: positionPropType,
-  onClick: onClickPropType
+  onClick: onClickPropType.isRequired
 });
 
 export const selectionIconsPropType = PropTypes.shape({
   tooltip: tooltipPropType,
-  icon: iconPropType,
+  icon: iconPropType.isRequired,
   position: positionPropType,
-  onClick: onClickPropType
+  onClick: onClickPropType.isRequired
 });
 
 export const featuresPropType = PropTypes.shape({
@@ -139,8 +139,40 @@ export const featuresPropType = PropTypes.shape({
 export const optionsPropType = PropTypes.shape({
   title: titlePropType,
   dimensions: dimensionsPropType,
-  keyColumn: keyColumnPropType,
+  keyColumn: keyColumnPropType.isRequired,
   font: fontPropType,
-  data: dataPropType,
+  data: dataPropType.isRequired,
   features: featuresPropType
 });
+
+export const CustomTableBodyRowPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.element
+]);
+export const CustomTableBodyCellPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.element
+]);
+export const CustomTableHeaderRowPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.element
+]);
+export const CustomTableHeaderCellPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.element
+]);
+export const componentPropType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.element
+]);
+
+export const customDataTypePropType = PropTypes.shape({
+  dataType: dataTypePropType.isRequired,
+  component: componentPropType.isRequired
+});
+
+export const customDataTypesPropType = PropTypes.arrayOf(
+  customDataTypePropType
+);
+
+export const indexPropType = PropTypes.number;

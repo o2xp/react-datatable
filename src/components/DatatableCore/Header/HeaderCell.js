@@ -8,7 +8,7 @@ import {
   TimeWrapper,
   DateTimeWrapper
 } from "../CellTypes";
-import { columnPropType } from "../../proptypes/proptypes";
+import { columnPropType } from "../../../proptypes";
 
 class HeaderCell extends Component {
   buildHeaderCell = () => {

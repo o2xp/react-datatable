@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { TableRow } from "@material-ui/core";
 import {
   columnsPropType,
-  columnsOrderPropType
-} from "../../proptypes/proptypes";
+  columnsOrderPropType,
+  CustomTableHeaderCellPropType
+} from "../../../proptypes";
 import HeaderCell from "./HeaderCell";
 
 class HeaderRow extends Component {
   headerCellBuilder = columnId => {
     const { columns, CustomTableHeaderCell } = this.props;
     const column = columns.find(col => col.id === columnId);
-
     if (CustomTableHeaderCell !== null) {
       return <CustomTableHeaderCell column={column} key={columnId} />;
     }
@@ -32,8 +32,9 @@ class HeaderRow extends Component {
 }
 
 HeaderRow.propTypes = {
-  columns: columnsPropType,
-  columnsOrder: columnsOrderPropType
+  columns: columnsPropType.isRequired,
+  columnsOrder: columnsOrderPropType.isRequired,
+  CustomTableHeaderCell: CustomTableHeaderCellPropType
 };
 
 const mapStateToProps = state => {

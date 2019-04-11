@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { TableHead } from "@material-ui/core";
 import {
-  columnsPropType,
-  columnsOrderPropType
-} from "../../proptypes/proptypes";
+  columnsOrderPropType,
+  CustomTableHeaderRowPropType
+} from "../../../proptypes";
 import HeaderRow from "./HeaderRow";
 
 class Header extends Component {
@@ -23,7 +23,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  columnsOrder: columnsOrderPropType
+  columnsOrder: columnsOrderPropType.isRequired,
+  CustomTableHeaderRow: CustomTableHeaderRowPropType
 };
 
 const mapStateToProps = state => {

@@ -1,6 +1,4 @@
-import deepmerge from "deepmerge";
-
-const defaultState = {
+const defaultOptionsSample = {
   title: "",
   dimensions: {
     datatable: {
@@ -48,29 +46,4 @@ const defaultState = {
   }
 };
 
-const overwriteMerge = (destinationArray, sourceArray) => sourceArray;
-
-const initializeOptions = (state, payload) => {
-  const newState = deepmerge(state, payload, {
-    arrayMerge: overwriteMerge
-  });
-
-  if (newState.features.userConfiguration.columnsOrder.length === 0) {
-    newState.features.userConfiguration.columnsOrder = payload.data.columns.map(
-      col => col.id
-    );
-  }
-
-  return newState;
-};
-
-const datatableReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case "INITIALIZE_OPTIONS":
-      return initializeOptions(state, action.payload);
-    default:
-      return state;
-  }
-};
-
-export default datatableReducer;
+export default defaultOptionsSample;

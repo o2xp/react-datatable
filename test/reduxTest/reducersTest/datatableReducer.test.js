@@ -8,7 +8,7 @@ import {
   mergedMinimumOptionsSample,
   maximumOptionsSample,
   mergedMaximumOptionsSample
-} from "../../data/samples";
+} from "../../../data/samples";
 
 const sortingOptions = options => {
   const res = options;

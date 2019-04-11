@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { TableCell } from "@material-ui/core";
 import { connect } from "react-redux";
-import { columnPropType, cellValPropType } from "../../proptypes/proptypes";
+import {
+  columnPropType,
+  cellValPropType,
+  customDataTypesPropType
+} from "../../../proptypes";
 import {
   NumberType,
   TextType,
@@ -11,7 +15,7 @@ import {
   DateTimeType
 } from "../CellTypes";
 
-class BodyCell extends Component {
+export class BodyCell extends Component {
   buildCell = () => {
     const { cellVal, column, customDataTypes } = this.props;
     const customDatatype = customDataTypes.find(
@@ -54,8 +58,9 @@ class BodyCell extends Component {
 }
 
 BodyCell.propTypes = {
-  cellVal: cellValPropType,
-  column: columnPropType.isRequired
+  cellVal: cellValPropType.isRequired,
+  column: columnPropType.isRequired,
+  customDataTypes: customDataTypesPropType.isRequired
 };
 
 const mapStateToProps = state => {

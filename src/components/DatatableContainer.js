@@ -3,7 +3,7 @@ import { Table } from "@material-ui/core";
 import { connect } from "react-redux";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
-import { dataPropType } from "./proptypes/proptypes";
+import { dataPropType } from "../proptypes";
 
 class DatatableContainer extends Component {
   render() {
@@ -30,7 +30,7 @@ class DatatableContainer extends Component {
 }
 
 DatatableContainer.propTypes = {
-  data: dataPropType
+  data: dataPropType.isRequired
 };
 
 const mapStateToProps = state => {

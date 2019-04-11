@@ -1,9 +1,9 @@
 import * as actions from "../../../src/redux/actions/datatableActions";
-import sample1 from "../../data/samples";
+import { simpleOptionsSample } from "../../../data/samples";
 
 describe("Datatable actions", () => {
   it("should create an action to initialize options", () => {
-    const payload = sample1;
+    const payload = simpleOptionsSample;
     const expectedAction = {
       type: "INITIALIZE_OPTIONS",
       payload
@@ -12,7 +12,7 @@ describe("Datatable actions", () => {
   });
 
   it("should create an action to update options", () => {
-    const payload = sample1;
+    const payload = simpleOptionsSample;
     const expectedAction = {
       type: "UPDATE",
       payload

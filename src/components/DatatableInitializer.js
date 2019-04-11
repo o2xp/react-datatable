@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   initializeOptionsPropType,
-  optionsPropType
-} from "./proptypes/proptypes";
+  initializeCustomComponentsPropType,
+  optionsPropType,
+  CustomTableBodyRowPropType,
+  CustomTableBodyCellPropType,
+  CustomTableHeaderRowPropType,
+  CustomTableHeaderCellPropType,
+  customDataTypesPropType
+} from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
 import { initializeOptions } from "../redux/actions/datatableActions";
-import { initializeCustomComponents } from "../redux/actions/customComponentsActions";
+import initializeCustomComponents from "../redux/actions/customComponentsActions";
 
 class DatatableInitializer extends Component {
   constructor(props) {
@@ -44,7 +50,13 @@ const mapDispatchToProps = dispatch => {
 
 DatatableInitializer.propTypes = {
   initializeOptions: initializeOptionsPropType,
-  optionsInit: optionsPropType
+  initializeCustomComponents: initializeCustomComponentsPropType,
+  optionsInit: optionsPropType.isRequired,
+  CustomTableBodyCell: CustomTableBodyCellPropType,
+  CustomTableBodyRow: CustomTableBodyRowPropType,
+  CustomTableHeaderCell: CustomTableHeaderCellPropType,
+  CustomTableHeaderRow: CustomTableHeaderRowPropType,
+  customDataTypes: customDataTypesPropType
 };
 
 export default connect(
