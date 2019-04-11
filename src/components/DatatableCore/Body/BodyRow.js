@@ -17,7 +17,7 @@ export class BodyRow extends Component {
     const key = `row-${rowIndex}-cell-${cellIndex}`;
 
     if (val === null || val === undefined) {
-      return <TableCell key={key} />;
+      return <TableCell className="no-data" key={key} />;
     }
     if (CustomTableBodyCell !== null) {
       return <CustomTableBodyCell cellVal={val} column={column} key={key} />;

@@ -1,4 +1,6 @@
 import storeSample from "./storeSample";
+import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
+import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
 import storeNoDataSample from "./storeNoDataSample";
 import simpleOptionsSample from "./simpleOptionsSample";
 import simpleOptionsNoDataSample from "./simpleOptionsNoDataSample";
@@ -16,6 +18,8 @@ import customDataTypesSample from "./customDataTypesSample";
 
 export {
   storeSample,
+  storeNoCustomComponentsSample,
+  storeCustomTableBodyCellComponentSample,
   storeNoDataSample,
   simpleOptionsSample,
   simpleOptionsNoDataSample,
