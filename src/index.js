@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Provider} from "react-redux";
 import store from "./redux/store/store";
 import DatatableInitializer from "./components/DatatableInitializer";
@@ -16,16 +16,33 @@ class Datatable extends Component {
     } = this.props;
     
     return (
-      <Provider store={store}>
-        <DatatableInitializer 
-          optionsInit={options} 
-          CustomTableBodyCell={CustomTableBodyCell} 
-          CustomTableBodyRow={CustomTableBodyRow} 
-          CustomTableHeaderCell={CustomTableHeaderCell} 
-          CustomTableHeaderRow={CustomTableHeaderRow} 
-          customDataTypes={customDataTypes}
-        />
-      </Provider>
+      <Fragment>
+        
+        {options.data && options.keyColumn &&
+          <Provider store={store}>
+            <DatatableInitializer 
+              optionsInit={options} 
+              CustomTableBodyCell={CustomTableBodyCell} 
+              CustomTableBodyRow={CustomTableBodyRow} 
+              CustomTableHeaderCell={CustomTableHeaderCell} 
+              CustomTableHeaderRow={CustomTableHeaderRow} 
+              customDataTypes={customDataTypes}
+            />
+          </Provider>
+        }
+        {
+          options.data && !options.keyColumn &&
+          <div id="no-keyColumn">@o2xp/react-datatable : You forgot to give keyColumn..</div>
+        }
+        {
+          !options.data && options.keyColumn &&
+          <div id="no-data">@o2xp/react-datatable : You forgot to give data..</div>
+        }
+        {
+          !options.data && !options.keyColumn &&
+          <div id="no-data-and-no-keyColumn">@o2xp/react-datatable : You forgot to give data and keyColumn..</div>
+        }
+      </Fragment>
     );
   }
 }
