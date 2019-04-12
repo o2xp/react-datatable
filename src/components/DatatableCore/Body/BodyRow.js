@@ -10,7 +10,7 @@ import {
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
 
-export class BodyRow extends Component {
+class BodyRow extends Component {
   bodyCellBuilder = (val, columnId, cellIndex) => {
     const { columns, CustomTableBodyCell, rowIndex } = this.props;
     const column = columns.find(col => col.id === columnId);

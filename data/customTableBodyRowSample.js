@@ -9,6 +9,7 @@ import {
 const customTableBodyRowSample = ({ row, columnsOrder, rowIndex }) => {
   return (
     <TableRow
+      className={rowIndex % 2 === 0 ? "stripped" : "not-stripped"}
       style={{ background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f" }}
     >
       {columnsOrder.map(columnId => {

@@ -1,6 +1,9 @@
 import storeSample from "./storeSample";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
+import storeCustomTableBodyRowComponentSample from "./storeCustomTableBodyRowComponentSample";
+import storeCustomTableHeaderCellComponentSample from "./storeCustomTableHeaderCellComponentSample";
+import storeCustomTableHeaderRowComponentSample from "./storeCustomTableHeaderRowComponentSample";
 import storeNoDataSample from "./storeNoDataSample";
 import simpleOptionsSample from "./simpleOptionsSample";
 import simpleOptionsNoDataSample from "./simpleOptionsNoDataSample";
@@ -20,6 +23,9 @@ export {
   storeSample,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,
+  storeCustomTableBodyRowComponentSample,
+  storeCustomTableHeaderCellComponentSample,
+  storeCustomTableHeaderRowComponentSample,
   storeNoDataSample,
   simpleOptionsSample,
   simpleOptionsNoDataSample,
