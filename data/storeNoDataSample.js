@@ -55,6 +55,13 @@ const storeNoDataSample = {
         }
       ]
     }
+  },
+  customComponentsReducer: {
+    CustomTableBodyCell: null,
+    CustomTableBodyRow: null,
+    CustomTableHeaderCell: null,
+    CustomTableHeaderRow: null,
+    customDataTypes: null
   }
 };
 

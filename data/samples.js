@@ -5,6 +5,7 @@ import storeCustomTableBodyRowComponentSample from "./storeCustomTableBodyRowCom
 import storeCustomTableHeaderCellComponentSample from "./storeCustomTableHeaderCellComponentSample";
 import storeCustomTableHeaderRowComponentSample from "./storeCustomTableHeaderRowComponentSample";
 import storeNoDataSample from "./storeNoDataSample";
+import storeNoRowsDataSample from "./storeNoRowsDataSample";
 import simpleOptionsSample from "./simpleOptionsSample";
 import simpleOptionsNoDataSample from "./simpleOptionsNoDataSample";
 import maximumOptionsSample from "./maximumOptionsSample";
@@ -27,6 +28,7 @@ export {
   storeCustomTableHeaderCellComponentSample,
   storeCustomTableHeaderRowComponentSample,
   storeNoDataSample,
+  storeNoRowsDataSample,
   simpleOptionsSample,
   simpleOptionsNoDataSample,
   maximumOptionsSample,

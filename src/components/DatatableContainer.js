@@ -10,15 +10,10 @@ class DatatableContainer extends Component {
     const { data } = this.props;
     return (
       <Fragment>
-        {data.columns.length > 0 && data.rows.length > 0 && (
+        {data.columns.length > 0 && (
           <Table>
             <Header />
-            <Body />
-          </Table>
-        )}
-        {data.columns.length > 0 && data.rows.length === 0 && (
-          <Table>
-            <Header />
+            {data.rows.length > 0 && <Body />}
           </Table>
         )}
         {(data.columns.length === 0 || data.rows.length === 0) && (
