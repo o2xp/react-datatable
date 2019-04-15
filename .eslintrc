@@ -4,7 +4,9 @@
   "parser": "babel-eslint",
   "rules": {
     "react/prefer-stateless-function": 0,
+    "react/require-default-props": 0,
     "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": 0,
     "react/jsx-filename-extension": [
       1,
       {
@@ -12,7 +14,7 @@
       }
     ],
     "prettier/prettier": "error",
-    "max-len": ["error", 80]
+    "max-len": 0
   },
   "env": {
     "browser": true,
