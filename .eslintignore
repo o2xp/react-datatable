@@ -5,3 +5,4 @@ example/node_modules/*
 storybook-static/
 webpack.config.js
 index.js
+config/*
