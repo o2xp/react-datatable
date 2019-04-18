@@ -7,9 +7,15 @@ import {
   features
 } from "./optionsObjectSample";
 
-const mergedSimpleOptionsSample = {
+const mergedSimpleOptionsSampleHeightResize = {
   title,
-  dimensions,
+  dimensions: {
+    ...dimensions,
+    body: {
+      height: "30vh",
+      heightNumber: 150
+    }
+  },
   keyColumn,
   font,
   data,
@@ -19,4 +25,4 @@ const mergedSimpleOptionsSample = {
   }
 };
 
-export default mergedSimpleOptionsSample;
+export default mergedSimpleOptionsSampleHeightResize;

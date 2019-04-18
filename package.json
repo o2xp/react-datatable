@@ -10,6 +10,8 @@
     "moment": "^2.24.0",
     "react": "^16.8.4",
     "react-redux": "^6.0.1",
+    "react-scroll-sync": "^0.7.0",
+    "react-window": "^1.8.1",
     "redux": "^4.0.1",
     "styled-components": "^4.2.0"
   },
@@ -43,6 +45,7 @@
     "jest-styled-components": "^6.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "^1.16.4",
+    "react-virtualized": "^9.21.0",
     "redux-mock-store": "^1.5.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",

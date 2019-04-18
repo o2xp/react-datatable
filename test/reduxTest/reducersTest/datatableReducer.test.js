@@ -4,25 +4,15 @@ import {
   defaultOptionsSample,
   simpleOptionsSample,
   mergedSimpleOptionsSample,
+  mergedSimpleOptionsSampleWidthResize,
+  mergedSimpleOptionsSampleHeightResize,
+  mergedSimpleOptionsSampleWidthHeightResize,
   minimumOptionsSample,
   mergedMinimumOptionsSample,
   maximumOptionsSample,
   mergedMaximumOptionsSample
 } from "../../../data/samples";
-
-const sortingOptions = options => {
-  const res = options;
-  res.data.columns = res.data.columns.map(el => el.id).sort();
-  res.data.rows = res.data.rows.map(el => el.id).sort();
-  res.features.additionalIcons = res.features.additionalIcons
-    .map(el => el.tooltip)
-    .sort();
-  res.features.selectionIcons = res.features.selectionIcons
-    .map(el => el.tooltip)
-    .sort();
-
-  return res;
-};
+import cloneObject from "../../functions";
 
 describe("datatableReducer reducer", () => {
   it("should return the initial state", () => {
@@ -33,48 +23,85 @@ describe("datatableReducer reducer", () => {
     it("simple options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: simpleOptionsSample
+        payload: cloneObject(simpleOptionsSample)
       });
 
-      const initializedOptionsSorted = sortingOptions(initializedOptions);
-      const mergedSimpleOptionsSampleSorted = sortingOptions(
-        mergedSimpleOptionsSample
-      );
-
       expect(
-        equal(initializedOptionsSorted, mergedSimpleOptionsSampleSorted)
+        equal(initializedOptions, cloneObject(mergedSimpleOptionsSample))
       ).toBeTruthy();
     });
 
     it("minimum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: minimumOptionsSample
+        payload: cloneObject(minimumOptionsSample)
       });
 
-      const initializedOptionsSorted = sortingOptions(initializedOptions);
-      const mergedMinimumOptionSampleSorted = sortingOptions(
-        mergedMinimumOptionsSample
-      );
-
       expect(
-        equal(initializedOptionsSorted, mergedMinimumOptionSampleSorted)
+        equal(initializedOptions, cloneObject(mergedMinimumOptionsSample))
       ).toBeTruthy();
     });
 
     it("maximum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: maximumOptionsSample
+        payload: cloneObject(maximumOptionsSample)
       });
 
-      const initializedOptionsSorted = sortingOptions(initializedOptions);
-      const mergedMaximumOptionsSampleSorted = sortingOptions(
-        mergedMaximumOptionsSample
-      );
+      expect(
+        equal(initializedOptions, cloneObject(mergedMaximumOptionsSample))
+      ).toBeTruthy();
+    });
+  });
+
+  describe("should handle UPDATE_COMPONENT_SIZE", () => {
+    afterEach(() => {
+      global.innerWidth = 1024;
+      global.innerHeight = 768;
+    });
+
+    it("with initial size", () => {
+      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+        type: "UPDATE_COMPONENT_SIZE"
+      });
+
+      expect(equal(state, cloneObject(mergedSimpleOptionsSample))).toBeTruthy();
+    });
+
+    it("with width resize", () => {
+      global.innerWidth = 2000;
+
+      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+        type: "UPDATE_COMPONENT_SIZE"
+      });
 
       expect(
-        equal(initializedOptionsSorted, mergedMaximumOptionsSampleSorted)
+        equal(state, cloneObject(mergedSimpleOptionsSampleWidthResize))
+      ).toBeTruthy();
+    });
+
+    it("with height resize", () => {
+      global.innerHeight = 500;
+
+      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+        type: "UPDATE_COMPONENT_SIZE"
+      });
+
+      expect(
+        equal(state, cloneObject(mergedSimpleOptionsSampleHeightResize))
+      ).toBeTruthy();
+    });
+
+    it("with height and width resize", () => {
+      global.innerWidth = 2000;
+      global.innerHeight = 500;
+
+      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+        type: "UPDATE_COMPONENT_SIZE"
+      });
+
+      expect(
+        equal(state, cloneObject(mergedSimpleOptionsSampleWidthHeightResize))
       ).toBeTruthy();
     });
   });

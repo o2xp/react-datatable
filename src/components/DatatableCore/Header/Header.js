@@ -1,29 +1,45 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { TableHead } from "@material-ui/core";
+import { ScrollSyncPane } from "react-scroll-sync";
 import {
   columnsOrderPropType,
+  columnSizeMultiplierPropType,
+  widthNumberPropType,
   CustomTableHeaderRowPropType
 } from "../../../proptypes";
 import HeaderRow from "./HeaderRow";
 
 class Header extends Component {
   headerRowBuilder = () => {
-    const { columnsOrder, CustomTableHeaderRow } = this.props;
+    const {
+      columnsOrder,
+      CustomTableHeaderRow,
+      columnSizeMultiplier,
+      widthDatatable
+    } = this.props;
 
     if (CustomTableHeaderRow !== null) {
-      return <CustomTableHeaderRow columnsOrder={columnsOrder} />;
+      return (
+        <div style={{ width: widthDatatable - 17, overflow: "hidden" }}>
+          <CustomTableHeaderRow
+            columnsOrder={columnsOrder}
+            columnSizeMultiplier={columnSizeMultiplier}
+          />
+        </div>
+      );
     }
     return <HeaderRow />;
   };
 
   render() {
-    return <TableHead>{this.headerRowBuilder()}</TableHead>;
+    return <ScrollSyncPane>{this.headerRowBuilder()}</ScrollSyncPane>;
   }
 }
 
 Header.propTypes = {
   columnsOrder: columnsOrderPropType.isRequired,
+  columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
+  widthDatatable: widthNumberPropType.isRequired,
   CustomTableHeaderRow: CustomTableHeaderRowPropType
 };
 
@@ -31,6 +47,9 @@ const mapStateToProps = state => {
   return {
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
+    widthDatatable: state.datatableReducer.dimensions.datatable.widthNumber,
+    columnSizeMultiplier:
+      state.datatableReducer.dimensions.columnSizeMultiplier,
     CustomTableHeaderRow: state.customComponentsReducer.CustomTableHeaderRow
   };
 };

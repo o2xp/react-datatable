@@ -11,7 +11,10 @@ import {
   customDataTypesPropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
-import { initializeOptions } from "../redux/actions/datatableActions";
+import {
+  initializeOptions,
+  updateComponentSize
+} from "../redux/actions/datatableActions";
 import initializeCustomComponents from "../redux/actions/customComponentsActions";
 
 class DatatableInitializer extends Component {
@@ -35,6 +38,29 @@ class DatatableInitializer extends Component {
     });
   }
 
+  componentDidMount() {
+    let timeout;
+    const { props } = this;
+
+    window.addEventListener(
+      "resize",
+      () => {
+        if (!timeout) {
+          timeout = setTimeout(() => {
+            timeout = null;
+            props.updateComponentSize();
+          }, 50);
+        }
+      },
+      false
+    );
+  }
+
+  componentWillUnmount() {
+    const { props } = this;
+    window.addEventListener("resize", () => props.updateComponentSize());
+  }
+
   render() {
     return <DatatableContainer />;
   }
@@ -43,6 +69,7 @@ class DatatableInitializer extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     initializeOptions: state => dispatch(initializeOptions(state)),
+    updateComponentSize: () => dispatch(updateComponentSize()),
     initializeCustomComponents: state =>
       dispatch(initializeCustomComponents(state))
   };

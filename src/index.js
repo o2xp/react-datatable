@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Provider} from "react-redux";
 import store from "./redux/store/store";
 import DatatableInitializer from "./components/DatatableInitializer";
-
+import "./app.css";
 
 class Datatable extends Component {
   render() {
@@ -17,7 +17,6 @@ class Datatable extends Component {
     
     return (
       <Fragment>
-        
         {options.data && options.keyColumn &&
           <Provider store={store}>
             <DatatableInitializer 

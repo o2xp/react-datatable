@@ -12,6 +12,9 @@ import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
+import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
+import mergedSimpleOptionsSampleHeightResize from "./mergedSimpleOptionsSampleHeightResize";
+import mergedSimpleOptionsSampleWidthHeightResize from "./mergedSimpleOptionsSampleWidthHeightResize";
 import mergedMaximumOptionsSample from "./mergedMaximumOptionsSample";
 import mergedMinimumOptionsSample from "./mergedMinimumOptionsSample";
 import customTableBodyRowSample from "./customTableBodyRowSample";
@@ -35,6 +38,9 @@ export {
   minimumOptionsSample,
   defaultOptionsSample,
   mergedSimpleOptionsSample,
+  mergedSimpleOptionsSampleWidthResize,
+  mergedSimpleOptionsSampleHeightResize,
+  mergedSimpleOptionsSampleWidthHeightResize,
   mergedMaximumOptionsSample,
   mergedMinimumOptionsSample,
   customTableBodyRowSample,

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { TableCell } from "@material-ui/core";
 import {
   NumberWrapper,
   TextWrapper,
@@ -8,36 +7,41 @@ import {
   TimeWrapper,
   DateTimeWrapper
 } from "../CellTypes";
-import { columnPropType } from "../../../proptypes";
+import { columnPropType, widthPropType } from "../../../proptypes";
 
 class HeaderCell extends Component {
   buildHeaderCell = () => {
-    const { column } = this.props;
+    const { width, column } = this.props;
     switch (column.dataType) {
       case "number":
-        return <NumberWrapper>{column.label}</NumberWrapper>;
+        return <NumberWrapper style={{ width }}>{column.label}</NumberWrapper>;
       case "text":
-        return <TextWrapper>{column.label}</TextWrapper>;
+        return <TextWrapper style={{ width }}>{column.label}</TextWrapper>;
       case "boolean":
-        return <BooleanWrapper>{column.label}</BooleanWrapper>;
+        return (
+          <BooleanWrapper style={{ width }}>{column.label}</BooleanWrapper>
+        );
       case "date":
-        return <DateWrapper>{column.label}</DateWrapper>;
+        return <DateWrapper style={{ width }}>{column.label}</DateWrapper>;
       case "time":
-        return <TimeWrapper>{column.label}</TimeWrapper>;
+        return <TimeWrapper style={{ width }}>{column.label}</TimeWrapper>;
       case "dateTime":
-        return <DateTimeWrapper>{column.label}</DateTimeWrapper>;
+        return (
+          <DateTimeWrapper style={{ width }}>{column.label}</DateTimeWrapper>
+        );
       default:
-        return <TextWrapper>{column.label}</TextWrapper>;
+        return <TextWrapper style={{ width }}>{column.label}</TextWrapper>;
     }
   };
 
   render() {
-    return <TableCell>{this.buildHeaderCell()}</TableCell>;
+    return <div className="Table-Header-Cell">{this.buildHeaderCell()}</div>;
   }
 }
 
 HeaderCell.propTypes = {
-  column: columnPropType.isRequired
+  column: columnPropType.isRequired,
+  width: widthPropType.isRequired
 };
 
 export default HeaderCell;

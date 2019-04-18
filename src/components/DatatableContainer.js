@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Table } from "@material-ui/core";
 import { connect } from "react-redux";
+import { ScrollSync } from "react-scroll-sync";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
 import { dataPropType } from "../proptypes";
@@ -9,17 +9,19 @@ class DatatableContainer extends Component {
   render() {
     const { data } = this.props;
     return (
-      <Fragment>
-        {data.columns.length > 0 && (
-          <Table>
-            <Header />
-            {data.rows.length > 0 && <Body />}
-          </Table>
-        )}
-        {(data.columns.length === 0 || data.rows.length === 0) && (
-          <div id="no-rows">There is no data yet</div>
-        )}
-      </Fragment>
+      <ScrollSync>
+        <Fragment>
+          {data.columns.length > 0 && (
+            <div className="Table">
+              <Header />
+              {data.rows.length > 0 && <Body />}
+            </div>
+          )}
+          {(data.columns.length === 0 || data.rows.length === 0) && (
+            <div id="no-rows">There is no data yet</div>
+          )}
+        </Fragment>
+      </ScrollSync>
     );
   }
 }

@@ -1,97 +1,30 @@
-import React from "react";
-import { CallSplit as CallSplitIcon } from "@material-ui/icons";
+import {
+  title,
+  keyColumn,
+  columns,
+  selectionIcons
+} from "./optionsObjectSample";
 
 const simpleOptionsNoDataSample = {
-  title: "My super datatable",
+  title,
   dimensions: {
     datatable: {
       width: "90vw"
     },
-    header: {
-      height: "60px"
+    body: {
+      height: "30vh"
     }
   },
-  keyColumn: "id",
+  keyColumn,
   data: {
-    columns: [
-      {
-        id: "id",
-        label: "id",
-        colSize: 10,
-        editable: true,
-        required: true,
-        dataType: "text",
-        valueVerification: val => {
-          const error = val === "whatever";
-          const message = val === "whatever" ? "Value is not valid" : "";
-          return {
-            error,
-            message
-          };
-        }
-      },
-      {
-        id: "name",
-        label: "name",
-        colSize: 20,
-        editable: false,
-        dataType: "text"
-      },
-      {
-        id: "age",
-        label: "age",
-        colSize: 3,
-        editable: true,
-        required: false,
-        dataType: "number",
-        valueVerification: val => {
-          const error = val > 100;
-          const message = val > 100 ? "Value is too big" : "";
-          return {
-            error,
-            message
-          };
-        }
-      },
-      {
-        id: "adult",
-        label: "adult",
-        colSize: 0,
-        editable: false,
-        dataType: "boolean",
-        inputType: "checkbox"
-      },
-      {
-        id: "birthDate",
-        label: "birth date",
-        colSize: 10,
-        editable: false,
-        dataType: "date",
-        inputType: "date",
-        dateFormat: "YYYY-MM-DDTHH:MM:ss"
-      },
-      {
-        id: "iban",
-        label: "iban",
-        colSize: 10,
-        editable: false,
-        dataType: "iban"
-      }
-    ],
+    columns,
     rows: []
   },
   features: {
     canEdit: true,
     canPrint: true,
     canDownload: true,
-    selectionIcons: [
-      {
-        tooltip: "Selected Rows",
-        icon: <CallSplitIcon />,
-        position: 5,
-        onClick: rows => rows
-      }
-    ]
+    selectionIcons
   }
 };
 export default simpleOptionsNoDataSample;

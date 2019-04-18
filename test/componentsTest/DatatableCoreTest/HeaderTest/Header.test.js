@@ -2,7 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import { Table, TableRow } from "@material-ui/core";
+import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import Header from "../../../../src/components/DatatableCore/Header/Header";
 import HeaderRow from "../../../../src/components/DatatableCore/Header/HeaderRow";
 import {
@@ -20,7 +20,11 @@ describe("Header component", () => {
   it("connected should render without errors", () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <Header />
+        <ScrollSync>
+          <ScrollSyncPane>
+            <Header />
+          </ScrollSyncPane>
+        </ScrollSync>
       </Provider>
     );
     expect(wrapper.find("Connect(Header)")).toHaveLength(1);
@@ -29,9 +33,11 @@ describe("Header component", () => {
   it("should create a header with 1 row", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <Table>
-          <Header />
-        </Table>
+        <ScrollSync>
+          <ScrollSyncPane>
+            <Header />
+          </ScrollSyncPane>
+        </ScrollSync>
       </Provider>
     );
 
@@ -41,12 +47,14 @@ describe("Header component", () => {
   it("should create a body with custom row", () => {
     const wrapper = mount(
       <Provider store={storeCustomComponent}>
-        <Table>
-          <Header />
-        </Table>
+        <ScrollSync>
+          <ScrollSyncPane>
+            <Header />
+          </ScrollSyncPane>
+        </ScrollSync>
       </Provider>
     );
 
-    expect(wrapper.find(TableRow)).toHaveLength(1);
+    expect(wrapper.find(".Table-Row")).toHaveLength(1);
   });
 });

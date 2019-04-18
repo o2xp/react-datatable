@@ -2,17 +2,22 @@ const defaultOptionsSample = {
   title: "",
   dimensions: {
     datatable: {
-      width: "100vw"
+      width: "100vw",
+      widthNumber: 0
     },
     header: {
-      height: "60px"
+      height: "60px",
+      heightNumber: 0
     },
     body: {
-      height: "300px"
+      height: "300px",
+      heightNumber: 0
     },
     row: {
-      height: "60px"
-    }
+      height: "60px",
+      heightNumber: 0
+    },
+    columnSizeMultiplier: 1
   },
   keyColumn: null,
   font: "Arial",
