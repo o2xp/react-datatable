@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { throttle } from "lodash";
 import {
   initializeOptionsPropType,
   initializeCustomComponentsPropType,
+  updateComponentSizePropType,
   optionsPropType,
   CustomTableBodyRowPropType,
   CustomTableBodyCellPropType,
@@ -12,53 +14,45 @@ import {
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
 import {
-  initializeOptions,
-  updateComponentSize
+  initializeOptions as initializeOptionsAction,
+  updateComponentSize as updateComponentSizeAction
 } from "../redux/actions/datatableActions";
-import initializeCustomComponents from "../redux/actions/customComponentsActions";
+import initializeCustomComponentsAction from "../redux/actions/customComponentsActions";
 
-class DatatableInitializer extends Component {
-  constructor(props) {
-    super(props);
+export class DatatableInitializer extends Component {
+  componentDidMount() {
     const {
       optionsInit,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
       CustomTableHeaderRow,
-      customDataTypes
-    } = props;
-    props.initializeOptions(optionsInit);
-    props.initializeCustomComponents({
+      customDataTypes,
+      updateComponentSize,
+      initializeOptions,
+      initializeCustomComponents
+    } = this.props;
+
+    initializeOptions(optionsInit);
+    initializeCustomComponents({
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
       CustomTableHeaderRow,
       customDataTypes
     });
-  }
-
-  componentDidMount() {
-    let timeout;
-    const { props } = this;
+    updateComponentSize();
 
     window.addEventListener(
       "resize",
-      () => {
-        if (!timeout) {
-          timeout = setTimeout(() => {
-            timeout = null;
-            props.updateComponentSize();
-          }, 50);
-        }
-      },
+      throttle(() => updateComponentSize(), 100),
       false
     );
   }
 
   componentWillUnmount() {
-    const { props } = this;
-    window.addEventListener("resize", () => props.updateComponentSize());
+    const { updateComponentSize } = this.props;
+    window.removeEventListener("resize", () => updateComponentSize());
   }
 
   render() {
@@ -68,16 +62,17 @@ class DatatableInitializer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    initializeOptions: state => dispatch(initializeOptions(state)),
-    updateComponentSize: () => dispatch(updateComponentSize()),
+    initializeOptions: state => dispatch(initializeOptionsAction(state)),
+    updateComponentSize: () => dispatch(updateComponentSizeAction()),
     initializeCustomComponents: state =>
-      dispatch(initializeCustomComponents(state))
+      dispatch(initializeCustomComponentsAction(state))
   };
 };
 
 DatatableInitializer.propTypes = {
   initializeOptions: initializeOptionsPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
+  updateComponentSize: updateComponentSizePropType,
   optionsInit: optionsPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType,
   CustomTableBodyRow: CustomTableBodyRowPropType,

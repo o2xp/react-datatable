@@ -3,7 +3,7 @@ import {
   rowPropType,
   columnsOrderPropType,
   indexPropType,
-  heightPropType,
+  heightNumberPropType,
   columnSizeMultiplierPropType
 } from "../src/proptypes";
 import { simpleOptionsSample } from "./samples";
@@ -18,7 +18,9 @@ const customTableBodyRowSample = ({
   const { columns } = simpleOptionsSample.data;
   return (
     <div
-      className="Table-Row"
+      className={
+        rowIndex % 2 === 0 ? "Table-Row stripped" : "Table-Row not-stripped"
+      }
       style={{
         height,
         background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f"
@@ -43,7 +45,7 @@ customTableBodyRowSample.propTypes = {
   row: rowPropType,
   columnsOrder: columnsOrderPropType,
   rowIndex: indexPropType,
-  height: heightPropType,
+  height: heightNumberPropType,
   columnSizeMultiplier: columnSizeMultiplierPropType
 };
 

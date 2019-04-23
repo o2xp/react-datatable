@@ -52,6 +52,32 @@ describe("datatableReducer reducer", () => {
         equal(initializedOptions, cloneObject(mergedMaximumOptionsSample))
       ).toBeTruthy();
     });
+
+    it("default colSize", () => {
+      const simpleOptionsSampleNoColSize = cloneObject(simpleOptionsSample);
+      const mergedSimpleOptionsSampleNoColSize = cloneObject(
+        mergedSimpleOptionsSample
+      );
+
+      simpleOptionsSampleNoColSize.data.columns.forEach(col => {
+        delete col.colSize;
+      });
+      mergedSimpleOptionsSampleNoColSize.data.columns.forEach(col => {
+        col.colSize = "100px";
+      });
+
+      const initializedOptions = datatableReducer(undefined, {
+        type: "INITIALIZE_OPTIONS",
+        payload: cloneObject(simpleOptionsSampleNoColSize)
+      });
+
+      expect(
+        equal(
+          initializedOptions,
+          cloneObject(mergedSimpleOptionsSampleNoColSize)
+        )
+      ).toBeTruthy();
+    });
   });
 
   describe("should handle UPDATE_COMPONENT_SIZE", () => {

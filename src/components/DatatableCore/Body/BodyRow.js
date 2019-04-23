@@ -25,6 +25,16 @@ class BodyRow extends Component {
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
 
+    if (val === null || val === undefined) {
+      return (
+        <div className="Table-Cell" key={key}>
+          <div style={{ width }}>
+            <div className="no-data" />
+          </div>
+        </div>
+      );
+    }
+
     if (CustomTableBodyCell !== null) {
       return (
         <div className="Table-Cell" key={key}>

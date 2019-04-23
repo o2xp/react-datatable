@@ -80,9 +80,14 @@ const updateRowSizeMultiplier = state => {
     }
   });
 
-  const widthColDisplayed = colDisplayed.map(col =>
-    Number(col.colSize.split("px")[0])
-  );
+  const widthColDisplayed = colDisplayed.map(col => {
+    const column = col;
+    if (column.colSize) {
+      return Number(column.colSize.split("px")[0]);
+    }
+    column.colSize = "100px";
+    return 100;
+  });
   const totalWidthColDisplayed = widthColDisplayed.reduce((a, b) => {
     return a + b;
   });

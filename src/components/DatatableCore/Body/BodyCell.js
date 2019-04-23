@@ -61,7 +61,7 @@ export class BodyCell extends Component {
 }
 
 BodyCell.propTypes = {
-  cellVal: cellValPropType.isRequired,
+  cellVal: cellValPropType,
   column: columnPropType.isRequired,
   customDataTypes: customDataTypesPropType.isRequired,
   width: widthPropType.isRequired

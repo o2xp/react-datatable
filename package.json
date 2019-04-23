@@ -42,6 +42,7 @@
     "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
     "jest": "^24.3.1",
+    "jest-css-modules": "^2.0.0",
     "jest-styled-components": "^6.3.1",
     "lint-staged": "^8.1.5",
     "prettier": "^1.16.4",
@@ -75,6 +76,9 @@
       "/redux/store/"
     ],
     "collectCoverage": true,
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    },
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/storybook-static/"
