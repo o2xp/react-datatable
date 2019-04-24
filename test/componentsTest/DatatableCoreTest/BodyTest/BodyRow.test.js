@@ -2,7 +2,6 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import { Table, TableBody, TableCell } from "@material-ui/core";
 import BodyRow from "../../../../src/components/DatatableCore/Body/BodyRow";
 import BodyCell from "../../../../src/components/DatatableCore/Body/BodyCell";
 import {
@@ -20,81 +19,79 @@ const {
   columnsOrder
 } = storeNoCustomComponentsSample.datatableReducer.features.userConfiguration;
 const rowIndex = 1;
+const style = { top: 0, height: "60px", position: "absolute" };
 
 describe("BodyRow component", () => {
   it("connected should render without errors", () => {
-    const wrapper = shallow(
+    const rowWrapper = shallow(
       <Provider store={store}>
         <BodyRow
           row={row}
           columns={columns}
           columnsOrder={columnsOrder}
           rowIndex={rowIndex}
+          style={style}
           CustomTableBodyCell={null}
         />
       </Provider>
     );
-    expect(wrapper.find("Connect(BodyRow)")).toHaveLength(1);
+    expect(rowWrapper.find("Connect(BodyRow)")).toHaveLength(1);
   });
 
   describe("should create a row", () => {
-    const wrapper = mount(
+    const rowWrapper = mount(
       <Provider store={store}>
-        <Table>
-          <TableBody>
-            <BodyRow
-              row={row}
-              columns={columns}
-              columnsOrder={columnsOrder}
-              rowIndex={rowIndex}
-              CustomTableBodyCell={null}
-            />
-          </TableBody>
-        </Table>
+        <BodyRow
+          row={row}
+          columns={columns}
+          columnsOrder={columnsOrder}
+          rowIndex={rowIndex}
+          style={style}
+          CustomTableBodyCell={null}
+        />
       </Provider>
     );
+
     it("of 6 cells", () => {
-      expect(wrapper.find(TableCell)).toHaveLength(6);
+      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(6);
     });
 
     it("with 5 cells containing data", () => {
-      expect(wrapper.find(BodyCell)).toHaveLength(5);
+      expect(rowWrapper.find(BodyCell)).toHaveLength(5);
     });
 
     it("with 1 empty cell", () => {
-      expect(wrapper.find(".no-data").hostNodes()).toHaveLength(1);
+      expect(rowWrapper.find(".no-data").hostNodes()).toHaveLength(1);
     });
   });
 
   describe("should create a row with custom cell", () => {
-    const wrapper = mount(
+    const rowWrapper = mount(
       <Provider store={storeCustomComponent}>
-        <Table>
-          <TableBody>
-            <BodyRow
-              row={row}
-              columns={columns}
-              columnsOrder={columnsOrder}
-              rowIndex={rowIndex}
-            />
-          </TableBody>
-        </Table>
+        <BodyRow
+          row={row}
+          columns={columns}
+          columnsOrder={columnsOrder}
+          rowIndex={rowIndex}
+          style={style}
+          CustomTableBodyCell={null}
+        />
       </Provider>
     );
     it("of 6 cells", () => {
-      expect(wrapper.find(TableCell)).toHaveLength(6);
+      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(6);
     });
 
     it("with 4 cells containing basic data", () => {
-      expect(wrapper.find(".data").hostNodes()).toHaveLength(4);
+      expect(rowWrapper.find(".data").hostNodes()).toHaveLength(4);
     });
 
     it("with 1 empty cell", () => {
-      expect(wrapper.find(".no-data").hostNodes()).toHaveLength(1);
+      expect(rowWrapper.find(".no-data").hostNodes()).toHaveLength(1);
     });
 
     it("with 1 cell containing boolean", () => {
-      expect(wrapper.find(".data-boolean").hostNodes()).toHaveLength(1);
+      expect(rowWrapper.find(".data-boolean").hostNodes()).toHaveLength(1);
     });
   });
 });

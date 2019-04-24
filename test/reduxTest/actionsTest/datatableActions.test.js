@@ -19,4 +19,11 @@ describe("Datatable actions", () => {
     };
     expect(actions.updateOptions(payload)).toEqual(expectedAction);
   });
+
+  it("should create an action to update component size", () => {
+    const expectedAction = {
+      type: "UPDATE_COMPONENT_SIZE"
+    };
+    expect(actions.updateComponentSize()).toEqual(expectedAction);
+  });
 });

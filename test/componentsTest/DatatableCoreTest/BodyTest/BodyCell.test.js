@@ -2,7 +2,6 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow } from "enzyme";
-import { TableCell } from "@material-ui/core";
 import BodyCell, {
   BodyCell as BodyCellPureComponent
 } from "../../../../src/components/DatatableCore/Body/BodyCell";
@@ -27,180 +26,223 @@ const cellValDefault = "By default this is text";
 const cellValCustomIban = "LU020106768919913391";
 const cellValCustomOverrideText = "This is some text cell has been overrided";
 
-const columnNumber = { dataType: "number", id: "number", label: "number" };
-const columnText = { dataType: "text", id: "text", label: "text" };
+const columnNumber = {
+  dataType: "number",
+  id: "number",
+  label: "number",
+  colSize: "70px"
+};
+const columnText = {
+  dataType: "text",
+  id: "text",
+  label: "text",
+  colSize: "250px"
+};
 const columnBoolean = {
   dataType: "boolean",
   id: "boolean",
-  label: "boolean"
+  label: "boolean",
+  colSize: "100px"
 };
-const columnDate = { dataType: "date", id: "date", label: "date" };
-const columnTime = { dataType: "time", id: "time", label: "time" };
+const columnDate = {
+  dataType: "date",
+  id: "date",
+  label: "date",
+  colSize: "120px"
+};
+const columnTime = {
+  dataType: "time",
+  id: "time",
+  label: "time",
+  colSize: "110px"
+};
 const columnDateTime = {
   dataType: "dateTime",
   id: "dateTime",
-  label: "dateTime"
+  label: "dateTime",
+  colSize: "165px"
 };
 const columnDefault = {
   dataType: "default",
   id: "default",
-  label: "default"
+  label: "default",
+  colSize: "250px"
 };
-const columnCustomIban = { dataType: "iban", id: "iban", label: "iban" };
+const columnCustomIban = {
+  dataType: "iban",
+  id: "iban",
+  label: "iban",
+  colSize: "350px"
+};
 const columnCustomOverrideText = {
   dataType: "text",
   id: "overrideText",
-  label: "overrideText"
+  label: "overrideText",
+  colSize: "150px"
 };
 
 const customDataTypes = [
   {
     dataType: "text",
-    component: cellVal => (
-      <TableCell>
-        <div style={{ color: "purple" }}>{cellVal}</div>
-      </TableCell>
-    )
+    component: cellVal => <div style={{ color: "purple" }}>{cellVal}</div>
   },
   {
     dataType: "iban",
-    component: cellVal => (
-      <TableCell>
-        <div style={{ color: "red" }}>{cellVal}</div>
-      </TableCell>
-    )
+    component: cellVal => <div style={{ color: "red" }}>{cellVal}</div>
   }
 ];
 
 describe("BodyCell component", () => {
   it("connected should render without errors", () => {
-    const wrapper = shallow(
+    const cell = shallow(
       <Provider store={store}>
         <BodyCell column={columnText} cellVal={cellValText} />
       </Provider>
     );
-    expect(wrapper.find("Connect(BodyCell)")).toHaveLength(1);
+    expect(cell.find("Connect(BodyCell)")).toHaveLength(1);
   });
 
   describe("should create a cell of type", () => {
     it("number", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValNumber}
           column={columnNumber}
+          width={columnNumber.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{NumberType(cellValNumber)}</TableCell>
+
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnNumber.colSize }}>
+          {NumberType(cellValNumber)}
+        </div>
       );
     });
 
     it("text", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValText}
           column={columnText}
+          width={columnText.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{TextType(cellValText)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnText.colSize }}>{TextType(cellValText)}</div>
       );
     });
 
     it("boolean", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValBoolean}
           column={columnBoolean}
+          width={columnBoolean.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{BooleanType(cellValBoolean)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnBoolean.colSize }}>
+          {BooleanType(cellValBoolean)}
+        </div>
       );
     });
 
     it("date", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnDate}
+          width={columnDate.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{DateType(cellValDateTime)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnDate.colSize }}>
+          {DateType(cellValDateTime)}
+        </div>
       );
     });
 
     it("time", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnTime}
+          width={columnTime.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{TimeType(cellValDateTime)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnTime.colSize }}>
+          {TimeType(cellValDateTime)}
+        </div>
       );
     });
 
     it("dateTime", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnDateTime}
+          width={columnDateTime.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{DateTimeType(cellValDateTime)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnDateTime.colSize }}>
+          {DateTimeType(cellValDateTime)}
+        </div>
       );
     });
 
     it("default", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValDefault}
           column={columnDefault}
+          width={columnDefault.colSize}
           customDataTypes={[]}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>{TextType(cellValDefault)}</TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnDefault.colSize }}>
+          {TextType(cellValDefault)}
+        </div>
       );
     });
 
     it("custom iban", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValCustomIban}
           column={columnCustomIban}
+          width={columnCustomIban.colSize}
           customDataTypes={customDataTypes}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnCustomIban.colSize }}>
           <div style={{ color: "red" }}>{cellValCustomIban}</div>
-        </TableCell>
+        </div>
       );
     });
 
     it("custom override text", () => {
-      const wrapper = shallow(
+      const cell = shallow(
         <BodyCellPureComponent
           cellVal={cellValCustomOverrideText}
           column={columnCustomOverrideText}
+          width={columnCustomOverrideText.colSize}
           customDataTypes={customDataTypes}
         />
       );
-      expect(wrapper.instance().buildCell()).toEqual(
-        <TableCell>
+      expect(cell.instance().buildCell()).toEqual(
+        <div style={{ width: columnCustomOverrideText.colSize }}>
           <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
-        </TableCell>
+        </div>
       );
     });
   });

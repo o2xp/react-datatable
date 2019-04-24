@@ -1,7 +1,7 @@
 import initializeCustomComponents from "../../../src/redux/actions/customComponentsActions";
 
 describe("Component actions", () => {
-  it("should create an action to initialize cuztom components", () => {
+  it("should create an action to initialize custom components", () => {
     const payload = {
       CustomTableBodyCell: null,
       CustomTableBodyRow: null,

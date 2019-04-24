@@ -1,38 +1,73 @@
 import React, { Component } from "react";
-import { TableRow, TableCell } from "@material-ui/core";
 import { connect } from "react-redux";
 import {
   rowPropType,
   columnsPropType,
   columnsOrderPropType,
   CustomTableBodyCellPropType,
-  indexPropType
+  indexPropType,
+  columnSizeMultiplierPropType,
+  stylePropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
 
 class BodyRow extends Component {
   bodyCellBuilder = (val, columnId, cellIndex) => {
-    const { columns, CustomTableBodyCell, rowIndex } = this.props;
+    const {
+      columns,
+      CustomTableBodyCell,
+      rowIndex,
+      columnSizeMultiplier
+    } = this.props;
     const column = columns.find(col => col.id === columnId);
     const key = `row-${rowIndex}-cell-${cellIndex}`;
+    const width = `${(
+      column.colSize.split("px")[0] * columnSizeMultiplier
+    ).toString()}px`;
 
     if (val === null || val === undefined) {
-      return <TableCell className="no-data" key={key} />;
+      return (
+        <div className="Table-Cell" key={key}>
+          <div style={{ width }}>
+            <div className="no-data" />
+          </div>
+        </div>
+      );
     }
+
     if (CustomTableBodyCell !== null) {
-      return <CustomTableBodyCell cellVal={val} column={column} key={key} />;
+      return (
+        <div className="Table-Cell" key={key}>
+          <div style={{ width }}>
+            <CustomTableBodyCell cellVal={val} column={column} />
+          </div>
+        </div>
+      );
     }
-    return <BodyCell cellVal={val} column={column} key={key} />;
+    return <BodyCell cellVal={val} width={width} column={column} key={key} />;
   };
 
   render() {
-    const { row, columnsOrder } = this.props;
+    const { style, row, columnsOrder } = this.props;
     return (
-      <TableRow>
-        {columnsOrder.map((columnId, cellIndex) => {
-          return this.bodyCellBuilder(row[columnId], columnId, cellIndex);
-        })}
-      </TableRow>
+      <div
+        style={{
+          top: style.top,
+          height: style.height,
+          position: style.position
+        }}
+      >
+        <div
+          className="Table-Row"
+          style={{
+            height: style.height
+          }}
+        >
+          {columnsOrder.map((columnId, cellIndex) => {
+            return this.bodyCellBuilder(row[columnId], columnId, cellIndex);
+          })}
+        </div>
+      </div>
     );
   }
 }
@@ -42,6 +77,8 @@ BodyRow.propTypes = {
   rowIndex: indexPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
+  columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
+  style: stylePropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
 };
 
@@ -50,6 +87,8 @@ const mapStateToProps = state => {
     columns: state.datatableReducer.data.columns,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
+    columnSizeMultiplier:
+      state.datatableReducer.dimensions.columnSizeMultiplier,
     CustomTableBodyCell: state.customComponentsReducer.CustomTableBodyCell
   };
 };

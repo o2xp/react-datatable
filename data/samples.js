@@ -1,4 +1,5 @@
 import storeSample from "./storeSample";
+import storyOptionsSample from "./storyOptionsSample";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
 import storeCustomTableBodyRowComponentSample from "./storeCustomTableBodyRowComponentSample";
@@ -12,6 +13,10 @@ import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
+import mergedSimpleOptionsSampleCustomSize from "./mergedSimpleOptionsSampleCustomSize";
+import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
+import mergedSimpleOptionsSampleHeightResize from "./mergedSimpleOptionsSampleHeightResize";
+import mergedSimpleOptionsSampleWidthHeightResize from "./mergedSimpleOptionsSampleWidthHeightResize";
 import mergedMaximumOptionsSample from "./mergedMaximumOptionsSample";
 import mergedMinimumOptionsSample from "./mergedMinimumOptionsSample";
 import customTableBodyRowSample from "./customTableBodyRowSample";
@@ -22,6 +27,7 @@ import customDataTypesSample from "./customDataTypesSample";
 
 export {
   storeSample,
+  storyOptionsSample,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,
   storeCustomTableBodyRowComponentSample,
@@ -35,6 +41,10 @@ export {
   minimumOptionsSample,
   defaultOptionsSample,
   mergedSimpleOptionsSample,
+  mergedSimpleOptionsSampleCustomSize,
+  mergedSimpleOptionsSampleWidthResize,
+  mergedSimpleOptionsSampleHeightResize,
+  mergedSimpleOptionsSampleWidthHeightResize,
   mergedMaximumOptionsSample,
   mergedMinimumOptionsSample,
   customTableBodyRowSample,

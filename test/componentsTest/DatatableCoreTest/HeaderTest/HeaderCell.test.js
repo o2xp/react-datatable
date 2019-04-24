@@ -10,73 +10,124 @@ import {
   DateTimeWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
 
-const columnNumber = { dataType: "number", id: "number", label: "number" };
-const columnText = { dataType: "text", id: "text", label: "text" };
+const columnNumber = {
+  dataType: "number",
+  id: "number",
+  label: "number",
+  colSize: "70px"
+};
+const columnText = {
+  dataType: "text",
+  id: "text",
+  label: "text",
+  colSize: "250px"
+};
 const columnBoolean = {
   dataType: "boolean",
   id: "boolean",
-  label: "boolean"
+  label: "boolean",
+  colSize: "100px"
 };
-const columnDate = { dataType: "date", id: "date", label: "date" };
-const columnTime = { dataType: "time", id: "time", label: "time" };
+const columnDate = {
+  dataType: "date",
+  id: "date",
+  label: "date",
+  colSize: "120px"
+};
+const columnTime = {
+  dataType: "time",
+  id: "time",
+  label: "time",
+  colSize: "110px"
+};
 const columnDateTime = {
   dataType: "dateTime",
   id: "dateTime",
-  label: "dateTime"
+  label: "dateTime",
+  colSize: "165px"
 };
 const columnDefault = {
   dataType: "default",
   id: "default",
-  label: "default"
+  label: "default",
+  colSize: "250px"
 };
 
 describe("BodyCell component should create a cell of type", () => {
   it("number", () => {
-    const wrapper = shallow(<HeaderCell column={columnNumber} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnNumber} width={columnNumber.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <NumberWrapper>{columnNumber.label}</NumberWrapper>
+      <NumberWrapper style={{ width: columnNumber.colSize }}>
+        {columnNumber.label}
+      </NumberWrapper>
     );
   });
 
   it("text", () => {
-    const wrapper = shallow(<HeaderCell column={columnText} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnText} width={columnText.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <TextWrapper>{columnText.label}</TextWrapper>
+      <TextWrapper style={{ width: columnText.colSize }}>
+        {columnText.label}
+      </TextWrapper>
     );
   });
 
   it("boolean", () => {
-    const wrapper = shallow(<HeaderCell column={columnBoolean} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnBoolean} width={columnBoolean.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <BooleanWrapper>{columnBoolean.label}</BooleanWrapper>
+      <BooleanWrapper style={{ width: columnBoolean.colSize }}>
+        {columnBoolean.label}
+      </BooleanWrapper>
     );
   });
 
   it("date", () => {
-    const wrapper = shallow(<HeaderCell column={columnDate} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnDate} width={columnDate.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <DateWrapper>{columnDate.label}</DateWrapper>
+      <DateWrapper style={{ width: columnDate.colSize }}>
+        {columnDate.label}
+      </DateWrapper>
     );
   });
 
   it("time", () => {
-    const wrapper = shallow(<HeaderCell column={columnTime} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnTime} width={columnTime.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <TimeWrapper>{columnTime.label}</TimeWrapper>
+      <TimeWrapper style={{ width: columnTime.colSize }}>
+        {columnTime.label}
+      </TimeWrapper>
     );
   });
 
   it("dateTime", () => {
-    const wrapper = shallow(<HeaderCell column={columnDateTime} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnDateTime} width={columnDateTime.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <DateTimeWrapper>{columnDateTime.label}</DateTimeWrapper>
+      <DateTimeWrapper style={{ width: columnDateTime.colSize }}>
+        {columnDateTime.label}
+      </DateTimeWrapper>
     );
   });
 
   it("default", () => {
-    const wrapper = shallow(<HeaderCell column={columnDefault} />);
+    const wrapper = shallow(
+      <HeaderCell column={columnDefault} width={columnDefault.colSize} />
+    );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
-      <TextWrapper>{columnDefault.label}</TextWrapper>
+      <TextWrapper style={{ width: columnDefault.colSize }}>
+        {columnDefault.label}
+      </TextWrapper>
     );
   });
 });
