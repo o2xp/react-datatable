@@ -1,12 +1,85 @@
-.app {
-  text-align: center;
+.Table {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+  0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  display: table;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 0.9rem;
 }
 
-.root {
-  width: 100vw;
+.Table-Header {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+  overflow: auto;
 }
 
-.table {
-  width: 100vw;
-  margin-top: 5px;
+.Table-Body {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.Table-Row {
+  color: inherit;
+  display: table-row;
+  outline: none;
+  top: 50%;
+}
+
+.Table-Cell {
+  display: table-cell;
+  padding: 5px 25px;
+  text-align: left;
+  border-bottom: 1px solid rgba(224, 224, 244, 1);
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Table-Header-Cell {
+  display: table-cell;
+  padding: 5px 25px;
+  text-align: left;
+  border-bottom: 1px solid rgba(224, 224, 244, 1);
+  vertical-align: middle;
+    height: 50px;
+  overflow: hidden;
+  color: rgba(0,0,0,0.54);
+}
+
+#no-rows {
+  font-style: italic;
+  overflow: auto;
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center; 
+  justify-content: center;
+  color: rgba(0,0,0,0.54);
+}
+
+@keyframes blink {
+  0% {
+    opacity: .2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .2;
+  }
+}
+
+#no-rows span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+#no-rowsspan:nth-child(2) {
+  animation-delay: .2s;
+}
+
+#no-rows span:nth-child(3) {
+  animation-delay: .4s;
 }

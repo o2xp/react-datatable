@@ -2,7 +2,6 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import { Table } from "@material-ui/core";
 import DatatableContainer from "../../src/components/DatatableContainer";
 import Header from "../../src/components/DatatableCore/Header/Header";
 import Body from "../../src/components/DatatableCore/Body/Body";
@@ -35,7 +34,7 @@ describe("Datatable container component", () => {
     );
 
     it("without errors", () => {
-      expect(wrapper.find(Table)).toHaveLength(1);
+      expect(wrapper.find("div.Table")).toHaveLength(1);
     });
 
     it("with a Header", () => {

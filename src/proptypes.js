@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
+export const updateComponentSizePropType = PropTypes.func.isRequired;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,
@@ -12,12 +13,16 @@ export const cellValPropType = PropTypes.oneOfType([
 // Options propstype
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;
+export const widthNumberPropType = PropTypes.number;
 export const heightPropType = PropTypes.string;
+export const heightNumberPropType = PropTypes.number;
+export const columnSizeMultiplierPropType = PropTypes.number;
+export const stylePropType = PropTypes.object;
 export const keyColumnPropType = PropTypes.string;
 export const fontPropType = PropTypes.string;
 export const idPropType = PropTypes.string;
 export const labelPropType = PropTypes.string;
-export const colSizePropType = PropTypes.number;
+export const colSizePropType = PropTypes.string;
 export const editablePropType = PropTypes.boolean;
 export const dataTypePropType = PropTypes.string;
 export const inputTypePropType = PropTypes.string;
@@ -49,26 +54,31 @@ export const headOfTheTablePropType = PropTypes.element;
 export const bodyOfTheTablePropType = PropTypes.element;
 
 export const datatablePropType = PropTypes.shape({
-  width: widthPropType.isRequired
+  width: widthPropType.isRequired,
+  widthNumber: widthNumberPropType
 });
 
 export const headerPropType = PropTypes.shape({
-  height: heightPropType.isRequired
+  height: heightPropType.isRequired,
+  heightNumber: heightNumberPropType
 });
 
 export const bodyPropType = PropTypes.shape({
-  height: heightPropType.isRequired
+  height: heightPropType.isRequired,
+  heightNumber: heightNumberPropType
 });
 
 export const rowDimensionPropType = PropTypes.shape({
-  height: heightPropType.isRequired
+  height: heightPropType.isRequired,
+  heightNumber: heightNumberPropType
 });
 
 export const dimensionsPropType = PropTypes.shape({
   datatable: datatablePropType,
   header: headerPropType,
   body: bodyPropType,
-  row: rowDimensionPropType
+  row: rowDimensionPropType,
+  columnSizeMultiplier: columnSizeMultiplierPropType
 });
 
 export const columnPropType = PropTypes.shape({

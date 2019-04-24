@@ -3,6 +3,10 @@ export const initializeOptions = payload => ({
   payload
 });
 
+export const updateComponentSize = () => ({
+  type: "UPDATE_COMPONENT_SIZE"
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

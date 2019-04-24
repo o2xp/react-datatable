@@ -2,7 +2,6 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import { Table, TableHead, TableCell } from "@material-ui/core";
 import HeaderRow from "../../../../src/components/DatatableCore/Header/HeaderRow";
 import HeaderCell from "../../../../src/components/DatatableCore/Header/HeaderCell";
 import {
@@ -45,11 +44,7 @@ describe("HeaderRow component", () => {
   describe("should create a row", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <Table>
-          <TableHead>
-            <HeaderRow />
-          </TableHead>
-        </Table>
+        <HeaderRow />
       </Provider>
     );
 
@@ -77,16 +72,12 @@ describe("HeaderRow component", () => {
   describe("should create a row with custom cell", () => {
     const wrapper = mount(
       <Provider store={storeCustomComponent}>
-        <Table>
-          <TableHead>
-            <HeaderRow />
-          </TableHead>
-        </Table>
+        <HeaderRow />
       </Provider>
     );
 
     it("of 6 cells", () => {
-      expect(wrapper.find(TableCell)).toHaveLength(6);
+      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(6);
     });
 
     it("with 1 number cell", () => {

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { throttle } from "lodash";
 import {
   initializeOptionsPropType,
   initializeCustomComponentsPropType,
+  updateComponentSizePropType,
   optionsPropType,
   CustomTableBodyRowPropType,
   CustomTableBodyCellPropType,
@@ -11,28 +13,46 @@ import {
   customDataTypesPropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
-import { initializeOptions } from "../redux/actions/datatableActions";
-import initializeCustomComponents from "../redux/actions/customComponentsActions";
+import {
+  initializeOptions as initializeOptionsAction,
+  updateComponentSize as updateComponentSizeAction
+} from "../redux/actions/datatableActions";
+import initializeCustomComponentsAction from "../redux/actions/customComponentsActions";
 
-class DatatableInitializer extends Component {
-  constructor(props) {
-    super(props);
+export class DatatableInitializer extends Component {
+  componentDidMount() {
     const {
       optionsInit,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
       CustomTableHeaderRow,
-      customDataTypes
-    } = props;
-    props.initializeOptions(optionsInit);
-    props.initializeCustomComponents({
+      customDataTypes,
+      updateComponentSize,
+      initializeOptions,
+      initializeCustomComponents
+    } = this.props;
+
+    initializeOptions(optionsInit);
+    initializeCustomComponents({
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
       CustomTableHeaderRow,
       customDataTypes
     });
+    updateComponentSize();
+
+    window.addEventListener(
+      "resize",
+      throttle(() => updateComponentSize(), 100),
+      false
+    );
+  }
+
+  componentWillUnmount() {
+    const { updateComponentSize } = this.props;
+    window.removeEventListener("resize", () => updateComponentSize());
   }
 
   render() {
@@ -42,15 +62,17 @@ class DatatableInitializer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    initializeOptions: state => dispatch(initializeOptions(state)),
+    initializeOptions: state => dispatch(initializeOptionsAction(state)),
+    updateComponentSize: () => dispatch(updateComponentSizeAction()),
     initializeCustomComponents: state =>
-      dispatch(initializeCustomComponents(state))
+      dispatch(initializeCustomComponentsAction(state))
   };
 };
 
 DatatableInitializer.propTypes = {
   initializeOptions: initializeOptionsPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
+  updateComponentSize: updateComponentSizePropType,
   optionsInit: optionsPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType,
   CustomTableBodyRow: CustomTableBodyRowPropType,
