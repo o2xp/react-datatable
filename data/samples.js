@@ -1,4 +1,5 @@
 import storeSample from "./storeSample";
+import storyOptionsSample from "./storyOptionsSample";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
 import storeCustomTableBodyRowComponentSample from "./storeCustomTableBodyRowComponentSample";
@@ -26,6 +27,7 @@ import customDataTypesSample from "./customDataTypesSample";
 
 export {
   storeSample,
+  storyOptionsSample,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,
   storeCustomTableBodyRowComponentSample,

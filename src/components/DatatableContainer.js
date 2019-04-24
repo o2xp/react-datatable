@@ -69,8 +69,8 @@ DatatableContainer.propTypes = {
   data: dataPropType.isRequired,
   height: heightNumberPropType.isRequired,
   width: widthNumberPropType.isRequired,
-  totalWidthNumber: widthNumberPropType.isRequired,
-  columnSizeMultiplier: columnSizeMultiplierPropType.isRequired
+  totalWidthNumber: widthNumberPropType,
+  columnSizeMultiplier: columnSizeMultiplierPropType
 };
 
 const mapStateToProps = state => {
