@@ -2,6 +2,8 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow } from "enzyme";
+import twidth from "text-width";
+import { Tooltip, Zoom } from "@material-ui/core";
 import BodyCell, {
   BodyCell as BodyCellPureComponent
 } from "../../../../src/components/DatatableCore/Body/BodyCell";
@@ -113,10 +115,23 @@ describe("BodyCell component", () => {
         />
       );
 
+      const textWidth = twidth(cellValNumber, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnNumber.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnNumber.colSize }}>
-          {NumberType(cellValNumber)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValNumber : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnNumber.colSize }}>
+            {NumberType(cellValNumber)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -129,8 +144,23 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValText, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap = textWidth - 5 > Number(columnText.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnText.colSize }}>{TextType(cellValText)}</div>
+        <Tooltip
+          title={overlap ? cellValText : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnText.colSize }}>
+            {TextType(cellValText)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -143,10 +173,24 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValBoolean, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnBoolean.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnBoolean.colSize }}>
-          {BooleanType(cellValBoolean)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValBoolean : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnBoolean.colSize }}>
+            {BooleanType(cellValBoolean)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -159,10 +203,23 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValDateTime, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap = textWidth - 5 > Number(columnDate.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnDate.colSize }}>
-          {DateType(cellValDateTime)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValDateTime : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnDate.colSize }}>
+            {DateType(cellValDateTime)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -175,10 +232,23 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValDateTime, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap = textWidth - 5 > Number(columnTime.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnTime.colSize }}>
-          {TimeType(cellValDateTime)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValDateTime : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnTime.colSize }}>
+            {TimeType(cellValDateTime)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -191,10 +261,24 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValDateTime, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnDateTime.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnDateTime.colSize }}>
-          {DateTimeType(cellValDateTime)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValDateTime : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnDateTime.colSize }}>
+            {DateTimeType(cellValDateTime)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -207,10 +291,24 @@ describe("BodyCell component", () => {
           customDataTypes={[]}
         />
       );
+
+      const textWidth = twidth(cellValDefault, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnDefault.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnDefault.colSize }}>
-          {TextType(cellValDefault)}
-        </div>
+        <Tooltip
+          title={overlap ? cellValDefault : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnDefault.colSize }}>
+            {TextType(cellValDefault)}
+          </div>
+        </Tooltip>
       );
     });
 
@@ -223,10 +321,24 @@ describe("BodyCell component", () => {
           customDataTypes={customDataTypes}
         />
       );
+
+      const textWidth = twidth(cellValCustomIban, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnCustomIban.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnCustomIban.colSize }}>
-          <div style={{ color: "red" }}>{cellValCustomIban}</div>
-        </div>
+        <Tooltip
+          title={overlap ? cellValCustomIban : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnCustomIban.colSize }}>
+            <div style={{ color: "red" }}>{cellValCustomIban}</div>
+          </div>
+        </Tooltip>
       );
     });
 
@@ -239,10 +351,24 @@ describe("BodyCell component", () => {
           customDataTypes={customDataTypes}
         />
       );
+
+      const textWidth = twidth(cellValCustomOverrideText, {
+        family: "Arial",
+        size: 15
+      });
+      const overlap =
+        textWidth - 5 > Number(columnCustomOverrideText.colSize.split("px")[0]);
+
       expect(cell.instance().buildCell()).toEqual(
-        <div style={{ width: columnCustomOverrideText.colSize }}>
-          <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
-        </div>
+        <Tooltip
+          title={overlap ? cellValCustomOverrideText : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width: columnCustomOverrideText.colSize }}>
+            <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
+          </div>
+        </Tooltip>
       );
     });
   });
