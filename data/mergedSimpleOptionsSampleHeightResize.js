@@ -11,6 +11,10 @@ const mergedSimpleOptionsSampleHeightResize = {
   title,
   dimensions: {
     ...dimensions,
+    datatable: {
+      ...dimensions.datatable,
+      totalWidthNumber: 1138
+    },
     body: {
       height: "30vh",
       heightNumber: 150

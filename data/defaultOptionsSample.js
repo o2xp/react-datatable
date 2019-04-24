@@ -3,7 +3,8 @@ const defaultOptionsSample = {
   dimensions: {
     datatable: {
       width: "100vw",
-      widthNumber: 0
+      widthNumber: 0,
+      totalWidthNumber: 0
     },
     header: {
       height: "60px",

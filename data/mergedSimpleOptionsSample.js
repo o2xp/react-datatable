@@ -9,7 +9,13 @@ import {
 
 const mergedSimpleOptionsSample = {
   title,
-  dimensions,
+  dimensions: {
+    ...dimensions,
+    datatable: {
+      ...dimensions.datatable,
+      totalWidthNumber: 0
+    }
+  },
   keyColumn,
   font,
   data,

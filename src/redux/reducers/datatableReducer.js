@@ -5,7 +5,8 @@ const defaultState = {
   dimensions: {
     datatable: {
       width: "100vw",
-      widthNumber: 0
+      widthNumber: 0,
+      totalWidthNumber: 0
     },
     header: {
       height: "60px",
@@ -107,17 +108,39 @@ const updateRowSizeMultiplier = state => {
   if (widthTable > totalWidthColDisplayed) {
     mult = widthTable / totalWidthColDisplayed;
   }
-
   return mult;
 };
 
+const totalWidth = state => {
+  const colDisplayed = [];
+  state.data.columns.forEach(col => {
+    if (state.features.userConfiguration.columnsOrder.includes(col.id)) {
+      colDisplayed.push(col);
+    }
+  });
+
+  const widthColDisplayed = colDisplayed.map(
+    col => Number(col.colSize.split("px")[0]) + 50
+  );
+  let totalWidthColDisplayed = widthColDisplayed.reduce((a, b) => {
+    return a + b;
+  });
+
+  totalWidthColDisplayed *= state.dimensions.columnSizeMultiplier;
+  totalWidthColDisplayed -= 22;
+
+  return totalWidthColDisplayed;
+};
+
 const calcComponentSize = state => {
+  totalWidth(state);
   return {
     ...state,
     dimensions: {
       datatable: {
         ...state.dimensions.datatable,
-        widthNumber: convertSizeToNumber(state.dimensions.datatable.width)
+        widthNumber: convertSizeToNumber(state.dimensions.datatable.width),
+        totalWidthNumber: totalWidth(state)
       },
       header: {
         ...state.dimensions.header,

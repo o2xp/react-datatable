@@ -13,7 +13,8 @@ const mergedSimpleOptionsSampleWidthResize = {
     ...dimensions,
     datatable: {
       width: "90vw",
-      widthNumber: 1800
+      widthNumber: 1800,
+      totalWidthNumber: 1138
     },
     columnSizeMultiplier: 1478 / 860
   },

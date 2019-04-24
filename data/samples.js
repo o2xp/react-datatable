@@ -12,6 +12,7 @@ import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
+import mergedSimpleOptionsSampleCustomSize from "./mergedSimpleOptionsSampleCustomSize";
 import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
 import mergedSimpleOptionsSampleHeightResize from "./mergedSimpleOptionsSampleHeightResize";
 import mergedSimpleOptionsSampleWidthHeightResize from "./mergedSimpleOptionsSampleWidthHeightResize";
@@ -38,6 +39,7 @@ export {
   minimumOptionsSample,
   defaultOptionsSample,
   mergedSimpleOptionsSample,
+  mergedSimpleOptionsSampleCustomSize,
   mergedSimpleOptionsSampleWidthResize,
   mergedSimpleOptionsSampleHeightResize,
   mergedSimpleOptionsSampleWidthHeightResize,

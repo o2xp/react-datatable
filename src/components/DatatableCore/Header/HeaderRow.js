@@ -33,7 +33,10 @@ class HeaderRow extends Component {
   render() {
     const { columnsOrder, widthDatatable } = this.props;
     return (
-      <div style={{ width: widthDatatable - 17, overflow: "hidden" }}>
+      <div
+        className="test"
+        style={{ width: widthDatatable - 17, overflowX: "hidden" }}
+      >
         <div className="Table-Header">
           <div className="Table-Row">
             {columnsOrder.map(columnId => {

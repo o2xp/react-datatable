@@ -14,10 +14,10 @@ class Datatable extends Component {
       CustomTableHeaderRow = null,
       customDataTypes = []
     } = this.props;
-    
+
     return (
       <Fragment>
-        {options.data && options.keyColumn &&
+        {options.data && options.data.columns && options.data.columns.length > 0 && options.keyColumn &&
           <Provider store={store}>
             <DatatableInitializer 
               optionsInit={options} 
@@ -34,7 +34,7 @@ class Datatable extends Component {
           <div id="no-keyColumn">@o2xp/react-datatable : You forgot to give keyColumn..</div>
         }
         {
-          !options.data && options.keyColumn &&
+          (!options.data || !options.data.columns || options.data.columns.length === 0) && options.keyColumn &&
           <div id="no-data">@o2xp/react-datatable : You forgot to give data..</div>
         }
         {

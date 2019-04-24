@@ -4,6 +4,7 @@ import {
   defaultOptionsSample,
   simpleOptionsSample,
   mergedSimpleOptionsSample,
+  mergedSimpleOptionsSampleCustomSize,
   mergedSimpleOptionsSampleWidthResize,
   mergedSimpleOptionsSampleHeightResize,
   mergedSimpleOptionsSampleWidthHeightResize,
@@ -59,12 +60,21 @@ describe("datatableReducer reducer", () => {
         mergedSimpleOptionsSample
       );
 
-      simpleOptionsSampleNoColSize.data.columns.forEach(col => {
-        delete col.colSize;
-      });
-      mergedSimpleOptionsSampleNoColSize.data.columns.forEach(col => {
-        col.colSize = "100px";
-      });
+      simpleOptionsSampleNoColSize.data.columns = simpleOptionsSampleNoColSize.data.columns.map(
+        col => {
+          const column = col;
+          delete column.colSize;
+          return column;
+        }
+      );
+
+      mergedSimpleOptionsSampleNoColSize.data.columns = mergedSimpleOptionsSampleNoColSize.data.columns.map(
+        col => {
+          const column = col;
+          column.colSize = "100px";
+          return column;
+        }
+      );
 
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
@@ -91,7 +101,9 @@ describe("datatableReducer reducer", () => {
         type: "UPDATE_COMPONENT_SIZE"
       });
 
-      expect(equal(state, cloneObject(mergedSimpleOptionsSample))).toBeTruthy();
+      expect(
+        equal(state, cloneObject(mergedSimpleOptionsSampleCustomSize))
+      ).toBeTruthy();
     });
 
     it("with width resize", () => {

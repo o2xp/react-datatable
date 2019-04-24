@@ -13,7 +13,8 @@ const mergedMinimumOptionsSample = {
     ...dimensions,
     datatable: {
       width: "100vw",
-      widthNumber: 1024
+      widthNumber: 1024,
+      totalWidthNumber: 0
     },
     body: {
       height: "300px",

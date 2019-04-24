@@ -14,7 +14,8 @@ const mergedMaximumOptionsSample = {
     ...dimensions,
     datatable: {
       width: "500px",
-      widthNumber: 500
+      widthNumber: 500,
+      totalWidthNumber: 0
     }
   },
   keyColumn,
