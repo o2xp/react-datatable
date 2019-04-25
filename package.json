@@ -31,8 +31,6 @@
     "@storybook/react": "^5.0.6",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "canvas": "^2.4.1",
-    "canvas-prebuilt": "^2.0.0-alpha.14",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
     "eslint": "^5.15.1",
@@ -87,7 +85,9 @@
       "/node_modules/",
       "/storybook-static/"
     ],
-    "setupFiles": ["jest-canvas-mock"],
+    "setupFiles": [
+      "jest-canvas-mock"
+    ],
     "setupFilesAfterEnv": [
       "./test/enzyme.conf.js"
     ]
