@@ -27,7 +27,7 @@ export const dimensions = {
   columnSizeMultiplier
 };
 export const keyColumn = "id";
-export const font = "Arial";
+export const font = "Roboto";
 export const columns = [
   {
     id: "id",

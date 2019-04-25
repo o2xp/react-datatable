@@ -12,7 +12,7 @@ import {
 
 class Body extends Component {
   rowBuilder = ({ index, style }) => {
-    const { CustomTableBodyRow, columnsOrder, rows, dimensions } = this.props;
+    const { CustomTableBodyRow, rows, dimensions, columnsOrder } = this.props;
     const row = rows[index];
     const key = `row-${index}`;
     const { columnSizeMultiplier } = dimensions;
@@ -23,7 +23,8 @@ class Body extends Component {
           style={{
             top: style.top,
             height: style.height,
-            position: style.position
+            position: style.position,
+            borderBottom: "1px solid rgba(224, 224, 244, 1)"
           }}
         >
           <CustomTableBodyRow
@@ -41,8 +42,7 @@ class Body extends Component {
   };
 
   render() {
-    const { rows, dimensions } = this.props;
-
+    const { rows, dimensions, columnsOrder } = this.props;
     return (
       <div className="Table-Body">
         <ScrollSyncPane>
@@ -51,6 +51,7 @@ class Body extends Component {
             itemCount={rows.length}
             itemSize={dimensions.row.heightNumber}
             width={dimensions.datatable.widthNumber}
+            columnsOrder={columnsOrder}
           >
             {this.rowBuilder}
           </FixedSizeList>

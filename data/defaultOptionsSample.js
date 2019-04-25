@@ -21,7 +21,7 @@ const defaultOptionsSample = {
     columnSizeMultiplier: 1
   },
   keyColumn: null,
-  font: "Arial",
+  font: "Roboto",
   data: {
     columns: [],
     rows: []

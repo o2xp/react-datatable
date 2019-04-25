@@ -1,4 +1,5 @@
 import deepmerge from "deepmerge";
+import arrayMove from "array-move";
 
 const defaultState = {
   title: "",
@@ -23,7 +24,7 @@ const defaultState = {
     columnSizeMultiplier: 1
   },
   keyColumn: null,
-  font: "Arial",
+  font: "Roboto",
   data: {
     columns: [],
     rows: []
@@ -133,7 +134,6 @@ const totalWidth = state => {
 };
 
 const calcComponentSize = state => {
-  totalWidth(state);
   return {
     ...state,
     dimensions: {
@@ -185,12 +185,33 @@ const initializeOptions = (state, payload) => {
   return newState;
 };
 
+const sortColumn = (state, { newIndex, oldIndex }) => {
+  const newState = {
+    ...state,
+    features: {
+      ...state.features,
+      userConfiguration: {
+        ...state.features.userConfiguration,
+        columnsOrder: arrayMove(
+          state.features.userConfiguration.columnsOrder,
+          oldIndex,
+          newIndex
+        )
+      }
+    }
+  };
+
+  return newState;
+};
+
 const datatableReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "INITIALIZE_OPTIONS":
       return initializeOptions(state, action.payload);
     case "UPDATE_COMPONENT_SIZE":
       return calcComponentSize(state);
+    case "SORT_COLUMNS":
+      return sortColumn(state, action.payload);
     default:
       return state;
   }

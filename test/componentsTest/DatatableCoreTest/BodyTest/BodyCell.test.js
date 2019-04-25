@@ -116,7 +116,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValNumber, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =
@@ -146,7 +146,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValText, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap = textWidth - 5 > Number(columnText.colSize.split("px")[0]);
@@ -175,7 +175,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValBoolean, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =
@@ -205,7 +205,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValDateTime, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap = textWidth - 5 > Number(columnDate.colSize.split("px")[0]);
@@ -234,7 +234,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValDateTime, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap = textWidth - 5 > Number(columnTime.colSize.split("px")[0]);
@@ -263,7 +263,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValDateTime, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =
@@ -293,7 +293,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValDefault, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =
@@ -323,7 +323,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValCustomIban, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =
@@ -353,7 +353,7 @@ describe("BodyCell component", () => {
       );
 
       const textWidth = twidth(cellValCustomOverrideText, {
-        family: "Arial",
+        family: "Roboto",
         size: 15
       });
       const overlap =

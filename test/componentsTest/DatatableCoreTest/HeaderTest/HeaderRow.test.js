@@ -2,19 +2,21 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import HeaderRow from "../../../../src/components/DatatableCore/Header/HeaderRow";
+import HeaderRow, {
+  HeaderRow as HeaderRowPureComponent
+} from "../../../../src/components/DatatableCore/Header/HeaderRow";
 import HeaderCell from "../../../../src/components/DatatableCore/Header/HeaderCell";
 import {
   storeNoCustomComponentsSample,
   storeCustomTableHeaderCellComponentSample
 } from "../../../../data/samples";
-
 import {
   NumberWrapper,
   TextWrapper,
   BooleanWrapper,
   DateWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
+import cloneObject from "../../../functions";
 
 const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
@@ -99,5 +101,21 @@ describe("HeaderRow component", () => {
     it("with 1 default cell", () => {
       expect(wrapper.find(".default").hostNodes()).toHaveLength(1);
     });
+  });
+
+  it("should call on sort end without errors", () => {
+    const onSortEnd = jest.fn();
+    const wrapper = mount(
+      <HeaderRowPureComponent
+        columns={columns}
+        columnsOrder={cloneObject(columnsOrder)}
+        columnSizeMultiplier={1}
+        sortColumns={onSortEnd}
+        widthDatatable={600}
+        CustomTableHeaderCell={null}
+      />
+    );
+    wrapper.instance().onSortEnd({ newIndex: 0, oldIndex: 1 });
+    expect(onSortEnd).toBeCalled();
   });
 });
