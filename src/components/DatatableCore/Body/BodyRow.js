@@ -54,7 +54,8 @@ class BodyRow extends Component {
         style={{
           top: style.top,
           height: style.height,
-          position: style.position
+          position: style.position,
+          borderBottom: "1px solid rgba(224, 224, 244, 1)"
         }}
       >
         <div

@@ -143,4 +143,129 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
   });
+
+  describe("should handle SORT_COLUMNS", () => {
+    it("with negative new index", () => {
+      const {
+        columnsOrder
+      } = mergedSimpleOptionsSample.features.userConfiguration;
+
+      const payload = { columnsOrder, oldIndex: 1, newIndex: -5 };
+
+      const sortedColums = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SORT_COLUMNS",
+          payload
+        }
+      );
+
+      expect(
+        equal(sortedColums, cloneObject(mergedSimpleOptionsSample))
+      ).toBeTruthy();
+    });
+
+    it("with one movement", () => {
+      const {
+        columnsOrder
+      } = mergedSimpleOptionsSample.features.userConfiguration;
+
+      const payload = { columnsOrder, oldIndex: 1, newIndex: 2 };
+
+      const sortedColums = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SORT_COLUMNS",
+          payload
+        }
+      );
+
+      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+        mergedSimpleOptionsSample
+      );
+
+      mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
+        "id",
+        "age",
+        "name",
+        "adult",
+        "birthDate",
+        "iban"
+      ];
+      expect(
+        equal(sortedColums, mergedSimpleOptionsSampleSortColumns)
+      ).toBeTruthy();
+    });
+
+    it("with multiples movements", () => {
+      const {
+        columnsOrder
+      } = mergedSimpleOptionsSample.features.userConfiguration;
+
+      let payload = { columnsOrder, oldIndex: 1, newIndex: 2 };
+
+      let sortedColums = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SORT_COLUMNS",
+          payload
+        }
+      );
+
+      payload = { columnsOrder, oldIndex: 0, newIndex: 3 };
+
+      sortedColums = datatableReducer(sortedColums, {
+        type: "SORT_COLUMNS",
+        payload
+      });
+
+      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+        mergedSimpleOptionsSample
+      );
+
+      mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
+        "age",
+        "name",
+        "adult",
+        "id",
+        "birthDate",
+        "iban"
+      ];
+      expect(
+        equal(sortedColums, mergedSimpleOptionsSampleSortColumns)
+      ).toBeTruthy();
+    });
+
+    it("with new index higher than length", () => {
+      const {
+        columnsOrder
+      } = mergedSimpleOptionsSample.features.userConfiguration;
+
+      const payload = { columnsOrder, oldIndex: 0, newIndex: 45 };
+
+      const sortedColums = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SORT_COLUMNS",
+          payload
+        }
+      );
+
+      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+        mergedSimpleOptionsSample
+      );
+
+      mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
+        "name",
+        "age",
+        "adult",
+        "birthDate",
+        "iban",
+        "id"
+      ];
+      expect(
+        equal(sortedColums, mergedSimpleOptionsSampleSortColumns)
+      ).toBeTruthy();
+    });
+  });
 });

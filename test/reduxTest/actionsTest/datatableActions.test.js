@@ -26,4 +26,14 @@ describe("Datatable actions", () => {
     };
     expect(actions.updateComponentSize()).toEqual(expectedAction);
   });
+
+  it("should create an action to sort columns", () => {
+    const columnsOrder = ["id", "age", "name", "adult"];
+    const payload = { columnsOrder, oldIndex: 0, newIndex: 2 };
+    const expectedAction = {
+      type: "SORT_COLUMNS",
+      payload
+    };
+    expect(actions.sortColumns(payload)).toEqual(expectedAction);
+  });
 });

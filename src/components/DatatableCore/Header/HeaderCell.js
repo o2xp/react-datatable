@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { sortableElement } from "react-sortable-hoc";
 import {
   NumberWrapper,
   TextWrapper,
@@ -7,7 +8,11 @@ import {
   TimeWrapper,
   DateTimeWrapper
 } from "../CellTypes";
-import { columnPropType, widthPropType } from "../../../proptypes";
+import {
+  columnPropType,
+  widthPropType,
+  indexPropType
+} from "../../../proptypes";
 
 class HeaderCell extends Component {
   buildHeaderCell = () => {
@@ -35,13 +40,19 @@ class HeaderCell extends Component {
   };
 
   render() {
-    return <div className="Table-Header-Cell">{this.buildHeaderCell()}</div>;
+    const { index } = this.props;
+    return <SortableItem index={index} value={this.buildHeaderCell()} />;
   }
 }
 
+const SortableItem = sortableElement(({ value }) => (
+  <div className="Table-Header-Cell">{value}</div>
+));
+
 HeaderCell.propTypes = {
   column: columnPropType.isRequired,
-  width: widthPropType.isRequired
+  width: widthPropType.isRequired,
+  index: indexPropType.isRequired
 };
 
 export default HeaderCell;
