@@ -13,7 +13,8 @@
     "react-scroll-sync": "^0.7.0",
     "react-window": "^1.8.1",
     "redux": "^4.0.1",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "text-width": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -42,6 +43,7 @@
     "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
     "jest": "^24.3.1",
+    "jest-canvas-mock": "^2.0.0",
     "jest-css-modules": "^2.0.0",
     "jest-styled-components": "^6.3.1",
     "lint-staged": "^8.1.5",
@@ -82,6 +84,9 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/storybook-static/"
+    ],
+    "setupFiles": [
+      "jest-canvas-mock"
     ],
     "setupFilesAfterEnv": [
       "./test/enzyme.conf.js"
