@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
 export const updateComponentSizePropType = PropTypes.func.isRequired;
+export const sortColumnsPropType = PropTypes.func.isRequired;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,

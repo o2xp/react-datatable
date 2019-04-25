@@ -56,7 +56,11 @@ const columnDefault = {
 describe("BodyCell component should create a cell of type", () => {
   it("number", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnNumber} width={columnNumber.colSize} />
+      <HeaderCell
+        column={columnNumber}
+        width={columnNumber.colSize}
+        index={0}
+      />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <NumberWrapper style={{ width: columnNumber.colSize }}>
@@ -67,7 +71,7 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("text", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnText} width={columnText.colSize} />
+      <HeaderCell column={columnText} width={columnText.colSize} index={0} />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <TextWrapper style={{ width: columnText.colSize }}>
@@ -78,7 +82,11 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("boolean", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnBoolean} width={columnBoolean.colSize} />
+      <HeaderCell
+        column={columnBoolean}
+        width={columnBoolean.colSize}
+        index={0}
+      />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <BooleanWrapper style={{ width: columnBoolean.colSize }}>
@@ -89,7 +97,7 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("date", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnDate} width={columnDate.colSize} />
+      <HeaderCell column={columnDate} width={columnDate.colSize} index={0} />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <DateWrapper style={{ width: columnDate.colSize }}>
@@ -100,7 +108,7 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("time", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnTime} width={columnTime.colSize} />
+      <HeaderCell column={columnTime} width={columnTime.colSize} index={0} />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <TimeWrapper style={{ width: columnTime.colSize }}>
@@ -111,7 +119,11 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("dateTime", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnDateTime} width={columnDateTime.colSize} />
+      <HeaderCell
+        column={columnDateTime}
+        width={columnDateTime.colSize}
+        index={0}
+      />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <DateTimeWrapper style={{ width: columnDateTime.colSize }}>
@@ -122,7 +134,11 @@ describe("BodyCell component should create a cell of type", () => {
 
   it("default", () => {
     const wrapper = shallow(
-      <HeaderCell column={columnDefault} width={columnDefault.colSize} />
+      <HeaderCell
+        column={columnDefault}
+        width={columnDefault.colSize}
+        index={0}
+      />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
       <TextWrapper style={{ width: columnDefault.colSize }}>

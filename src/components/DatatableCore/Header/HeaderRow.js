@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { sortableContainer, sortableElement } from "react-sortable-hoc";
 import {
   columnsPropType,
   columnsOrderPropType,
   columnSizeMultiplierPropType,
+  sortColumnsPropType,
   widthNumberPropType,
   CustomTableHeaderCellPropType
 } from "../../../proptypes";
 import HeaderCell from "./HeaderCell";
+import { sortColumns as sortColumnsAction } from "../../../redux/actions/datatableActions";
 
-class HeaderRow extends Component {
-  headerCellBuilder = columnId => {
+export class HeaderRow extends Component {
+  headerCellBuilder = (columnId, index) => {
     const { columns, CustomTableHeaderCell, columnSizeMultiplier } = this.props;
     const column = columns.find(col => col.id === columnId);
     const width = `${(
@@ -19,42 +22,77 @@ class HeaderRow extends Component {
 
     if (CustomTableHeaderCell !== null) {
       return (
-        <div className="Table-Header-Cell" key={columnId}>
-          <div style={{ width }}>
-            <CustomTableHeaderCell column={column} width={width} />
-          </div>
-        </div>
+        <SortableItem
+          key={columnId}
+          index={index}
+          width={width}
+          value={<CustomTableHeaderCell column={column} width={width} />}
+        />
       );
     }
 
-    return <HeaderCell column={column} width={width} key={columnId} />;
+    return (
+      <HeaderCell column={column} width={width} key={columnId} index={index} />
+    );
+  };
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    const { sortColumns } = this.props;
+    sortColumns(oldIndex, newIndex);
   };
 
   render() {
     const { columnsOrder, widthDatatable } = this.props;
     return (
       <div
-        className="test"
-        style={{ width: widthDatatable - 17, overflowX: "hidden" }}
+        style={{
+          width: widthDatatable - 17,
+          overflowX: "hidden",
+          borderBottom: "1px solid #7e7e7e"
+        }}
       >
         <div className="Table-Header">
-          <div className="Table-Row">
-            {columnsOrder.map(columnId => {
-              return this.headerCellBuilder(columnId);
+          <SortableContainer
+            onSortEnd={this.onSortEnd}
+            axis="x"
+            lockAxis="x"
+            lockToContainerEdges
+            helperClass="Table-Header-Cell-Draging"
+          >
+            {columnsOrder.map((columnId, index) => {
+              return this.headerCellBuilder(columnId, index);
             })}
-          </div>
+          </SortableContainer>
         </div>
       </div>
     );
   }
 }
 
+const SortableContainer = sortableContainer(({ children }) => {
+  return <div className="Table-Row">{children}</div>;
+});
+
+const SortableItem = sortableElement(({ width, value }) => (
+  <div className="Table-Header-Cell">
+    <div style={{ width }}>{value}</div>
+  </div>
+));
+
 HeaderRow.propTypes = {
   columns: columnsPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
+  sortColumns: sortColumnsPropType,
   widthDatatable: widthNumberPropType.isRequired,
   CustomTableHeaderCell: CustomTableHeaderCellPropType
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    sortColumns: (oldIndex, newIndex) =>
+      dispatch(sortColumnsAction({ oldIndex, newIndex }))
+  };
 };
 
 const mapStateToProps = state => {
@@ -69,4 +107,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(HeaderRow);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderRow);
