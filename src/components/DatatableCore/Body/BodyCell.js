@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import twidth from "text-width";
+import { Tooltip, Zoom } from "@material-ui/core";
 import {
   columnPropType,
   cellValPropType,
   customDataTypesPropType,
-  widthPropType
+  widthPropType,
+  fontPropType
 } from "../../../proptypes";
 import {
   NumberType,
@@ -17,12 +20,16 @@ import {
 
 export class BodyCell extends Component {
   buildCell = () => {
-    const { cellVal, column, customDataTypes, width } = this.props;
+    const { cellVal, column, customDataTypes, width, font } = this.props;
     const customDatatype = customDataTypes.find(
       cd => cd.dataType === column.dataType
     );
-
-    let cellContent = null;
+    const textWidth = twidth(cellVal, {
+      family: font,
+      size: 15
+    });
+    const overlap = textWidth - 5 > Number(width.split("px")[0]);
+    let cellContent;
 
     if (customDatatype) {
       cellContent = customDatatype.component(cellVal, width);
@@ -52,7 +59,15 @@ export class BodyCell extends Component {
       }
     }
 
-    return <div style={{ width }}>{cellContent}</div>;
+    return (
+      <Tooltip
+        title={overlap ? cellVal : ""}
+        TransitionComponent={Zoom}
+        interactive
+      >
+        <div style={{ width }}>{cellContent}</div>
+      </Tooltip>
+    );
   };
 
   render() {
@@ -64,12 +79,14 @@ BodyCell.propTypes = {
   cellVal: cellValPropType,
   column: columnPropType.isRequired,
   customDataTypes: customDataTypesPropType.isRequired,
-  width: widthPropType.isRequired
+  width: widthPropType.isRequired,
+  font: fontPropType
 };
 
 const mapStateToProps = state => {
   return {
-    customDataTypes: state.customComponentsReducer.customDataTypes
+    customDataTypes: state.customComponentsReducer.customDataTypes,
+    font: state.datatableReducer.font
   };
 };
 
