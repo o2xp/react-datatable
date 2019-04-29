@@ -10,6 +10,8 @@ import {
   dimensionsPropType
 } from "../../../proptypes";
 
+export const tableRef = React.createRef();
+
 class Body extends Component {
   rowBuilder = ({ index, style }) => {
     const { CustomTableBodyRow, rows, dimensions, columnsOrder } = this.props;
@@ -43,15 +45,18 @@ class Body extends Component {
 
   render() {
     const { rows, dimensions, columnsOrder } = this.props;
+
     return (
       <div className="Table-Body">
         <ScrollSyncPane>
           <FixedSizeList
+            ref={tableRef}
             height={dimensions.body.heightNumber}
             itemCount={rows.length}
             itemSize={dimensions.row.heightNumber}
             width={dimensions.datatable.widthNumber}
             columnsOrder={columnsOrder}
+            rows={rows}
           >
             {this.rowBuilder}
           </FixedSizeList>
@@ -70,7 +75,7 @@ Body.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    rows: state.datatableReducer.data.rows,
+    rows: state.datatableReducer.pagination.rowsCurrentPage,
     dimensions: state.datatableReducer.dimensions,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,

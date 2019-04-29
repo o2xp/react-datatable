@@ -20,7 +20,13 @@ class Header extends Component {
 
     if (CustomTableHeaderRow !== null) {
       return (
-        <div style={{ width: widthDatatable - 17, overflow: "hidden" }}>
+        <div
+          style={{
+            width: widthDatatable - 17,
+            overflow: "hidden",
+            borderBottom: "1px solid #7e7e7e"
+          }}
+        >
           <CustomTableHeaderRow
             columnsOrder={columnsOrder}
             columnSizeMultiplier={columnSizeMultiplier}

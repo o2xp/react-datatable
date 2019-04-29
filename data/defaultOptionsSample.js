@@ -26,6 +26,12 @@ const defaultOptionsSample = {
     columns: [],
     rows: []
   },
+  pagination: {
+    pageSelected: 1,
+    pageTotal: 1,
+    rowsPerPageSelected: "",
+    rowsCurrentPage: []
+  },
   features: {
     canEdit: false,
     canPrint: false,
@@ -39,8 +45,8 @@ const defaultOptionsSample = {
       copyToClipboard: false
     },
     rowsPerPage: {
-      available: [10, 25, 50, 100],
-      selected: 50
+      available: [10, 25, 50, 100, "All"],
+      selected: "All"
     },
     selection: {
       rowsSelectable: false,

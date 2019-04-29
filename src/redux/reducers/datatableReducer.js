@@ -1,5 +1,7 @@
 import deepmerge from "deepmerge";
 import arrayMove from "array-move";
+import { chunk } from "lodash";
+import { tableRef } from "../../components/DatatableCore/Body/Body";
 
 const defaultState = {
   title: "",
@@ -29,6 +31,12 @@ const defaultState = {
     columns: [],
     rows: []
   },
+  pagination: {
+    pageSelected: 1,
+    pageTotal: 1,
+    rowsPerPageSelected: "",
+    rowsCurrentPage: []
+  },
   features: {
     canEdit: false,
     canPrint: false,
@@ -42,8 +50,8 @@ const defaultState = {
       copyToClipboard: false
     },
     rowsPerPage: {
-      available: [10, 25, 50, 100],
-      selected: 50
+      available: [10, 25, 50, 100, "All"],
+      selected: "All"
     },
     selection: {
       rowsSelectable: false,
@@ -159,6 +167,44 @@ const calcComponentSize = state => {
   };
 };
 
+const setPagination = ({
+  state,
+  newPageSelected = null,
+  newRowsPerPageSelected = null
+}) => {
+  const rowsPerPageSelected =
+    newRowsPerPageSelected ||
+    state.pagination.rowsPerPageSelected ||
+    state.features.rowsPerPage.selected;
+  let pageSelected =
+    rowsPerPageSelected === "All"
+      ? 1
+      : newPageSelected || state.pagination.pageSelected;
+  const pageTotal =
+    rowsPerPageSelected === "All"
+      ? 1
+      : Math.ceil(state.data.rows.length / rowsPerPageSelected);
+  pageSelected = pageSelected > pageTotal ? pageTotal : pageSelected;
+  pageSelected = pageSelected < 1 ? 1 : pageSelected;
+  const rowsCurrentPage =
+    rowsPerPageSelected === "All"
+      ? state.data.rows
+      : chunk(state.data.rows, rowsPerPageSelected)[
+          pageSelected ? pageSelected - 1 : 0
+        ];
+
+  if (tableRef.current) {
+    tableRef.current.scrollToItem(0);
+  }
+
+  return {
+    pageSelected,
+    pageTotal,
+    rowsPerPageSelected,
+    rowsCurrentPage
+  };
+};
+
 const initializeOptions = (state, payload) => {
   const newState = deepmerge(state, payload, {
     arrayMerge: overwriteMerge
@@ -169,6 +215,13 @@ const initializeOptions = (state, payload) => {
       col => col.id
     );
   }
+
+  newState.pagination = setPagination({
+    state: newState,
+    current: 1,
+    rowsPerPageSelected: newState.features.rowsPerPage.selected
+  });
+
   newState.dimensions.columnSizeMultiplier = updateRowSizeMultiplier(newState);
   newState.dimensions.datatable.widthNumber = convertSizeToNumber(
     newState.dimensions.datatable.width
@@ -182,6 +235,7 @@ const initializeOptions = (state, payload) => {
   newState.dimensions.row.heightNumber = convertSizeToNumber(
     newState.dimensions.row.height
   );
+
   return newState;
 };
 
@@ -212,6 +266,20 @@ const datatableReducer = (state = defaultState, action) => {
       return calcComponentSize(state);
     case "SORT_COLUMNS":
       return sortColumn(state, action.payload);
+    case "SET_ROWS_PER_PAGE":
+      return {
+        ...state,
+        pagination: setPagination({
+          state,
+          newPageSelected: 1,
+          newRowsPerPageSelected: action.payload
+        })
+      };
+    case "SET_PAGE":
+      return {
+        ...state,
+        pagination: setPagination({ state, newPageSelected: action.payload })
+      };
     default:
       return state;
   }

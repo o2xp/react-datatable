@@ -1,4 +1,5 @@
 import equal from "fast-deep-equal";
+import { chunk } from "lodash";
 import datatableReducer from "../../../src/redux/reducers/datatableReducer";
 import {
   defaultOptionsSample,
@@ -8,6 +9,7 @@ import {
   mergedSimpleOptionsSampleWidthResize,
   mergedSimpleOptionsSampleHeightResize,
   mergedSimpleOptionsSampleWidthHeightResize,
+  mergedSetRowsPerPageSample,
   minimumOptionsSample,
   mergedMinimumOptionsSample,
   maximumOptionsSample,
@@ -266,6 +268,125 @@ describe("datatableReducer reducer", () => {
       expect(
         equal(sortedColums, mergedSimpleOptionsSampleSortColumns)
       ).toBeTruthy();
+    });
+  });
+
+  describe("should handle SET_ROWS_PER_PAGE", () => {
+    it("with 10 rows per page", () => {
+      const rowsPerPage = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SET_ROWS_PER_PAGE",
+          payload: 10
+        }
+      );
+
+      expect(
+        equal(rowsPerPage, cloneObject(mergedSetRowsPerPageSample))
+      ).toBeTruthy();
+    });
+
+    it("with 25 rows per page", () => {
+      const rowsPerPage = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SET_ROWS_PER_PAGE",
+          payload: 25
+        }
+      );
+
+      const mergedSet25RowsPerPage = cloneObject(mergedSetRowsPerPageSample);
+      mergedSet25RowsPerPage.pagination = {
+        ...mergedSet25RowsPerPage.pagination,
+        pageTotal: 8,
+        rowsPerPageSelected: 25,
+        rowsCurrentPage: chunk(mergedSet25RowsPerPage.data.rows, 25)[0]
+      };
+
+      expect(equal(rowsPerPage, mergedSet25RowsPerPage)).toBeTruthy();
+    });
+
+    it("with all rows per page", () => {
+      const rowsPerPage = datatableReducer(
+        cloneObject(mergedSimpleOptionsSample),
+        {
+          type: "SET_ROWS_PER_PAGE",
+          payload: "All"
+        }
+      );
+
+      const mergedSetAllRowsPerPage = cloneObject(mergedSetRowsPerPageSample);
+      mergedSetAllRowsPerPage.pagination = {
+        pageSelected: 1,
+        pageTotal: 1,
+        rowsPerPageSelected: "All",
+        rowsCurrentPage: mergedSetAllRowsPerPage.data.rows
+      };
+
+      expect(equal(rowsPerPage, mergedSetAllRowsPerPage)).toBeTruthy();
+    });
+  });
+
+  describe("should handle SET_PAGE", () => {
+    it("number 3", () => {
+      const setPage = datatableReducer(
+        cloneObject(mergedMaximumOptionsSample),
+        {
+          type: "SET_PAGE",
+          payload: 3
+        }
+      );
+
+      const mergedSetPage3 = cloneObject(mergedMaximumOptionsSample);
+      mergedSetPage3.pagination = {
+        ...mergedSetPage3.pagination,
+        pageSelected: 3,
+        rowsCurrentPage: chunk(mergedSetPage3.data.rows, 50)[2]
+      };
+
+      expect(equal(setPage, mergedSetPage3)).toBeTruthy();
+    });
+
+    it("number higher than total", () => {
+      const setPage = datatableReducer(
+        cloneObject(mergedMaximumOptionsSample),
+        {
+          type: "SET_PAGE",
+          payload: 10
+        }
+      );
+
+      const mergedSetPageHigherThanTotal = cloneObject(
+        mergedMaximumOptionsSample
+      );
+      mergedSetPageHigherThanTotal.pagination = {
+        ...mergedSetPageHigherThanTotal.pagination,
+        pageSelected: 4,
+        rowsCurrentPage: chunk(mergedSetPageHigherThanTotal.data.rows, 50)[3]
+      };
+
+      expect(equal(setPage, mergedSetPageHigherThanTotal)).toBeTruthy();
+    });
+
+    it("number lower than 1", () => {
+      const setPage = datatableReducer(
+        cloneObject(mergedMaximumOptionsSample),
+        {
+          type: "SET_PAGE",
+          payload: -5
+        }
+      );
+
+      const mergedSetPageLowerThanTotal = cloneObject(
+        mergedMaximumOptionsSample
+      );
+      mergedSetPageLowerThanTotal.pagination = {
+        ...mergedSetPageLowerThanTotal.pagination,
+        pageSelected: 1,
+        rowsCurrentPage: chunk(mergedSetPageLowerThanTotal.data.rows, 50)[0]
+      };
+
+      expect(equal(setPage, mergedSetPageLowerThanTotal)).toBeTruthy();
     });
   });
 });

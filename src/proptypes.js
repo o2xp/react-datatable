@@ -4,6 +4,8 @@ export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
 export const updateComponentSizePropType = PropTypes.func.isRequired;
 export const sortColumnsPropType = PropTypes.func.isRequired;
+export const setPagePagePropType = PropTypes.func.isRequired;
+export const setRowsPerPagePropType = PropTypes.func.isRequired;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,
@@ -11,7 +13,24 @@ export const cellValPropType = PropTypes.oneOfType([
   PropTypes.bool
 ]);
 
-// Options propstype
+// Pagination propTypes
+export const pageSelectedPropType = PropTypes.number;
+export const pageTotalPropType = PropTypes.number;
+export const rowsPerPageSelectedPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number
+]);
+export const rowsCurrentPagePropType = PropTypes.arrayOf(
+  PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
+);
+export const paginationPropType = PropTypes.shape({
+  pageSelected: pageSelectedPropType,
+  pageTotal: pageTotalPropType,
+  rowsPerPageSelected: rowsPerPageSelectedPropType,
+  rowsCurrentPage: rowsCurrentPagePropType
+});
+
+// Options propTypes
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;
 export const widthNumberPropType = PropTypes.number;
@@ -42,8 +61,13 @@ export const canFilterColumnsPropType = PropTypes.boolean;
 export const canSaveUserConfigurationPropType = PropTypes.boolean;
 export const columnsOrderPropType = PropTypes.arrayOf(PropTypes.string);
 export const copyToClipboardPropType = PropTypes.boolean;
-export const availablePropType = PropTypes.arrayOf(PropTypes.number);
-export const selectedPropType = PropTypes.number;
+export const availablePropType = PropTypes.arrayOf(
+  PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+);
+export const selectedPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number
+]);
 export const rowsSelectablePropType = PropTypes.boolean;
 export const selectPageRowsPropType = PropTypes.boolean;
 export const selectAllRowsPropType = PropTypes.boolean;
