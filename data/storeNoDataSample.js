@@ -2,6 +2,7 @@ import {
   title,
   dimensions,
   keyColumn,
+  pagination,
   font,
   features
 } from "./optionsObjectSample";
@@ -12,6 +13,7 @@ const storeNoDataSample = {
     dimensions,
     keyColumn,
     font,
+    pagination,
     data: {
       columns: [],
       rows: []

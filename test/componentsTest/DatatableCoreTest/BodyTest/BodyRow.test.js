@@ -13,12 +13,12 @@ const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
 const storeCustomComponent = mockStore(storeCustomTableBodyCellComponentSample);
 
-const row = storeNoCustomComponentsSample.datatableReducer.data.rows[1];
+const row = storeNoCustomComponentsSample.datatableReducer.data.rows[0];
 const { columns } = storeNoCustomComponentsSample.datatableReducer.data;
 const {
   columnsOrder
 } = storeNoCustomComponentsSample.datatableReducer.features.userConfiguration;
-const rowIndex = 1;
+const rowIndex = 0;
 const style = { top: 0, height: "60px", position: "absolute" };
 
 describe("BodyRow component", () => {

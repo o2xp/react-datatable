@@ -5,6 +5,7 @@ import { shallow, mount } from "enzyme";
 import DatatableContainer from "../../src/components/DatatableContainer";
 import Header from "../../src/components/DatatableCore/Header/Header";
 import Body from "../../src/components/DatatableCore/Body/Body";
+import DatatableFooter from "../../src/components/DatatableFooter/DatatableFooter";
 import {
   storeSample,
   storeNoDataSample,
@@ -43,6 +44,10 @@ describe("Datatable container component", () => {
 
     it("with a Body", () => {
       expect(wrapper.find(Body)).toHaveLength(1);
+    });
+
+    it("and a Footer", () => {
+      expect(wrapper.find(DatatableFooter)).toHaveLength(1);
     });
   });
 
@@ -83,6 +88,10 @@ describe("Datatable container component", () => {
 
     it("with a div telling no data", () => {
       expect(wrapperNoData.find("div#no-rows").hostNodes()).toHaveLength(1);
+    });
+
+    it("and a Footer", () => {
+      expect(wrapperNoData.find(DatatableFooter)).toHaveLength(1);
     });
   });
 });

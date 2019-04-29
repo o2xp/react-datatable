@@ -4,6 +4,7 @@ import {
   keyColumn,
   font,
   data,
+  pagination,
   features
 } from "./optionsObjectSample";
 
@@ -19,6 +20,10 @@ const mergedSimpleOptionsSampleHeightResize = {
       height: "30vh",
       heightNumber: 150
     }
+  },
+  pagination: {
+    ...pagination,
+    rowsCurrentPage: data.rows
   },
   keyColumn,
   font,

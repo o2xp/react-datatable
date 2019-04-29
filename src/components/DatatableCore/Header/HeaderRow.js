@@ -57,7 +57,7 @@ export class HeaderRow extends Component {
             axis="x"
             lockAxis="x"
             lockToContainerEdges
-            helperClass="Table-Header-Cell-Draging"
+            helperClass="Table-Header-Cell-Draging-o2xp"
           >
             {columnsOrder.map((columnId, index) => {
               return this.headerCellBuilder(columnId, index);
