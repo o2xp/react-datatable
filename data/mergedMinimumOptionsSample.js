@@ -4,6 +4,7 @@ import {
   font,
   data,
   userConfiguration,
+  pagination,
   rowsPerPage
 } from "./optionsObjectSample";
 
@@ -24,6 +25,10 @@ const mergedMinimumOptionsSample = {
   keyColumn,
   data,
   font,
+  pagination: {
+    ...pagination,
+    rowsCurrentPage: data.rows
+  },
   features: {
     canEdit: false,
     canPrint: false,

@@ -1,3 +1,4 @@
+import { chunk } from "lodash";
 import {
   dimensions,
   keyColumn,
@@ -21,6 +22,12 @@ const mergedMaximumOptionsSample = {
   keyColumn,
   font,
   data,
+  pagination: {
+    pageSelected: 1,
+    pageTotal: 4,
+    rowsPerPageSelected: 50,
+    rowsCurrentPage: chunk(data.rows, 50)[0]
+  },
   features: {
     canEdit: true,
     canPrint: true,
@@ -34,8 +41,8 @@ const mergedMaximumOptionsSample = {
       copyToClipboard: true
     },
     rowsPerPage: {
-      available: [40],
-      selected: 40
+      available: [50],
+      selected: 50
     },
     selection,
     additionalIcons,

@@ -1,5 +1,6 @@
 import React from "react";
 import { CallSplit as CallSplitIcon } from "@material-ui/icons";
+import rows from "./rows";
 
 export const title = "My super datatable";
 export const datatable = {
@@ -93,38 +94,19 @@ export const columns = [
     dataType: "iban"
   }
 ];
-export const rows = [
-  {
-    id: "50cf",
-    age: 28,
-    name: "Kerr Mayo",
-    adult: true,
-    birthDate: "1972-09-04T18:09:59",
-    iban: "LU650105597859435517"
-  },
-  {
-    id: "209",
-    age: 34,
-    name: "Freda Bowman",
-    adult: true,
-    iban: "LU020106768919913391"
-  },
-  {
-    id: "2dd81ef",
-    age: 14,
-    name: "Becky Lawrence",
-    adult: false,
-    birthDate: "1969-02-10T04:02:44",
-    iban: "LU250107549217378667"
-  }
-];
 export const data = {
   columns,
   rows
 };
+export const pagination = {
+  pageSelected: 1,
+  pageTotal: 1,
+  rowsPerPageSelected: "All",
+  rowsCurrentPage: []
+};
 export const rowsPerPage = {
-  available: [10, 25, 50, 100],
-  selected: 50
+  available: [10, 25, 50, 100, "All"],
+  selected: "All"
 };
 export const userConfiguration = {
   columnsOrder: ["id", "name", "age", "adult", "birthDate", "iban"],
@@ -170,6 +152,7 @@ export const options = {
   dimensions,
   keyColumn,
   font,
+  pagination,
   data,
   features
 };

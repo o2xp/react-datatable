@@ -40,8 +40,8 @@ const maximumOptionsSample = {
       copyToClipboard: true
     },
     rowsPerPage: {
-      available: [40],
-      selected: 40
+      available: [50],
+      selected: 50
     },
     selection,
     additionalIcons,

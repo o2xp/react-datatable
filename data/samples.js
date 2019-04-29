@@ -1,5 +1,6 @@
 import storeSample from "./storeSample";
 import storyOptionsSample from "./storyOptionsSample";
+import storeSampleWithPages from "./storeSampleWithPages";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
 import storeCustomTableBodyRowComponentSample from "./storeCustomTableBodyRowComponentSample";
@@ -12,11 +13,13 @@ import simpleOptionsNoDataSample from "./simpleOptionsNoDataSample";
 import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
+import mergedPageSample from "./mergedPageSample";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
 import mergedSimpleOptionsSampleCustomSize from "./mergedSimpleOptionsSampleCustomSize";
 import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
 import mergedSimpleOptionsSampleHeightResize from "./mergedSimpleOptionsSampleHeightResize";
 import mergedSimpleOptionsSampleWidthHeightResize from "./mergedSimpleOptionsSampleWidthHeightResize";
+import mergedSetRowsPerPageSample from "./mergedSetRowsPerPageSample";
 import mergedMaximumOptionsSample from "./mergedMaximumOptionsSample";
 import mergedMinimumOptionsSample from "./mergedMinimumOptionsSample";
 import customTableBodyRowSample from "./customTableBodyRowSample";
@@ -28,6 +31,7 @@ import customDataTypesSample from "./customDataTypesSample";
 export {
   storeSample,
   storyOptionsSample,
+  storeSampleWithPages,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,
   storeCustomTableBodyRowComponentSample,
@@ -40,11 +44,13 @@ export {
   maximumOptionsSample,
   minimumOptionsSample,
   defaultOptionsSample,
+  mergedPageSample,
   mergedSimpleOptionsSample,
   mergedSimpleOptionsSampleCustomSize,
   mergedSimpleOptionsSampleWidthResize,
   mergedSimpleOptionsSampleHeightResize,
   mergedSimpleOptionsSampleWidthHeightResize,
+  mergedSetRowsPerPageSample,
   mergedMaximumOptionsSample,
   mergedMinimumOptionsSample,
   customTableBodyRowSample,

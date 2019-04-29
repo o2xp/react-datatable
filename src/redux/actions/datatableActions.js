@@ -12,6 +12,16 @@ export const sortColumns = payload => ({
   payload
 });
 
+export const setRowsPerPage = payload => ({
+  type: "SET_ROWS_PER_PAGE",
+  payload
+});
+
+export const setPage = payload => ({
+  type: "SET_PAGE",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

@@ -39,8 +39,8 @@ describe("Body component", () => {
       </Provider>
     );
 
-    it("of 3 rows", () => {
-      expect(bodyWrapper.find(BodyRow)).toHaveLength(3);
+    it("of 6 rows visible", () => {
+      expect(bodyWrapper.find(BodyRow)).toHaveLength(6);
     });
   });
 
@@ -55,16 +55,16 @@ describe("Body component", () => {
       </Provider>
     );
 
-    it("of 3 rows", () => {
-      expect(bodyWrapper.find("div.Table-Row")).toHaveLength(3);
+    it("of 6 rows visible", () => {
+      expect(bodyWrapper.find("div.Table-Row")).toHaveLength(6);
     });
 
-    it("of 2 stripped rows", () => {
-      expect(bodyWrapper.find(".stripped").hostNodes()).toHaveLength(2);
+    it("of 3 stripped rows visible", () => {
+      expect(bodyWrapper.find(".stripped").hostNodes()).toHaveLength(3);
     });
 
-    it("of 1 not-stripped row", () => {
-      expect(bodyWrapper.find(".not-stripped").hostNodes()).toHaveLength(1);
+    it("of 3 not-stripped rows visible", () => {
+      expect(bodyWrapper.find(".not-stripped").hostNodes()).toHaveLength(3);
     });
   });
 });

@@ -4,6 +4,7 @@ import {
   keyColumn,
   font,
   data,
+  pagination,
   features
 } from "./optionsObjectSample";
 
@@ -15,6 +16,10 @@ const mergedSimpleOptionsSample = {
       ...dimensions.datatable,
       totalWidthNumber: 0
     }
+  },
+  pagination: {
+    ...pagination,
+    rowsCurrentPage: data.rows
   },
   keyColumn,
   font,

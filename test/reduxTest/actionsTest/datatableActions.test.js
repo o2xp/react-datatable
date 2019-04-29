@@ -36,4 +36,22 @@ describe("Datatable actions", () => {
     };
     expect(actions.sortColumns(payload)).toEqual(expectedAction);
   });
+
+  it("should create an action to set rows per page", () => {
+    const payload = 25;
+    const expectedAction = {
+      type: "SET_ROWS_PER_PAGE",
+      payload
+    };
+    expect(actions.setRowsPerPage(payload)).toEqual(expectedAction);
+  });
+
+  it("should create an action to set page", () => {
+    const payload = 2;
+    const expectedAction = {
+      type: "SET_PAGE",
+      payload
+    };
+    expect(actions.setPage(payload)).toEqual(expectedAction);
+  });
 });

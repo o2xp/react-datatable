@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
+import DatatableFooter from "./DatatableFooter/DatatableFooter";
 import {
   dataPropType,
   heightNumberPropType,
@@ -22,7 +23,7 @@ class DatatableContainer extends Component {
 
     return (
       <ScrollSync>
-        <Fragment>
+        <div className="o2xp" style={{ width }}>
           <div className="Table">
             {data.columns.length > 0 && (
               <Fragment>
@@ -59,7 +60,8 @@ class DatatableContainer extends Component {
               </Fragment>
             )}
           </div>
-        </Fragment>
+          <DatatableFooter />
+        </div>
       </ScrollSync>
     );
   }
