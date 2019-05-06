@@ -6,6 +6,8 @@
 
 See a live example [just here](https://o2xp.github.io/react-datatable/).
 
+Note: This is **WIP**, the documentation and the functionnalities may change before the release of the first version. If you have any questions don't hesitate to open an issue
+
 # Table of Contents
 - [**Getting Started**](#getting-started)
     - [**Installing**](#installing)
