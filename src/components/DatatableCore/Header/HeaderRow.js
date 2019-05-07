@@ -10,6 +10,7 @@ import {
   CustomTableHeaderCellPropType
 } from "../../../proptypes";
 import HeaderCell from "./HeaderCell";
+import HeaderActionsCell from "./HeaderActionsCell";
 import { sortColumns as sortColumnsAction } from "../../../redux/actions/datatableActions";
 
 export class HeaderRow extends Component {
@@ -19,6 +20,10 @@ export class HeaderRow extends Component {
     const width = `${(
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
+
+    if (columnId === "actions") {
+      return <HeaderActionsCell key={columnId} column={column} />;
+    }
 
     if (CustomTableHeaderCell !== null) {
       return (
@@ -52,17 +57,19 @@ export class HeaderRow extends Component {
         }}
       >
         <div className="Table-Header">
-          <SortableContainer
-            onSortEnd={this.onSortEnd}
-            axis="x"
-            lockAxis="x"
-            lockToContainerEdges
-            helperClass="Table-Header-Cell-Draging-o2xp"
-          >
-            {columnsOrder.map((columnId, index) => {
-              return this.headerCellBuilder(columnId, index);
-            })}
-          </SortableContainer>
+          <div className="Table-Row">
+            <SortableContainer
+              onSortEnd={this.onSortEnd}
+              axis="x"
+              lockAxis="x"
+              lockToContainerEdges
+              helperClass="Table-Header-Cell-Draging-o2xp"
+            >
+              {columnsOrder.map((columnId, index) => {
+                return this.headerCellBuilder(columnId, index);
+              })}
+            </SortableContainer>
+          </div>
         </div>
       </div>
     );
@@ -70,7 +77,7 @@ export class HeaderRow extends Component {
 }
 
 const SortableContainer = sortableContainer(({ children }) => {
-  return <div className="Table-Row">{children}</div>;
+  return <div>{children}</div>;
 });
 
 const SortableItem = sortableElement(({ width, value }) => (

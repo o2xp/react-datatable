@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { throttle } from "lodash";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import MomentUtils from "@date-io/moment";
+import theme from "./MuiTheme";
 import {
   initializeOptionsPropType,
   initializeCustomComponentsPropType,
@@ -56,7 +60,13 @@ export class DatatableInitializer extends Component {
   }
 
   render() {
-    return <DatatableContainer />;
+    return (
+      <MuiThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <DatatableContainer />
+        </MuiPickersUtilsProvider>
+      </MuiThemeProvider>
+    );
   }
 }
 

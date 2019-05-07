@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import twidth from "text-width";
-import { Tooltip, Zoom } from "@material-ui/core";
+import { Tooltip, Zoom, TextField } from "@material-ui/core";
+import { setRowEdited as setRowEditedAction } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
   cellValPropType,
@@ -20,7 +21,16 @@ import {
 
 export class BodyCell extends Component {
   buildCell = () => {
-    const { cellVal, column, customDataTypes, width, font } = this.props;
+    const {
+      cellVal,
+      column,
+      customDataTypes,
+      width,
+      font,
+      rowId,
+      editing,
+      setRowEdited
+    } = this.props;
     const customDatatype = customDataTypes.find(
       cd => cd.dataType === column.dataType
     );
@@ -28,50 +38,64 @@ export class BodyCell extends Component {
       family: font,
       size: 15
     });
-    const overlap = textWidth - 5 > Number(width.split("px")[0]);
+    const overlap = textWidth + 5 > Number(width.split("px")[0]);
     let cellContent;
+    const { inputType, dataType, values, valueVerification } = column;
+    const columnId = column.id;
+    const properties = {
+      cellVal,
+      editing,
+      inputType,
+      values,
+      rowId,
+      columnId,
+      valueVerification,
+      setRowEdited
+    };
 
-    if (customDatatype) {
+    if (customDatatype && !editing) {
       cellContent = customDatatype.component(cellVal, width);
     } else {
-      switch (column.dataType) {
+      switch (dataType) {
         case "number":
-          cellContent = NumberType(cellVal);
+          cellContent = NumberType(properties);
           break;
         case "text":
-          cellContent = TextType(cellVal);
+          cellContent = TextType(properties);
           break;
         case "boolean":
-          cellContent = BooleanType(cellVal);
+          cellContent = BooleanType(properties);
           break;
         case "date":
-          cellContent = DateType(cellVal);
+          cellContent = DateType(properties);
           break;
         case "time":
-          cellContent = TimeType(cellVal);
+          cellContent = TimeType(properties);
           break;
         case "dateTime":
-          cellContent = DateTimeType(cellVal);
+          cellContent = DateTimeType(properties);
           break;
         default:
-          cellContent = TextType(cellVal);
+          cellContent = TextType(properties);
           break;
       }
     }
 
     return (
-      <Tooltip
-        title={overlap ? cellVal : ""}
-        TransitionComponent={Zoom}
-        interactive
-      >
-        <div style={{ width }}>{cellContent}</div>
-      </Tooltip>
+      <div className={`Table-Cell ${column.id}`}>
+        <Tooltip
+          title={overlap && !editing ? cellVal : ""}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div style={{ width }}>{cellContent}</div>
+        </Tooltip>
+      </div>
     );
   };
 
   render() {
-    return <div className="Table-Cell">{this.buildCell()}</div>;
+    return this.buildCell();
   }
 }
 
@@ -90,4 +114,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(BodyCell);
+const mapDispatchToProps = dispatch => {
+  return {
+    setRowEdited: ({ columnId, rowId, newValue }) =>
+      dispatch(setRowEditedAction({ columnId, rowId, newValue }))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BodyCell);

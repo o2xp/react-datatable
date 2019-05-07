@@ -10,17 +10,26 @@ import {
   stylePropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
+import BodyActionsCell from "./BodyActionsCell";
 
 class BodyRow extends Component {
-  bodyCellBuilder = (val, columnId, cellIndex) => {
+  bodyCellBuilder = (val, columnId, cellIndex, row, editing) => {
     const {
       columns,
       CustomTableBodyCell,
       rowIndex,
-      columnSizeMultiplier
+      columnSizeMultiplier,
+      keyColumn
     } = this.props;
     const column = columns.find(col => col.id === columnId);
     const key = `row-${rowIndex}-cell-${cellIndex}`;
+    const rowId = row[keyColumn];
+    editing = editing && column.editable;
+
+    if (columnId === "actions") {
+      return <BodyActionsCell key={key} column={column} row={row} />;
+    }
+
     const width = `${(
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
@@ -44,18 +53,27 @@ class BodyRow extends Component {
         </div>
       );
     }
-    return <BodyCell cellVal={val} width={width} column={column} key={key} />;
+
+    return (
+      <BodyCell
+        cellVal={val}
+        editing={editing}
+        width={width}
+        column={column}
+        rowId={rowId}
+        key={key}
+      />
+    );
   };
 
   render() {
-    const { style, row, columnsOrder } = this.props;
+    const { style, row, columnsOrder, editing } = this.props;
     return (
       <div
         style={{
           top: style.top,
           height: style.height,
-          position: style.position,
-          borderBottom: "1px solid rgba(224, 224, 244, 1)"
+          position: style.position
         }}
       >
         <div
@@ -65,7 +83,13 @@ class BodyRow extends Component {
           }}
         >
           {columnsOrder.map((columnId, cellIndex) => {
-            return this.bodyCellBuilder(row[columnId], columnId, cellIndex);
+            return this.bodyCellBuilder(
+              row[columnId],
+              columnId,
+              cellIndex,
+              row,
+              editing
+            );
           })}
         </div>
       </div>
@@ -86,10 +110,12 @@ BodyRow.propTypes = {
 const mapStateToProps = state => {
   return {
     columns: state.datatableReducer.data.columns,
+    keyColumn: state.datatableReducer.keyColumn,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     columnSizeMultiplier:
       state.datatableReducer.dimensions.columnSizeMultiplier,
+
     CustomTableBodyCell: state.customComponentsReducer.CustomTableBodyCell
   };
 };
