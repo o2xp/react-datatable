@@ -27,12 +27,11 @@ class Body extends Component {
     );
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.rowsEdited.length !== prevProps.rowsEdited.length) {
-  //     console.log("la");
-  //     tableRef.current.resetAfterIndex(0);
-  //   }
-  // }
+  componentWillUnmount() {
+    document
+      .getElementsByClassName("virtualized-container")[0]
+      .removeEventListener("scroll");
+  }
 
   handleScroll = scrollLeft => {
     const { setIsScrolling, isScrolling } = this.props;
@@ -41,12 +40,6 @@ class Body extends Component {
       setIsScrolling(bool);
     }
   };
-
-  componentWillUnmount() {
-    document
-      .getElementsByClassName("virtualized-container")[0]
-      .removeEventListener("scroll");
-  }
 
   rowBuilder = ({ index, style }) => {
     const {

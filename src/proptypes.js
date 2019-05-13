@@ -1,17 +1,28 @@
 import PropTypes from "prop-types";
 
+// Redux actions
 export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
 export const updateComponentSizePropType = PropTypes.func.isRequired;
 export const sortColumnsPropType = PropTypes.func.isRequired;
 export const setPagePagePropType = PropTypes.func.isRequired;
 export const setRowsPerPagePropType = PropTypes.func.isRequired;
+export const setRowEditedPropType = PropTypes.func.isRequired;
+export const isScrollingPropType = PropTypes.boolean;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.number,
   PropTypes.bool
 ]);
+
+export const classesPropType = PropTypes.object;
+
+// Input propTypes
+export const typePropType = PropTypes.string;
+export const rowIdPropType = PropTypes.string;
+export const columnIdPropType = PropTypes.string;
+export const editingPropType = PropTypes.boolean;
 
 // Pagination propTypes
 export const pageSelectedPropType = PropTypes.number;

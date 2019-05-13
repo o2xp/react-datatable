@@ -4,7 +4,8 @@ import { throttle } from "lodash";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import MomentUtils from "@date-io/moment";
-import theme from "./MuiTheme";
+import { moment, locale } from "../moment.config";
+import { mainTheme } from "./MuiTheme";
 import {
   initializeOptionsPropType,
   initializeCustomComponentsPropType,
@@ -61,8 +62,12 @@ export class DatatableInitializer extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
+      <MuiThemeProvider theme={mainTheme}>
+        <MuiPickersUtilsProvider
+          utils={MomentUtils}
+          locale={locale}
+          moment={moment}
+        >
           <DatatableContainer />
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>

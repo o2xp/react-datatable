@@ -7,6 +7,8 @@ import {
   CustomTableBodyCellPropType,
   indexPropType,
   columnSizeMultiplierPropType,
+  keyColumnPropType,
+  editingPropType,
   stylePropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
@@ -24,7 +26,7 @@ class BodyRow extends Component {
     const column = columns.find(col => col.id === columnId);
     const key = `row-${rowIndex}-cell-${cellIndex}`;
     const rowId = row[keyColumn];
-    editing = editing && column.editable;
+    const isEditing = editing && column.editable;
 
     if (columnId === "actions") {
       return <BodyActionsCell key={key} column={column} row={row} />;
@@ -48,7 +50,12 @@ class BodyRow extends Component {
       return (
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>
-            <CustomTableBodyCell cellVal={val} column={column} />
+            <CustomTableBodyCell
+              cellVal={val}
+              column={column}
+              editing={isEditing}
+              rowId={rowId}
+            />
           </div>
         </div>
       );
@@ -57,7 +64,7 @@ class BodyRow extends Component {
     return (
       <BodyCell
         cellVal={val}
-        editing={editing}
+        editing={isEditing}
         width={width}
         column={column}
         rowId={rowId}
@@ -104,6 +111,8 @@ BodyRow.propTypes = {
   columns: columnsPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
   style: stylePropType.isRequired,
+  keyColumn: keyColumnPropType.isRequired,
+  editing: editingPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
 };
 

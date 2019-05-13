@@ -1,6 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+export const mainTheme = createMuiTheme({
   typography: {
     useNextVariants: true
   },
@@ -35,4 +35,12 @@ const theme = createMuiTheme({
   }
 });
 
-export default theme;
+export const customVariant = () => ({
+  errorTooltip: {
+    backgroundColor: "red",
+    color: "white",
+    "&:before": {
+      borderBottom: "5px solid red"
+    }
+  }
+});

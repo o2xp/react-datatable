@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import twidth from "text-width";
-import { Tooltip, Zoom, TextField } from "@material-ui/core";
+import { Tooltip, Zoom } from "@material-ui/core";
 import { setRowEdited as setRowEditedAction } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
   cellValPropType,
   customDataTypesPropType,
   widthPropType,
+  rowIdPropType,
+  editingPropType,
+  setRowEditedPropType,
   fontPropType
 } from "../../../proptypes";
 import {
@@ -40,7 +43,13 @@ export class BodyCell extends Component {
     });
     const overlap = textWidth + 5 > Number(width.split("px")[0]);
     let cellContent;
-    const { inputType, dataType, values, valueVerification } = column;
+    const {
+      inputType,
+      dataType,
+      values,
+      valueVerification,
+      dateFormat
+    } = column;
     const columnId = column.id;
     const properties = {
       cellVal,
@@ -50,6 +59,7 @@ export class BodyCell extends Component {
       rowId,
       columnId,
       valueVerification,
+      dateFormat,
       setRowEdited
     };
 
@@ -59,9 +69,6 @@ export class BodyCell extends Component {
       switch (dataType) {
         case "number":
           cellContent = NumberType(properties);
-          break;
-        case "text":
-          cellContent = TextType(properties);
           break;
         case "boolean":
           cellContent = BooleanType(properties);
@@ -75,6 +82,7 @@ export class BodyCell extends Component {
         case "dateTime":
           cellContent = DateTimeType(properties);
           break;
+        case "text":
         default:
           cellContent = TextType(properties);
           break;
@@ -104,6 +112,9 @@ BodyCell.propTypes = {
   column: columnPropType.isRequired,
   customDataTypes: customDataTypesPropType.isRequired,
   width: widthPropType.isRequired,
+  rowId: rowIdPropType.isRequired,
+  editing: editingPropType.isRequired,
+  setRowEdited: setRowEditedPropType,
   font: fontPropType
 };
 
@@ -116,8 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setRowEdited: ({ columnId, rowId, newValue }) =>
-      dispatch(setRowEditedAction({ columnId, rowId, newValue }))
+    setRowEdited: ({ columnId, rowId, newValue, error }) =>
+      dispatch(setRowEditedAction({ columnId, rowId, newValue, error }))
   };
 };
 

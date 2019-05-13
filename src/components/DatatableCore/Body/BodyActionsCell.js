@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Tooltip, ListItemIcon, IconButton, Checkbox } from "@material-ui/core";
+import { Tooltip, IconButton, Checkbox } from "@material-ui/core";
 import { Delete as DeleteIcon, Create as CreateIcon } from "@material-ui/icons";
 import { connect } from "react-redux";
-import BodyCell from "./BodyCell";
 import { addRowEdited as addRowEditedAction } from "../../../redux/actions/datatableActions";
+import {
+  columnPropType,
+  isScrollingPropType,
+  canEditPropType,
+  canDeletePropType,
+  rowsSelectablePropType,
+  rowPropType,
+  addRowEditedPropType
+} from "../../../proptypes";
 
 class BodyActionsCell extends Component {
   render() {
@@ -28,20 +36,14 @@ class BodyActionsCell extends Component {
           {rowsSelectable && <Checkbox checked={false} />}
           {canDelete && (
             <Tooltip title="Confirm delete">
-              <IconButton
-                className="icon-red"
-                onClick={() => console.log("delete")}
-              >
+              <IconButton onClick={() => true}>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
           )}
           {canEdit && (
             <Tooltip title="Edit row">
-              <IconButton
-                className="icon-blue"
-                onClick={() => addRowEdited(row)}
-              >
+              <IconButton onClick={() => addRowEdited(row)}>
                 <CreateIcon />
               </IconButton>
             </Tooltip>
@@ -66,6 +68,16 @@ const mapStateToProps = state => {
     canDelete: state.datatableReducer.features.canDelete,
     rowsSelectable: state.datatableReducer.features.selection.rowsSelectable
   };
+};
+
+BodyActionsCell.propTypes = {
+  column: columnPropType,
+  isScrolling: isScrollingPropType,
+  canEdit: canEditPropType,
+  canDelete: canDeletePropType,
+  rowsSelectable: rowsSelectablePropType,
+  row: rowPropType,
+  addRowEdited: addRowEditedPropType
 };
 
 export default connect(

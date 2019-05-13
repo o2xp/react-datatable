@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Tooltip, ListItemIcon, IconButton, Checkbox } from "@material-ui/core";
-import { Clear as ClearIcon, Create as CreateIcon } from "@material-ui/icons";
 import { connect } from "react-redux";
+import { columnPropType, isScrollingPropType } from "../../../proptypes";
 
 class HeaderActionsCell extends Component {
   render() {
@@ -24,6 +23,11 @@ const mapStateToProps = state => {
   return {
     isScrolling: state.datatableReducer.dimensions.isScrolling
   };
+};
+
+HeaderActionsCell.propTypes = {
+  column: columnPropType.isRequired,
+  isScrolling: isScrollingPropType
 };
 
 export default connect(mapStateToProps)(HeaderActionsCell);

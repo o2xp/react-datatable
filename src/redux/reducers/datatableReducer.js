@@ -318,25 +318,41 @@ const setIsScrolling = (state, isScrolling) => {
 
 const addRowEdited = (state, row) => {
   const { rowsEdited } = state;
-  return { ...state, rowsEdited: [...rowsEdited, row] };
+  return {
+    ...state,
+    rowsEdited: [
+      ...rowsEdited,
+      {
+        ...row,
+        idOfColumnErr: []
+      }
+    ]
+  };
 };
 
-const setRowEdited = (state, { columnId, rowId, newValue }) => {
+const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
   const { rowsEdited, keyColumn } = state;
-  const t = rowsEdited.map(row => {
-    // Find the item with the matching id
+  const rowsEditedUpdate = rowsEdited.map(row => {
     if (row[keyColumn] === rowId) {
-      // Return a new object
+      let idOfColumnErrUpdate = row.idOfColumnErr;
+      if (error) {
+        if (!idOfColumnErrUpdate.includes(columnId)) {
+          idOfColumnErrUpdate = [...idOfColumnErrUpdate, columnId];
+        }
+      } else {
+        idOfColumnErrUpdate = idOfColumnErrUpdate.filter(e => e !== columnId);
+      }
+
       return {
-        ...row, // copy the existing item
-        [columnId]: newValue // replace the email addr
+        ...row,
+        [columnId]: newValue,
+        idOfColumnErr: idOfColumnErrUpdate
       };
     }
-    // Leave every other item unchanged
     return row;
   });
 
-  return { ...state, rowsEdited: t };
+  return { ...state, rowsEdited: rowsEditedUpdate };
 };
 
 const datatableReducer = (state = defaultState, action) => {

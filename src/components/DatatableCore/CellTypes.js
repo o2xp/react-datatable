@@ -1,50 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
-import moment from "moment";
-import { Checkbox, TextField, Select, MenuItem } from "@material-ui/core";
-import { DatePicker, TimePicker, DateTimePicker } from "material-ui-pickers";
-import createInput from "./InputTypes";
-
-const locale = window.navigator.userLanguage || window.navigator.language;
-moment.locale(locale);
-const localeData = moment.localeData();
-const dateFormat = localeData.longDateFormat("L");
-const timeFormat = localeData.longDateFormat("LT");
-const dateTimeFormat = localeData.longDateFormat("lll");
-const regMask = new RegExp("[a-zA-Z]");
-const dateMask = dateFormat.split("").map(char => {
-  if (regMask.test(char)) {
-    return /\d/;
-  }
-  return char;
-});
+import { Checkbox } from "@material-ui/core";
+import {
+  moment,
+  dateFormatUser,
+  timeFormatUser,
+  dateTimeFormatUser
+} from "../../moment.config";
+import CreateInput from "./InputTypes/CreateInput";
+import {
+  cellValPropType,
+  rowIdPropType,
+  columnIdPropType,
+  editingPropType,
+  setRowEditedPropType
+} from "../../proptypes";
 
 export const NumberWrapper = styled.div`
   text-align: center;
 `;
 
-export const NumberType = ({
-  cellVal,
-  editing,
-  inputType = "input",
-  values,
-  valueVerification,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
+export const NumberType = properties => {
+  const { cellVal, editing } = properties;
   const type = "number";
   if (editing) {
-    return createInput({
-      cellVal,
-      inputType,
-      values,
-      valueVerification,
-      rowId,
-      columnId,
-      type,
-      setRowEdited
-    });
+    return CreateInput({ ...properties, type });
   }
   const formatVal = cellVal
     ? cellVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
@@ -56,28 +36,11 @@ export const TextWrapper = styled.div`
   text-align: left;
 `;
 
-export const TextType = ({
-  cellVal,
-  editing,
-  inputType = "input",
-  values,
-  valueVerification,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
+export const TextType = properties => {
+  const { cellVal, editing } = properties;
   const type = "text";
   if (editing) {
-    return createInput({
-      cellVal,
-      inputType,
-      values,
-      valueVerification,
-      rowId,
-      columnId,
-      type,
-      setRowEdited
-    });
+    return CreateInput({ ...properties, type });
   }
   return <TextWrapper>{cellVal}</TextWrapper>;
 };
@@ -107,38 +70,30 @@ export const BooleanType = ({
   );
 };
 
+BooleanType.propTypes = {
+  cellVal: cellValPropType.isRequired,
+  rowId: rowIdPropType.isRequired,
+  columnId: columnIdPropType.isRequired,
+  setRowEdited: setRowEditedPropType,
+  editing: editingPropType
+};
+
 export const DateWrapper = styled.div`
   text-align: left;
 `;
 
-export const DateType = ({
-  cellVal,
-  editing,
-  inputType = "datePicker",
-  values,
-  valueVerification,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
-  const format = dateFormat;
+export const DateType = properties => {
+  const { cellVal, editing, inputType = "datePicker" } = properties;
   if (editing) {
-    return createInput({
-      cellVal,
-      inputType,
-      values,
-      valueVerification,
-      rowId,
-      columnId,
-      setRowEdited,
-      format,
-      dateMask
+    return CreateInput({
+      ...properties,
+      inputType
     });
   }
 
   return (
     <DateWrapper>
-      {cellVal !== "" ? moment(cellVal).format(format) : cellVal}
+      {cellVal !== "" ? moment(cellVal).format(dateFormatUser) : cellVal}
     </DateWrapper>
   );
 };
@@ -147,32 +102,17 @@ export const TimeWrapper = styled.div`
   text-align: left;
 `;
 
-export const TimeType = ({
-  cellVal,
-  editing,
-  inputType = "timePicker",
-  values,
-  valueVerification,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
-  const format = timeFormat;
+export const TimeType = properties => {
+  const { cellVal, editing, inputType = "timePicker" } = properties;
   if (editing) {
-    return createInput({
-      cellVal,
-      inputType,
-      values,
-      valueVerification,
-      rowId,
-      columnId,
-      setRowEdited,
-      format
+    return CreateInput({
+      ...properties,
+      inputType
     });
   }
   return (
     <TimeWrapper>
-      {cellVal ? moment(cellVal).format(format) : cellVal}
+      {cellVal ? moment(cellVal).format(timeFormatUser) : cellVal}
     </TimeWrapper>
   );
 };
@@ -181,32 +121,17 @@ export const DateTimeWrapper = styled.div`
   text-align: left;
 `;
 
-export const DateTimeType = ({
-  cellVal,
-  editing,
-  inputType = "dateTimePicker",
-  values,
-  valueVerification,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
-  const format = dateTimeFormat;
+export const DateTimeType = properties => {
+  const { cellVal, editing, inputType = "dateTimePicker" } = properties;
   if (editing) {
-    return createInput({
-      cellVal,
-      inputType,
-      values,
-      valueVerification,
-      rowId,
-      columnId,
-      setRowEdited,
-      format
+    return CreateInput({
+      ...properties,
+      inputType
     });
   }
   return (
     <DateTimeWrapper>
-      {cellVal ? moment(cellVal).format(format) : cellVal}
+      {cellVal ? moment(cellVal).format(dateTimeFormatUser) : cellVal}
     </DateTimeWrapper>
   );
 };
