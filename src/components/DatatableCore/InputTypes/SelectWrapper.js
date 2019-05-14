@@ -26,9 +26,9 @@ const SelectWrapper = ({
         setRowEdited({ rowId, columnId, newValue: e.target.value })
       }
     >
-      {values.map((val, i) => {
+      {values.map(val => {
         return (
-          <MenuItem key={`${i}-${val}`} value={val}>
+          <MenuItem key={`${rowId}-${val}`} value={val}>
             {dateFormat ? moment(val).format(dateFormat) : val}
           </MenuItem>
         );

@@ -8,13 +8,6 @@ import {
   dateTimeFormatUser
 } from "../../moment.config";
 import CreateInput from "./InputTypes/CreateInput";
-import {
-  cellValPropType,
-  rowIdPropType,
-  columnIdPropType,
-  editingPropType,
-  setRowEditedPropType
-} from "../../proptypes";
 
 export const NumberWrapper = styled.div`
   text-align: center;
@@ -49,33 +42,16 @@ export const BooleanWrapper = styled.div`
   text-align: center;
 `;
 
-export const BooleanType = ({
-  cellVal,
-  editing,
-  rowId,
-  columnId,
-  setRowEdited
-}) => {
+export const BooleanType = properties => {
+  const { editing, cellVal, inputType = "boolean" } = properties;
+  if (editing) {
+    return CreateInput({ ...properties, inputType });
+  }
   return (
     <BooleanWrapper>
-      <Checkbox
-        checked={cellVal}
-        color="primary"
-        disabled={!editing}
-        onChange={(e, checked) =>
-          setRowEdited({ rowId, columnId, newValue: checked })
-        }
-      />
+      <Checkbox checked={cellVal} color="primary" disabled />
     </BooleanWrapper>
   );
-};
-
-BooleanType.propTypes = {
-  cellVal: cellValPropType.isRequired,
-  rowId: rowIdPropType.isRequired,
-  columnId: columnIdPropType.isRequired,
-  setRowEdited: setRowEditedPropType,
-  editing: editingPropType
 };
 
 export const DateWrapper = styled.div`

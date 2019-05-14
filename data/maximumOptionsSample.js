@@ -31,6 +31,7 @@ const maximumOptionsSample = {
     canEdit: true,
     canPrint: true,
     canDownload: true,
+    canDelete: true,
     canSearch: true,
     canRefreshRows: true,
     canFilterColumns: true,

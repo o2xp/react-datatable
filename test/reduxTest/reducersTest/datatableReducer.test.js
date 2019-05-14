@@ -69,11 +69,10 @@ describe("datatableReducer reducer", () => {
           return column;
         }
       );
-
       mergedSimpleOptionsSampleNoColSize.data.columns = mergedSimpleOptionsSampleNoColSize.data.columns.map(
         col => {
           const column = col;
-          column.colSize = "100px";
+          column.colSize = col.id === "actions" ? "150px" : "100px";
           return column;
         }
       );
@@ -147,26 +146,6 @@ describe("datatableReducer reducer", () => {
   });
 
   describe("should handle SORT_COLUMNS", () => {
-    it("with negative new index", () => {
-      const {
-        columnsOrder
-      } = mergedSimpleOptionsSample.features.userConfiguration;
-
-      const payload = { columnsOrder, oldIndex: 1, newIndex: -5 };
-
-      const sortedColums = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
-        {
-          type: "SORT_COLUMNS",
-          payload
-        }
-      );
-
-      expect(
-        equal(sortedColums, cloneObject(mergedSimpleOptionsSample))
-      ).toBeTruthy();
-    });
-
     it("with one movement", () => {
       const {
         columnsOrder
@@ -187,9 +166,10 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
+        "actions",
+        "name",
         "id",
         "age",
-        "name",
         "adult",
         "birthDate",
         "iban"
@@ -214,7 +194,7 @@ describe("datatableReducer reducer", () => {
         }
       );
 
-      payload = { columnsOrder, oldIndex: 0, newIndex: 3 };
+      payload = { columnsOrder, oldIndex: 3, newIndex: 5 };
 
       sortedColums = datatableReducer(sortedColums, {
         type: "SORT_COLUMNS",
@@ -226,11 +206,12 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
-        "age",
+        "actions",
         "name",
-        "adult",
         "id",
+        "adult",
         "birthDate",
+        "age",
         "iban"
       ];
       expect(
@@ -243,7 +224,7 @@ describe("datatableReducer reducer", () => {
         columnsOrder
       } = mergedSimpleOptionsSample.features.userConfiguration;
 
-      const payload = { columnsOrder, oldIndex: 0, newIndex: 45 };
+      const payload = { columnsOrder, oldIndex: 1, newIndex: 45 };
 
       const sortedColums = datatableReducer(
         cloneObject(mergedSimpleOptionsSample),
@@ -258,6 +239,7 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
+        "actions",
         "name",
         "age",
         "adult",

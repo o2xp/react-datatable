@@ -71,12 +71,12 @@ const mapStateToProps = state => {
 };
 
 BodyActionsCell.propTypes = {
-  column: columnPropType,
-  isScrolling: isScrollingPropType,
-  canEdit: canEditPropType,
-  canDelete: canDeletePropType,
-  rowsSelectable: rowsSelectablePropType,
-  row: rowPropType,
+  column: columnPropType.isRequired,
+  isScrolling: isScrollingPropType.isRequired,
+  canEdit: canEditPropType.isRequired,
+  canDelete: canDeletePropType.isRequired,
+  rowsSelectable: rowsSelectablePropType.isRequired,
+  row: rowPropType.isRequired,
   addRowEdited: addRowEditedPropType
 };
 

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-// Redux actions
+// Redux
 export const initializeOptionsPropType = PropTypes.func.isRequired;
 export const initializeCustomComponentsPropType = PropTypes.func.isRequired;
 export const updateComponentSizePropType = PropTypes.func.isRequired;
@@ -8,7 +8,11 @@ export const sortColumnsPropType = PropTypes.func.isRequired;
 export const setPagePagePropType = PropTypes.func.isRequired;
 export const setRowsPerPagePropType = PropTypes.func.isRequired;
 export const setRowEditedPropType = PropTypes.func.isRequired;
-export const isScrollingPropType = PropTypes.boolean;
+export const addRowEditedPropType = PropTypes.func.isRequired;
+export const setIsScrollingPropType = PropTypes.func.isRequired;
+export const isScrollingPropType = PropTypes.bool;
+export const canDeletePropType = PropTypes.bool;
+export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,
@@ -22,7 +26,7 @@ export const classesPropType = PropTypes.object;
 export const typePropType = PropTypes.string;
 export const rowIdPropType = PropTypes.string;
 export const columnIdPropType = PropTypes.string;
-export const editingPropType = PropTypes.boolean;
+export const editingPropType = PropTypes.bool;
 
 // Pagination propTypes
 export const pageSelectedPropType = PropTypes.number;
@@ -54,24 +58,24 @@ export const fontPropType = PropTypes.string;
 export const idPropType = PropTypes.string;
 export const labelPropType = PropTypes.string;
 export const colSizePropType = PropTypes.string;
-export const editablePropType = PropTypes.boolean;
+export const editablePropType = PropTypes.bool;
 export const dataTypePropType = PropTypes.string;
 export const inputTypePropType = PropTypes.string;
 export const dateFormatPropType = PropTypes.string;
 export const valuesPropType = PropTypes.array;
-export const requiredPropType = PropTypes.boolean;
+export const requiredPropType = PropTypes.bool;
 export const valueVerificationPropType = PropTypes.func;
 export const rowPropType = PropTypes.object;
 export const rowsPropType = PropTypes.arrayOf(rowPropType);
-export const canEditPropType = PropTypes.boolean;
-export const canPrintPropType = PropTypes.boolean;
-export const canDownloadPropType = PropTypes.boolean;
-export const canSearchPropType = PropTypes.boolean;
-export const canRefreshRowsPropType = PropTypes.boolean;
-export const canFilterColumnsPropType = PropTypes.boolean;
-export const canSaveUserConfigurationPropType = PropTypes.boolean;
+export const canEditPropType = PropTypes.bool;
+export const canPrintPropType = PropTypes.bool;
+export const canDownloadPropType = PropTypes.bool;
+export const canSearchPropType = PropTypes.bool;
+export const canRefreshRowsPropType = PropTypes.bool;
+export const canFilterColumnsPropType = PropTypes.bool;
+export const canSaveUserConfigurationPropType = PropTypes.bool;
 export const columnsOrderPropType = PropTypes.arrayOf(PropTypes.string);
-export const copyToClipboardPropType = PropTypes.boolean;
+export const copyToClipboardPropType = PropTypes.bool;
 export const availablePropType = PropTypes.arrayOf(
   PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 );
@@ -79,9 +83,9 @@ export const selectedPropType = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.number
 ]);
-export const rowsSelectablePropType = PropTypes.boolean;
-export const selectPageRowsPropType = PropTypes.boolean;
-export const selectAllRowsPropType = PropTypes.boolean;
+export const rowsSelectablePropType = PropTypes.bool;
+export const selectPageRowsPropType = PropTypes.bool;
+export const selectAllRowsPropType = PropTypes.bool;
 export const tooltipPropType = PropTypes.string;
 export const iconPropType = PropTypes.element;
 export const positionPropType = PropTypes.number;

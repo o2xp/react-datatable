@@ -4,7 +4,10 @@ import {
   keyColumn,
   font,
   data,
+  columnAction,
+  userConfiguration,
   pagination,
+  rowsEdited,
   features
 } from "./optionsObjectSample";
 
@@ -17,15 +20,23 @@ const mergedSimpleOptionsSample = {
       totalWidthNumber: 0
     }
   },
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
   pagination: {
     ...pagination,
     rowsCurrentPage: data.rows
   },
   keyColumn,
   font,
-  data,
+  rowsEdited,
   features: {
     ...features,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+    },
     additionalIcons: []
   }
 };

@@ -9,7 +9,11 @@ import {
   rowsPropType,
   CustomTableBodyRowPropType,
   columnsOrderPropType,
-  dimensionsPropType
+  dimensionsPropType,
+  setIsScrollingPropType,
+  isScrollingPropType,
+  keyColumnPropType,
+  rowsEditedPropType
 } from "../../../proptypes";
 
 export const tableRef = React.createRef();
@@ -129,7 +133,11 @@ Body.propTypes = {
   rows: rowsPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
   dimensions: dimensionsPropType.isRequired,
-  CustomTableBodyRow: CustomTableBodyRowPropType
+  CustomTableBodyRow: CustomTableBodyRowPropType,
+  setIsScrolling: setIsScrollingPropType,
+  isScrolling: isScrollingPropType.isRequired,
+  keyColumn: keyColumnPropType.isRequired,
+  rowsEdited: rowsEditedPropType.isRequired
 };
 
 const mapDispatchToProps = dispatch => {

@@ -18,7 +18,8 @@ const defaultOptionsSample = {
       height: "60px",
       heightNumber: 0
     },
-    columnSizeMultiplier: 1
+    columnSizeMultiplier: 1,
+    isScrolling: false
   },
   keyColumn: null,
   font: "Roboto",
@@ -26,6 +27,7 @@ const defaultOptionsSample = {
     columns: [],
     rows: []
   },
+  rowsEdited: [],
   pagination: {
     pageSelected: 1,
     pageTotal: 1,
@@ -36,6 +38,7 @@ const defaultOptionsSample = {
     canEdit: false,
     canPrint: false,
     canDownload: false,
+    canDelete: false,
     canSearch: false,
     canRefreshRows: false,
     canFilterColumns: false,

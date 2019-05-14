@@ -4,7 +4,10 @@ import {
   keyColumn,
   font,
   data,
+  columnAction,
+  userConfiguration,
   pagination,
+  rowsEdited,
   features
 } from "./optionsObjectSample";
 
@@ -17,7 +20,7 @@ const mergedSimpleOptionsSampleWidthResize = {
       widthNumber: 1800,
       totalWidthNumber: 1138
     },
-    columnSizeMultiplier: 1478 / 860
+    columnSizeMultiplier: 1278 / 860
   },
   pagination: {
     ...pagination,
@@ -25,9 +28,17 @@ const mergedSimpleOptionsSampleWidthResize = {
   },
   keyColumn,
   font,
-  data,
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
+  rowsEdited,
   features: {
     ...features,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+    },
     additionalIcons: []
   }
 };

@@ -159,6 +159,7 @@ const calcComponentSize = state => {
   return {
     ...state,
     dimensions: {
+      ...state.dimensions,
       datatable: {
         ...state.dimensions.datatable,
         widthNumber: convertSizeToNumber(state.dimensions.datatable.width),

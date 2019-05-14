@@ -20,15 +20,24 @@ export const row = {
   heightNumber: 60
 };
 export const columnSizeMultiplier = 1;
+export const isScrolling = false;
 export const dimensions = {
   datatable,
   header,
   body,
   row,
-  columnSizeMultiplier
+  columnSizeMultiplier,
+  isScrolling
 };
 export const keyColumn = "id";
 export const font = "Roboto";
+export const columnAction = {
+  id: "actions",
+  label: "",
+  colSize: "150px",
+  editable: false
+};
+
 export const columns = [
   {
     id: "id",
@@ -94,6 +103,7 @@ export const columns = [
     dataType: "iban"
   }
 ];
+export const rowsEdited = [];
 export const data = {
   columns,
   rows
@@ -137,6 +147,7 @@ export const features = {
   canEdit: true,
   canPrint: true,
   canDownload: true,
+  canDelete: true,
   canSearch: false,
   canRefreshRows: false,
   canFilterColumns: false,

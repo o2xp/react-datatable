@@ -60,17 +60,17 @@ describe("Cell type", () => {
 
   describe("should render", () => {
     it("number", () => {
-      const element = NumberType(10000);
+      const element = NumberType({ cellVal: 10000 });
       expect(element).toEqual(<NumberWrapper>10 000</NumberWrapper>);
     });
 
     it("text", () => {
-      const element = TextType("This is some text");
+      const element = TextType({ cellVal: "This is some text" });
       expect(element).toEqual(<TextWrapper>This is some text</TextWrapper>);
     });
 
     it("boolean", () => {
-      const element = BooleanType(false);
+      const element = BooleanType({ cellVal: false });
       expect(element).toEqual(
         <BooleanWrapper>
           <Checkbox checked={false} color="primary" disabled />
@@ -79,7 +79,7 @@ describe("Cell type", () => {
     });
 
     it("date", () => {
-      const element = DateType("1972-09-04T18:09:59");
+      const element = DateType({ cellVal: "1972-09-04T18:09:59" });
       expect(element).toEqual(
         <DateWrapper>
           {moment("1972-09-04T18:09:59").format(dateFormat)}
@@ -88,7 +88,7 @@ describe("Cell type", () => {
     });
 
     it("time", () => {
-      const element = TimeType("1972-09-04T18:09:59");
+      const element = TimeType({ cellVal: "1972-09-04T18:09:59" });
       expect(element).toEqual(
         <TimeWrapper>
           {moment("1972-09-04T18:09:59").format(timeFormat)}
@@ -97,7 +97,7 @@ describe("Cell type", () => {
     });
 
     it("dateTime", () => {
-      const element = DateTimeType("1972-09-04T18:09:59");
+      const element = DateTimeType({ cellVal: "1972-09-04T18:09:59" });
       expect(element).toEqual(
         <DateTimeWrapper>
           {moment("1972-09-04T18:09:59").format(dateTimeFormat)}

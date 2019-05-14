@@ -4,6 +4,7 @@ import TimePickerWrapper from "./TimePickerWrapper";
 import DateTimePickerWrapper from "./DateTimePickerWrapper";
 import TextFieldWrapper from "./TextFieldWrapper";
 import SelectWrapper from "./SelectWrapper";
+import BooleanWrapper from "./BooleanWrapper";
 import {
   cellValPropType,
   valueVerificationPropType,
@@ -67,6 +68,13 @@ const CreateInput = ({
         values,
         rowId,
         dateFormat,
+        columnId,
+        setRowEdited
+      });
+    case "boolean":
+      return BooleanWrapper({
+        cellVal,
+        rowId,
         columnId,
         setRowEdited
       });
