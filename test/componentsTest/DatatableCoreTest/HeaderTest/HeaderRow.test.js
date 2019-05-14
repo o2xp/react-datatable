@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { cloneDeep } from "lodash";
 import HeaderRow, {
   HeaderRow as HeaderRowPureComponent
 } from "../../../../src/components/DatatableCore/Header/HeaderRow";
@@ -16,7 +17,6 @@ import {
   BooleanWrapper,
   DateWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
-import cloneObject from "../../../functions";
 
 const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
@@ -112,7 +112,7 @@ describe("HeaderRow component", () => {
     const wrapper = shallow(
       <HeaderRowPureComponent
         columns={columns}
-        columnsOrder={cloneObject(columnsOrder)}
+        columnsOrder={cloneDeep(columnsOrder)}
         columnSizeMultiplier={1}
         sortColumns={onSortEnd}
         widthDatatable={600}

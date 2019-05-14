@@ -3,6 +3,7 @@ import { Provider} from "react-redux";
 import store from "./redux/store/store";
 import DatatableInitializer from "./components/DatatableInitializer";
 import "./app.css";
+import {cloneDeep} from "lodash";
 
 class Datatable extends Component {
   render() {
@@ -20,7 +21,7 @@ class Datatable extends Component {
         {options.data && options.data.columns && options.data.columns.length > 0 && options.keyColumn &&
           <Provider store={store}>
             <DatatableInitializer 
-              optionsInit={options} 
+              optionsInit={cloneDeep(options)} 
               CustomTableBodyCell={CustomTableBodyCell} 
               CustomTableBodyRow={CustomTableBodyRow} 
               CustomTableHeaderCell={CustomTableHeaderCell} 

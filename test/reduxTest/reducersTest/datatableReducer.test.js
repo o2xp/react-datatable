@@ -1,5 +1,5 @@
 import equal from "fast-deep-equal";
-import { chunk } from "lodash";
+import { chunk, cloneDeep } from "lodash";
 import datatableReducer from "../../../src/redux/reducers/datatableReducer";
 import {
   defaultOptionsSample,
@@ -15,7 +15,6 @@ import {
   maximumOptionsSample,
   mergedMaximumOptionsSample
 } from "../../../data/samples";
-import cloneObject from "../../functions";
 
 describe("datatableReducer reducer", () => {
   it("should return the initial state", () => {
@@ -26,39 +25,39 @@ describe("datatableReducer reducer", () => {
     it("simple options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneObject(simpleOptionsSample)
+        payload: cloneDeep(simpleOptionsSample)
       });
 
       expect(
-        equal(initializedOptions, cloneObject(mergedSimpleOptionsSample))
+        equal(initializedOptions, cloneDeep(mergedSimpleOptionsSample))
       ).toBeTruthy();
     });
 
     it("minimum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneObject(minimumOptionsSample)
+        payload: cloneDeep(minimumOptionsSample)
       });
 
       expect(
-        equal(initializedOptions, cloneObject(mergedMinimumOptionsSample))
+        equal(initializedOptions, cloneDeep(mergedMinimumOptionsSample))
       ).toBeTruthy();
     });
 
     it("maximum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneObject(maximumOptionsSample)
+        payload: cloneDeep(maximumOptionsSample)
       });
 
       expect(
-        equal(initializedOptions, cloneObject(mergedMaximumOptionsSample))
+        equal(initializedOptions, cloneDeep(mergedMaximumOptionsSample))
       ).toBeTruthy();
     });
 
     it("default colSize", () => {
-      const simpleOptionsSampleNoColSize = cloneObject(simpleOptionsSample);
-      const mergedSimpleOptionsSampleNoColSize = cloneObject(
+      const simpleOptionsSampleNoColSize = cloneDeep(simpleOptionsSample);
+      const mergedSimpleOptionsSampleNoColSize = cloneDeep(
         mergedSimpleOptionsSample
       );
 
@@ -79,14 +78,11 @@ describe("datatableReducer reducer", () => {
 
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneObject(simpleOptionsSampleNoColSize)
+        payload: cloneDeep(simpleOptionsSampleNoColSize)
       });
 
       expect(
-        equal(
-          initializedOptions,
-          cloneObject(mergedSimpleOptionsSampleNoColSize)
-        )
+        equal(initializedOptions, cloneDeep(mergedSimpleOptionsSampleNoColSize))
       ).toBeTruthy();
     });
   });
@@ -98,36 +94,36 @@ describe("datatableReducer reducer", () => {
     });
 
     it("with initial size", () => {
-      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+      const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
 
       expect(
-        equal(state, cloneObject(mergedSimpleOptionsSampleCustomSize))
+        equal(state, cloneDeep(mergedSimpleOptionsSampleCustomSize))
       ).toBeTruthy();
     });
 
     it("with width resize", () => {
       global.innerWidth = 2000;
 
-      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+      const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
 
       expect(
-        equal(state, cloneObject(mergedSimpleOptionsSampleWidthResize))
+        equal(state, cloneDeep(mergedSimpleOptionsSampleWidthResize))
       ).toBeTruthy();
     });
 
     it("with height resize", () => {
       global.innerHeight = 500;
 
-      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+      const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
 
       expect(
-        equal(state, cloneObject(mergedSimpleOptionsSampleHeightResize))
+        equal(state, cloneDeep(mergedSimpleOptionsSampleHeightResize))
       ).toBeTruthy();
     });
 
@@ -135,12 +131,12 @@ describe("datatableReducer reducer", () => {
       global.innerWidth = 2000;
       global.innerHeight = 500;
 
-      const state = datatableReducer(cloneObject(mergedSimpleOptionsSample), {
+      const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
 
       expect(
-        equal(state, cloneObject(mergedSimpleOptionsSampleWidthHeightResize))
+        equal(state, cloneDeep(mergedSimpleOptionsSampleWidthHeightResize))
       ).toBeTruthy();
     });
   });
@@ -154,14 +150,14 @@ describe("datatableReducer reducer", () => {
       const payload = { columnsOrder, oldIndex: 1, newIndex: 2 };
 
       const sortedColums = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SORT_COLUMNS",
           payload
         }
       );
 
-      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+      const mergedSimpleOptionsSampleSortColumns = cloneDeep(
         mergedSimpleOptionsSample
       );
 
@@ -187,7 +183,7 @@ describe("datatableReducer reducer", () => {
       let payload = { columnsOrder, oldIndex: 1, newIndex: 2 };
 
       let sortedColums = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SORT_COLUMNS",
           payload
@@ -201,7 +197,7 @@ describe("datatableReducer reducer", () => {
         payload
       });
 
-      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+      const mergedSimpleOptionsSampleSortColumns = cloneDeep(
         mergedSimpleOptionsSample
       );
 
@@ -227,14 +223,14 @@ describe("datatableReducer reducer", () => {
       const payload = { columnsOrder, oldIndex: 1, newIndex: 45 };
 
       const sortedColums = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SORT_COLUMNS",
           payload
         }
       );
 
-      const mergedSimpleOptionsSampleSortColumns = cloneObject(
+      const mergedSimpleOptionsSampleSortColumns = cloneDeep(
         mergedSimpleOptionsSample
       );
 
@@ -256,7 +252,7 @@ describe("datatableReducer reducer", () => {
   describe("should handle SET_ROWS_PER_PAGE", () => {
     it("with 10 rows per page", () => {
       const rowsPerPage = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SET_ROWS_PER_PAGE",
           payload: 10
@@ -264,20 +260,20 @@ describe("datatableReducer reducer", () => {
       );
 
       expect(
-        equal(rowsPerPage, cloneObject(mergedSetRowsPerPageSample))
+        equal(rowsPerPage, cloneDeep(mergedSetRowsPerPageSample))
       ).toBeTruthy();
     });
 
     it("with 25 rows per page", () => {
       const rowsPerPage = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SET_ROWS_PER_PAGE",
           payload: 25
         }
       );
 
-      const mergedSet25RowsPerPage = cloneObject(mergedSetRowsPerPageSample);
+      const mergedSet25RowsPerPage = cloneDeep(mergedSetRowsPerPageSample);
       mergedSet25RowsPerPage.pagination = {
         ...mergedSet25RowsPerPage.pagination,
         pageTotal: 8,
@@ -290,14 +286,14 @@ describe("datatableReducer reducer", () => {
 
     it("with all rows per page", () => {
       const rowsPerPage = datatableReducer(
-        cloneObject(mergedSimpleOptionsSample),
+        cloneDeep(mergedSimpleOptionsSample),
         {
           type: "SET_ROWS_PER_PAGE",
           payload: "All"
         }
       );
 
-      const mergedSetAllRowsPerPage = cloneObject(mergedSetRowsPerPageSample);
+      const mergedSetAllRowsPerPage = cloneDeep(mergedSetRowsPerPageSample);
       mergedSetAllRowsPerPage.pagination = {
         pageSelected: 1,
         pageTotal: 1,
@@ -311,15 +307,12 @@ describe("datatableReducer reducer", () => {
 
   describe("should handle SET_PAGE", () => {
     it("number 3", () => {
-      const setPage = datatableReducer(
-        cloneObject(mergedMaximumOptionsSample),
-        {
-          type: "SET_PAGE",
-          payload: 3
-        }
-      );
+      const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
+        type: "SET_PAGE",
+        payload: 3
+      });
 
-      const mergedSetPage3 = cloneObject(mergedMaximumOptionsSample);
+      const mergedSetPage3 = cloneDeep(mergedMaximumOptionsSample);
       mergedSetPage3.pagination = {
         ...mergedSetPage3.pagination,
         pageSelected: 3,
@@ -330,15 +323,12 @@ describe("datatableReducer reducer", () => {
     });
 
     it("number higher than total", () => {
-      const setPage = datatableReducer(
-        cloneObject(mergedMaximumOptionsSample),
-        {
-          type: "SET_PAGE",
-          payload: 10
-        }
-      );
+      const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
+        type: "SET_PAGE",
+        payload: 10
+      });
 
-      const mergedSetPageHigherThanTotal = cloneObject(
+      const mergedSetPageHigherThanTotal = cloneDeep(
         mergedMaximumOptionsSample
       );
       mergedSetPageHigherThanTotal.pagination = {
@@ -351,17 +341,12 @@ describe("datatableReducer reducer", () => {
     });
 
     it("number lower than 1", () => {
-      const setPage = datatableReducer(
-        cloneObject(mergedMaximumOptionsSample),
-        {
-          type: "SET_PAGE",
-          payload: -5
-        }
-      );
+      const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
+        type: "SET_PAGE",
+        payload: -5
+      });
 
-      const mergedSetPageLowerThanTotal = cloneObject(
-        mergedMaximumOptionsSample
-      );
+      const mergedSetPageLowerThanTotal = cloneDeep(mergedMaximumOptionsSample);
       mergedSetPageLowerThanTotal.pagination = {
         ...mergedSetPageLowerThanTotal.pagination,
         pageSelected: 1,
