@@ -78,8 +78,12 @@ describe("HeaderRow component", () => {
       </Provider>
     );
 
-    it("of 6 cells", () => {
-      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(6);
+    it("of 7 cells", () => {
+      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(7);
+    });
+
+    it("with 1 actions cell", () => {
+      expect(wrapper.find(".action")).toHaveLength(1);
     });
 
     it("with 1 number cell", () => {
@@ -105,7 +109,7 @@ describe("HeaderRow component", () => {
 
   it("should call on sort end without errors", () => {
     const onSortEnd = jest.fn();
-    const wrapper = mount(
+    const wrapper = shallow(
       <HeaderRowPureComponent
         columns={columns}
         columnsOrder={cloneObject(columnsOrder)}
