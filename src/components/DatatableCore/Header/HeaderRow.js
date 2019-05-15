@@ -20,15 +20,16 @@ export class HeaderRow extends Component {
     const width = `${(
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
+    const key = `column-${columnId}`;
 
     if (columnId === "actions") {
-      return <HeaderActionsCell key={columnId} column={column} />;
+      return <HeaderActionsCell key={key} column={column} />;
     }
 
     if (CustomTableHeaderCell !== null) {
       return (
         <SortableItem
-          key={columnId}
+          key={key}
           index={index}
           width={width}
           value={<CustomTableHeaderCell column={column} width={width} />}
@@ -36,9 +37,7 @@ export class HeaderRow extends Component {
       );
     }
 
-    return (
-      <HeaderCell column={column} width={width} key={columnId} index={index} />
-    );
+    return <HeaderCell column={column} width={width} key={key} index={index} />;
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {

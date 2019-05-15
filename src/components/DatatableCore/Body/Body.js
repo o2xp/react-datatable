@@ -28,7 +28,7 @@ class Body extends Component {
   }
 
   componentWillUnmount() {
-    findDOMNode(tableRef.current).removeEventListener("scroll");
+    findDOMNode(tableRef.current).removeEventListener("scroll", null);
   }
 
   handleScroll = scrollLeft => {
