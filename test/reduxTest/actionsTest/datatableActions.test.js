@@ -54,4 +54,45 @@ describe("Datatable actions", () => {
     };
     expect(actions.setPage(payload)).toEqual(expectedAction);
   });
+
+  it("should create an action to set scrolling", () => {
+    const payload = true;
+    const expectedAction = {
+      type: "SET_IS_SCROLLING",
+      payload
+    };
+    expect(actions.setIsScrolling(payload)).toEqual(expectedAction);
+  });
+
+  it("should create an action to add a row to edited", () => {
+    const payload = {
+      index: 0,
+      id: "5cd9307025f4f0572995990f",
+      name: "Hunt Valdez",
+      age: 2,
+      adult: false,
+      birthDate: "2017-06-02T11:22",
+      iban: "",
+      eyeColor: "green"
+    };
+    const expectedAction = {
+      type: "ADD_ROW_EDITED",
+      payload
+    };
+    expect(actions.addRowEdited(payload)).toEqual(expectedAction);
+  });
+
+  it("should create an action to set an edited row", () => {
+    const payload = {
+      columnId: "age",
+      rowId: "5cd9307025f4f0572995990f",
+      newValue: 50,
+      error: false
+    };
+    const expectedAction = {
+      type: "SET_ROW_EDITED",
+      payload
+    };
+    expect(actions.setRowEdited(payload)).toEqual(expectedAction);
+  });
 });

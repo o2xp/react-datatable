@@ -371,10 +371,13 @@ const datatableReducer = (state = defaultState, action) => {
     case "SET_PAGE":
       return setPage(state, payload);
     case "SET_IS_SCROLLING":
+      console.log(payload);
       return setIsScrolling(state, payload);
     case "ADD_ROW_EDITED":
+      console.log(payload);
       return addRowEdited(state, payload);
     case "SET_ROW_EDITED":
+      console.log(payload);
       return setRowEdited(state, payload);
     default:
       return state;
