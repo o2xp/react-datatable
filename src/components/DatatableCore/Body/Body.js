@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { findDOMNode } from "react-dom";
 import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
 import { FixedSizeList } from "react-window";
@@ -20,21 +21,14 @@ export const tableRef = React.createRef();
 
 class Body extends Component {
   componentDidMount() {
-    const virtualizedContainer = document.getElementsByClassName(
-      "virtualized-container"
-    )[0];
-
-    virtualizedContainer.addEventListener(
-      "scroll",
-      throttle(() => this.handleScroll(virtualizedContainer.scrollLeft)),
-      500
-    );
+    const virtualizedContainer = findDOMNode(tableRef.current);
+    const callBack = () =>
+      throttle(() => this.handleScroll(virtualizedContainer.scrollLeft), 500);
+    virtualizedContainer.addEventListener("scroll", callBack());
   }
 
   componentWillUnmount() {
-    document
-      .getElementsByClassName("virtualized-container")[0]
-      .removeEventListener("scroll");
+    findDOMNode(tableRef.current).removeEventListener("scroll");
   }
 
   handleScroll = scrollLeft => {

@@ -16,6 +16,12 @@ const customTableBodyRowSample = ({
   height
 }) => {
   const { columns } = simpleOptionsSample.data;
+  const columnAction = {
+    id: "actions",
+    label: "Actions",
+    colSize: "150px",
+    editable: false
+  };
   return (
     <div
       className={
@@ -27,7 +33,10 @@ const customTableBodyRowSample = ({
       }}
     >
       {columnsOrder.map(columnId => {
-        const column = columns.find(col => col.id === columnId);
+        const column =
+          columnId === "actions"
+            ? columnAction
+            : columns.find(col => col.id === columnId);
         const width = `${(
           column.colSize.split("px")[0] * columnSizeMultiplier
         ).toString()}px`;
