@@ -96,6 +96,14 @@ export const columns = [
     dateFormat: "YYYY-MM-DDTHH:MM:ss"
   },
   {
+    id: "eyeColor",
+    label: "eyeColor",
+    colSize: "120px",
+    editable: true,
+    inputType: "select",
+    values: ["blue", "brown", "green"]
+  },
+  {
     id: "iban",
     label: "iban",
     colSize: "250px",
@@ -119,7 +127,7 @@ export const rowsPerPage = {
   selected: "All"
 };
 export const userConfiguration = {
-  columnsOrder: ["id", "name", "age", "adult", "birthDate", "iban"],
+  columnsOrder: ["id", "name", "age", "adult", "birthDate", "eyeColor", "iban"],
   copyToClipboard: false
 };
 export const selection = {

@@ -47,17 +47,18 @@ describe("BodyRow component", () => {
           columnsOrder={columnsOrder}
           rowIndex={rowIndex}
           style={style}
+          editing={false}
           CustomTableBodyCell={null}
         />
       </Provider>
     );
 
-    it("of 6 cells", () => {
-      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(6);
+    it("of 8 cells", () => {
+      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(8);
     });
 
-    it("with 5 cells containing data", () => {
-      expect(rowWrapper.find(BodyCell)).toHaveLength(5);
+    it("with 6 cells containing data", () => {
+      expect(rowWrapper.find(BodyCell)).toHaveLength(6);
     });
 
     it("with 1 empty cell", () => {
@@ -74,16 +75,17 @@ describe("BodyRow component", () => {
           columnsOrder={columnsOrder}
           rowIndex={rowIndex}
           style={style}
+          editing={false}
           CustomTableBodyCell={null}
         />
       </Provider>
     );
-    it("of 6 cells", () => {
-      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(6);
+    it("of 8 cells", () => {
+      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(8);
     });
 
-    it("with 4 cells containing basic data", () => {
-      expect(rowWrapper.find(".data").hostNodes()).toHaveLength(4);
+    it("with 5 cells containing basic data", () => {
+      expect(rowWrapper.find(".data").hostNodes()).toHaveLength(5);
     });
 
     it("with 1 empty cell", () => {

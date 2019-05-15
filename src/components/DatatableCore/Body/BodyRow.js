@@ -36,7 +36,7 @@ class BodyRow extends Component {
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
 
-    if (val === null || val === undefined) {
+    if (val === null || val === undefined || val === "") {
       return (
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>

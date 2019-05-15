@@ -168,6 +168,7 @@ describe("datatableReducer reducer", () => {
         "age",
         "adult",
         "birthDate",
+        "eyeColor",
         "iban"
       ];
       expect(
@@ -208,6 +209,7 @@ describe("datatableReducer reducer", () => {
         "adult",
         "birthDate",
         "age",
+        "eyeColor",
         "iban"
       ];
       expect(
@@ -240,6 +242,7 @@ describe("datatableReducer reducer", () => {
         "age",
         "adult",
         "birthDate",
+        "eyeColor",
         "iban",
         "id"
       ];

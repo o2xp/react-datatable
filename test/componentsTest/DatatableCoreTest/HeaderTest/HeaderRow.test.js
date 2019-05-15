@@ -50,16 +50,16 @@ describe("HeaderRow component", () => {
       </Provider>
     );
 
-    it("of 6 cells", () => {
-      expect(wrapper.find(HeaderCell)).toHaveLength(6);
+    it("of 7 cells", () => {
+      expect(wrapper.find(HeaderCell)).toHaveLength(7);
     });
 
     it("with 1 number cell", () => {
       expect(wrapper.find(NumberWrapper)).toHaveLength(1);
     });
 
-    it("with 3 text cells", () => {
-      expect(wrapper.find(TextWrapper)).toHaveLength(3);
+    it("with 4 text cells", () => {
+      expect(wrapper.find(TextWrapper)).toHaveLength(4);
     });
 
     it("with 1 boolean cell", () => {
@@ -78,8 +78,8 @@ describe("HeaderRow component", () => {
       </Provider>
     );
 
-    it("of 7 cells", () => {
-      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(7);
+    it("of 8 cells", () => {
+      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(8);
     });
 
     it("with 1 actions cell", () => {
@@ -102,8 +102,8 @@ describe("HeaderRow component", () => {
       expect(wrapper.find(".date").hostNodes()).toHaveLength(1);
     });
 
-    it("with 1 default cell", () => {
-      expect(wrapper.find(".default").hostNodes()).toHaveLength(1);
+    it("with 2 default cell", () => {
+      expect(wrapper.find(".default").hostNodes()).toHaveLength(2);
     });
   });
 
