@@ -6,7 +6,8 @@ const booleanValue = {
   cellVal: true,
   rowId: "5cd9307025f4f0572995990f",
   columnId: "adult",
-  setRowEdited: () => setRowEdited()
+  setRowEdited: ({ rowId, columnId, newValue }) =>
+    setRowEdited({ rowId, columnId, newValue })
 };
 
 describe("Boolean wrapper", () => {
@@ -28,6 +29,12 @@ describe("Boolean wrapper", () => {
   it("should call setRowEdited onChange", () => {
     const wrapper = mount(BooleanWrapper(booleanValue));
     wrapper.find("input").simulate("change", { target: { checked: false } });
+    const { rowId, columnId } = booleanValue;
     expect(setRowEdited).toHaveBeenCalled();
+    expect(setRowEdited).toHaveBeenCalledWith({
+      rowId,
+      columnId,
+      newValue: false
+    });
   });
 });
