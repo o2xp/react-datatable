@@ -14,6 +14,7 @@ import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
 import mergedPageSample from "./mergedPageSample";
+import mergedDatableReducerRowsEdited from "./mergedDatableReducerRowsEdited";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
 import mergedSimpleOptionsSampleCustomSize from "./mergedSimpleOptionsSampleCustomSize";
 import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
@@ -45,6 +46,7 @@ export {
   minimumOptionsSample,
   defaultOptionsSample,
   mergedPageSample,
+  mergedDatableReducerRowsEdited,
   mergedSimpleOptionsSample,
   mergedSimpleOptionsSampleCustomSize,
   mergedSimpleOptionsSampleWidthResize,

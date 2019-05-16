@@ -318,7 +318,10 @@ const setIsScrolling = (state, isScrolling) => {
 };
 
 const addRowEdited = (state, row) => {
-  const { rowsEdited } = state;
+  const { rowsEdited, keyColumn } = state;
+  if (rowsEdited.find(re => re[keyColumn] === row[keyColumn])) {
+    return state;
+  }
   return {
     ...state,
     rowsEdited: [
