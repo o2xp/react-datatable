@@ -19,7 +19,7 @@ import {
   classesPropType
 } from "../../../proptypes";
 
-class DatePickerWrapper extends Component {
+export class DatePickerWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
