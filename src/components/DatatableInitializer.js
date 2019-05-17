@@ -49,7 +49,7 @@ export class DatatableInitializer extends Component {
     updateComponentSize();
 
     const callBack = () => throttle(() => updateComponentSize(), 100);
-    window.addEventListener("resize", callBack);
+    window.addEventListener("resize", callBack());
   }
 
   componentWillUnmount() {

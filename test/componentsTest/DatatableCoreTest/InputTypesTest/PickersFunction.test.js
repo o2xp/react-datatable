@@ -82,7 +82,7 @@ describe("PickersFunction", () => {
       expect(res).toEqual(expectedRes);
     });
 
-    it("with good value while mouting", () => {
+    it("with error value while mouting", () => {
       const res = checkValue({ ...errorCheckValue, mounting: true });
       const expectedRes = {
         message: "Value is too big",
@@ -114,7 +114,7 @@ describe("PickersFunction", () => {
       expect(res).toEqual(expectedRes);
     });
 
-    it("with default value and valueVerification", () => {
+    it("with default value and without valueVerification", () => {
       const res = setValue(dateSetValue);
       const expectedRes = {
         message: "",

@@ -176,7 +176,7 @@ describe("Select wrapper", () => {
     });
   });
 
-  describe("on textfield blue should set tooltipOpen to false", () => {
+  describe("on textfield blur should set tooltipOpen to false", () => {
     it("should be called on textfield focus", () => {
       const wrapper = mount(
         <TextFieldWrapperPureComponent
