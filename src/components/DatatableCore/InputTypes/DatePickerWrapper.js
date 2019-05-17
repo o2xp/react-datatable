@@ -52,7 +52,7 @@ class DatePickerWrapper extends Component {
     }
   };
 
-  toggleCloseTooltip = open => {
+  toggleTooltip = open => {
     const { error } = this.state;
     if (error) {
       this.setState({ tooltipOpen: open });
@@ -73,7 +73,7 @@ class DatePickerWrapper extends Component {
         TransitionComponent={Zoom}
         interactive
       >
-        <ClickAwayListener onClickAway={() => this.toggleCloseTooltip(false)}>
+        <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <DatePicker
             clearable
             error={error}

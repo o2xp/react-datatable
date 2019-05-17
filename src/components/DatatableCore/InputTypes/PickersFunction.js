@@ -3,9 +3,9 @@ import { moment } from "../../../moment.config";
 export const checkValue = ({ cellVal, mounting, valueVerification }) => {
   const { message, error } = valueVerification(cellVal);
   const newState = {
+    tooltipOpen: mounting ? false : error,
     message,
-    error,
-    tooltipOpen: mounting ? false : error
+    error
   };
 
   return newState;

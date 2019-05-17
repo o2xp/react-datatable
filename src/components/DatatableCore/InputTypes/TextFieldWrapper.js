@@ -10,7 +10,7 @@ import {
   typePropType
 } from "../../../proptypes";
 
-class TextFieldWrapper extends Component {
+export class TextFieldWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +33,7 @@ class TextFieldWrapper extends Component {
     }
   }
 
-  onValueChange = e => {
-    const { value } = e.target;
+  onValueChange = value => {
     const newState = setValue({
       ...this.props,
       value
@@ -44,7 +43,7 @@ class TextFieldWrapper extends Component {
     }
   };
 
-  toggleCloseTooltip = open => {
+  toggleTooltip = open => {
     const { error } = this.state;
     if (error) {
       this.setState({ tooltipOpen: open });
@@ -69,9 +68,9 @@ class TextFieldWrapper extends Component {
           <TextField
             value={cellVal}
             error={error}
-            onFocus={() => this.toggleCloseTooltip(true)}
+            onFocus={() => this.toggleTooltip(true)}
             onBlur={() => this.setState({ tooltipOpen: false })}
-            onChange={this.onValueChange}
+            onChange={e => this.onValueChange(e.target.value)}
             type={type}
             fullWidth
           />
