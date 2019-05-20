@@ -155,10 +155,12 @@ describe("Select wrapper", () => {
           />
         </MuiPickersUtilsProvider>
       ).children();
+      console.log(wrapper.state());
       wrapper
         .find("ClickAwayListener")
         .props()
         .onClickAway();
+      console.log(wrapper.state());
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "Date can't be in futur",
