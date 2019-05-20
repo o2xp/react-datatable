@@ -138,34 +138,6 @@ describe("Select wrapper", () => {
   });
 
   describe("toggleTooltip", () => {
-    it("should set tooltipOpen to false on picker open", () => {
-      const wrapper = mount(
-        <MuiPickersUtilsProvider
-          utils={MomentUtils}
-          locale={locale}
-          moment={moment}
-        >
-          <DatePickerWrapperPureComponent
-            cellVal="2048-05-17"
-            columnId="birthDate"
-            rowId={rowId}
-            valueVerification={valueVerification}
-            setRowEdited={setRowEdited}
-            classes={{ customVariant }}
-          />
-        </MuiPickersUtilsProvider>
-      ).children();
-      wrapper
-        .find(DatePicker)
-        .props()
-        .onOpen();
-      expect(wrapper.state()).toEqual({
-        tooltipOpen: false,
-        message: "Date can't be in futur",
-        error: true
-      });
-    });
-
     it("should set tooltipOpen to false on onClickAway", () => {
       const wrapper = mount(
         <MuiPickersUtilsProvider
@@ -187,6 +159,34 @@ describe("Select wrapper", () => {
         .find("ClickAwayListener")
         .props()
         .onClickAway();
+      expect(wrapper.state()).toEqual({
+        tooltipOpen: false,
+        message: "Date can't be in futur",
+        error: true
+      });
+    });
+
+    it("should set tooltipOpen to false on picker open", () => {
+      const wrapper = mount(
+        <MuiPickersUtilsProvider
+          utils={MomentUtils}
+          locale={locale}
+          moment={moment}
+        >
+          <DatePickerWrapperPureComponent
+            cellVal="2048-05-17"
+            columnId="birthDate"
+            rowId={rowId}
+            valueVerification={valueVerification}
+            setRowEdited={setRowEdited}
+            classes={{ customVariant }}
+          />
+        </MuiPickersUtilsProvider>
+      ).children();
+      wrapper
+        .find(DatePicker)
+        .props()
+        .onOpen();
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "Date can't be in futur",
