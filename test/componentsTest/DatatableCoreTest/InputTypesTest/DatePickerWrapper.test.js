@@ -146,7 +146,7 @@ describe("Select wrapper", () => {
           moment={moment}
         >
           <DatePickerWrapperPureComponent
-            cellVal="2019-05-17"
+            cellVal="2019-05-25"
             columnId="birthDate"
             rowId={rowId}
             valueVerification={valueVerification}
@@ -155,12 +155,10 @@ describe("Select wrapper", () => {
           />
         </MuiPickersUtilsProvider>
       ).children();
-      console.log(wrapper.state());
       wrapper
         .find("ClickAwayListener")
         .props()
         .onClickAway();
-      console.log(wrapper.state());
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "Date can't be in futur",
