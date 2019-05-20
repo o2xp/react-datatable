@@ -13,7 +13,7 @@ import {
   addRowEditedPropType
 } from "../../../proptypes";
 
-class BodyActionsCell extends Component {
+export class BodyActionsCell extends Component {
   render() {
     const {
       column,
@@ -33,17 +33,17 @@ class BodyActionsCell extends Component {
         }
       >
         <div style={{ width: column.colSize }}>
-          {rowsSelectable && <Checkbox checked={false} />}
+          {rowsSelectable && <Checkbox className="select" checked={false} />}
           {canDelete && (
             <Tooltip title="Confirm delete">
-              <IconButton onClick={() => true}>
+              <IconButton className="delete">
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
           )}
           {canEdit && (
             <Tooltip title="Edit row">
-              <IconButton onClick={() => addRowEdited(row)}>
+              <IconButton className="edit" onClick={() => addRowEdited(row)}>
                 <CreateIcon />
               </IconButton>
             </Tooltip>
