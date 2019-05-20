@@ -88,13 +88,13 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle UPDATE_COMPONENT_SIZE", () => {
+  describe("should handle UPDATE_COMPONENT_SIZE with", () => {
     afterEach(() => {
       global.innerWidth = 1024;
       global.innerHeight = 768;
     });
 
-    it("with initial size", () => {
+    it("initial size", () => {
       const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
@@ -104,7 +104,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with width resize", () => {
+    it("width resize", () => {
       global.innerWidth = 2000;
 
       const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
@@ -116,7 +116,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with height resize", () => {
+    it("height resize", () => {
       global.innerHeight = 500;
 
       const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
@@ -128,7 +128,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with height and width resize", () => {
+    it("height and width resize", () => {
       global.innerWidth = 2000;
       global.innerHeight = 500;
 
@@ -142,8 +142,8 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle SORT_COLUMNS", () => {
-    it("with one movement", () => {
+  describe("should handle SORT_COLUMNS whith", () => {
+    it("one movement", () => {
       const {
         columnsOrder
       } = mergedSimpleOptionsSample.features.userConfiguration;
@@ -177,7 +177,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with multiples movements", () => {
+    it("multiples movements", () => {
       const {
         columnsOrder
       } = mergedSimpleOptionsSample.features.userConfiguration;
@@ -218,7 +218,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with new index higher than length", () => {
+    it("new index higher than length", () => {
       const {
         columnsOrder
       } = mergedSimpleOptionsSample.features.userConfiguration;
@@ -253,8 +253,8 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle SET_ROWS_PER_PAGE", () => {
-    it("with 10 rows per page", () => {
+  describe("should handle SET_ROWS_PER_PAGE with", () => {
+    it("10 rows per page", () => {
       const rowsPerPage = datatableReducer(
         cloneDeep(mergedSimpleOptionsSample),
         {
@@ -268,7 +268,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("with 25 rows per page", () => {
+    it("25 rows per page", () => {
       const rowsPerPage = datatableReducer(
         cloneDeep(mergedSimpleOptionsSample),
         {
@@ -288,7 +288,7 @@ describe("datatableReducer reducer", () => {
       expect(equal(rowsPerPage, mergedSet25RowsPerPage)).toBeTruthy();
     });
 
-    it("with all rows per page", () => {
+    it("all rows per page", () => {
       const rowsPerPage = datatableReducer(
         cloneDeep(mergedSimpleOptionsSample),
         {
@@ -309,8 +309,8 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle SET_PAGE", () => {
-    it("number 3", () => {
+  describe("should handle SET_PAGE number", () => {
+    it("3", () => {
       const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
         type: "SET_PAGE",
         payload: 3
@@ -326,7 +326,7 @@ describe("datatableReducer reducer", () => {
       expect(equal(setPage, mergedSetPage3)).toBeTruthy();
     });
 
-    it("number higher than total", () => {
+    it("higher than total", () => {
       const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
         type: "SET_PAGE",
         payload: 10
@@ -344,7 +344,7 @@ describe("datatableReducer reducer", () => {
       expect(equal(setPage, mergedSetPageHigherThanTotal)).toBeTruthy();
     });
 
-    it("number lower than 1", () => {
+    it("lower than 1", () => {
       const setPage = datatableReducer(cloneDeep(mergedMaximumOptionsSample), {
         type: "SET_PAGE",
         payload: -5
@@ -361,8 +361,8 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle SET_IS_SCROLLING", () => {
-    it("to false", () => {
+  describe("should handle SET_IS_SCROLLING to", () => {
+    it("false", () => {
       const setScrolled = datatableReducer(
         cloneDeep(mergedSimpleOptionsSample),
         {
@@ -376,7 +376,7 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
-    it("to true", () => {
+    it("true", () => {
       const setScrolled = datatableReducer(
         cloneDeep(mergedSimpleOptionsSample),
         {
@@ -398,51 +398,52 @@ describe("datatableReducer reducer", () => {
   });
 
   describe("should handle ADD_ROW_EDITED", () => {
-    it("with one row", () => {
-      const row = simpleOptionsSample.data.rows[0];
-      const rowAdded = simpleOptionsSample.data.rows[0];
-      rowAdded.idOfColumnErr = [];
-      const result = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
-        type: "ADD_ROW_EDITED",
-        payload: row
-      });
-
-      const mergedSimpleOptionsSampleWithOneEditedRow = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [rowAdded]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedSimpleOptionsSampleWithOneEditedRow))
-      ).toBeTruthy();
-    });
-
-    it("with multiples rows (here 4)", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[10];
-      const rowAdded = rows[10];
-      rowAdded.idOfColumnErr = [];
-      const result = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
+    describe("with", () => {
+      it("one row", () => {
+        const row = simpleOptionsSample.data.rows[0];
+        const rowAdded = simpleOptionsSample.data.rows[0];
+        rowAdded.idOfColumnErr = [];
+        const result = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
           type: "ADD_ROW_EDITED",
           payload: row
-        }
-      );
+        });
 
-      const mergedDatableReducerRowsEditedWithFourRows = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], idOfColumnErr: [] },
-          { ...rows[45], idOfColumnErr: [] },
-          rowAdded
-        ]
-      };
+        const mergedSimpleOptionsSampleWithOneEditedRow = {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [rowAdded]
+        };
 
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedWithFourRows))
-      ).toBeTruthy();
+        expect(
+          equal(result, cloneDeep(mergedSimpleOptionsSampleWithOneEditedRow))
+        ).toBeTruthy();
+      });
+
+      it("multiples rows (here 4)", () => {
+        const { rows } = cloneDeep(simpleOptionsSample.data);
+        const row = rows[10];
+        const rowAdded = rows[10];
+        rowAdded.idOfColumnErr = [];
+        const result = datatableReducer(
+          cloneDeep(mergedDatableReducerRowsEdited),
+          {
+            type: "ADD_ROW_EDITED",
+            payload: row
+          }
+        );
+        const mergedDatableReducerRowsEditedWithFourRows = {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [
+            { ...rows[0], idOfColumnErr: [] },
+            { ...rows[5], idOfColumnErr: [] },
+            { ...rows[45], idOfColumnErr: [] },
+            rowAdded
+          ]
+        };
+
+        expect(
+          equal(result, cloneDeep(mergedDatableReducerRowsEditedWithFourRows))
+        ).toBeTruthy();
+      });
     });
 
     it("shouln't add row if already present", () => {
@@ -474,340 +475,348 @@ describe("datatableReducer reducer", () => {
   });
 
   describe("should handle SET_ROW_EDITED", () => {
-    it("when value is good", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[5];
-      const payload = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 50,
-        error: false
-      };
+    describe("when value is", () => {
+      it("good", () => {
+        const { rows } = cloneDeep(simpleOptionsSample.data);
+        const row = rows[5];
+        const payload = {
+          columnId: "age",
+          rowId: row.id,
+          newValue: 50,
+          error: false
+        };
 
-      const result = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 50, idOfColumnErr: [] },
-          { ...rows[45], idOfColumnErr: [] }
-        ]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
-
-    it("when value is wrong", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[5];
-      const payload = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 101,
-        error: true
-      };
-
-      const result = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 101, idOfColumnErr: ["age"] },
-          { ...rows[45], idOfColumnErr: [] }
-        ]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
-
-    it("when edit row on multiple field without error", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[5];
-      const payload = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 101,
-        error: false
-      };
-
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const payload2 = {
-        columnId: "name",
-        rowId: row.id,
-        newValue: "John Doe",
-        error: false
-      };
-
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
-      });
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 101, name: "John Doe", idOfColumnErr: [] },
-          { ...rows[45], idOfColumnErr: [] }
-        ]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
-
-    it("when edit row on multiple field with errors", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[5];
-      const payload = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 101,
-        error: true
-      };
-
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const payload2 = {
-        columnId: "name",
-        rowId: row.id,
-        newValue: "John Doe",
-        error: true
-      };
-
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
-      });
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
+        const result = datatableReducer(
+          cloneDeep(mergedDatableReducerRowsEdited),
           {
-            ...rows[5],
-            age: 101,
-            name: "John Doe",
-            idOfColumnErr: ["age", "name"]
-          },
-          { ...rows[45], idOfColumnErr: [] }
-        ]
-      };
+            type: "SET_ROW_EDITED",
+            payload
+          }
+        );
 
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
+        const mergedDatableReducerRowsEditedExpect = {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [
+            { ...rows[0], idOfColumnErr: [] },
+            { ...rows[5], age: 50, idOfColumnErr: [] },
+            { ...rows[45], idOfColumnErr: [] }
+          ]
+        };
 
-    it("when edit row on multiple field with corrected error", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row = rows[5];
-      const payload = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 101,
-        error: true
-      };
-
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const payload2 = {
-        columnId: "age",
-        rowId: row.id,
-        newValue: 70,
-        error: false
-      };
-
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
+        expect(
+          equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+        ).toBeTruthy();
       });
 
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 70, idOfColumnErr: [] },
-          { ...rows[45], idOfColumnErr: [] }
-        ]
-      };
+      it("wrong", () => {
+        const { rows } = cloneDeep(simpleOptionsSample.data);
+        const row = rows[5];
+        const payload = {
+          columnId: "age",
+          rowId: row.id,
+          newValue: 101,
+          error: true
+        };
 
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
+        const result = datatableReducer(
+          cloneDeep(mergedDatableReducerRowsEdited),
+          {
+            type: "SET_ROW_EDITED",
+            payload
+          }
+        );
+
+        const mergedDatableReducerRowsEditedExpect = {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [
+            { ...rows[0], idOfColumnErr: [] },
+            { ...rows[5], age: 101, idOfColumnErr: ["age"] },
+            { ...rows[45], idOfColumnErr: [] }
+          ]
+        };
+
+        expect(
+          equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+        ).toBeTruthy();
+      });
     });
 
-    it("when edit multiple rows field without error", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row5 = rows[5];
-      const row45 = rows[45];
-      const payload = {
-        columnId: "age",
-        rowId: row5.id,
-        newValue: 70,
-        error: false
-      };
+    describe("when edit row on multiple field", () => {
+      describe("without", () => {
+        it("error", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row = rows[5];
+          const payload = {
+            columnId: "age",
+            rowId: row.id,
+            newValue: 101,
+            error: false
+          };
 
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
 
-      const payload2 = {
-        columnId: "name",
-        rowId: row45.id,
-        newValue: "John Doe",
-        error: false
-      };
+          const payload2 = {
+            columnId: "name",
+            rowId: row.id,
+            newValue: "John Doe",
+            error: false
+          };
 
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
+
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[5], age: 101, name: "John Doe", idOfColumnErr: [] },
+              { ...rows[45], idOfColumnErr: [] }
+            ]
+          };
+
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
+
+        it("errors", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row5 = rows[5];
+          const row45 = rows[45];
+          const payload = {
+            columnId: "age",
+            rowId: row5.id,
+            newValue: 70,
+            error: false
+          };
+
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
+
+          const payload2 = {
+            columnId: "name",
+            rowId: row45.id,
+            newValue: "John Doe",
+            error: false
+          };
+
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
+
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[5], age: 70, idOfColumnErr: [] },
+              { ...rows[45], name: "John Doe", idOfColumnErr: [] }
+            ]
+          };
+
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
       });
 
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 70, idOfColumnErr: [] },
-          { ...rows[45], name: "John Doe", idOfColumnErr: [] }
-        ]
-      };
+      describe("with", () => {
+        it("errors", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row = rows[5];
+          const payload = {
+            columnId: "age",
+            rowId: row.id,
+            newValue: 101,
+            error: true
+          };
 
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
 
-    it("when edit multiple rows field with error", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row5 = rows[5];
-      const row45 = rows[45];
-      const payload = {
-        columnId: "age",
-        rowId: row5.id,
-        newValue: 105,
-        error: true
-      };
+          const payload2 = {
+            columnId: "name",
+            rowId: row.id,
+            newValue: "John Doe",
+            error: true
+          };
 
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
 
-      const payload2 = {
-        columnId: "name",
-        rowId: row45.id,
-        newValue: "John Doe",
-        error: false
-      };
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              {
+                ...rows[5],
+                age: 101,
+                name: "John Doe",
+                idOfColumnErr: ["age", "name"]
+              },
+              { ...rows[45], idOfColumnErr: [] }
+            ]
+          };
 
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
+
+        it("corrected error", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row = rows[5];
+          const payload = {
+            columnId: "age",
+            rowId: row.id,
+            newValue: 101,
+            error: true
+          };
+
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
+
+          const payload2 = {
+            columnId: "age",
+            rowId: row.id,
+            newValue: 70,
+            error: false
+          };
+
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
+
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[5], age: 70, idOfColumnErr: [] },
+              { ...rows[45], idOfColumnErr: [] }
+            ]
+          };
+
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
+
+        it("error", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row5 = rows[5];
+          const row45 = rows[45];
+          const payload = {
+            columnId: "age",
+            rowId: row5.id,
+            newValue: 105,
+            error: true
+          };
+
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
+
+          const payload2 = {
+            columnId: "name",
+            rowId: row45.id,
+            newValue: "John Doe",
+            error: false
+          };
+
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
+
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[5], age: 105, idOfColumnErr: ["age"] },
+              { ...rows[45], name: "John Doe", idOfColumnErr: [] }
+            ]
+          };
+
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
+
+        it("errors corrected to errors", () => {
+          const { rows } = cloneDeep(simpleOptionsSample.data);
+          const row5 = rows[5];
+          const row45 = rows[45];
+          const payload = {
+            columnId: "age",
+            rowId: row5.id,
+            newValue: 105,
+            error: true
+          };
+
+          const preresult = datatableReducer(
+            cloneDeep(mergedDatableReducerRowsEdited),
+            {
+              type: "SET_ROW_EDITED",
+              payload
+            }
+          );
+
+          const payload2 = {
+            columnId: "name",
+            rowId: row45.id,
+            newValue: "John Doe",
+            error: true
+          };
+
+          const result = datatableReducer(preresult, {
+            type: "SET_ROW_EDITED",
+            payload: payload2
+          });
+
+          const mergedDatableReducerRowsEditedExpect = {
+            ...mergedSimpleOptionsSample,
+            rowsEdited: [
+              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[5], age: 105, idOfColumnErr: ["age"] },
+              { ...rows[45], name: "John Doe", idOfColumnErr: ["name"] }
+            ]
+          };
+
+          expect(
+            equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+          ).toBeTruthy();
+        });
       });
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 105, idOfColumnErr: ["age"] },
-          { ...rows[45], name: "John Doe", idOfColumnErr: [] }
-        ]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
-    });
-
-    it("when edit multiple rows field with errors", () => {
-      const { rows } = cloneDeep(simpleOptionsSample.data);
-      const row5 = rows[5];
-      const row45 = rows[45];
-      const payload = {
-        columnId: "age",
-        rowId: row5.id,
-        newValue: 105,
-        error: true
-      };
-
-      const preresult = datatableReducer(
-        cloneDeep(mergedDatableReducerRowsEdited),
-        {
-          type: "SET_ROW_EDITED",
-          payload
-        }
-      );
-
-      const payload2 = {
-        columnId: "name",
-        rowId: row45.id,
-        newValue: "John Doe",
-        error: true
-      };
-
-      const result = datatableReducer(preresult, {
-        type: "SET_ROW_EDITED",
-        payload: payload2
-      });
-
-      const mergedDatableReducerRowsEditedExpect = {
-        ...mergedSimpleOptionsSample,
-        rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], age: 105, idOfColumnErr: ["age"] },
-          { ...rows[45], name: "John Doe", idOfColumnErr: ["name"] }
-        ]
-      };
-
-      expect(
-        equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
-      ).toBeTruthy();
     });
   });
 });
