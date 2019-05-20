@@ -19,7 +19,7 @@ import {
 
 export const tableRef = React.createRef();
 
-class Body extends Component {
+export class Body extends Component {
   componentDidMount() {
     const virtualizedContainer = findDOMNode(tableRef.current);
     const callBack = () =>
@@ -86,16 +86,6 @@ class Body extends Component {
         key={key}
       />
     );
-  };
-
-  getItemSize = index => {
-    const { rows, rowsEdited, keyColumn, dimensions } = this.props;
-    const rowId = rows[index];
-
-    if (rowsEdited.find(re => re[keyColumn] === rowId[keyColumn])) {
-      return dimensions.row.heightNumber + 20;
-    }
-    return dimensions.row.heightNumber;
   };
 
   render() {
