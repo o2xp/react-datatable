@@ -19,9 +19,7 @@ export const NumberType = properties => {
   if (editing) {
     return CreateInput({ ...properties, type });
   }
-  const formatVal = cellVal
-    ? cellVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    : cellVal;
+  const formatVal = cellVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return <NumberWrapper>{formatVal}</NumberWrapper>;
 };
 
@@ -67,11 +65,7 @@ export const DateType = properties => {
     });
   }
 
-  return (
-    <DateWrapper>
-      {cellVal !== "" ? moment(cellVal).format(dateFormatUser) : cellVal}
-    </DateWrapper>
-  );
+  return <DateWrapper>{moment(cellVal).format(dateFormatUser)}</DateWrapper>;
 };
 
 export const TimeWrapper = styled.div`
@@ -86,11 +80,7 @@ export const TimeType = properties => {
       inputType
     });
   }
-  return (
-    <TimeWrapper>
-      {cellVal ? moment(cellVal).format(timeFormatUser) : cellVal}
-    </TimeWrapper>
-  );
+  return <TimeWrapper>{moment(cellVal).format(timeFormatUser)}</TimeWrapper>;
 };
 
 export const DateTimeWrapper = styled.div`
@@ -107,7 +97,7 @@ export const DateTimeType = properties => {
   }
   return (
     <DateTimeWrapper>
-      {cellVal ? moment(cellVal).format(dateTimeFormatUser) : cellVal}
+      {moment(cellVal).format(dateTimeFormatUser)}
     </DateTimeWrapper>
   );
 };
