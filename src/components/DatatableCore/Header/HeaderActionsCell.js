@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { columnPropType, isScrollingPropType } from "../../../proptypes";
 
-class HeaderActionsCell extends Component {
+export class HeaderActionsCell extends Component {
   render() {
     const { column, isScrolling } = this.props;
     return (
