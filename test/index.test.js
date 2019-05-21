@@ -3,7 +3,7 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
 import { Datatable } from "../src/index";
-import { storeSample } from "../data/samples";
+import { storeSample, simpleOptionsSample } from "../data/samples";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
@@ -12,7 +12,7 @@ describe("Datatable component", () => {
   it("should render DatatableInitializer", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <Datatable options={storeSample.datatableReducer} />
+        <Datatable options={simpleOptionsSample} />
       </Provider>
     );
 

@@ -22,6 +22,7 @@ const simpleOptionsSample = {
     canEdit: true,
     canPrint: true,
     canDownload: true,
+    canDelete: true,
     selection,
     selectionIcons
   }

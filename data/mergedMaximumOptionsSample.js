@@ -6,6 +6,8 @@ import {
   data,
   selection,
   additionalIcons,
+  rowsEdited,
+  columnAction,
   selectionIcons
 } from "./optionsObjectSample";
 
@@ -19,9 +21,13 @@ const mergedMaximumOptionsSample = {
       totalWidthNumber: 0
     }
   },
+  rowsEdited,
   keyColumn,
   font,
-  data,
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
   pagination: {
     pageSelected: 1,
     pageTotal: 4,
@@ -33,11 +39,12 @@ const mergedMaximumOptionsSample = {
     canPrint: true,
     canDownload: true,
     canSearch: true,
+    canDelete: true,
     canRefreshRows: true,
     canFilterColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {
-      columnsOrder: ["id", "name", "age"],
+      columnsOrder: ["actions", "id", "name", "age"],
       copyToClipboard: true
     },
     rowsPerPage: {

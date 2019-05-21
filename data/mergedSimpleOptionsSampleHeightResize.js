@@ -4,7 +4,10 @@ import {
   keyColumn,
   font,
   data,
+  columnAction,
+  userConfiguration,
   pagination,
+  rowsEdited,
   features
 } from "./optionsObjectSample";
 
@@ -14,7 +17,7 @@ const mergedSimpleOptionsSampleHeightResize = {
     ...dimensions,
     datatable: {
       ...dimensions.datatable,
-      totalWidthNumber: 1138
+      totalWidthNumber: 1288
     },
     body: {
       height: "30vh",
@@ -27,9 +30,17 @@ const mergedSimpleOptionsSampleHeightResize = {
   },
   keyColumn,
   font,
-  data,
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
+  rowsEdited,
   features: {
     ...features,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+    },
     additionalIcons: []
   }
 };

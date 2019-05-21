@@ -30,7 +30,7 @@ describe("Datatable initializer component", () => {
     expect(wrapper.find(DatatableContainer)).toHaveLength(1);
   });
 
-  it("should call componentDidMount", () => {
+  describe("on mount should ", () => {
     const componentDidMount = jest.spyOn(
       DatatableInitializerPureComponent.prototype,
       "componentDidMount"
@@ -41,11 +41,26 @@ describe("Datatable initializer component", () => {
         <DatatableInitializer optionsInit={simpleOptionsSample} />
       </Provider>
     );
+    it("call componentDidMount", () => {
+      global.innerWidth = 30000;
+      global.dispatchEvent(new Event("resize"));
 
-    global.innerWidth = 30000;
-    global.dispatchEvent(new Event("resize"));
-
-    expect(componentDidMount).toHaveBeenCalledTimes(1);
+      expect(componentDidMount).toHaveBeenCalled();
+    });
+    describe("dispatch action type", () => {
+      it("INITIALIZE_OPTIONS", () => {
+        const action = store.getActions()[0];
+        expect(action.type).toEqual("INITIALIZE_OPTIONS");
+      });
+      it("INITIALIZE_CUSTOM_COMPONENTS", () => {
+        const action = store.getActions()[1];
+        expect(action.type).toEqual("INITIALIZE_CUSTOM_COMPONENTS");
+      });
+      it("UPDATE_COMPONENT_SIZE", () => {
+        const action = store.getActions()[2];
+        expect(action.type).toEqual("UPDATE_COMPONENT_SIZE");
+      });
+    });
   });
 
   it("should call componentWillUnmount", () => {

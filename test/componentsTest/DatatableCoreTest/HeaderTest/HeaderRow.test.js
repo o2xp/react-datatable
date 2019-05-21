@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { cloneDeep } from "lodash";
 import HeaderRow, {
   HeaderRow as HeaderRowPureComponent
 } from "../../../../src/components/DatatableCore/Header/HeaderRow";
@@ -14,9 +15,8 @@ import {
   NumberWrapper,
   TextWrapper,
   BooleanWrapper,
-  DateWrapper
+  DateTimeWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
-import cloneObject from "../../../functions";
 
 const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
@@ -50,24 +50,24 @@ describe("HeaderRow component", () => {
       </Provider>
     );
 
-    it("of 6 cells", () => {
-      expect(wrapper.find(HeaderCell)).toHaveLength(6);
+    it("of 7 cells", () => {
+      expect(wrapper.find(HeaderCell)).toHaveLength(7);
     });
 
     it("with 1 number cell", () => {
       expect(wrapper.find(NumberWrapper)).toHaveLength(1);
     });
 
-    it("with 3 text cells", () => {
-      expect(wrapper.find(TextWrapper)).toHaveLength(3);
+    it("with 4 text cells", () => {
+      expect(wrapper.find(TextWrapper)).toHaveLength(4);
     });
 
     it("with 1 boolean cell", () => {
       expect(wrapper.find(BooleanWrapper)).toHaveLength(1);
     });
 
-    it("with 1 date cell", () => {
-      expect(wrapper.find(DateWrapper)).toHaveLength(1);
+    it("with 1 dateTime cell", () => {
+      expect(wrapper.find(DateTimeWrapper)).toHaveLength(1);
     });
   });
 
@@ -78,8 +78,12 @@ describe("HeaderRow component", () => {
       </Provider>
     );
 
-    it("of 6 cells", () => {
-      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(6);
+    it("of 8 cells", () => {
+      expect(wrapper.find(".Table-Header-Cell")).toHaveLength(8);
+    });
+
+    it("with 1 actions cell", () => {
+      expect(wrapper.find(".action")).toHaveLength(1);
     });
 
     it("with 1 number cell", () => {
@@ -95,20 +99,20 @@ describe("HeaderRow component", () => {
     });
 
     it("with 1 date cell", () => {
-      expect(wrapper.find(".date").hostNodes()).toHaveLength(1);
+      expect(wrapper.find(".dateTime").hostNodes()).toHaveLength(1);
     });
 
-    it("with 1 default cell", () => {
-      expect(wrapper.find(".default").hostNodes()).toHaveLength(1);
+    it("with 2 default cell", () => {
+      expect(wrapper.find(".default").hostNodes()).toHaveLength(2);
     });
   });
 
   it("should call on sort end without errors", () => {
     const onSortEnd = jest.fn();
-    const wrapper = mount(
+    const wrapper = shallow(
       <HeaderRowPureComponent
         columns={columns}
-        columnsOrder={cloneObject(columnsOrder)}
+        columnsOrder={cloneDeep(columnsOrder)}
         columnSizeMultiplier={1}
         sortColumns={onSortEnd}
         widthDatatable={600}

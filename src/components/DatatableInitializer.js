@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { throttle } from "lodash";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import MomentUtils from "@date-io/moment";
+import { moment, locale } from "../moment.config";
+import { mainTheme } from "./MuiTheme";
 import {
   initializeOptionsPropType,
   initializeCustomComponentsPropType,
   updateComponentSizePropType,
   optionsPropType,
+  forceRerenderPropType,
   CustomTableBodyRowPropType,
   CustomTableBodyCellPropType,
   CustomTableHeaderRowPropType,
@@ -23,6 +29,7 @@ export class DatatableInitializer extends Component {
   componentDidMount() {
     const {
       optionsInit,
+      forceRerender,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
@@ -33,7 +40,7 @@ export class DatatableInitializer extends Component {
       initializeCustomComponents
     } = this.props;
 
-    initializeOptions(optionsInit);
+    initializeOptions({ optionsInit, forceRerender });
     initializeCustomComponents({
       CustomTableBodyCell,
       CustomTableBodyRow,
@@ -43,11 +50,8 @@ export class DatatableInitializer extends Component {
     });
     updateComponentSize();
 
-    window.addEventListener(
-      "resize",
-      throttle(() => updateComponentSize(), 100),
-      false
-    );
+    const callBack = () => throttle(() => updateComponentSize(), 100);
+    window.addEventListener("resize", callBack());
   }
 
   componentWillUnmount() {
@@ -56,7 +60,17 @@ export class DatatableInitializer extends Component {
   }
 
   render() {
-    return <DatatableContainer />;
+    return (
+      <MuiThemeProvider theme={mainTheme}>
+        <MuiPickersUtilsProvider
+          utils={MomentUtils}
+          locale={locale}
+          moment={moment}
+        >
+          <DatatableContainer />
+        </MuiPickersUtilsProvider>
+      </MuiThemeProvider>
+    );
   }
 }
 
@@ -74,6 +88,7 @@ DatatableInitializer.propTypes = {
   initializeCustomComponents: initializeCustomComponentsPropType,
   updateComponentSize: updateComponentSizePropType,
   optionsInit: optionsPropType.isRequired,
+  forceRerender: forceRerenderPropType,
   CustomTableBodyCell: CustomTableBodyCellPropType,
   CustomTableBodyRow: CustomTableBodyRowPropType,
   CustomTableHeaderCell: CustomTableHeaderCellPropType,
