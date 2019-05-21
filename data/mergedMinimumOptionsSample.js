@@ -40,7 +40,10 @@ const mergedMinimumOptionsSample = {
     canRefreshRows: false,
     canFilterColumns: false,
     canSaveUserConfiguration: false,
-    userConfiguration,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: [...userConfiguration.columnsOrder]
+    },
     rowsPerPage,
     selection: {
       rowsSelectable: false,

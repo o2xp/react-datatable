@@ -9,6 +9,7 @@ class Datatable extends Component {
   render() {
     const {
       options = {}, 
+      forceRerender = false,
       CustomTableBodyCell = null, 
       CustomTableBodyRow = null, 
       CustomTableHeaderCell= null, 
@@ -22,6 +23,7 @@ class Datatable extends Component {
           <Provider store={store}>
             <DatatableInitializer 
               optionsInit={cloneDeep(options)} 
+              forceRerender={forceRerender}
               CustomTableBodyCell={CustomTableBodyCell} 
               CustomTableBodyRow={CustomTableBodyRow} 
               CustomTableHeaderCell={CustomTableHeaderCell} 

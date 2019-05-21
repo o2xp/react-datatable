@@ -42,8 +42,8 @@ export const columns = [
   {
     id: "id",
     label: "id",
-    colSize: "150px",
-    editable: true,
+    colSize: "200px",
+    editable: false,
     required: true,
     dataType: "text",
     valueVerification: val => {
@@ -58,20 +58,35 @@ export const columns = [
   {
     id: "name",
     label: "name",
-    colSize: "200px",
-    editable: false,
+    colSize: "100px",
+    editable: true,
     dataType: "text"
   },
   {
     id: "age",
     label: "age",
-    colSize: "30px",
+    colSize: "60px",
     editable: true,
     required: false,
     dataType: "number",
     valueVerification: val => {
-      const error = val > 100;
-      const message = val > 100 ? "Value is too big" : "";
+      let error;
+      let message;
+      switch (true) {
+        case val > 100:
+          error = true;
+          message = "Value is too big";
+          break;
+        case val < 1:
+          error = true;
+          message = "Value is too low";
+          break;
+        default:
+          error = false;
+          message = "";
+          break;
+      }
+
       return {
         error,
         message
@@ -82,18 +97,28 @@ export const columns = [
     id: "adult",
     label: "adult",
     colSize: "50px",
-    editable: false,
-    dataType: "boolean",
-    inputType: "checkbox"
+    editable: true,
+    dataType: "boolean"
   },
   {
     id: "birthDate",
     label: "birth date",
     colSize: "180px",
-    editable: false,
-    dataType: "date",
-    inputType: "date",
-    dateFormat: "YYYY-MM-DDTHH:MM:ss"
+    editable: true,
+    dataType: "dateTime",
+    dateFormat: "YYYY-MM-DDTHH:mm",
+    valueVerification: val => {
+      if (new Date().getTime() < new Date(val).getTime()) {
+        return {
+          error: true,
+          message: "Date can't be in the futur"
+        };
+      }
+      return {
+        error: false,
+        message: ""
+      };
+    }
   },
   {
     id: "eyeColor",

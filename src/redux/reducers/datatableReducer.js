@@ -220,13 +220,17 @@ const setPagination = ({
   };
 };
 
-const initializeOptions = (state, payload) => {
-  const newState = deepmerge(state, payload, {
-    arrayMerge: overwriteMerge
-  });
+const initializeOptions = (state, { optionsInit, forceRerender = false }) => {
+  const newState = deepmerge(
+    forceRerender ? defaultState : state,
+    optionsInit,
+    {
+      arrayMerge: overwriteMerge
+    }
+  );
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
-    newState.features.userConfiguration.columnsOrder = payload.data.columns.map(
+    newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
       col => col.id
     );
   }
@@ -236,7 +240,10 @@ const initializeOptions = (state, payload) => {
     v => v
   ).length;
 
-  if (numberOfActions > 0) {
+  if (
+    numberOfActions > 0 &&
+    !newState.data.columns.find(col => col.id === "actions")
+  ) {
     newState.features.userConfiguration.columnsOrder.unshift("actions");
 
     newState.data.columns.unshift({
@@ -266,7 +273,6 @@ const initializeOptions = (state, payload) => {
   newState.dimensions.row.heightNumber = convertSizeToNumber(
     newState.dimensions.row.height
   );
-
   return newState;
 };
 

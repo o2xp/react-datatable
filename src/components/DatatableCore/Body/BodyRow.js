@@ -46,16 +46,11 @@ class BodyRow extends Component {
       );
     }
 
-    if (CustomTableBodyCell !== null) {
+    if (CustomTableBodyCell !== null && !isEditing) {
       return (
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>
-            <CustomTableBodyCell
-              cellVal={val}
-              column={column}
-              editing={isEditing}
-              rowId={rowId}
-            />
+            <CustomTableBodyCell cellVal={val} column={column} rowId={rowId} />
           </div>
         </div>
       );

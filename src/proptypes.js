@@ -46,6 +46,7 @@ export const paginationPropType = PropTypes.shape({
 });
 
 // Options propTypes
+export const forceRerenderPropType = PropTypes.bool;
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;
 export const widthNumberPropType = PropTypes.number;

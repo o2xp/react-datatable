@@ -1,5 +1,6 @@
 import storeSample from "./storeSample";
 import storyOptionsSample from "./storyOptionsSample";
+import storyOptionsNoActionSample from "./storyOptionsNoActionSample";
 import storeSampleWithPages from "./storeSampleWithPages";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
@@ -32,6 +33,7 @@ import customDataTypesSample from "./customDataTypesSample";
 export {
   storeSample,
   storyOptionsSample,
+  storyOptionsNoActionSample,
   storeSampleWithPages,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,

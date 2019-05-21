@@ -18,13 +18,13 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
     datatable: {
       width: "90vw",
       widthNumber: 1800,
-      totalWidthNumber: 1308
+      totalWidthNumber: 1288
     },
     body: {
       height: "30vh",
       heightNumber: 150
     },
-    columnSizeMultiplier: 1228 / 980
+    columnSizeMultiplier: 1228 / 960
   },
   pagination: {
     ...pagination,

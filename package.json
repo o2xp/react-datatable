@@ -66,7 +66,7 @@
     "lintfix": "eslint **/*.{js,jsx} --fix",
     "start": "webpack --watch",
     "test": "jest --verbose",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 3000",
     "prettier": "prettier --write *.{js,jsx}",
     "build-storybook": "build-storybook"
   },

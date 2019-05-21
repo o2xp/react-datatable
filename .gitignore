@@ -21,6 +21,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-index.js
+/index.js
 storybook-static/
 coverage/

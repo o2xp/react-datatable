@@ -15,7 +15,7 @@ import {
   NumberWrapper,
   TextWrapper,
   BooleanWrapper,
-  DateWrapper
+  DateTimeWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
 
 const mockStore = configureStore();
@@ -66,8 +66,8 @@ describe("HeaderRow component", () => {
       expect(wrapper.find(BooleanWrapper)).toHaveLength(1);
     });
 
-    it("with 1 date cell", () => {
-      expect(wrapper.find(DateWrapper)).toHaveLength(1);
+    it("with 1 dateTime cell", () => {
+      expect(wrapper.find(DateTimeWrapper)).toHaveLength(1);
     });
   });
 
@@ -99,7 +99,7 @@ describe("HeaderRow component", () => {
     });
 
     it("with 1 date cell", () => {
-      expect(wrapper.find(".date").hostNodes()).toHaveLength(1);
+      expect(wrapper.find(".dateTime").hostNodes()).toHaveLength(1);
     });
 
     it("with 2 default cell", () => {

@@ -4,15 +4,31 @@ import { columnPropType } from "../src/proptypes";
 const customTableHeaderCellSample = ({ column }) => {
   switch (column.dataType) {
     case "number":
-      return <div className="number">{column.label}</div>;
+      return (
+        <div style={{ color: "blue" }} className="number">
+          {column.label}
+        </div>
+      );
     case "text":
-      return <div className="text">{column.label}</div>;
+      return (
+        <div style={{ color: "green" }} className="text">
+          {column.label}
+        </div>
+      );
     case "boolean":
-      return <div className="boolean">{column.label}</div>;
-    case "date":
-      return <div className="date">{column.label}</div>;
+      return (
+        <div className="boolean" style={{ color: "black" }}>
+          {column.label}
+        </div>
+      );
+    case "dateTime":
+      return <div className="dateTime">{column.label}</div>;
     default:
-      return <div className="default">{column.label}</div>;
+      return (
+        <div style={{ color: "red" }} className="default">
+          {column.label}
+        </div>
+      );
   }
 };
 

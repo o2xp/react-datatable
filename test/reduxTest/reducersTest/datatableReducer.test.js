@@ -26,7 +26,7 @@ describe("datatableReducer reducer", () => {
     it("simple options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneDeep(simpleOptionsSample)
+        payload: { optionsInit: cloneDeep(simpleOptionsSample) }
       });
 
       expect(
@@ -37,7 +37,7 @@ describe("datatableReducer reducer", () => {
     it("minimum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneDeep(minimumOptionsSample)
+        payload: { optionsInit: cloneDeep(minimumOptionsSample) }
       });
 
       expect(
@@ -48,7 +48,7 @@ describe("datatableReducer reducer", () => {
     it("maximum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneDeep(maximumOptionsSample)
+        payload: { optionsInit: cloneDeep(maximumOptionsSample) }
       });
 
       expect(
@@ -79,7 +79,7 @@ describe("datatableReducer reducer", () => {
 
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
-        payload: cloneDeep(simpleOptionsSampleNoColSize)
+        payload: { optionsInit: cloneDeep(simpleOptionsSampleNoColSize) }
       });
 
       expect(

@@ -17,7 +17,7 @@ const mergedSimpleOptionsSampleCustomSize = {
     ...dimensions,
     datatable: {
       ...dimensions.datatable,
-      totalWidthNumber: 1308
+      totalWidthNumber: 1288
     }
   },
   pagination: {

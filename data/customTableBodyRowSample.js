@@ -28,8 +28,7 @@ const customTableBodyRowSample = ({
         rowIndex % 2 === 0 ? "Table-Row stripped" : "Table-Row not-stripped"
       }
       style={{
-        height,
-        background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f"
+        height
       }}
     >
       {columnsOrder.map(columnId => {
@@ -41,8 +40,21 @@ const customTableBodyRowSample = ({
           column.colSize.split("px")[0] * columnSizeMultiplier
         ).toString()}px`;
         return (
-          <div className="Table-Cell" key={columnId}>
-            <div style={{ color: "pink", width }}>{row[columnId]}</div>
+          <div
+            className="Table-Cell"
+            style={{
+              background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f"
+            }}
+            key={columnId}
+          >
+            <div
+              style={{
+                color: "pink",
+                width
+              }}
+            >
+              {row[columnId]}
+            </div>
           </div>
         );
       })}
