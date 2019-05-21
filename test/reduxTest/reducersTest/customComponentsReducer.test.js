@@ -21,8 +21,8 @@ describe("componentReducer reducer", () => {
     expect(customComponentsReducer(undefined, {})).toEqual(defaultState);
   });
 
-  describe("should handle INITIALIZE_CUSTOM_COMPONENTS action", () => {
-    describe("with custom table body", () => {
+  describe("should handle INITIALIZE_CUSTOM_COMPONENTS action with", () => {
+    describe("custom table body", () => {
       it("row", () => {
         const newState = defaultState;
         defaultState.CustomTableBodyRow = customTableBodyRowSample;
@@ -58,7 +58,7 @@ describe("componentReducer reducer", () => {
       });
     });
 
-    describe("with custom table header", () => {
+    describe("custom table header", () => {
       it("row", () => {
         const newState = defaultState;
         defaultState.CustomTableHeaderRow = customTableHeaderRowSample;
@@ -96,7 +96,7 @@ describe("componentReducer reducer", () => {
       });
     });
 
-    it("with custom dataType", () => {
+    it("custom dataType", () => {
       const newState = defaultState;
       defaultState.customDataTypes = customDataTypesSample;
       newState.customDataTypes = customDataTypesSample;
@@ -109,7 +109,7 @@ describe("componentReducer reducer", () => {
       expect(equal(initializedCustomDataTypes, defaultState)).toBeTruthy();
     });
 
-    it("with multiple custom components", () => {
+    it("multiple custom components", () => {
       const newState = defaultState;
       defaultState.CustomTableHeaderCell = customTableHeaderCellSample;
       newState.CustomTableHeaderCell = customTableHeaderCellSample;

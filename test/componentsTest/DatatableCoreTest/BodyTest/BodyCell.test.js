@@ -94,6 +94,9 @@ const customDataTypes = [
   }
 ];
 
+const setRowEdited = jest.fn();
+const rowId = "5cd9307025f4f0572995990f";
+
 describe("BodyCell component", () => {
   it("connected should render without errors", () => {
     const cell = shallow(
@@ -111,6 +114,9 @@ describe("BodyCell component", () => {
           cellVal={cellValNumber}
           column={columnNumber}
           width={columnNumber.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -123,15 +129,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnNumber.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValNumber : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnNumber.colSize }}>
-            {NumberType(cellValNumber)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnNumber.id}`}>
+          <Tooltip
+            title={overlap ? cellValNumber : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnNumber.colSize }}>
+              {NumberType({ cellVal: cellValNumber })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -141,6 +149,9 @@ describe("BodyCell component", () => {
           cellVal={cellValText}
           column={columnText}
           width={columnText.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -152,15 +163,17 @@ describe("BodyCell component", () => {
       const overlap = textWidth - 5 > Number(columnText.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValText : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnText.colSize }}>
-            {TextType(cellValText)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnText.id}`}>
+          <Tooltip
+            title={overlap ? cellValText : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnText.colSize }}>
+              {TextType({ cellVal: cellValText })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -170,6 +183,9 @@ describe("BodyCell component", () => {
           cellVal={cellValBoolean}
           column={columnBoolean}
           width={columnBoolean.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -182,15 +198,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnBoolean.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValBoolean : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnBoolean.colSize }}>
-            {BooleanType(cellValBoolean)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnBoolean.id}`}>
+          <Tooltip
+            title={overlap ? cellValBoolean : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnBoolean.colSize }}>
+              {BooleanType({ cellVal: cellValBoolean })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -200,6 +218,9 @@ describe("BodyCell component", () => {
           cellVal={cellValDateTime}
           column={columnDate}
           width={columnDate.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -211,15 +232,17 @@ describe("BodyCell component", () => {
       const overlap = textWidth - 5 > Number(columnDate.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValDateTime : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnDate.colSize }}>
-            {DateType(cellValDateTime)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnDate.id}`}>
+          <Tooltip
+            title={overlap ? cellValDateTime : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnDate.colSize }}>
+              {DateType({ cellVal: cellValDateTime })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -229,6 +252,9 @@ describe("BodyCell component", () => {
           cellVal={cellValDateTime}
           column={columnTime}
           width={columnTime.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -240,15 +266,17 @@ describe("BodyCell component", () => {
       const overlap = textWidth - 5 > Number(columnTime.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValDateTime : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnTime.colSize }}>
-            {TimeType(cellValDateTime)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnTime.id}`}>
+          <Tooltip
+            title={overlap ? cellValDateTime : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnTime.colSize }}>
+              {TimeType({ cellVal: cellValDateTime })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -258,6 +286,9 @@ describe("BodyCell component", () => {
           cellVal={cellValDateTime}
           column={columnDateTime}
           width={columnDateTime.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -270,15 +301,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnDateTime.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValDateTime : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnDateTime.colSize }}>
-            {DateTimeType(cellValDateTime)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnDateTime.id}`}>
+          <Tooltip
+            title={overlap ? cellValDateTime : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnDateTime.colSize }}>
+              {DateTimeType({ cellVal: cellValDateTime })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -288,6 +321,9 @@ describe("BodyCell component", () => {
           cellVal={cellValDefault}
           column={columnDefault}
           width={columnDefault.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={[]}
         />
       );
@@ -300,15 +336,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnDefault.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValDefault : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnDefault.colSize }}>
-            {TextType(cellValDefault)}
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnDefault.id}`}>
+          <Tooltip
+            title={overlap ? cellValDefault : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnDefault.colSize }}>
+              {TextType({ cellVal: cellValDefault })}
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -318,6 +356,9 @@ describe("BodyCell component", () => {
           cellVal={cellValCustomIban}
           column={columnCustomIban}
           width={columnCustomIban.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={customDataTypes}
         />
       );
@@ -330,15 +371,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnCustomIban.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValCustomIban : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnCustomIban.colSize }}>
-            <div style={{ color: "red" }}>{cellValCustomIban}</div>
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnCustomIban.id}`}>
+          <Tooltip
+            title={overlap ? cellValCustomIban : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnCustomIban.colSize }}>
+              <div style={{ color: "red" }}>{cellValCustomIban}</div>
+            </div>
+          </Tooltip>
+        </div>
       );
     });
 
@@ -348,6 +391,9 @@ describe("BodyCell component", () => {
           cellVal={cellValCustomOverrideText}
           column={columnCustomOverrideText}
           width={columnCustomOverrideText.colSize}
+          editing={false}
+          setRowEdited={setRowEdited}
+          rowId={rowId}
           customDataTypes={customDataTypes}
         />
       );
@@ -360,15 +406,17 @@ describe("BodyCell component", () => {
         textWidth - 5 > Number(columnCustomOverrideText.colSize.split("px")[0]);
 
       expect(cell.instance().buildCell()).toEqual(
-        <Tooltip
-          title={overlap ? cellValCustomOverrideText : ""}
-          TransitionComponent={Zoom}
-          interactive
-        >
-          <div style={{ width: columnCustomOverrideText.colSize }}>
-            <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
-          </div>
-        </Tooltip>
+        <div className={`Table-Cell ${columnCustomOverrideText.id}`}>
+          <Tooltip
+            title={overlap ? cellValCustomOverrideText : ""}
+            TransitionComponent={Zoom}
+            interactive
+          >
+            <div style={{ width: columnCustomOverrideText.colSize }}>
+              <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
+            </div>
+          </Tooltip>
+        </div>
       );
     });
   });

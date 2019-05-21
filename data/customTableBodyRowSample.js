@@ -16,24 +16,45 @@ const customTableBodyRowSample = ({
   height
 }) => {
   const { columns } = simpleOptionsSample.data;
+  const columnAction = {
+    id: "actions",
+    label: "Actions",
+    colSize: "150px",
+    editable: false
+  };
   return (
     <div
       className={
         rowIndex % 2 === 0 ? "Table-Row stripped" : "Table-Row not-stripped"
       }
       style={{
-        height,
-        background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f"
+        height
       }}
     >
       {columnsOrder.map(columnId => {
-        const column = columns.find(col => col.id === columnId);
+        const column =
+          columnId === "actions"
+            ? columnAction
+            : columns.find(col => col.id === columnId);
         const width = `${(
           column.colSize.split("px")[0] * columnSizeMultiplier
         ).toString()}px`;
         return (
-          <div className="Table-Cell" key={columnId}>
-            <div style={{ color: "pink", width }}>{row[columnId]}</div>
+          <div
+            className="Table-Cell"
+            style={{
+              background: rowIndex % 2 === 0 ? "#3f3f3f" : "#5f5f5f"
+            }}
+            key={columnId}
+          >
+            <div
+              style={{
+                color: "pink",
+                width
+              }}
+            >
+              {row[columnId]}
+            </div>
           </div>
         );
       })}

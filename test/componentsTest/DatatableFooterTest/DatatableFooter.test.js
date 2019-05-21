@@ -2,17 +2,16 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import { chunk } from "lodash";
+import { chunk, cloneDeep } from "lodash";
 import DatatableFooter from "../../../src/components/DatatableFooter/DatatableFooter";
 import { storeSample, storeSampleWithPages } from "../../../data/samples";
 import * as actions from "../../../src/redux/actions/datatableActions";
-import cloneObject from "../../functions";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
-const storeSamplePage5 = cloneObject(storeSampleWithPages);
+const storeSamplePage5 = cloneDeep(storeSampleWithPages);
 const storePage5 = mockStore(storeSamplePage5);
-const storeSamplePage1 = cloneObject(storeSampleWithPages);
+const storeSamplePage1 = cloneDeep(storeSampleWithPages);
 storeSamplePage1.datatableReducer.pagination = {
   ...storeSamplePage1.datatableReducer.pagination,
   pageSelected: 1,
@@ -22,7 +21,7 @@ storeSamplePage1.datatableReducer.pagination = {
   )[0]
 };
 const storePage1 = mockStore(storeSamplePage1);
-const storeSamplePage20 = cloneObject(storeSampleWithPages);
+const storeSamplePage20 = cloneDeep(storeSampleWithPages);
 storeSamplePage20.datatableReducer.pagination = {
   ...storeSamplePage20.datatableReducer.pagination,
   pageSelected: 20,

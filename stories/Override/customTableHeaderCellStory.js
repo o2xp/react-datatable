@@ -9,6 +9,7 @@ const customTableHeaderCellStory = () => {
   return (
     <Datatable
       options={storyOptionsSample}
+      forceRerender
       CustomTableHeaderCell={customTableHeaderCellSample}
     />
   );

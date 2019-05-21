@@ -1,14 +1,15 @@
 import React from "react";
 import { Datatable } from "../../src/index";
 import {
-  storyOptionsSample,
+  storyOptionsNoActionSample,
   customTableBodyRowSample
 } from "../../data/samples";
 
 const customTableBodyRowStory = () => {
   return (
     <Datatable
-      options={storyOptionsSample}
+      options={storyOptionsNoActionSample}
+      forceRerender
       CustomTableBodyRow={customTableBodyRowSample}
     />
   );

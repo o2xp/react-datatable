@@ -5,6 +5,9 @@ import {
   keyColumn,
   font,
   data,
+  columnAction,
+  userConfiguration,
+  rowsEdited,
   features
 } from "./optionsObjectSample";
 
@@ -25,9 +28,17 @@ const mergedSetRowsPerPageSample = {
   },
   keyColumn,
   font,
-  data,
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
+  rowsEdited,
   features: {
     ...features,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+    },
     additionalIcons: []
   }
 };

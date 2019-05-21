@@ -4,7 +4,10 @@ import {
   keyColumn,
   font,
   data,
+  columnAction,
+  userConfiguration,
   pagination,
+  rowsEdited,
   features
 } from "./optionsObjectSample";
 
@@ -14,7 +17,7 @@ const mergedSimpleOptionsSampleCustomSize = {
     ...dimensions,
     datatable: {
       ...dimensions.datatable,
-      totalWidthNumber: 1138
+      totalWidthNumber: 1288
     }
   },
   pagination: {
@@ -23,9 +26,17 @@ const mergedSimpleOptionsSampleCustomSize = {
   },
   keyColumn,
   font,
-  data,
+  data: {
+    ...data,
+    columns: [columnAction, ...data.columns]
+  },
+  rowsEdited,
   features: {
     ...features,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+    },
     additionalIcons: []
   }
 };

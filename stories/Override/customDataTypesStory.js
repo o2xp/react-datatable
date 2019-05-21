@@ -6,6 +6,7 @@ const customDataTypesStory = () => {
   return (
     <Datatable
       options={storyOptionsSample}
+      forceRerender
       customDataTypes={customDataTypesSample}
     />
   );

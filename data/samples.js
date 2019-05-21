@@ -1,5 +1,6 @@
 import storeSample from "./storeSample";
 import storyOptionsSample from "./storyOptionsSample";
+import storyOptionsNoActionSample from "./storyOptionsNoActionSample";
 import storeSampleWithPages from "./storeSampleWithPages";
 import storeNoCustomComponentsSample from "./storeNoCustomComponentsSample";
 import storeCustomTableBodyCellComponentSample from "./storeCustomTableBodyCellComponentSample";
@@ -14,6 +15,7 @@ import maximumOptionsSample from "./maximumOptionsSample";
 import minimumOptionsSample from "./minimumOptionsSample";
 import defaultOptionsSample from "./defaultOptionsSample";
 import mergedPageSample from "./mergedPageSample";
+import mergedDatableReducerRowsEdited from "./mergedDatableReducerRowsEdited";
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
 import mergedSimpleOptionsSampleCustomSize from "./mergedSimpleOptionsSampleCustomSize";
 import mergedSimpleOptionsSampleWidthResize from "./mergedSimpleOptionsSampleWidthResize";
@@ -31,6 +33,7 @@ import customDataTypesSample from "./customDataTypesSample";
 export {
   storeSample,
   storyOptionsSample,
+  storyOptionsNoActionSample,
   storeSampleWithPages,
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample,
@@ -45,6 +48,7 @@ export {
   minimumOptionsSample,
   defaultOptionsSample,
   mergedPageSample,
+  mergedDatableReducerRowsEdited,
   mergedSimpleOptionsSample,
   mergedSimpleOptionsSampleCustomSize,
   mergedSimpleOptionsSampleWidthResize,

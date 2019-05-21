@@ -5,6 +5,7 @@ import {
   data,
   userConfiguration,
   pagination,
+  rowsEdited,
   rowsPerPage
 } from "./optionsObjectSample";
 
@@ -22,6 +23,7 @@ const mergedMinimumOptionsSample = {
       heightNumber: 300
     }
   },
+  rowsEdited,
   keyColumn,
   data,
   font,
@@ -34,10 +36,14 @@ const mergedMinimumOptionsSample = {
     canPrint: false,
     canDownload: false,
     canSearch: false,
+    canDelete: false,
     canRefreshRows: false,
     canFilterColumns: false,
     canSaveUserConfiguration: false,
-    userConfiguration,
+    userConfiguration: {
+      ...userConfiguration,
+      columnsOrder: [...userConfiguration.columnsOrder]
+    },
     rowsPerPage,
     selection: {
       rowsSelectable: false,

@@ -22,6 +22,21 @@ export const setPage = payload => ({
   payload
 });
 
+export const setIsScrolling = payload => ({
+  type: "SET_IS_SCROLLING",
+  payload
+});
+
+export const addRowEdited = payload => ({
+  type: "ADD_ROW_EDITED",
+  payload
+});
+
+export const setRowEdited = payload => ({
+  type: "SET_ROW_EDITED",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
