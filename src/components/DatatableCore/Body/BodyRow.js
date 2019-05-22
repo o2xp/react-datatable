@@ -29,7 +29,14 @@ class BodyRow extends Component {
     const isEditing = editing && column.editable;
 
     if (columnId === "actions") {
-      return <BodyActionsCell key={key} column={column} row={row} />;
+      return (
+        <BodyActionsCell
+          key={key}
+          column={column}
+          row={row}
+          editing={editing}
+        />
+      );
     }
 
     const width = `${(

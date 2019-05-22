@@ -39,6 +39,7 @@ const defaultState = {
     rowsCurrentPage: []
   },
   rowsEdited: [],
+  actionsRow: null,
   features: {
     canEdit: false,
     canPrint: false,
@@ -220,7 +221,10 @@ const setPagination = ({
   };
 };
 
-const initializeOptions = (state, { optionsInit, forceRerender = false }) => {
+const initializeOptions = (
+  state,
+  { optionsInit, forceRerender = false, actionsRow }
+) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
     optionsInit,
@@ -228,6 +232,7 @@ const initializeOptions = (state, { optionsInit, forceRerender = false }) => {
       arrayMerge: overwriteMerge
     }
   );
+  newState.actionsRow = actionsRow;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
@@ -236,20 +241,35 @@ const initializeOptions = (state, { optionsInit, forceRerender = false }) => {
   }
 
   const { canEdit, canDelete, selection } = newState.features;
-  const numberOfActions = [canEdit, canDelete, selection.rowsSelectable].filter(
-    v => v
-  ).length;
+  const actions = [canEdit, canDelete, selection.rowsSelectable];
+  const numberOfActions = actions.filter(v => v).length;
 
   if (
     numberOfActions > 0 &&
     !newState.data.columns.find(col => col.id === "actions")
   ) {
     newState.features.userConfiguration.columnsOrder.unshift("actions");
+    let colSize = 0;
+    switch (actions.join(" ")) {
+      case "true true true":
+      case "false true true":
+      case "true false true":
+        colSize = "150px";
+        break;
+      case "true true false":
+      case "false true false":
+      case "true false false":
+        colSize = "100px";
+        break;
+      default:
+        colSize = "50px";
+        break;
+    }
 
     newState.data.columns.unshift({
       id: "actions",
       label: "",
-      colSize: `${numberOfActions * 50}px`,
+      colSize,
       editable: false
     });
   }
@@ -334,10 +354,25 @@ const addRowEdited = (state, row) => {
       ...rowsEdited,
       {
         ...row,
-        idOfColumnErr: []
+        idOfColumnErr: [],
+        hasBeenEdited: false
       }
     ]
   };
+};
+
+const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
+  const rowNonEdited = rows.find(
+    row => row[keyColumn] === rowEdited[keyColumn]
+  );
+
+  let hasBeenEdited = false;
+  Object.keys(rowNonEdited).forEach(key => {
+    if (rowNonEdited[key] !== rowEdited[key]) {
+      hasBeenEdited = true;
+    }
+  });
+  return hasBeenEdited;
 };
 
 const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
@@ -353,16 +388,62 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
         idOfColumnErrUpdate = idOfColumnErrUpdate.filter(e => e !== columnId);
       }
 
-      return {
+      const r = {
         ...row,
         [columnId]: newValue,
         idOfColumnErr: idOfColumnErrUpdate
+      };
+
+      const hasBeenEdited = checkHasBeenEdited({
+        rows: state.data.rows,
+        rowEdited: r,
+        keyColumn
+      });
+
+      return {
+        ...r,
+        hasBeenEdited
       };
     }
     return row;
   });
 
   return { ...state, rowsEdited: rowsEditedUpdate };
+};
+
+const mergeObjectInArray = (object, keyColumn, array) => {
+  return [
+    ...array.map(el => {
+      if (el[keyColumn] === object[keyColumn]) {
+        return object;
+      }
+      return el;
+    })
+  ];
+};
+
+const saveRowEdited = (state, payload) => {
+  const row = payload;
+  delete row.idOfColumnErr;
+  delete row.hasBeenEdited;
+  const { data, rowsEdited, keyColumn, pagination, actionsRow } = state;
+  actionsRow({ type: "save", row });
+  return {
+    ...state,
+    data: {
+      ...data,
+      rows: mergeObjectInArray(row, keyColumn, data.rows)
+    },
+    pagination: {
+      ...pagination,
+      rowsCurrentPage: mergeObjectInArray(
+        row,
+        keyColumn,
+        pagination.rowsCurrentPage
+      )
+    },
+    rowsEdited: [...rowsEdited.filter(r => r[keyColumn] !== row[keyColumn])]
+  };
 };
 
 const datatableReducer = (state = defaultState, action) => {
@@ -385,6 +466,8 @@ const datatableReducer = (state = defaultState, action) => {
       return addRowEdited(state, payload);
     case "SET_ROW_EDITED":
       return setRowEdited(state, payload);
+    case "SAVE_ROW_EDITED":
+      return saveRowEdited(state, payload);
     default:
       return state;
   }
