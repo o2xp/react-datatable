@@ -6,10 +6,12 @@ import BodyActionsCell, {
   BodyActionsCell as BodyActionsCellPureComponent
 } from "../../../../src/components/DatatableCore/Body/BodyActionsCell";
 import { storeSample } from "../../../../data/samples";
+import { customVariant } from "../../../../src/components/MuiTheme";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const addRowEdited = jest.fn();
+const saveRowEdited = jest.fn();
 const column = {
   id: "actions",
   label: "Actions",
@@ -32,7 +34,7 @@ describe("BodyActionsCell component", () => {
   it("connected should render without errors", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <BodyActionsCell column={column} row={row} />
+        <BodyActionsCell column={column} row={row} editing={false} />
       </Provider>
     );
     expect(wrapper.find("Connect(BodyActionsCell)")).toHaveLength(1);
@@ -47,8 +49,11 @@ describe("BodyActionsCell component", () => {
           canDelete
           rowsSelectable
           addRowEdited={addRowEdited}
+          saveRowEdited={saveRowEdited}
           column={column}
           row={row}
+          editing={false}
+          classes={{ customVariant }}
         />
       );
       expect(wrapper.find(".Table-Cell.action")).toHaveLength(1);
@@ -62,8 +67,11 @@ describe("BodyActionsCell component", () => {
           canDelete
           rowsSelectable
           addRowEdited={addRowEdited}
+          saveRowEdited={saveRowEdited}
           column={column}
           row={row}
+          editing={false}
+          classes={{ customVariant }}
         />
       );
       expect(wrapper.find(".Table-Cell.action.scrolling-shadow")).toHaveLength(
@@ -80,8 +88,11 @@ describe("BodyActionsCell component", () => {
             canDelete
             rowsSelectable
             addRowEdited={addRowEdited}
+            saveRowEdited={saveRowEdited}
             column={column}
             row={row}
+            editing={false}
+            classes={{ customVariant }}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(0);
@@ -97,8 +108,11 @@ describe("BodyActionsCell component", () => {
             canDelete={false}
             rowsSelectable
             addRowEdited={addRowEdited}
+            saveRowEdited={saveRowEdited}
             column={column}
             row={row}
+            editing={false}
+            classes={{ customVariant }}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -114,8 +128,11 @@ describe("BodyActionsCell component", () => {
             canDelete
             rowsSelectable={false}
             addRowEdited={addRowEdited}
+            saveRowEdited={saveRowEdited}
             column={column}
             row={row}
+            editing={false}
+            classes={{ customVariant }}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -128,7 +145,7 @@ describe("BodyActionsCell component", () => {
   describe("click on", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <BodyActionsCell column={column} row={row} />
+        <BodyActionsCell column={column} row={row} editing={false} />
       </Provider>
     );
 
