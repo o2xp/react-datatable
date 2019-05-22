@@ -401,8 +401,7 @@ describe("datatableReducer reducer", () => {
     describe("with", () => {
       it("one row", () => {
         const row = simpleOptionsSample.data.rows[0];
-        const rowAdded = simpleOptionsSample.data.rows[0];
-        rowAdded.idOfColumnErr = [];
+        const rowAdded = { ...row, idOfColumnErr: [], hasBeenEdited: false };
         const result = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
           type: "ADD_ROW_EDITED",
           payload: row
@@ -421,8 +420,7 @@ describe("datatableReducer reducer", () => {
       it("multiples rows (here 4)", () => {
         const { rows } = cloneDeep(simpleOptionsSample.data);
         const row = rows[10];
-        const rowAdded = rows[10];
-        rowAdded.idOfColumnErr = [];
+        const rowAdded = { ...row, idOfColumnErr: [], hasBeenEdited: false };
         const result = datatableReducer(
           cloneDeep(mergedDatableReducerRowsEdited),
           {
@@ -433,9 +431,9 @@ describe("datatableReducer reducer", () => {
         const mergedDatableReducerRowsEditedWithFourRows = {
           ...mergedSimpleOptionsSample,
           rowsEdited: [
-            { ...rows[0], idOfColumnErr: [] },
-            { ...rows[5], idOfColumnErr: [] },
-            { ...rows[45], idOfColumnErr: [] },
+            { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+            { ...rows[5], idOfColumnErr: [], hasBeenEdited: false },
+            { ...rows[45], idOfColumnErr: [], hasBeenEdited: false },
             rowAdded
           ]
         };
@@ -449,8 +447,6 @@ describe("datatableReducer reducer", () => {
     it("shouln't add row if already present", () => {
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[5];
-      const rowAdded = rows[5];
-      rowAdded.idOfColumnErr = [];
       const result = datatableReducer(
         cloneDeep(mergedDatableReducerRowsEdited),
         {
@@ -462,9 +458,9 @@ describe("datatableReducer reducer", () => {
       const mergedDatableReducerRowsEditedWithFourRows = {
         ...mergedSimpleOptionsSample,
         rowsEdited: [
-          { ...rows[0], idOfColumnErr: [] },
-          { ...rows[5], idOfColumnErr: [] },
-          { ...rows[45], idOfColumnErr: [] }
+          { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+          { ...rows[5], idOfColumnErr: [], hasBeenEdited: false },
+          { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
         ]
       };
 
@@ -497,9 +493,9 @@ describe("datatableReducer reducer", () => {
         const mergedDatableReducerRowsEditedExpect = {
           ...mergedSimpleOptionsSample,
           rowsEdited: [
-            { ...rows[0], idOfColumnErr: [] },
-            { ...rows[5], age: 50, idOfColumnErr: [] },
-            { ...rows[45], idOfColumnErr: [] }
+            { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+            { ...rows[5], age: 50, idOfColumnErr: [], hasBeenEdited: true },
+            { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
           ]
         };
 
@@ -529,9 +525,14 @@ describe("datatableReducer reducer", () => {
         const mergedDatableReducerRowsEditedExpect = {
           ...mergedSimpleOptionsSample,
           rowsEdited: [
-            { ...rows[0], idOfColumnErr: [] },
-            { ...rows[5], age: 101, idOfColumnErr: ["age"] },
-            { ...rows[45], idOfColumnErr: [] }
+            { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+            {
+              ...rows[5],
+              age: 101,
+              idOfColumnErr: ["age"],
+              hasBeenEdited: true
+            },
+            { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
           ]
         };
 
@@ -576,9 +577,15 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
-              { ...rows[5], age: 101, name: "John Doe", idOfColumnErr: [] },
-              { ...rows[45], idOfColumnErr: [] }
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+              {
+                ...rows[5],
+                age: 101,
+                name: "John Doe",
+                idOfColumnErr: [],
+                hasBeenEdited: true
+              },
+              { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
             ]
           };
 
@@ -621,9 +628,14 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
-              { ...rows[5], age: 70, idOfColumnErr: [] },
-              { ...rows[45], name: "John Doe", idOfColumnErr: [] }
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+              { ...rows[5], age: 70, idOfColumnErr: [], hasBeenEdited: true },
+              {
+                ...rows[45],
+                name: "John Doe",
+                idOfColumnErr: [],
+                hasBeenEdited: true
+              }
             ]
           };
 
@@ -667,14 +679,15 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
               {
                 ...rows[5],
                 age: 101,
                 name: "John Doe",
-                idOfColumnErr: ["age", "name"]
+                idOfColumnErr: ["age", "name"],
+                hasBeenEdited: true
               },
-              { ...rows[45], idOfColumnErr: [] }
+              { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
             ]
           };
 
@@ -716,9 +729,9 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
-              { ...rows[5], age: 70, idOfColumnErr: [] },
-              { ...rows[45], idOfColumnErr: [] }
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+              { ...rows[5], age: 70, idOfColumnErr: [], hasBeenEdited: true },
+              { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
             ]
           };
 
@@ -761,9 +774,19 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
-              { ...rows[5], age: 105, idOfColumnErr: ["age"] },
-              { ...rows[45], name: "John Doe", idOfColumnErr: [] }
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+              {
+                ...rows[5],
+                age: 105,
+                idOfColumnErr: ["age"],
+                hasBeenEdited: true
+              },
+              {
+                ...rows[45],
+                name: "John Doe",
+                idOfColumnErr: [],
+                hasBeenEdited: true
+              }
             ]
           };
 
@@ -806,9 +829,19 @@ describe("datatableReducer reducer", () => {
           const mergedDatableReducerRowsEditedExpect = {
             ...mergedSimpleOptionsSample,
             rowsEdited: [
-              { ...rows[0], idOfColumnErr: [] },
-              { ...rows[5], age: 105, idOfColumnErr: ["age"] },
-              { ...rows[45], name: "John Doe", idOfColumnErr: ["name"] }
+              { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+              {
+                ...rows[5],
+                age: 105,
+                idOfColumnErr: ["age"],
+                hasBeenEdited: true
+              },
+              {
+                ...rows[45],
+                name: "John Doe",
+                idOfColumnErr: ["name"],
+                hasBeenEdited: true
+              }
             ]
           };
 

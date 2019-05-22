@@ -223,7 +223,7 @@ const setPagination = ({
 
 const initializeOptions = (
   state,
-  { optionsInit, forceRerender = false, actionsRow }
+  { optionsInit, forceRerender = false, actionsRow = null }
 ) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
