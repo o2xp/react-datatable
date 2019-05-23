@@ -90,7 +90,7 @@ export class BodyActionsCell extends Component {
               </Tooltip>
               <Tooltip title="Confirm delete">
                 <IconButton
-                  className={`delete ${classes.errorIcon}`}
+                  className={`confirm-delete ${classes.errorIcon}`}
                   onClick={() => {
                     this.setState({ deleting: false });
                     deleteRow(row);
