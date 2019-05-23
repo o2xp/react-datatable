@@ -978,4 +978,20 @@ describe("datatableReducer reducer", () => {
       expect(actionsRow).toHaveBeenCalled();
     });
   });
+
+  it("should handle REVERT_ROW_EDITED", () => {
+    const { rows } = cloneDeep(simpleOptionsSample.data);
+    const row = rows[0];
+    const store = cloneDeep({
+      ...mergedSimpleOptionsSample,
+      rowsEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }]
+    });
+
+    const result = datatableReducer(store, {
+      type: "REVERT_ROW_EDITED",
+      payload: row
+    });
+
+    expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
+  });
 });

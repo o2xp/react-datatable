@@ -10,7 +10,8 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import {
   addRowEdited as addRowEditedAction,
-  saveRowEdited as saveRowEditedAction
+  saveRowEdited as saveRowEditedAction,
+  revertRowEdited as revertRowEditedAction
 } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
@@ -22,7 +23,8 @@ import {
   classesPropType,
   saveRowEditedPropType,
   editingPropType,
-  addRowEditedPropType
+  addRowEditedPropType,
+  revertRowEditedPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -38,6 +40,7 @@ export class BodyActionsCell extends Component {
       editing,
       addRowEdited,
       saveRowEdited,
+      revertRowEdited,
       classes
     } = this.props;
     const { hasBeenEdited, idOfColumnErr } = row;
@@ -74,7 +77,10 @@ export class BodyActionsCell extends Component {
           {editing && (
             <Fragment>
               <Tooltip title="Clear row">
-                <IconButton className={`clear ${classes.errorIcon}`}>
+                <IconButton
+                  className={`revert ${classes.errorIcon}`}
+                  onClick={() => revertRowEdited(row)}
+                >
                   <ClearIcon />
                 </IconButton>
               </Tooltip>
@@ -107,7 +113,8 @@ export class BodyActionsCell extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     addRowEdited: row => dispatch(addRowEditedAction(row)),
-    saveRowEdited: row => dispatch(saveRowEditedAction(row))
+    saveRowEdited: row => dispatch(saveRowEditedAction(row)),
+    revertRowEdited: row => dispatch(revertRowEditedAction(row))
   };
 };
 
@@ -131,7 +138,8 @@ BodyActionsCell.propTypes = {
   rowsSelectable: rowsSelectablePropType.isRequired,
   row: rowPropType.isRequired,
   saveRowEdited: saveRowEditedPropType,
-  addRowEdited: addRowEditedPropType
+  addRowEdited: addRowEditedPropType,
+  revertRowEdited: revertRowEditedPropType
 };
 
 export default compose(
