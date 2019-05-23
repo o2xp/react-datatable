@@ -149,6 +149,26 @@ describe("BodyActionsCell component", () => {
       </Provider>
     );
 
+    const wrapperEditMode = mount(
+      <Provider store={store}>
+        <BodyActionsCell
+          column={column}
+          row={{ ...row, idOfColumnErr: [], hasBeenEdited: false }}
+          editing
+        />
+      </Provider>
+    );
+
+    const wrapperEdited = mount(
+      <Provider store={store}>
+        <BodyActionsCell
+          column={column}
+          row={{ ...row, idOfColumnErr: [], hasBeenEdited: true }}
+          editing
+        />
+      </Provider>
+    );
+
     describe("edit button", () => {
       const editButton = wrapper.find("button.edit");
       it("should dispatch action type ADD_ROW_EDITED", () => {
@@ -159,8 +179,37 @@ describe("BodyActionsCell component", () => {
 
       it("should dispatch action width payload", () => {
         editButton.simulate("click");
-        const action = store.getActions()[0];
+        const action = store.getActions()[1];
         expect(action.payload).toEqual(row);
+      });
+    });
+
+    describe("save button", () => {
+      const saveButton = wrapperEdited.find("button.save");
+      const saveButtonDisabled = wrapperEditMode.find("button.save");
+
+      it("should be disabled", () => {
+        expect(saveButtonDisabled.props().disabled).toBeTruthy();
+      });
+
+      it("should be enabled", () => {
+        expect(saveButton.props().disabled).toBeFalsy();
+      });
+
+      it("should dispatch action type SAVE_ROW_EDITED", () => {
+        saveButton.simulate("click");
+        const action = store.getActions()[2];
+        expect(action.type).toEqual("SAVE_ROW_EDITED");
+      });
+
+      it("should dispatch action width payload", () => {
+        saveButton.simulate("click");
+        const action = store.getActions()[3];
+        expect(action.payload).toEqual({
+          ...row,
+          idOfColumnErr: [],
+          hasBeenEdited: true
+        });
       });
     });
   });
