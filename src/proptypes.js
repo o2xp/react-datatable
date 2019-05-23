@@ -11,6 +11,7 @@ export const setRowEditedPropType = PropTypes.func.isRequired;
 export const addRowEditedPropType = PropTypes.func.isRequired;
 export const revertRowEditedPropType = PropTypes.func.isRequired;
 export const saveRowEditedPropType = PropTypes.func.isRequired;
+export const deleteRowPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
