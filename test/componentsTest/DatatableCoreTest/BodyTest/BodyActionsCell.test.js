@@ -13,6 +13,7 @@ const store = mockStore(storeSample);
 const addRowEdited = jest.fn();
 const saveRowEdited = jest.fn();
 const revertRowEdited = jest.fn();
+const deleteRow = jest.fn();
 const column = {
   id: "actions",
   label: "Actions",
@@ -52,6 +53,7 @@ describe("BodyActionsCell component", () => {
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
+          deleteRow={deleteRow}
           column={column}
           row={row}
           editing={false}
@@ -71,6 +73,7 @@ describe("BodyActionsCell component", () => {
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
+          deleteRow={deleteRow}
           column={column}
           row={row}
           editing={false}
@@ -93,6 +96,7 @@ describe("BodyActionsCell component", () => {
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
+            deleteRow={deleteRow}
             column={column}
             row={row}
             editing={false}
@@ -114,6 +118,7 @@ describe("BodyActionsCell component", () => {
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
+            deleteRow={deleteRow}
             column={column}
             row={row}
             editing={false}
@@ -135,6 +140,7 @@ describe("BodyActionsCell component", () => {
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
+            deleteRow={deleteRow}
             column={column}
             row={row}
             editing={false}
@@ -235,6 +241,68 @@ describe("BodyActionsCell component", () => {
           idOfColumnErr: [],
           hasBeenEdited: true
         });
+      });
+    });
+
+    describe("delete button", () => {
+      const pure = mount(
+        <BodyActionsCellPureComponent
+          isScrolling={false}
+          canEdit
+          canDelete
+          rowsSelectable
+          addRowEdited={addRowEdited}
+          saveRowEdited={saveRowEdited}
+          revertRowEdited={revertRowEdited}
+          deleteRow={deleteRow}
+          column={column}
+          row={row}
+          editing={false}
+          classes={{ customVariant }}
+        />
+      );
+
+      describe("should set deleting to ", () => {
+        const deleteButton = pure.find("button.delete");
+
+        it("true", () => {
+          deleteButton.simulate("click");
+          expect(pure.state()).toEqual({ deleting: true });
+        });
+
+        it("false on cancel", () => {
+          deleteButton.simulate("click");
+          const cancelDeleteButton = pure.find("button.cancel-delete");
+          expect(pure.state()).toEqual({ deleting: true });
+          cancelDeleteButton.simulate("click");
+          expect(pure.state()).toEqual({ deleting: false });
+        });
+
+        it("false on delete", () => {
+          deleteButton.simulate("click");
+          const confirmDeleteButton = pure.find("button.confirm-delete");
+          expect(pure.state()).toEqual({ deleting: true });
+          confirmDeleteButton.simulate("click");
+          expect(pure.state()).toEqual({ deleting: false });
+        });
+      });
+
+      it("should dispatch action of type", () => {
+        const deleteButton = wrapper.find("button.delete");
+        deleteButton.simulate("click");
+        const confirmDeleteButton = wrapper.find("button.confirm-delete");
+        confirmDeleteButton.simulate("click");
+        const action = store.getActions()[6];
+        expect(action.type).toEqual("DELETE_ROW");
+      });
+
+      it("should dispatch action with payload", () => {
+        const deleteButton = wrapper.find("button.delete");
+        deleteButton.simulate("click");
+        const confirmDeleteButton = wrapper.find("button.confirm-delete");
+        confirmDeleteButton.simulate("click");
+        const action = store.getActions()[7];
+        expect(action.payload).toEqual(row);
       });
     });
   });

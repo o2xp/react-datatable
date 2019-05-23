@@ -115,4 +115,42 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.saveRowEdited(payload)).toEqual(expectedAction);
   });
+
+  it("revert changes on a row", () => {
+    const payload = {
+      index: 0,
+      id: "5cd9307025f4f0572995990f",
+      name: "Hunt Valdez",
+      age: 2,
+      adult: false,
+      birthDate: "2017-06-02T11:22",
+      iban: "",
+      eyeColor: "green",
+      idOfColumnErr: [],
+      hasBeenEdited: true
+    };
+    const expectedAction = {
+      type: "REVERT_ROW_EDITED",
+      payload
+    };
+    expect(actions.revertRowEdited(payload)).toEqual(expectedAction);
+  });
+
+  it("delete a row", () => {
+    const payload = {
+      index: 0,
+      id: "5cd9307025f4f0572995990f",
+      name: "Hunt Valdez",
+      age: 2,
+      adult: false,
+      birthDate: "2017-06-02T11:22",
+      iban: "",
+      eyeColor: "green"
+    };
+    const expectedAction = {
+      type: "DELETE_ROW",
+      payload
+    };
+    expect(actions.deleteRow(payload)).toEqual(expectedAction);
+  });
 });

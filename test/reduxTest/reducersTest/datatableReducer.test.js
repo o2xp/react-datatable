@@ -994,4 +994,84 @@ describe("datatableReducer reducer", () => {
 
     expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
   });
+
+  describe("should handle DELETE_ROW", () => {
+    it("without actionsRow", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "DELETE_ROW",
+        payload: row
+      });
+
+      const { data, keyColumn } = mergedSimpleOptionsSample;
+      let mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        data: {
+          ...data,
+          rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
+        }
+      };
+      const { pagination } = mergedDatableReducerExpect;
+      const { rowsPerPageSelected, pageSelected } = pagination;
+      mergedDatableReducerExpect = {
+        ...mergedDatableReducerExpect,
+        pagination: {
+          ...pagination,
+          rowsCurrentPage:
+            rowsPerPageSelected === "All"
+              ? mergedDatableReducerExpect.data.rows
+              : chunk(
+                  mergedDatableReducerExpect.data.rows,
+                  rowsPerPageSelected
+                )[pageSelected ? pageSelected - 1 : 0]
+        }
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+
+    it("with actionsRow", () => {
+      const actionsRow = jest.fn();
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+
+      const result = datatableReducer(
+        { ...mergedSimpleOptionsSample, actionsRow },
+        {
+          type: "DELETE_ROW",
+          payload: row
+        }
+      );
+
+      const { data, keyColumn } = mergedSimpleOptionsSample;
+      let mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        data: {
+          ...data,
+          rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
+        }
+      };
+      const { pagination } = mergedDatableReducerExpect;
+      const { rowsPerPageSelected, pageSelected } = pagination;
+      mergedDatableReducerExpect = {
+        ...mergedDatableReducerExpect,
+        actionsRow,
+        pagination: {
+          ...pagination,
+          rowsCurrentPage:
+            rowsPerPageSelected === "All"
+              ? mergedDatableReducerExpect.data.rows
+              : chunk(
+                  mergedDatableReducerExpect.data.rows,
+                  rowsPerPageSelected
+                )[pageSelected ? pageSelected - 1 : 0]
+        }
+      };
+
+      expect(actionsRow).toHaveBeenCalled();
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+  });
 });

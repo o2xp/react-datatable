@@ -457,6 +457,36 @@ const revertRowEdited = (state, payload) => {
   };
 };
 
+const deleteRow = (state, payload) => {
+  const row = payload;
+  const { data, keyColumn, pagination, actionsRow } = state;
+  const { pageSelected, rowsPerPageSelected } = pagination;
+
+  if (actionsRow) {
+    actionsRow({ type: "delete", row });
+  }
+
+  const newState = {
+    ...state,
+    data: {
+      ...data,
+      rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
+    }
+  };
+  return {
+    ...newState,
+    pagination: {
+      ...pagination,
+      rowsCurrentPage:
+        rowsPerPageSelected === "All"
+          ? newState.data.rows
+          : chunk(newState.data.rows, rowsPerPageSelected)[
+              pageSelected ? pageSelected - 1 : 0
+            ]
+    }
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -481,6 +511,8 @@ const datatableReducer = (state = defaultState, action) => {
       return saveRowEdited(state, payload);
     case "REVERT_ROW_EDITED":
       return revertRowEdited(state, payload);
+    case "DELETE_ROW":
+      return deleteRow(state, payload);
     default:
       return state;
   }
