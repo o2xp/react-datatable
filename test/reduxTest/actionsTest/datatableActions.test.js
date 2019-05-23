@@ -95,4 +95,24 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.setRowEdited(payload)).toEqual(expectedAction);
   });
+
+  it("save a row", () => {
+    const payload = {
+      index: 0,
+      id: "5cd9307025f4f0572995990f",
+      name: "Hunt Valdez",
+      age: 2,
+      adult: false,
+      birthDate: "2017-06-02T11:22",
+      iban: "",
+      eyeColor: "green",
+      idOfColumnErr: [],
+      hasBeenEdited: true
+    };
+    const expectedAction = {
+      type: "SAVE_ROW_EDITED",
+      payload
+    };
+    expect(actions.saveRowEdited(payload)).toEqual(expectedAction);
+  });
 });

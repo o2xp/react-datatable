@@ -31,6 +31,7 @@ const mergedSimpleOptionsSample = {
   keyColumn,
   font,
   rowsEdited,
+  actionsRow: null,
   features: {
     ...features,
     userConfiguration: {
