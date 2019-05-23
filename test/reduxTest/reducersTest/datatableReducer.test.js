@@ -34,6 +34,70 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
+    it("simple options without edit and delete", () => {
+      const initializedOptions = datatableReducer(undefined, {
+        type: "INITIALIZE_OPTIONS",
+        payload: {
+          optionsInit: cloneDeep({
+            ...simpleOptionsSample,
+            features: {
+              ...simpleOptionsSample.features,
+              canEdit: false,
+              canDelete: false
+            }
+          })
+        }
+      });
+
+      const mergedSimpleOptionsSampleExpect = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          canEdit: false,
+          canDelete: false
+        }
+      });
+      mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "50px";
+
+      expect(
+        equal(initializedOptions, mergedSimpleOptionsSampleExpect)
+      ).toBeTruthy();
+    });
+
+    it("simple options without selection", () => {
+      const initializedOptions = datatableReducer(undefined, {
+        type: "INITIALIZE_OPTIONS",
+        payload: {
+          optionsInit: cloneDeep({
+            ...simpleOptionsSample,
+            features: {
+              ...simpleOptionsSample.features,
+              selection: {
+                ...simpleOptionsSample.features.selection,
+                rowsSelectable: false
+              }
+            }
+          })
+        }
+      });
+
+      const mergedSimpleOptionsSampleExpect = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          selection: {
+            ...mergedSimpleOptionsSample.features.selection,
+            rowsSelectable: false
+          }
+        }
+      });
+      mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "100px";
+
+      expect(
+        equal(initializedOptions, mergedSimpleOptionsSampleExpect)
+      ).toBeTruthy();
+    });
+
     it("minimum options", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",
@@ -850,6 +914,68 @@ describe("datatableReducer reducer", () => {
           ).toBeTruthy();
         });
       });
+    });
+  });
+
+  describe("should handle SAVE_ROW_EDITED", () => {
+    it("without actionsRow", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+      row.age = 21;
+      const store = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        rowsEdited: [
+          { ...rows[0], age: 21, idOfColumnErr: [], hasBeenEdited: false }
+        ]
+      });
+
+      const result = datatableReducer(store, {
+        type: "SAVE_ROW_EDITED",
+        payload: row
+      });
+
+      const { data, pagination } = mergedSimpleOptionsSample;
+      data.rows[0].age = 21;
+      pagination.rowsCurrentPage[0].age = 21;
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        data,
+        pagination
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+
+    it("with actionsRow", () => {
+      const actionsRow = jest.fn();
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+      row.age = 21;
+      const store = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        actionsRow,
+        rowsEdited: [
+          { ...rows[0], age: 21, idOfColumnErr: [], hasBeenEdited: false }
+        ]
+      });
+
+      const result = datatableReducer(store, {
+        type: "SAVE_ROW_EDITED",
+        payload: row
+      });
+
+      const { data, pagination } = mergedSimpleOptionsSample;
+      data.rows[0].age = 21;
+      pagination.rowsCurrentPage[0].age = 21;
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        actionsRow,
+        data,
+        pagination
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+      expect(actionsRow).toHaveBeenCalled();
     });
   });
 });

@@ -427,7 +427,9 @@ const saveRowEdited = (state, payload) => {
   delete row.idOfColumnErr;
   delete row.hasBeenEdited;
   const { data, rowsEdited, keyColumn, pagination, actionsRow } = state;
-  actionsRow({ type: "save", row });
+  if (actionsRow) {
+    actionsRow({ type: "save", row });
+  }
   return {
     ...state,
     data: {
