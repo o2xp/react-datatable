@@ -448,6 +448,15 @@ const saveRowEdited = (state, payload) => {
   };
 };
 
+const revertRowEdited = (state, payload) => {
+  const row = payload;
+  const { rowsEdited, keyColumn } = state;
+  return {
+    ...state,
+    rowsEdited: [...rowsEdited.filter(r => r[keyColumn] !== row[keyColumn])]
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -470,6 +479,8 @@ const datatableReducer = (state = defaultState, action) => {
       return setRowEdited(state, payload);
     case "SAVE_ROW_EDITED":
       return saveRowEdited(state, payload);
+    case "REVERT_ROW_EDITED":
+      return revertRowEdited(state, payload);
     default:
       return state;
   }

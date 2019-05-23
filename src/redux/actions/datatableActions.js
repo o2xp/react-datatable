@@ -42,6 +42,11 @@ export const saveRowEdited = payload => ({
   payload
 });
 
+export const revertRowEdited = payload => ({
+  type: "REVERT_ROW_EDITED",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
