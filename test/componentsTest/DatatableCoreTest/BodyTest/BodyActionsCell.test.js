@@ -12,6 +12,7 @@ const mockStore = configureStore();
 const store = mockStore(storeSample);
 const addRowEdited = jest.fn();
 const saveRowEdited = jest.fn();
+const revertRowEdited = jest.fn();
 const column = {
   id: "actions",
   label: "Actions",
@@ -50,6 +51,7 @@ describe("BodyActionsCell component", () => {
           rowsSelectable
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
+          revertRowEdited={revertRowEdited}
           column={column}
           row={row}
           editing={false}
@@ -68,6 +70,7 @@ describe("BodyActionsCell component", () => {
           rowsSelectable
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
+          revertRowEdited={revertRowEdited}
           column={column}
           row={row}
           editing={false}
@@ -89,6 +92,7 @@ describe("BodyActionsCell component", () => {
             rowsSelectable
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
+            revertRowEdited={revertRowEdited}
             column={column}
             row={row}
             editing={false}
@@ -109,6 +113,7 @@ describe("BodyActionsCell component", () => {
             rowsSelectable
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
+            revertRowEdited={revertRowEdited}
             column={column}
             row={row}
             editing={false}
@@ -129,6 +134,7 @@ describe("BodyActionsCell component", () => {
             rowsSelectable={false}
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
+            revertRowEdited={revertRowEdited}
             column={column}
             row={row}
             editing={false}
@@ -177,7 +183,7 @@ describe("BodyActionsCell component", () => {
         expect(action.type).toEqual("ADD_ROW_EDITED");
       });
 
-      it("should dispatch action width payload", () => {
+      it("should dispatch action with payload", () => {
         editButton.simulate("click");
         const action = store.getActions()[1];
         expect(action.payload).toEqual(row);
@@ -202,9 +208,28 @@ describe("BodyActionsCell component", () => {
         expect(action.type).toEqual("SAVE_ROW_EDITED");
       });
 
-      it("should dispatch action width payload", () => {
+      it("should dispatch action with payload", () => {
         saveButton.simulate("click");
         const action = store.getActions()[3];
+        expect(action.payload).toEqual({
+          ...row,
+          idOfColumnErr: [],
+          hasBeenEdited: true
+        });
+      });
+    });
+
+    describe("revert button", () => {
+      const revertButton = wrapperEdited.find("button.revert");
+      it("should dispatch action type REVERT_ROW_EDITED", () => {
+        revertButton.simulate("click");
+        const action = store.getActions()[4];
+        expect(action.type).toEqual("REVERT_ROW_EDITED");
+      });
+
+      it("should dispatch action with payload", () => {
+        revertButton.simulate("click");
+        const action = store.getActions()[5];
         expect(action.payload).toEqual({
           ...row,
           idOfColumnErr: [],
