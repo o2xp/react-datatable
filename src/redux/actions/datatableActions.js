@@ -37,6 +37,11 @@ export const setRowEdited = payload => ({
   payload
 });
 
+export const saveRowEdited = payload => ({
+  type: "SAVE_ROW_EDITED",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

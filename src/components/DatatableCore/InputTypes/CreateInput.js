@@ -36,6 +36,7 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
+          dateFormat={dateFormat}
           setRowEdited={setRowEdited}
         />
       );
@@ -46,6 +47,7 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
+          dateFormat={dateFormat}
           setRowEdited={setRowEdited}
         />
       );
@@ -56,6 +58,7 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
+          dateFormat={dateFormat}
           setRowEdited={setRowEdited}
         />
       );

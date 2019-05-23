@@ -18,11 +18,13 @@ export const setValue = ({
   rowId,
   columnId,
   setRowEdited,
+  type,
   valueVerification
 }) => {
   let cellVal = "";
   cellVal = date ? moment(date).format(dateFormat) : cellVal;
   cellVal = value || cellVal;
+  cellVal = type === "number" ? parseInt(cellVal) : cellVal;
 
   let newState = {
     error: false,

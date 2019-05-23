@@ -1,8 +1,17 @@
-import React, { Component } from "react";
-import { Tooltip, IconButton, Checkbox } from "@material-ui/core";
-import { Delete as DeleteIcon, Create as CreateIcon } from "@material-ui/icons";
+import React, { Component, Fragment } from "react";
+import { Tooltip, IconButton, Checkbox, withStyles } from "@material-ui/core";
+import {
+  Delete as DeleteIcon,
+  Create as CreateIcon,
+  Save as SaveIcon,
+  Clear as ClearIcon
+} from "@material-ui/icons";
 import { connect } from "react-redux";
-import { addRowEdited as addRowEditedAction } from "../../../redux/actions/datatableActions";
+import { compose } from "redux";
+import {
+  addRowEdited as addRowEditedAction,
+  saveRowEdited as saveRowEditedAction
+} from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
   isScrollingPropType,
@@ -10,8 +19,12 @@ import {
   canDeletePropType,
   rowsSelectablePropType,
   rowPropType,
+  classesPropType,
+  saveRowEditedPropType,
+  editingPropType,
   addRowEditedPropType
 } from "../../../proptypes";
+import { customVariant } from "../../MuiTheme";
 
 export class BodyActionsCell extends Component {
   render() {
@@ -22,8 +35,13 @@ export class BodyActionsCell extends Component {
       canDelete,
       rowsSelectable,
       row,
-      addRowEdited
+      editing,
+      addRowEdited,
+      saveRowEdited,
+      classes
     } = this.props;
+    const { hasBeenEdited, idOfColumnErr } = row;
+    const saveDisabled = !hasBeenEdited || idOfColumnErr.length > 0;
     return (
       <div
         className={
@@ -34,19 +52,51 @@ export class BodyActionsCell extends Component {
       >
         <div style={{ width: column.colSize }}>
           {rowsSelectable && <Checkbox className="select" checked={false} />}
-          {canDelete && (
+          {canDelete && !editing && (
             <Tooltip title="Confirm delete">
               <IconButton className="delete">
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
           )}
-          {canEdit && (
+          {canEdit && !editing && (
             <Tooltip title="Edit row">
-              <IconButton className="edit" onClick={() => addRowEdited(row)}>
+              <IconButton
+                className="edit"
+                color="primary"
+                onClick={() => addRowEdited(row)}
+              >
                 <CreateIcon />
               </IconButton>
             </Tooltip>
+          )}
+
+          {editing && (
+            <Fragment>
+              <Tooltip title="Clear row">
+                <IconButton className={`clear ${classes.errorIcon}`}>
+                  <ClearIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip
+                title="Save row"
+                classes={{
+                  popper: saveDisabled
+                    ? classes.disabledButtonPopper
+                    : classes.enabledButtonPopper
+                }}
+              >
+                <span>
+                  <IconButton
+                    className={`save ${classes.validIcon}`}
+                    onClick={() => saveRowEdited(row)}
+                    disabled={saveDisabled}
+                  >
+                    <SaveIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </Fragment>
           )}
         </div>
       </div>
@@ -56,7 +106,8 @@ export class BodyActionsCell extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addRowEdited: row => dispatch(addRowEditedAction(row))
+    addRowEdited: row => dispatch(addRowEditedAction(row)),
+    saveRowEdited: row => dispatch(saveRowEditedAction(row))
   };
 };
 
@@ -72,15 +123,21 @@ const mapStateToProps = state => {
 
 BodyActionsCell.propTypes = {
   column: columnPropType.isRequired,
+  editing: editingPropType.isRequired,
+  classes: classesPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,
   canEdit: canEditPropType.isRequired,
   canDelete: canDeletePropType.isRequired,
   rowsSelectable: rowsSelectablePropType.isRequired,
   row: rowPropType.isRequired,
+  saveRowEdited: saveRowEditedPropType,
   addRowEdited: addRowEditedPropType
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withStyles(customVariant),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(BodyActionsCell);

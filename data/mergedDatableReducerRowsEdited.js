@@ -28,11 +28,12 @@ const mergedDatableReducerRowsEdited = {
     rowsCurrentPage: data.rows
   },
   keyColumn,
+  actionsRow: null,
   font,
   rowsEdited: [
-    { ...data.rows[0], idOfColumnErr: [] },
-    { ...data.rows[5], idOfColumnErr: [] },
-    { ...data.rows[45], idOfColumnErr: [] }
+    { ...data.rows[0], idOfColumnErr: [], hasBeenEdited: false },
+    { ...data.rows[5], idOfColumnErr: [], hasBeenEdited: false },
+    { ...data.rows[45], idOfColumnErr: [], hasBeenEdited: false }
   ],
   features: {
     ...features,

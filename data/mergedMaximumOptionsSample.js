@@ -22,6 +22,7 @@ const mergedMaximumOptionsSample = {
     }
   },
   rowsEdited,
+  actionsRow: null,
   keyColumn,
   font,
   data: {

@@ -9,6 +9,7 @@ export const setPagePagePropType = PropTypes.func.isRequired;
 export const setRowsPerPagePropType = PropTypes.func.isRequired;
 export const setRowEditedPropType = PropTypes.func.isRequired;
 export const addRowEditedPropType = PropTypes.func.isRequired;
+export const saveRowEditedPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
@@ -46,6 +47,7 @@ export const paginationPropType = PropTypes.shape({
 });
 
 // Options propTypes
+export const actionsRowPropType = PropTypes.func;
 export const forceRerenderPropType = PropTypes.bool;
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;

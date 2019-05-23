@@ -28,6 +28,7 @@ const defaultOptionsSample = {
     rows: []
   },
   rowsEdited: [],
+  actionsRow: null,
   pagination: {
     pageSelected: 1,
     pageTotal: 1,

@@ -24,6 +24,7 @@ const mergedMinimumOptionsSample = {
     }
   },
   rowsEdited,
+  actionsRow: null,
   keyColumn,
   data,
   font,

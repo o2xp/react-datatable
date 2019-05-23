@@ -42,5 +42,20 @@ export const customVariant = () => ({
     "&:before": {
       borderBottom: "5px solid red"
     }
+  },
+  disabledButtonPopper: {
+    marginTop: "5px"
+  },
+  enabledButtonPopper: {
+    marginTop: "12px"
+  },
+  defaultIcon: {
+    color: "black"
+  },
+  errorIcon: {
+    color: "red"
+  },
+  validIcon: {
+    color: "#4caf50"
   }
 });
