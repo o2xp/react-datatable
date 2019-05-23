@@ -4,14 +4,16 @@ import {
   Delete as DeleteIcon,
   Create as CreateIcon,
   Save as SaveIcon,
-  Clear as ClearIcon
+  Clear as ClearIcon,
+  DeleteForever as DeleteForeverIcon
 } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
   addRowEdited as addRowEditedAction,
   saveRowEdited as saveRowEditedAction,
-  revertRowEdited as revertRowEditedAction
+  revertRowEdited as revertRowEditedAction,
+  deleteRow as deleteRowAction
 } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
@@ -24,11 +26,19 @@ import {
   saveRowEditedPropType,
   editingPropType,
   addRowEditedPropType,
-  revertRowEditedPropType
+  revertRowEditedPropType,
+  deleteRowPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
 export class BodyActionsCell extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deleting: false
+    };
+  }
+
   render() {
     const {
       column,
@@ -41,8 +51,10 @@ export class BodyActionsCell extends Component {
       addRowEdited,
       saveRowEdited,
       revertRowEdited,
+      deleteRow,
       classes
     } = this.props;
+    const { deleting } = this.state;
     const { hasBeenEdited, idOfColumnErr } = row;
     const saveDisabled = !hasBeenEdited || idOfColumnErr.length > 0;
     return (
@@ -55,14 +67,42 @@ export class BodyActionsCell extends Component {
       >
         <div style={{ width: column.colSize }}>
           {rowsSelectable && <Checkbox className="select" checked={false} />}
-          {canDelete && !editing && (
+          {canDelete && !editing && !deleting && (
             <Tooltip title="Confirm delete">
-              <IconButton className="delete">
+              <IconButton
+                className={`delete ${classes.defaultIcon}`}
+                onClick={() => this.setState({ deleting: true })}
+              >
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
           )}
-          {canEdit && !editing && (
+
+          {deleting && (
+            <Fragment>
+              <Tooltip title="Cancel delete">
+                <IconButton
+                  className={`cancel-delete ${classes.defaultIcon}`}
+                  onClick={() => this.setState({ deleting: false })}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Confirm delete">
+                <IconButton
+                  className={`delete ${classes.errorIcon}`}
+                  onClick={() => {
+                    this.setState({ deleting: false });
+                    deleteRow(row);
+                  }}
+                >
+                  <DeleteForeverIcon />
+                </IconButton>
+              </Tooltip>
+            </Fragment>
+          )}
+
+          {canEdit && !editing && !deleting && (
             <Tooltip title="Edit row">
               <IconButton
                 className="edit"
@@ -74,7 +114,7 @@ export class BodyActionsCell extends Component {
             </Tooltip>
           )}
 
-          {editing && (
+          {editing && !deleting && (
             <Fragment>
               <Tooltip title="Clear row">
                 <IconButton
@@ -114,7 +154,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addRowEdited: row => dispatch(addRowEditedAction(row)),
     saveRowEdited: row => dispatch(saveRowEditedAction(row)),
-    revertRowEdited: row => dispatch(revertRowEditedAction(row))
+    revertRowEdited: row => dispatch(revertRowEditedAction(row)),
+    deleteRow: row => dispatch(deleteRowAction(row))
   };
 };
 
@@ -139,7 +180,8 @@ BodyActionsCell.propTypes = {
   row: rowPropType.isRequired,
   saveRowEdited: saveRowEditedPropType,
   addRowEdited: addRowEditedPropType,
-  revertRowEdited: revertRowEditedPropType
+  revertRowEdited: revertRowEditedPropType,
+  deleteRow: deleteRowPropType
 };
 
 export default compose(

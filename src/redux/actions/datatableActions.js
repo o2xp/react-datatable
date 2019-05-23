@@ -47,6 +47,11 @@ export const revertRowEdited = payload => ({
   payload
 });
 
+export const deleteRow = payload => ({
+  type: "DELETE_ROW",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
