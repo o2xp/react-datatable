@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsSelected,
   features
 } from "./optionsObjectSample";
 
@@ -31,6 +32,7 @@ const mergedSimpleOptionsSample = {
   keyColumn,
   font,
   rowsEdited,
+  rowsSelected,
   actionsRow: null,
   features: {
     ...features,

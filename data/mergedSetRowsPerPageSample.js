@@ -8,6 +8,7 @@ import {
   columnAction,
   userConfiguration,
   rowsEdited,
+  rowsSelected,
   features
 } from "./optionsObjectSample";
 
@@ -34,6 +35,7 @@ const mergedSetRowsPerPageSample = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsSelected,
   features: {
     ...features,
     userConfiguration: {

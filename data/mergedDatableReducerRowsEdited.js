@@ -7,6 +7,7 @@ import {
   columnAction,
   userConfiguration,
   pagination,
+  rowsSelected,
   features
 } from "./optionsObjectSample";
 
@@ -35,6 +36,7 @@ const mergedDatableReducerRowsEdited = {
     { ...data.rows[5], idOfColumnErr: [], hasBeenEdited: false },
     { ...data.rows[45], idOfColumnErr: [], hasBeenEdited: false }
   ],
+  rowsSelected,
   features: {
     ...features,
     userConfiguration: {
