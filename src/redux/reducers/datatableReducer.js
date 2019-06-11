@@ -39,6 +39,7 @@ const defaultState = {
     rowsCurrentPage: []
   },
   rowsEdited: [],
+  rowsSelected: [],
   actionsRow: null,
   features: {
     canEdit: false,
@@ -487,6 +488,22 @@ const deleteRow = (state, payload) => {
   };
 };
 
+const selectRow = (state, payload) => {
+  const { keyColumn, rowsSelected } = state;
+  const { checked, row } = payload;
+
+  if (checked) {
+    return {
+      ...state,
+      rowsSelected: [...rowsSelected, row]
+    };
+  }
+  return {
+    ...state,
+    rowsSelected: [...rowsSelected.filter(r => r[keyColumn] !== row[keyColumn])]
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -513,6 +530,8 @@ const datatableReducer = (state = defaultState, action) => {
       return revertRowEdited(state, payload);
     case "DELETE_ROW":
       return deleteRow(state, payload);
+    case "SELECT_ROW":
+      return selectRow(state, payload);
     default:
       return state;
   }
