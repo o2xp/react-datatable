@@ -209,7 +209,7 @@ const setPagination = ({
           pageSelected ? pageSelected - 1 : 0
         ];
 
-  if (tableRef.current) {
+  if (tableRef.current && (newPageSelected || newRowsPerPageSelected)) {
     tableRef.current.scrollToItem(0);
   }
 
@@ -459,32 +459,26 @@ const revertRowEdited = (state, payload) => {
 
 const deleteRow = (state, payload) => {
   const row = payload;
-  const { data, keyColumn, pagination, actionsRow } = state;
-  const { pageSelected, rowsPerPageSelected } = pagination;
+  const { data, keyColumn, actionsRow } = state;
 
   if (actionsRow) {
     actionsRow({ type: "delete", row });
   }
 
-  const newState = {
+  let newState = {
     ...state,
     data: {
       ...data,
       rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
     }
   };
-  return {
+
+  newState = {
     ...newState,
-    pagination: {
-      ...pagination,
-      rowsCurrentPage:
-        rowsPerPageSelected === "All"
-          ? newState.data.rows
-          : chunk(newState.data.rows, rowsPerPageSelected)[
-              pageSelected ? pageSelected - 1 : 0
-            ]
-    }
+    pagination: setPagination({ state: newState })
   };
+
+  return newState;
 };
 
 const datatableReducer = (state = defaultState, action) => {
