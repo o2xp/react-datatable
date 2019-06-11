@@ -328,5 +328,20 @@ describe("BodyActionsCell component", () => {
         expect(action.payload).toEqual(row);
       });
     });
+
+    describe("checkbox", () => {
+      const checkbox = wrapper.find(".select input");
+      it("should dispatch action type SELECT_ROW", () => {
+        checkbox.simulate("change", { target: { checked: true } });
+        const action = store.getActions()[8];
+        expect(action.type).toEqual("SELECT_ROW");
+      });
+
+      it("should dispatch action with payload", () => {
+        checkbox.simulate("change", { target: { checked: true } });
+        const action = store.getActions()[9];
+        expect(action.payload).toEqual({ checked: true, row });
+      });
+    });
   });
 });
