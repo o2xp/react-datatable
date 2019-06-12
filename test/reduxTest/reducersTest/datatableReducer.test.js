@@ -1155,33 +1155,4 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
   });
-
-  describe("should handle EXPORT_ROW", () => {
-    it("without actionsRow", () => {
-      const store = cloneDeep(mergedSimpleOptionsSample);
-
-      const result = datatableReducer(store, {
-        type: "EXPORT_ROW"
-      });
-
-      expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
-    });
-
-    it("with actionsRow", () => {
-      const actionsRow = jest.fn();
-      const store = cloneDeep({ ...mergedSimpleOptionsSample, actionsRow });
-
-      const result = datatableReducer(store, {
-        type: "EXPORT_ROW"
-      });
-
-      const mergedDatableReducerExpect = {
-        ...mergedSimpleOptionsSample,
-        actionsRow
-      };
-
-      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
-      expect(actionsRow).toHaveBeenCalled();
-    });
-  });
 });

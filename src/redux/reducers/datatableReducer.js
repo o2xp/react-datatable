@@ -493,17 +493,6 @@ const selectRow = (state, payload) => {
   };
 };
 
-const exportRow = state => {
-  const { actionsRow, rowsSelected } = state;
-  if (actionsRow) {
-    actionsRow({ type: "export", payload: rowsSelected });
-  }
-  return {
-    ...state,
-    rowsSelected: []
-  };
-};
-
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -532,8 +521,6 @@ const datatableReducer = (state = defaultState, action) => {
       return deleteRow(state, payload);
     case "SELECT_ROW":
       return selectRow(state, payload);
-    case "EXPORT_ROW":
-      return exportRow(state);
     default:
       return state;
   }

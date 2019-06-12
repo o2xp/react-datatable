@@ -174,11 +174,4 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.selectRow(payload)).toEqual(expectedAction);
   });
-
-  it("export rows", () => {
-    const expectedAction = {
-      type: "EXPORT_ROW"
-    };
-    expect(actions.exportRow()).toEqual(expectedAction);
-  });
 });

@@ -28,9 +28,5 @@ describe("DatatableHeader component", () => {
     it("a title", () => {
       expect(wrapper.find("div.title")).toHaveLength(1);
     });
-
-    it("an export widget", () => {
-      expect(wrapper.find("ExportRows")).toHaveLength(1);
-    });
   });
 });

@@ -57,10 +57,6 @@ export const selectRow = payload => ({
   payload
 });
 
-export const exportRow = () => ({
-  type: "EXPORT_ROW"
-});
-
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
