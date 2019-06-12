@@ -14,6 +14,7 @@ export const saveRowEditedPropType = PropTypes.func.isRequired;
 export const deleteRowPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
+export const exportRowPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
@@ -81,6 +82,7 @@ export const canDownloadPropType = PropTypes.bool;
 export const canSearchPropType = PropTypes.bool;
 export const canRefreshRowsPropType = PropTypes.bool;
 export const canFilterColumnsPropType = PropTypes.bool;
+export const canSelectRowPropType = PropTypes.bool;
 export const canSaveUserConfigurationPropType = PropTypes.bool;
 export const columnsOrderPropType = PropTypes.arrayOf(PropTypes.string);
 export const copyToClipboardPropType = PropTypes.bool;
@@ -159,12 +161,6 @@ export const rowsPerPagePropType = PropTypes.shape({
   selected: selectedPropType
 });
 
-export const selectionPropType = PropTypes.shape({
-  rowsSelectable: rowsSelectablePropType,
-  selectPageRows: selectPageRowsPropType,
-  selectAllRows: selectAllRowsPropType
-});
-
 export const additionalIconsPropType = PropTypes.shape({
   tooltip: tooltipPropType,
   icon: iconPropType.isRequired,
@@ -187,9 +183,9 @@ export const featuresPropType = PropTypes.shape({
   canRefreshRows: canRefreshRowsPropType,
   canFilterColumns: canFilterColumnsPropType,
   canSaveUserConfiguration: canSaveUserConfigurationPropType,
+  canSelectRow: canSelectRowPropType,
   userConfiguration: userConfigurationPropType,
   rowsPerPage: rowsPerPagePropType,
-  selection: selectionPropType,
   additionalIcons: PropTypes.arrayOf(additionalIconsPropType),
   selectionIcons: PropTypes.arrayOf(selectionIconsPropType)
 });

@@ -19,6 +19,9 @@ const storeNoRowsDataSample = {
       columns,
       rows: []
     },
+    rowsEdited: [],
+    rowsSelected: [],
+    actionsRow: null,
     features: {
       ...features,
       additionalIcons: []

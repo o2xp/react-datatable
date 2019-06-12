@@ -3,7 +3,6 @@ import {
   keyColumn,
   font,
   data,
-  selection,
   additionalIcons,
   selectionIcons
 } from "./optionsObjectSample";
@@ -35,6 +34,7 @@ const maximumOptionsSample = {
     canSearch: true,
     canRefreshRows: true,
     canFilterColumns: true,
+    canSelectRow: true,
     canSaveUserConfiguration: true,
     userConfiguration: {
       columnsOrder: ["id", "name", "age"],
@@ -44,7 +44,6 @@ const maximumOptionsSample = {
       available: [50],
       selected: 50
     },
-    selection,
     additionalIcons,
     selectionIcons
   }
