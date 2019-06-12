@@ -4,7 +4,6 @@ import {
   keyColumn,
   font,
   data,
-  selection,
   additionalIcons,
   rowsEdited,
   rowsSelected,
@@ -44,6 +43,7 @@ const mergedMaximumOptionsSample = {
     canSearch: true,
     canDelete: true,
     canRefreshRows: true,
+    canSelectRow: true,
     canFilterColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {
@@ -54,7 +54,6 @@ const mergedMaximumOptionsSample = {
       available: [50],
       selected: 50
     },
-    selection,
     additionalIcons,
     selectionIcons
   }

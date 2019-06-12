@@ -1,10 +1,4 @@
-import {
-  title,
-  keyColumn,
-  data,
-  selectionIcons,
-  selection
-} from "./optionsObjectSample";
+import { title, keyColumn, data, selectionIcons } from "./optionsObjectSample";
 import rows from "./rows";
 
 const storyOptionsSample = {
@@ -26,7 +20,7 @@ const storyOptionsSample = {
     canEdit: true,
     canPrint: true,
     canDownload: true,
-    selection,
+    canSelectRow: true,
     selectionIcons
   }
 };

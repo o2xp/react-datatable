@@ -72,10 +72,7 @@ describe("datatableReducer reducer", () => {
             ...simpleOptionsSample,
             features: {
               ...simpleOptionsSample.features,
-              selection: {
-                ...simpleOptionsSample.features.selection,
-                rowsSelectable: false
-              }
+              canSelectRow: false
             }
           })
         }
@@ -85,10 +82,7 @@ describe("datatableReducer reducer", () => {
         ...mergedSimpleOptionsSample,
         features: {
           ...mergedSimpleOptionsSample.features,
-          selection: {
-            ...mergedSimpleOptionsSample.features.selection,
-            rowsSelectable: false
-          }
+          canSelectRow: false
         }
       });
       mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "100px";
