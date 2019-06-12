@@ -156,11 +156,6 @@ export const userConfiguration = {
   columnsOrder: ["id", "name", "age", "adult", "birthDate", "eyeColor", "iban"],
   copyToClipboard: false
 };
-export const selection = {
-  rowsSelectable: true,
-  selectPageRows: true,
-  selectAllRows: false
-};
 export const selectionIcons = [
   {
     tooltip: "Selected Rows",
@@ -184,11 +179,11 @@ export const features = {
   canDelete: true,
   canSearch: false,
   canRefreshRows: false,
+  canSelectRow: true,
   canFilterColumns: false,
   canSaveUserConfiguration: false,
   userConfiguration,
   rowsPerPage,
-  selection,
   additionalIcons,
   selectionIcons
 };

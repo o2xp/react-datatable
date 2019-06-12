@@ -43,6 +43,7 @@ const defaultOptionsSample = {
     canDelete: false,
     canSearch: false,
     canRefreshRows: false,
+    canSelectRow: false,
     canFilterColumns: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
@@ -52,11 +53,6 @@ const defaultOptionsSample = {
     rowsPerPage: {
       available: [10, 25, 50, 100, "All"],
       selected: "All"
-    },
-    selection: {
-      rowsSelectable: false,
-      selectPageRows: false,
-      selectAllRows: false
     },
     additionalIcons: [],
     selectionIcons: []

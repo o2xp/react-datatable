@@ -55,7 +55,7 @@ describe("BodyActionsCell component", () => {
           isScrolling={false}
           canEdit
           canDelete
-          rowsSelectable
+          canSelectRow
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
@@ -77,7 +77,7 @@ describe("BodyActionsCell component", () => {
           isScrolling
           canEdit
           canDelete
-          rowsSelectable
+          canSelectRow
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
@@ -102,7 +102,7 @@ describe("BodyActionsCell component", () => {
             isScrolling
             canEdit={false}
             canDelete
-            rowsSelectable
+            canSelectRow
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -126,7 +126,7 @@ describe("BodyActionsCell component", () => {
             isScrolling
             canEdit
             canDelete={false}
-            rowsSelectable
+            canSelectRow
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -150,7 +150,7 @@ describe("BodyActionsCell component", () => {
             isScrolling
             canEdit
             canDelete
-            rowsSelectable={false}
+            canSelectRow={false}
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -272,7 +272,7 @@ describe("BodyActionsCell component", () => {
           isScrolling={false}
           canEdit
           canDelete
-          rowsSelectable
+          canSelectRow
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}

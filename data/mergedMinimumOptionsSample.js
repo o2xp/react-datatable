@@ -40,6 +40,7 @@ const mergedMinimumOptionsSample = {
     canDownload: false,
     canSearch: false,
     canDelete: false,
+    canSelectRow: false,
     canRefreshRows: false,
     canFilterColumns: false,
     canSaveUserConfiguration: false,
@@ -48,11 +49,6 @@ const mergedMinimumOptionsSample = {
       columnsOrder: [...userConfiguration.columnsOrder]
     },
     rowsPerPage,
-    selection: {
-      rowsSelectable: false,
-      selectPageRows: false,
-      selectAllRows: false
-    },
     additionalIcons: [],
     selectionIcons: []
   }

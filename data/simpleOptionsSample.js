@@ -1,10 +1,4 @@
-import {
-  title,
-  keyColumn,
-  data,
-  selectionIcons,
-  selection
-} from "./optionsObjectSample";
+import { title, keyColumn, data, selectionIcons } from "./optionsObjectSample";
 
 const simpleOptionsSample = {
   title,
@@ -23,7 +17,7 @@ const simpleOptionsSample = {
     canPrint: true,
     canDownload: true,
     canDelete: true,
-    selection,
+    canSelectRow: true,
     selectionIcons
   }
 };
