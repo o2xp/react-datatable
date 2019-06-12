@@ -21,7 +21,7 @@ import {
   isScrollingPropType,
   canEditPropType,
   canDeletePropType,
-  rowsSelectablePropType,
+  canSelectRowPropType,
   rowPropType,
   classesPropType,
   saveRowEditedPropType,
@@ -48,7 +48,7 @@ export class BodyActionsCell extends Component {
       isScrolling,
       canEdit,
       canDelete,
-      rowsSelectable,
+      canSelectRow,
       row,
       checked,
       editing,
@@ -73,7 +73,7 @@ export class BodyActionsCell extends Component {
         }
       >
         <div style={{ width: column.colSize }}>
-          {rowsSelectable && (
+          {canSelectRow && (
             <Checkbox
               className="select"
               color="primary"
@@ -180,7 +180,7 @@ const mapStateToProps = state => {
     isScrolling: state.datatableReducer.dimensions.isScrolling,
     canEdit: state.datatableReducer.features.canEdit,
     canDelete: state.datatableReducer.features.canDelete,
-    rowsSelectable: state.datatableReducer.features.selection.rowsSelectable
+    canSelectRow: state.datatableReducer.features.canSelectRow
   };
 };
 
@@ -191,7 +191,7 @@ BodyActionsCell.propTypes = {
   isScrolling: isScrollingPropType.isRequired,
   canEdit: canEditPropType.isRequired,
   canDelete: canDeletePropType.isRequired,
-  rowsSelectable: rowsSelectablePropType.isRequired,
+  canSelectRow: canSelectRowPropType.isRequired,
   checked: checkedPropType.isRequired,
   row: rowPropType.isRequired,
   saveRowEdited: saveRowEditedPropType,

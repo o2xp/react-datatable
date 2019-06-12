@@ -49,6 +49,7 @@ const defaultState = {
     canSearch: false,
     canRefreshRows: false,
     canFilterColumns: false,
+    canSelectRow: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
       columnsOrder: [],
@@ -57,11 +58,6 @@ const defaultState = {
     rowsPerPage: {
       available: [10, 25, 50, 100, "All"],
       selected: "All"
-    },
-    selection: {
-      rowsSelectable: false,
-      selectPageRows: false,
-      selectAllRows: false
     },
     additionalIcons: [],
     selectionIcons: []
@@ -88,10 +84,9 @@ const convertSizeToNumber = val => {
 };
 
 const updateRowSizeMultiplier = state => {
-  const { canEdit, canDelete, selection } = state.features;
-  const numberOfActions = [canEdit, canDelete, selection.rowsSelectable].filter(
-    v => v
-  ).length;
+  const { canEdit, canDelete, canSelectRow } = state.features;
+  const numberOfActions = [canEdit, canDelete, canSelectRow].filter(v => v)
+    .length;
   const colDisplayed = [];
   state.data.columns.forEach(col => {
     if (state.features.userConfiguration.columnsOrder.includes(col.id)) {
@@ -241,8 +236,8 @@ const initializeOptions = (
     );
   }
 
-  const { canEdit, canDelete, selection } = newState.features;
-  const actions = [canEdit, canDelete, selection.rowsSelectable];
+  const { canEdit, canDelete, canSelectRow } = newState.features;
+  const actions = [canEdit, canDelete, canSelectRow];
   const numberOfActions = actions.filter(v => v).length;
 
   if (
@@ -429,7 +424,7 @@ const saveRowEdited = (state, payload) => {
   delete row.hasBeenEdited;
   const { data, rowsEdited, keyColumn, pagination, actionsRow } = state;
   if (actionsRow) {
-    actionsRow({ type: "save", row });
+    actionsRow({ type: "save", payload: row });
   }
   return {
     ...state,
@@ -463,7 +458,7 @@ const deleteRow = (state, payload) => {
   const { data, keyColumn, actionsRow } = state;
 
   if (actionsRow) {
-    actionsRow({ type: "delete", row });
+    actionsRow({ type: "delete", payload: row });
   }
 
   let newState = {
@@ -498,6 +493,17 @@ const selectRow = (state, payload) => {
   };
 };
 
+const exportRow = state => {
+  const { actionsRow, rowsSelected } = state;
+  if (actionsRow) {
+    actionsRow({ type: "export", payload: rowsSelected });
+  }
+  return {
+    ...state,
+    rowsSelected: []
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -526,6 +532,8 @@ const datatableReducer = (state = defaultState, action) => {
       return deleteRow(state, payload);
     case "SELECT_ROW":
       return selectRow(state, payload);
+    case "EXPORT_ROW":
+      return exportRow(state);
     default:
       return state;
   }

@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
+import DatatableHeader from "./DatatableHeader/DatatableHeader";
 import DatatableFooter from "./DatatableFooter/DatatableFooter";
 import {
   dataPropType,
   heightNumberPropType,
   widthNumberPropType,
+  featuresPropType,
+  titlePropType,
   columnSizeMultiplierPropType
 } from "../proptypes";
 
@@ -18,12 +21,20 @@ class DatatableContainer extends Component {
       height,
       columnSizeMultiplier,
       width,
+      features,
+      title,
       totalWidthNumber
     } = this.props;
+
+    const { canSelectRow } = features;
+
+    const hasHeader = title !== "" || canSelectRow;
 
     return (
       <ScrollSync>
         <div className="o2xp" style={{ width }}>
+          {hasHeader && <DatatableHeader />}
+
           <div className="Table">
             {data.columns.length > 0 && (
               <Fragment>
@@ -72,6 +83,8 @@ DatatableContainer.propTypes = {
   height: heightNumberPropType.isRequired,
   width: widthNumberPropType.isRequired,
   totalWidthNumber: widthNumberPropType,
+  features: featuresPropType,
+  title: titlePropType,
   columnSizeMultiplier: columnSizeMultiplierPropType
 };
 
@@ -80,6 +93,8 @@ const mapStateToProps = state => {
     data: state.datatableReducer.data,
     height: state.datatableReducer.dimensions.body.heightNumber,
     width: state.datatableReducer.dimensions.datatable.widthNumber,
+    features: state.datatableReducer.features,
+    title: state.datatableReducer.title,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier: state.datatableReducer.dimensions.columnSizeMultiplier
