@@ -47,7 +47,6 @@ describe("ExportRows component", () => {
       );
 
       const exportButton = wrapper.find("button.export-rows");
-      console.log(exportButton.props());
       expect(exportButton.props().disabled).toBeTruthy();
     });
   });
