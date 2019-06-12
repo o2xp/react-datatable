@@ -77,15 +77,7 @@ export class Body extends Component {
       );
     }
 
-    return (
-      <BodyRow
-        row={row}
-        editing={editing}
-        style={style}
-        rowIndex={index}
-        key={key}
-      />
-    );
+    return <BodyRow row={row} editing={editing} style={style} key={key} />;
   };
 
   render() {

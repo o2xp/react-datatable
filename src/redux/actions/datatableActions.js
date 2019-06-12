@@ -52,6 +52,11 @@ export const deleteRow = payload => ({
   payload
 });
 
+export const selectRow = payload => ({
+  type: "SELECT_ROW",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

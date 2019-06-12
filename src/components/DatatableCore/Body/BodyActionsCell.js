@@ -13,6 +13,7 @@ import {
   addRowEdited as addRowEditedAction,
   saveRowEdited as saveRowEditedAction,
   revertRowEdited as revertRowEditedAction,
+  selectRow as selectRowAction,
   deleteRow as deleteRowAction
 } from "../../../redux/actions/datatableActions";
 import {
@@ -27,6 +28,8 @@ import {
   editingPropType,
   addRowEditedPropType,
   revertRowEditedPropType,
+  selectRowPropType,
+  checkedPropType,
   deleteRowPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
@@ -47,16 +50,20 @@ export class BodyActionsCell extends Component {
       canDelete,
       rowsSelectable,
       row,
+      checked,
       editing,
       addRowEdited,
       saveRowEdited,
       revertRowEdited,
       deleteRow,
+      selectRow,
       classes
     } = this.props;
+
     const { deleting } = this.state;
     const { hasBeenEdited, idOfColumnErr } = row;
     const saveDisabled = !hasBeenEdited || idOfColumnErr.length > 0;
+
     return (
       <div
         className={
@@ -66,7 +73,14 @@ export class BodyActionsCell extends Component {
         }
       >
         <div style={{ width: column.colSize }}>
-          {rowsSelectable && <Checkbox className="select" checked={false} />}
+          {rowsSelectable && (
+            <Checkbox
+              className="select"
+              color="primary"
+              onChange={e => selectRow({ checked: e.target.checked, row })}
+              checked={checked}
+            />
+          )}
           {canDelete && !editing && !deleting && (
             <Tooltip title="Confirm delete">
               <IconButton
@@ -154,6 +168,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addRowEdited: row => dispatch(addRowEditedAction(row)),
     saveRowEdited: row => dispatch(saveRowEditedAction(row)),
+    selectRow: row => dispatch(selectRowAction(row)),
     revertRowEdited: row => dispatch(revertRowEditedAction(row)),
     deleteRow: row => dispatch(deleteRowAction(row))
   };
@@ -177,9 +192,11 @@ BodyActionsCell.propTypes = {
   canEdit: canEditPropType.isRequired,
   canDelete: canDeletePropType.isRequired,
   rowsSelectable: rowsSelectablePropType.isRequired,
+  checked: checkedPropType.isRequired,
   row: rowPropType.isRequired,
   saveRowEdited: saveRowEditedPropType,
   addRowEdited: addRowEditedPropType,
+  selectRow: selectRowPropType,
   revertRowEdited: revertRowEditedPropType,
   deleteRow: deleteRowPropType
 };

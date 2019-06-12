@@ -14,6 +14,7 @@ const addRowEdited = jest.fn();
 const saveRowEdited = jest.fn();
 const revertRowEdited = jest.fn();
 const deleteRow = jest.fn();
+const selectRow = jest.fn();
 const column = {
   id: "actions",
   label: "Actions",
@@ -36,7 +37,12 @@ describe("BodyActionsCell component", () => {
   it("connected should render without errors", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <BodyActionsCell column={column} row={row} editing={false} />
+        <BodyActionsCell
+          column={column}
+          row={row}
+          editing={false}
+          checked={false}
+        />
       </Provider>
     );
     expect(wrapper.find("Connect(BodyActionsCell)")).toHaveLength(1);
@@ -54,9 +60,11 @@ describe("BodyActionsCell component", () => {
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
+          selectRow={selectRow}
           column={column}
           row={row}
           editing={false}
+          checked={false}
           classes={{ customVariant }}
         />
       );
@@ -74,9 +82,11 @@ describe("BodyActionsCell component", () => {
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
+          selectRow={selectRow}
           column={column}
           row={row}
           editing={false}
+          checked={false}
           classes={{ customVariant }}
         />
       );
@@ -97,9 +107,11 @@ describe("BodyActionsCell component", () => {
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
+            selectRow={selectRow}
             column={column}
             row={row}
             editing={false}
+            checked={false}
             classes={{ customVariant }}
           />
         );
@@ -119,9 +131,11 @@ describe("BodyActionsCell component", () => {
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
+            selectRow={selectRow}
             column={column}
             row={row}
             editing={false}
+            checked={false}
             classes={{ customVariant }}
           />
         );
@@ -141,9 +155,11 @@ describe("BodyActionsCell component", () => {
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
+            selectRow={selectRow}
             column={column}
             row={row}
             editing={false}
+            checked={false}
             classes={{ customVariant }}
           />
         );
@@ -157,7 +173,12 @@ describe("BodyActionsCell component", () => {
   describe("click on", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <BodyActionsCell column={column} row={row} editing={false} />
+        <BodyActionsCell
+          column={column}
+          row={row}
+          editing={false}
+          checked={false}
+        />
       </Provider>
     );
 
@@ -167,6 +188,7 @@ describe("BodyActionsCell component", () => {
           column={column}
           row={{ ...row, idOfColumnErr: [], hasBeenEdited: false }}
           editing
+          checked={false}
         />
       </Provider>
     );
@@ -177,6 +199,7 @@ describe("BodyActionsCell component", () => {
           column={column}
           row={{ ...row, idOfColumnErr: [], hasBeenEdited: true }}
           editing
+          checked={false}
         />
       </Provider>
     );
@@ -199,7 +222,6 @@ describe("BodyActionsCell component", () => {
     describe("save button", () => {
       const saveButton = wrapperEdited.find("button.save");
       const saveButtonDisabled = wrapperEditMode.find("button.save");
-
       it("should be disabled", () => {
         expect(saveButtonDisabled.props().disabled).toBeTruthy();
       });
@@ -255,16 +277,17 @@ describe("BodyActionsCell component", () => {
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
+          selectRow={selectRow}
           column={column}
           row={row}
           editing={false}
+          checked={false}
           classes={{ customVariant }}
         />
       );
 
       describe("should set deleting to ", () => {
         const deleteButton = pure.find("button.delete");
-
         it("true", () => {
           deleteButton.simulate("click");
           expect(pure.state()).toEqual({ deleting: true });
@@ -303,6 +326,21 @@ describe("BodyActionsCell component", () => {
         confirmDeleteButton.simulate("click");
         const action = store.getActions()[7];
         expect(action.payload).toEqual(row);
+      });
+    });
+
+    describe("checkbox", () => {
+      const checkbox = wrapper.find(".select input");
+      it("should dispatch action type SELECT_ROW", () => {
+        checkbox.simulate("change", { target: { checked: true } });
+        const action = store.getActions()[8];
+        expect(action.type).toEqual("SELECT_ROW");
+      });
+
+      it("should dispatch action with payload", () => {
+        checkbox.simulate("change", { target: { checked: true } });
+        const action = store.getActions()[9];
+        expect(action.payload).toEqual({ checked: true, row });
       });
     });
   });

@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsSelected,
   features
 } from "./optionsObjectSample";
 
@@ -34,6 +35,7 @@ const mergedSimpleOptionsSampleWidthResize = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsSelected,
   features: {
     ...features,
     userConfiguration: {

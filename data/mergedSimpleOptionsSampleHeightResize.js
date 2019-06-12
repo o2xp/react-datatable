@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsSelected,
   features
 } from "./optionsObjectSample";
 
@@ -36,6 +37,7 @@ const mergedSimpleOptionsSampleHeightResize = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsSelected,
   features: {
     ...features,
     userConfiguration: {
