@@ -137,6 +137,7 @@ export const columns = [
   }
 ];
 export const rowsEdited = [];
+export const rowsSelected = [];
 export const data = {
   columns,
   rows

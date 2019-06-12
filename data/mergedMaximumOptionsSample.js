@@ -7,6 +7,7 @@ import {
   selection,
   additionalIcons,
   rowsEdited,
+  rowsSelected,
   columnAction,
   selectionIcons
 } from "./optionsObjectSample";
@@ -22,6 +23,7 @@ const mergedMaximumOptionsSample = {
     }
   },
   rowsEdited,
+  rowsSelected,
   actionsRow: null,
   keyColumn,
   font,

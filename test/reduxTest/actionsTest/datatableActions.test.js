@@ -153,4 +153,25 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.deleteRow(payload)).toEqual(expectedAction);
   });
+
+  it("select a row", () => {
+    const payload = {
+      checked: true,
+      row: {
+        index: 0,
+        id: "5cd9307025f4f0572995990f",
+        name: "Hunt Valdez",
+        age: 2,
+        adult: false,
+        birthDate: "2017-06-02T11:22",
+        iban: "",
+        eyeColor: "green"
+      }
+    };
+    const expectedAction = {
+      type: "SELECT_ROW",
+      payload
+    };
+    expect(actions.selectRow(payload)).toEqual(expectedAction);
+  });
 });

@@ -5,10 +5,10 @@ import {
   columnsPropType,
   columnsOrderPropType,
   CustomTableBodyCellPropType,
-  indexPropType,
   columnSizeMultiplierPropType,
   keyColumnPropType,
   editingPropType,
+  rowsSelectedPropType,
   stylePropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
@@ -19,22 +19,24 @@ class BodyRow extends Component {
     const {
       columns,
       CustomTableBodyCell,
-      rowIndex,
       columnSizeMultiplier,
+      rowsSelected,
       keyColumn
     } = this.props;
     const column = columns.find(col => col.id === columnId);
-    const key = `row-${rowIndex}-cell-${cellIndex}`;
     const rowId = row[keyColumn];
+    const key = `row-${row[keyColumn]}-cell-${columnId}`;
     const isEditing = editing && column.editable;
 
     if (columnId === "actions") {
+      const checked = !!rowsSelected.find(r => r[keyColumn] === row[keyColumn]);
       return (
         <BodyActionsCell
           key={key}
           column={column}
           row={row}
           editing={editing}
+          checked={checked}
         />
       );
     }
@@ -108,13 +110,13 @@ class BodyRow extends Component {
 
 BodyRow.propTypes = {
   row: rowPropType.isRequired,
-  rowIndex: indexPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
   style: stylePropType.isRequired,
   keyColumn: keyColumnPropType.isRequired,
   editing: editingPropType.isRequired,
+  rowsSelected: rowsSelectedPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
 };
 
@@ -122,6 +124,7 @@ const mapStateToProps = state => {
   return {
     columns: state.datatableReducer.data.columns,
     keyColumn: state.datatableReducer.keyColumn,
+    rowsSelected: state.datatableReducer.rowsSelected,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     columnSizeMultiplier:

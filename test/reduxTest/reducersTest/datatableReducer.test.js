@@ -1074,4 +1074,91 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
   });
+
+  describe("should handle SELECT_ROW", () => {
+    it("when row isn't selected", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row }
+      });
+
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        rowsSelected: [row]
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+
+    it("when row is selected", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row }
+      });
+
+      result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SELECT_ROW",
+        payload: { checked: false, row }
+      });
+
+      expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
+    });
+
+    it("when multiple rows are selected", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+      const row1 = rows[1];
+
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row }
+      });
+
+      result = datatableReducer(result, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row: row1 }
+      });
+
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        rowsSelected: [row, row1]
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+
+    it("when multiple rows are selected and then unselected", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const row = rows[0];
+      const row1 = rows[1];
+
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row }
+      });
+
+      result = datatableReducer(result, {
+        type: "SELECT_ROW",
+        payload: { checked: true, row: row1 }
+      });
+
+      result = datatableReducer(result, {
+        type: "SELECT_ROW",
+        payload: { checked: false, row }
+      });
+
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        rowsSelected: [row1]
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+  });
 });
