@@ -112,6 +112,15 @@
   text-align: center;
 }
 
+.close-icon {
+  float: right;
+  margin-top: -7px!important;
+}
+
+.input-fileName input {
+  height: 20.09px;
+}
+
 .action{
   position: sticky;
   left:0;

@@ -1,0 +1,223 @@
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import {
+  IconButton,
+  Tooltip,
+  Zoom,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  Select,
+  MenuItem,
+  Input,
+  Slide
+} from "@material-ui/core";
+import {
+  CloudDownload as CloudDownloadIcon,
+  Close as CloseIcon
+} from "@material-ui/icons";
+import {
+  rowsPropType,
+  columnsPropType,
+  rowsCurrentPagePropType,
+  rowsSelectedPropType,
+  setRowsSelectedPropType
+} from "../../../proptypes";
+import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
+
+const Json2csvParser = require("json2csv").Parser;
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+class DownloadData extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dialogOpen: false,
+      fileType: "csv",
+      fileName: "my-data"
+    };
+  }
+
+  download = type => {
+    const {
+      rows,
+      columns,
+      rowsCurrentPage,
+      rowsSelected,
+      setRowsSelected
+    } = this.props;
+    const { fileType, fileName } = this.state;
+
+    let data = null;
+    switch (type) {
+      case "selected":
+        data = rowsSelected;
+        break;
+      case "current":
+        data = rowsCurrentPage;
+        break;
+      case "all":
+        data = rows;
+        break;
+      default:
+        break;
+    }
+
+    const hiddenElement = document.createElement("a");
+
+    if (fileType === "csv") {
+      const json2csvParser = new Json2csvParser({ columns });
+      const csv = json2csvParser.parse(data);
+      hiddenElement.href = `data:text/csv;charset=utf-8,${encodeURI(csv)}`;
+      hiddenElement.target = "_blank";
+      hiddenElement.download = `${fileName}.csv`;
+    } else {
+      hiddenElement.href = `data:text/json;charset=utf-8,${encodeURIComponent(
+        JSON.stringify(data)
+      )}`;
+      hiddenElement.target = "_blank";
+      hiddenElement.download = `${fileName}.json`;
+    }
+
+    hiddenElement.click();
+    this.setState({ dialogOpen: false });
+    if (type === "selected") {
+      setRowsSelected();
+    }
+  };
+
+  toggleDialog = bool => {
+    this.setState({ dialogOpen: bool });
+  };
+
+  setFileName = e => {
+    this.setState({ fileName: e.target.value });
+  };
+
+  setFileType = e => {
+    this.setState({ fileType: e.target.value });
+  };
+
+  render() {
+    const { rowsSelected } = this.props;
+    const { dialogOpen, fileType, fileName } = this.state;
+
+    return (
+      <Fragment>
+        <Tooltip TransitionComponent={Zoom} title="Download data">
+          <span>
+            <IconButton
+              className="download-data-icon"
+              onClick={() => this.toggleDialog(true)}
+            >
+              <CloudDownloadIcon color="primary" />
+            </IconButton>
+          </span>
+        </Tooltip>
+
+        <Dialog
+          open={dialogOpen}
+          onClose={() => this.toggleDialog(false)}
+          TransitionComponent={Transition}
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            Download Data
+            <IconButton
+              aria-label="Close"
+              className="close-icon"
+              onClick={() => this.toggleDialog(false)}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Data will be exported in {fileType} file
+            </DialogContentText>
+            <br />
+            <Input
+              className="input-fileName"
+              label={fileName}
+              value={fileName}
+              error={!(fileName.split(" ").join("").length > 0)}
+              onChange={e => this.setFileName(e)}
+              onFocus={e => e.target.select()}
+              autoFocus
+            />
+            <Select
+              position="end"
+              value={fileType}
+              onChange={e => this.setFileType(e)}
+            >
+              <MenuItem value="csv">.csv</MenuItem>
+              <MenuItem value="json">.json</MenuItem>
+            </Select>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => this.download("selected")}
+              variant="contained"
+              size="small"
+              color="primary"
+              disabled={rowsSelected.length === 0}
+            >
+              Rows selected
+            </Button>
+            <Button
+              onClick={() => this.download("current")}
+              variant="contained"
+              size="small"
+              color="primary"
+            >
+              Rows of current page
+            </Button>
+            <Button
+              onClick={() => this.download("all")}
+              variant="contained"
+              size="small"
+              color="primary"
+            >
+              All rows
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Fragment>
+    );
+  }
+}
+
+DownloadData.propTypes = {
+  rows: rowsPropType.isRequired,
+  columns: columnsPropType.isRequired,
+  rowsCurrentPage: rowsCurrentPagePropType.isRequired,
+  rowsSelected: rowsSelectedPropType.isRequired,
+  setRowsSelected: setRowsSelectedPropType
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setRowsSelected: () => dispatch(setRowsSelectedAction([]))
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    rowsSelected: state.datatableReducer.rowsSelected,
+    columns: state.datatableReducer.data.columns,
+    rows: state.datatableReducer.data.rows,
+    rowsCurrentPage: state.datatableReducer.pagination.rowsCurrentPage
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DownloadData);
