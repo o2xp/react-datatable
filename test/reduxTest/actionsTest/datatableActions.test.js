@@ -174,4 +174,13 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.selectRow(payload)).toEqual(expectedAction);
   });
+
+  it("select a row", () => {
+    const payload = [];
+    const expectedAction = {
+      type: "SET_ROWS_SELECTED",
+      payload
+    };
+    expect(actions.setRowsSelected(payload)).toEqual(expectedAction);
+  });
 });
