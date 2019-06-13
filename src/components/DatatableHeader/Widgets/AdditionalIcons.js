@@ -8,14 +8,17 @@ class AdditionalIcons extends Component {
     const { additionalIcons } = this.props;
     return (
       <Fragment>
-        {additionalIcons.map(icon => (
+        {additionalIcons.map((icon, i) => (
           <Tooltip
             key={icon.title}
             TransitionComponent={Zoom}
             title={icon.title}
           >
             <span>
-              <IconButton onClick={() => icon.onClick()}>
+              <IconButton
+                className={`additional-icon-${i}`}
+                onClick={() => icon.onClick()}
+              >
                 {icon.icon}
               </IconButton>
             </span>
