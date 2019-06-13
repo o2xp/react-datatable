@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class DownloadData extends Component {
+export class DownloadData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -144,7 +144,7 @@ class DownloadData extends Component {
             </DialogContentText>
             <br />
             <Input
-              className="input-fileName"
+              inputProps={{ className: "input-fileName" }}
               label={fileName}
               value={fileName}
               error={!(fileName.split(" ").join("").length > 0)}
@@ -163,6 +163,7 @@ class DownloadData extends Component {
           </DialogContent>
           <DialogActions>
             <Button
+              className="rows-selected"
               onClick={() => this.download("selected")}
               variant="contained"
               size="small"
@@ -172,6 +173,7 @@ class DownloadData extends Component {
               Rows selected
             </Button>
             <Button
+              className="rows-current-page"
               onClick={() => this.download("current")}
               variant="contained"
               size="small"
@@ -180,6 +182,7 @@ class DownloadData extends Component {
               Rows of current page
             </Button>
             <Button
+              className="all-rows"
               onClick={() => this.download("all")}
               variant="contained"
               size="small"
