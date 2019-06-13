@@ -14,7 +14,7 @@ export const saveRowEditedPropType = PropTypes.func.isRequired;
 export const deleteRowPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
-export const exportRowPropType = PropTypes.func.isRequired;
+export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
@@ -98,7 +98,6 @@ export const selectPageRowsPropType = PropTypes.bool;
 export const selectAllRowsPropType = PropTypes.bool;
 export const tooltipPropType = PropTypes.string;
 export const iconPropType = PropTypes.element;
-export const positionPropType = PropTypes.number;
 export const onClickPropType = PropTypes.func;
 export const headOfTheTablePropType = PropTypes.element;
 export const bodyOfTheTablePropType = PropTypes.element;
@@ -161,19 +160,21 @@ export const rowsPerPagePropType = PropTypes.shape({
   selected: selectedPropType
 });
 
-export const additionalIconsPropType = PropTypes.shape({
-  tooltip: tooltipPropType,
-  icon: iconPropType.isRequired,
-  position: positionPropType,
-  onClick: onClickPropType.isRequired
-});
+export const additionalIconsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    tooltip: tooltipPropType,
+    icon: iconPropType.isRequired,
+    onClick: onClickPropType.isRequired
+  })
+);
 
-export const selectionIconsPropType = PropTypes.shape({
-  tooltip: tooltipPropType,
-  icon: iconPropType.isRequired,
-  position: positionPropType,
-  onClick: onClickPropType.isRequired
-});
+export const selectionIconsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    tooltip: tooltipPropType,
+    icon: iconPropType.isRequired,
+    onClick: onClickPropType.isRequired
+  })
+);
 
 export const featuresPropType = PropTypes.shape({
   canEdit: canEditPropType,
@@ -186,8 +187,8 @@ export const featuresPropType = PropTypes.shape({
   canSelectRow: canSelectRowPropType,
   userConfiguration: userConfigurationPropType,
   rowsPerPage: rowsPerPagePropType,
-  additionalIcons: PropTypes.arrayOf(additionalIconsPropType),
-  selectionIcons: PropTypes.arrayOf(selectionIconsPropType)
+  additionalIcons: additionalIconsPropType,
+  selectionIcons: selectionIconsPropType
 });
 
 export const optionsPropType = PropTypes.shape({
