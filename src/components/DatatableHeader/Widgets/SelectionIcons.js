@@ -14,7 +14,7 @@ class SelectionIcons extends Component {
     const disabled = rowsSelected.length === 0;
     return (
       <Fragment>
-        {selectionIcons.map(icon => (
+        {selectionIcons.map((icon, i) => (
           <Tooltip
             key={icon.title}
             TransitionComponent={Zoom}
@@ -22,7 +22,11 @@ class SelectionIcons extends Component {
           >
             <span>
               <IconButton
-                className={disabled ? "disabled-icon" : ""}
+                className={
+                  disabled
+                    ? `disabled-icon selection-icon-${i}`
+                    : `selection-icon-${i}`
+                }
                 onClick={() => {
                   icon.onClick(rowsSelected);
                   setRowsSelected();
