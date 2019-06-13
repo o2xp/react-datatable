@@ -1155,4 +1155,30 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
   });
+
+  describe("should handle SET_ROWS_SELECTED", () => {
+    it("with empty array", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SET_ROWS_SELECTED",
+        payload: []
+      });
+
+      expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
+    });
+
+    it("with rows", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SET_ROWS_SELECTED",
+        payload: [rows[0], rows[3]]
+      });
+
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        rowsSelected: [rows[0], rows[3]]
+      };
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+  });
 });

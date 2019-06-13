@@ -160,15 +160,18 @@ export const selectionIcons = [
   {
     tooltip: "Selected Rows",
     icon: <CallSplitIcon />,
-    position: 5,
+    onClick: res => res
+  },
+  {
+    tooltip: "Selected Rows 2",
+    icon: <CallSplitIcon />,
     onClick: res => res
   }
 ];
 export const additionalIcons = [
   {
-    tooltip: "Selected Rows",
+    tooltip: "Coffee",
     icon: <CallSplitIcon />,
-    position: 5,
     onClick: () => true
   }
 ];
