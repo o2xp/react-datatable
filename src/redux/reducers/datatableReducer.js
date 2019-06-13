@@ -493,6 +493,13 @@ const selectRow = (state, payload) => {
   };
 };
 
+const setRowsSelected = (state, payload) => {
+  return {
+    ...state,
+    rowsSelected: payload
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -521,6 +528,8 @@ const datatableReducer = (state = defaultState, action) => {
       return deleteRow(state, payload);
     case "SELECT_ROW":
       return selectRow(state, payload);
+    case "SET_ROWS_SELECTED":
+      return setRowsSelected(state, payload);
     default:
       return state;
   }

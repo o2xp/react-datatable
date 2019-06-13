@@ -158,17 +158,20 @@ export const userConfiguration = {
 };
 export const selectionIcons = [
   {
-    tooltip: "Selected Rows",
+    title: "Selected Rows",
     icon: <CallSplitIcon />,
-    position: 5,
+    onClick: res => res
+  },
+  {
+    title: "Selected Rows 2",
+    icon: <CallSplitIcon />,
     onClick: res => res
   }
 ];
 export const additionalIcons = [
   {
-    tooltip: "Selected Rows",
+    title: "Coffee",
     icon: <CallSplitIcon />,
-    position: 5,
     onClick: () => true
   }
 ];

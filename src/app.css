@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.o2xp .disabled-icon span svg {
+  color: rgba(0, 0, 0, 0.26)!important;
+}
+
 .o2xp .title {
   margin-right: auto;
   display: flex;

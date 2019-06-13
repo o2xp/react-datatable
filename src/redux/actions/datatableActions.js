@@ -57,6 +57,11 @@ export const selectRow = payload => ({
   payload
 });
 
+export const setRowsSelected = payload => ({
+  type: "SET_ROWS_SELECTED",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
