@@ -12,6 +12,7 @@ class Search extends Component {
       openSearch: false,
       searchValue: ""
     };
+    this.searchInput = React.createRef();
   }
 
   searchUpdate = e => {
@@ -23,6 +24,9 @@ class Search extends Component {
 
   toggleSearch = () => {
     const { searchValue, openSearch } = this.state;
+    if (!openSearch) {
+      this.searchInput.current.focus();
+    }
     if (searchValue.length === 0) {
       this.setState({ openSearch: !openSearch });
     }
@@ -41,6 +45,7 @@ class Search extends Component {
                   ? "searchAnimationInput"
                   : "searchAnimationInputActive"
               }
+              inputRef={this.searchInput}
               onChange={this.searchUpdate}
               value={searchValue}
               placeholder="Search.."
