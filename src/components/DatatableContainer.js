@@ -26,9 +26,8 @@ class DatatableContainer extends Component {
       totalWidthNumber
     } = this.props;
 
-    const { canSelectRow } = features;
-
-    const hasHeader = title !== "" || canSelectRow;
+    const { canSelectRow, canDownload, canSearch } = features;
+    const hasHeader = title !== "" || canSelectRow || canDownload || canSearch;
 
     return (
       <ScrollSync>
