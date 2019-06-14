@@ -120,7 +120,7 @@ export class Body extends Component {
         {rows.length === 0 && (
           <Fragment>
             <div
-              id="no-rows"
+              id="no-rows-filtered"
               style={{ height: height - 15, width: width - 15 }}
             >
               There is no result for your search
