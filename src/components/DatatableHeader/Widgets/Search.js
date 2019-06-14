@@ -5,7 +5,7 @@ import { Search as SearchIcon } from "@material-ui/icons";
 import { canSearchPropType, searchPropType } from "../../../proptypes";
 import { search as searchAction } from "../../../redux/actions/datatableActions";
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,8 +42,8 @@ class Search extends Component {
             <TextField
               className={
                 !openSearch
-                  ? "searchAnimationInput"
-                  : "searchAnimationInputActive"
+                  ? "searchAnimationInput search-input"
+                  : "searchAnimationInputActive search-input"
               }
               inputRef={this.searchInput}
               onChange={this.searchUpdate}
@@ -54,7 +54,10 @@ class Search extends Component {
               TransitionComponent={Zoom}
               title={openSearch ? "Close" : "Open"}
             >
-              <IconButton onClick={() => this.toggleSearch()}>
+              <IconButton
+                className="search-icon"
+                onClick={() => this.toggleSearch()}
+              >
                 <SearchIcon color="primary" />
               </IconButton>
             </Tooltip>
