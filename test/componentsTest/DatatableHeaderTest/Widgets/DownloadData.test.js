@@ -180,41 +180,10 @@ describe("DownloadData component", () => {
         expect(spy).toHaveBeenCalled();
       });
     });
-  });
 
-  // describe("should create a cell of type", () => {
-  // it("number", () => {
-  //   const cell = shallow(
-  //     <BodyCellPureComponent
-  //       cellVal={cellValNumber}
-  //       column={columnNumber}
-  //       width={columnNumber.colSize}
-  //       editing={false}
-  //       setRowEdited={setRowEdited}
-  //       rowId={rowId}
-  //       customDataTypes={[]}
-  //     />
-  //   );
-  //
-  //   const textWidth = twidth(cellValNumber, {
-  //     family: "Roboto",
-  //     size: 15
-  //   });
-  //   const overlap =
-  //     textWidth - 5 > Number(columnNumber.colSize.split("px")[0]);
-  //
-  //   expect(cell.instance().buildCell()).toEqual(
-  //     <div className={`Table-Cell ${columnNumber.id}`}>
-  //       <Tooltip
-  //         title={overlap ? cellValNumber : ""}
-  //         TransitionComponent={Zoom}
-  //         interactive
-  //       >
-  //         <div style={{ width: columnNumber.colSize }}>
-  //           {NumberType({ cellVal: cellValNumber })}
-  //         </div>
-  //       </Tooltip>
-  //     </div>
-  //   );
-  // });
+    it("should handle default download param", () => {
+      wrapper.instance().download("test");
+      expect(wrapper.state("dialogOpen")).toBeFalsy();
+    });
+  });
 });

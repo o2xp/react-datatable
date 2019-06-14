@@ -62,10 +62,9 @@ export class DownloadData extends Component {
       case "current":
         data = rowsCurrentPage;
         break;
+      default:
       case "all":
         data = rows;
-        break;
-      default:
         break;
     }
 
