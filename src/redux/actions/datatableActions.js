@@ -62,6 +62,11 @@ export const setRowsSelected = payload => ({
   payload
 });
 
+export const search = payload => ({
+  type: "SEARCH",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

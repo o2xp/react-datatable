@@ -3,6 +3,18 @@
   0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 }
 
+.o2xp .searchAnimationInput {
+  width: 0;
+  transition: width ease-out 350ms, margin-left ease-out 0ms 350ms;
+  margin-left: 0!important;
+}
+
+.o2xp .searchAnimationInputActive {
+  margin-left: 12px!important;
+  transition: width ease-in 350ms;
+  width: 180px;
+}
+
 .o2xp .Header {  
   display: flex;
   justify-content: flex-end;

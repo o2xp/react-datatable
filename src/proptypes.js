@@ -15,6 +15,7 @@ export const deleteRowPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
+export const searchPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;

@@ -15,6 +15,16 @@ import {
 const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
 const storeCustomComponent = mockStore(storeCustomTableBodyRowComponentSample);
+const storeNoRowsCurrentPage = mockStore({
+  ...storeNoCustomComponentsSample,
+  datatableReducer: {
+    ...storeNoCustomComponentsSample.datatableReducer,
+    pagination: {
+      ...storeNoCustomComponentsSample.datatableReducer.pagination,
+      rowsCurrentPage: []
+    }
+  }
+});
 
 describe("Body component", () => {
   it("connected should render without errors", () => {
@@ -141,5 +151,19 @@ describe("Body component", () => {
         expect(action.payload).toEqual(true);
       });
     });
+  });
+
+  it("should display div with no rows", () => {
+    const bodyWrapper = mount(
+      <Provider store={storeNoRowsCurrentPage}>
+        <ScrollSync>
+          <ScrollSyncPane>
+            <Body />
+          </ScrollSyncPane>
+        </ScrollSync>
+      </Provider>
+    );
+
+    expect(bodyWrapper.find("#no-rows-filtered")).toHaveLength(1);
   });
 });
