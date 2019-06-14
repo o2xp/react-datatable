@@ -44,7 +44,10 @@ class DatatableContainer extends Component {
             )}
             {(data.columns.length === 0 || data.rows.length === 0) && (
               <Fragment>
-                <div id="no-rows" style={{ height, width: width - 15 }}>
+                <div
+                  id="no-rows"
+                  style={{ height: height - 15, width: width - 15 }}
+                >
                   There is no data yet, try to refresh <span> .</span>
                   <span>.</span>
                   <span>.</span>

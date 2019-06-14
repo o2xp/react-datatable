@@ -10,6 +10,7 @@ import {
 import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
 import DownloadData from "./Widgets/DownloadData";
+import Search from "./Widgets/Search";
 
 class DatatableHeader extends Component {
   render() {
@@ -23,6 +24,7 @@ class DatatableHeader extends Component {
     return (
       <div className="Header" style={{ width, height }}>
         <div className="title">{title}</div>
+        <Search />
         <DownloadData />
         <div
           className="selection-icons-separator"
