@@ -1181,4 +1181,57 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
   });
+
+  describe("should handle SEARCH and return", () => {
+    it("one result", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH",
+        payload: "Hunt Valdez"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: [mergedSimpleOptionsSample.data.rows[0]]
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("two results", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH",
+        payload: "hun"
+      });
+
+      const { rows } = mergedSimpleOptionsSample.data;
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: [rows[0], rows[134]]
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("zero result", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH",
+        payload: "kjqshkhqakeazjhkazhekzl"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: []
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
 });

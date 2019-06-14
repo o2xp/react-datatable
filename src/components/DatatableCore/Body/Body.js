@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { findDOMNode } from "react-dom";
 import { connect } from "react-redux";
 import { ScrollSyncPane } from "react-scroll-sync";
@@ -14,7 +14,10 @@ import {
   setIsScrollingPropType,
   isScrollingPropType,
   keyColumnPropType,
-  rowsEditedPropType
+  rowsEditedPropType,
+  heightNumberPropType,
+  widthNumberPropType,
+  columnSizeMultiplierPropType
 } from "../../../proptypes";
 
 export const tableRef = React.createRef();
@@ -81,26 +84,68 @@ export class Body extends Component {
   };
 
   render() {
-    const { rows, dimensions, columnsOrder, rowsEdited } = this.props;
+    const {
+      rows,
+      dimensions,
+      columnsOrder,
+      rowsEdited,
+      height,
+      width,
+      totalWidthNumber,
+      columnSizeMultiplier
+    } = this.props;
 
     return (
-      <div className="Table-Body">
-        <ScrollSyncPane>
-          <FixedSizeList
-            ref={tableRef}
-            className="virtualized-container"
-            height={dimensions.body.heightNumber}
-            itemCount={rows.length}
-            itemSize={dimensions.row.heightNumber}
-            width={dimensions.datatable.widthNumber}
-            columnsOrder={columnsOrder}
-            rowsEdited={rowsEdited}
-            rows={rows}
-          >
-            {this.rowBuilder}
-          </FixedSizeList>
-        </ScrollSyncPane>
-      </div>
+      <Fragment>
+        {rows.length > 0 && (
+          <div className="Table-Body">
+            <ScrollSyncPane>
+              <FixedSizeList
+                ref={tableRef}
+                className="virtualized-container"
+                height={dimensions.body.heightNumber}
+                itemCount={rows.length}
+                itemSize={dimensions.row.heightNumber}
+                width={dimensions.datatable.widthNumber}
+                columnsOrder={columnsOrder}
+                rowsEdited={rowsEdited}
+                rows={rows}
+              >
+                {this.rowBuilder}
+              </FixedSizeList>
+            </ScrollSyncPane>
+          </div>
+        )}
+
+        {rows.length === 0 && (
+          <Fragment>
+            <div
+              id="no-rows-filtered"
+              style={{ height: height - 15, width: width - 15 }}
+            >
+              There is no result for your search
+            </div>
+            <ScrollSyncPane>
+              <div
+                style={{
+                  overflowX: columnSizeMultiplier === 1 ? "scroll" : "hidden",
+                  overflowY: "hidden",
+                  height: "15px",
+                  width: width - 15
+                }}
+              >
+                <div
+                  style={{
+                    width: totalWidthNumber
+                  }}
+                >
+                  .
+                </div>
+              </div>
+            </ScrollSyncPane>
+          </Fragment>
+        )}
+      </Fragment>
     );
   }
 }
@@ -113,7 +158,11 @@ Body.propTypes = {
   setIsScrolling: setIsScrollingPropType,
   isScrolling: isScrollingPropType.isRequired,
   keyColumn: keyColumnPropType.isRequired,
-  rowsEdited: rowsEditedPropType.isRequired
+  rowsEdited: rowsEditedPropType.isRequired,
+  height: heightNumberPropType.isRequired,
+  width: widthNumberPropType.isRequired,
+  totalWidthNumber: widthNumberPropType,
+  columnSizeMultiplier: columnSizeMultiplierPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -129,8 +178,14 @@ const mapStateToProps = state => {
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     rowsEdited: state.datatableReducer.rowsEdited,
+    height: state.datatableReducer.dimensions.body.heightNumber,
+    width: state.datatableReducer.dimensions.datatable.widthNumber,
     keyColumn: state.datatableReducer.keyColumn,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
+    totalWidthNumber:
+      state.datatableReducer.dimensions.datatable.totalWidthNumber,
+    columnSizeMultiplier:
+      state.datatableReducer.dimensions.columnSizeMultiplier,
     CustomTableBodyRow: state.customComponentsReducer.CustomTableBodyRow
   };
 };

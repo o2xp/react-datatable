@@ -183,4 +183,13 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.setRowsSelected(payload)).toEqual(expectedAction);
   });
+
+  it("search data", () => {
+    const payload = "Hunt";
+    const expectedAction = {
+      type: "SEARCH",
+      payload
+    };
+    expect(actions.search(payload)).toEqual(expectedAction);
+  });
 });

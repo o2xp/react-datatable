@@ -3,6 +3,8 @@ import arrayMove from "array-move";
 import { chunk } from "lodash";
 import { tableRef } from "../../components/DatatableCore/Body/Body";
 
+const Fuse = require("fuse.js");
+
 const defaultState = {
   title: "",
   dimensions: {
@@ -182,8 +184,14 @@ const calcComponentSize = state => {
 const setPagination = ({
   state,
   newPageSelected = null,
-  newRowsPerPageSelected = null
+  newRowsPerPageSelected = null,
+  rowsFiltered = null
 }) => {
+  let rowsToUse = state.data.rows;
+  if (rowsFiltered !== null) {
+    rowsToUse = rowsFiltered;
+  }
+
   const rowsPerPageSelected =
     newRowsPerPageSelected ||
     state.pagination.rowsPerPageSelected ||
@@ -195,15 +203,18 @@ const setPagination = ({
   const pageTotal =
     rowsPerPageSelected === "All"
       ? 1
-      : Math.ceil(state.data.rows.length / rowsPerPageSelected);
+      : Math.ceil(rowsToUse.length / rowsPerPageSelected);
   pageSelected = pageSelected > pageTotal ? pageTotal : pageSelected;
   pageSelected = pageSelected < 1 ? 1 : pageSelected;
-  const rowsCurrentPage =
-    rowsPerPageSelected === "All"
-      ? state.data.rows
-      : chunk(state.data.rows, rowsPerPageSelected)[
-          pageSelected ? pageSelected - 1 : 0
-        ];
+  let rowsCurrentPage = [];
+  if (rowsToUse.length > 0) {
+    rowsCurrentPage =
+      rowsPerPageSelected === "All"
+        ? rowsToUse
+        : chunk(rowsToUse, rowsPerPageSelected)[
+            pageSelected ? pageSelected - 1 : 0
+          ];
+  }
 
   if (tableRef.current && (newPageSelected || newRowsPerPageSelected)) {
     tableRef.current.scrollToItem(0);
@@ -500,6 +511,25 @@ const setRowsSelected = (state, payload) => {
   };
 };
 
+const search = (state, payload) => {
+  const options = {
+    shouldSort: true,
+    threshold: 0.3,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: state.features.userConfiguration.columnsOrder
+  };
+  const fuse = new Fuse(state.data.rows, options); // "list" is the item array
+  const result = fuse.search(payload);
+
+  return {
+    ...state,
+    pagination: setPagination({ state, rowsFiltered: result })
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -530,6 +560,8 @@ const datatableReducer = (state = defaultState, action) => {
       return selectRow(state, payload);
     case "SET_ROWS_SELECTED":
       return setRowsSelected(state, payload);
+    case "SEARCH":
+      return search(state, payload);
     default:
       return state;
   }
