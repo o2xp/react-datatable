@@ -25,6 +25,7 @@ class DatatableHeader extends Component {
         <div className="title">{title}</div>
         <DownloadData />
         <div
+          className="selection-icons-separator"
           style={{
             borderRight: "1px solid rgba(0, 0, 0, 0.35)",
             height: selectionIcons.length > 0 ? "45%" : "0%"
@@ -32,6 +33,7 @@ class DatatableHeader extends Component {
         />
         <SelectionIcons />
         <div
+          className="additional-icons-separator"
           style={{
             borderRight: "1px solid rgba(0, 0, 0, 0.35)",
             height: additionalIcons.length > 0 ? "45%" : "0%"
