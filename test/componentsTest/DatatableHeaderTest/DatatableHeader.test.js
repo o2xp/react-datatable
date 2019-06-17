@@ -13,6 +13,9 @@ const store = mockStore({
     ...storeSample.datatableReducer,
     features: {
       ...storeSample.datatableReducer.features,
+      canSearch: true,
+      canFilterColumns: true,
+      canSelectRow: true,
       additionalIcons: [
         {
           title: "Coffee",
