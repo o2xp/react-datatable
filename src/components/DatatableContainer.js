@@ -31,7 +31,7 @@ class DatatableContainer extends Component {
 
     return (
       <ScrollSync>
-        <div className="o2xp" style={{ width }}>
+        <div id="o2xp" style={{ width }}>
           {hasHeader && <DatatableHeader />}
 
           <div className="Table">
