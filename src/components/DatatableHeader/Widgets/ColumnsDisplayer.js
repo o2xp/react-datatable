@@ -19,7 +19,7 @@ import {
 } from "../../../proptypes";
 import { setColumnVisibilty as setColumnVisibiltyAction } from "../../../redux/actions/datatableActions";
 
-class ColumnsDisplayer extends Component {
+export class ColumnsDisplayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
