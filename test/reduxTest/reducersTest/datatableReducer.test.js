@@ -1234,4 +1234,67 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
     });
   });
+
+  describe("should handle SET_COLUMN_VISIBILITY and", () => {
+    it("hide a column ", () => {
+      const column = mergedSimpleOptionsSample.data.columns[1];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SET_COLUMN_VISIBILITY",
+        payload: column
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.features.userConfiguration,
+            columnsOrder: [
+              "actions",
+              "name",
+              "age",
+              "adult",
+              "birthDate",
+              "eyeColor",
+              "iban"
+            ]
+          }
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("display a column", () => {
+      const column = mergedSimpleOptionsSample.data.columns[1];
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SET_COLUMN_VISIBILITY",
+        payload: column
+      });
+      result = datatableReducer(result, {
+        type: "SET_COLUMN_VISIBILITY",
+        payload: column
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.features.userConfiguration,
+            columnsOrder: [
+              "actions",
+              "id",
+              "name",
+              "age",
+              "adult",
+              "birthDate",
+              "eyeColor",
+              "iban"
+            ]
+          }
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
 });

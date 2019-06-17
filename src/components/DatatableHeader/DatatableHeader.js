@@ -5,12 +5,16 @@ import {
   heightNumberPropType,
   titlePropType,
   additionalIconsPropType,
-  selectionIconsPropType
+  selectionIconsPropType,
+  canFilterColumnsPropType,
+  canDownloadPropType,
+  canSearchPropType
 } from "../../proptypes";
 import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
 import DownloadData from "./Widgets/DownloadData";
 import Search from "./Widgets/Search";
+import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
 
 class DatatableHeader extends Component {
   render() {
@@ -19,18 +23,25 @@ class DatatableHeader extends Component {
       height,
       title,
       additionalIcons,
-      selectionIcons
+      selectionIcons,
+      canFilterColumns,
+      canDownload,
+      canSearch
     } = this.props;
+    const hasBaseIcons = canSearch || canDownload || canFilterColumns;
+    const hasSelectionIcons = selectionIcons.length > 0;
+    const hasAdditionalIcons = additionalIcons.length > 0;
     return (
       <div className="Header" style={{ width, height }}>
         <div className="title">{title}</div>
-        <Search />
-        <DownloadData />
+        {canSearch && <Search />}
+        {canDownload && <DownloadData />}
+        {canFilterColumns && <ColumnsDisplayer />}
         <div
           className="selection-icons-separator"
           style={{
             borderRight: "1px solid rgba(0, 0, 0, 0.35)",
-            height: selectionIcons.length > 0 ? "45%" : "0%"
+            height: hasBaseIcons && hasSelectionIcons ? "45%" : "0%"
           }}
         />
         <SelectionIcons />
@@ -38,7 +49,11 @@ class DatatableHeader extends Component {
           className="additional-icons-separator"
           style={{
             borderRight: "1px solid rgba(0, 0, 0, 0.35)",
-            height: additionalIcons.length > 0 ? "45%" : "0%"
+            height:
+              (hasSelectionIcons && hasAdditionalIcons) ||
+              (hasBaseIcons && hasAdditionalIcons)
+                ? "45%"
+                : "0%"
           }}
         />
         <AdditionalIcons />
@@ -52,7 +67,10 @@ DatatableHeader.propTypes = {
   height: heightNumberPropType.isRequired,
   title: titlePropType.isRequired,
   additionalIcons: additionalIconsPropType.isRequired,
-  selectionIcons: selectionIconsPropType.isRequired
+  selectionIcons: selectionIconsPropType.isRequired,
+  canFilterColumns: canFilterColumnsPropType.isRequired,
+  canDownload: canDownloadPropType.isRequired,
+  canSearch: canSearchPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -61,7 +79,10 @@ const mapStateToProps = state => {
     height: state.datatableReducer.dimensions.header.heightNumber,
     title: state.datatableReducer.title,
     additionalIcons: state.datatableReducer.features.additionalIcons,
-    selectionIcons: state.datatableReducer.features.selectionIcons
+    selectionIcons: state.datatableReducer.features.selectionIcons,
+    canFilterColumns: state.datatableReducer.features.canFilterColumns,
+    canDownload: state.datatableReducer.features.canDownload,
+    canSearch: state.datatableReducer.features.canSearch
   };
 };
 

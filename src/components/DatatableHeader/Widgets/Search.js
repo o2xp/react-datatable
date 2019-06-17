@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { IconButton, Tooltip, Zoom, TextField } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
-import { canSearchPropType, searchPropType } from "../../../proptypes";
+import { searchPropType } from "../../../proptypes";
 import { search as searchAction } from "../../../redux/actions/datatableActions";
 
 export class Search extends Component {
@@ -33,43 +33,37 @@ export class Search extends Component {
   };
 
   render() {
-    const { canSearch } = this.props;
     const { searchValue, openSearch } = this.state;
     return (
       <Fragment>
-        {canSearch && (
-          <Fragment>
-            <TextField
-              className={
-                !openSearch
-                  ? "searchAnimationInput search-input"
-                  : "searchAnimationInputActive search-input"
-              }
-              inputRef={this.searchInput}
-              onChange={this.searchUpdate}
-              value={searchValue}
-              placeholder="Search.."
-            />
-            <Tooltip
-              TransitionComponent={Zoom}
-              title={openSearch ? "Close" : "Open"}
-            >
-              <IconButton
-                className="search-icon"
-                onClick={() => this.toggleSearch()}
-              >
-                <SearchIcon color="primary" />
-              </IconButton>
-            </Tooltip>
-          </Fragment>
-        )}
+        <TextField
+          className={
+            !openSearch
+              ? "searchAnimationInput search-input"
+              : "searchAnimationInputActive search-input"
+          }
+          inputRef={this.searchInput}
+          onChange={this.searchUpdate}
+          value={searchValue}
+          placeholder="Search.."
+        />
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={openSearch ? "Close" : "Open"}
+        >
+          <IconButton
+            className="search-icon"
+            onClick={() => this.toggleSearch()}
+          >
+            <SearchIcon color="primary" />
+          </IconButton>
+        </Tooltip>
       </Fragment>
     );
   }
 }
 
 Search.propTypes = {
-  canSearch: canSearchPropType.isRequired,
   search: searchPropType
 };
 
@@ -81,8 +75,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    rowsSelected: state.datatableReducer.rowsSelected,
-    canSearch: state.datatableReducer.features.canSearch
+    rowsSelected: state.datatableReducer.rowsSelected
   };
 };
 

@@ -1,6 +1,6 @@
 import deepmerge from "deepmerge";
 import arrayMove from "array-move";
-import { chunk } from "lodash";
+import { chunk, cloneDeep } from "lodash";
 import { tableRef } from "../../components/DatatableCore/Body/Body";
 
 const Fuse = require("fuse.js");
@@ -530,6 +530,43 @@ const search = (state, payload) => {
   };
 };
 
+const setColumnVisibilty = (state, payload) => {
+  const { columns } = state.data;
+  const { columnsOrder } = state.features.userConfiguration;
+  const orderDisplayed = columns.filter(
+    col => columnsOrder.includes(col.id) || col.id === payload.id
+  );
+  const columnsId = orderDisplayed.map(col => col.id);
+  const index = columnsId.indexOf(payload.id);
+
+  let newColumnsOrder;
+  if (columnsOrder.includes(payload.id)) {
+    newColumnsOrder = columnsOrder.filter(col => col !== payload.id);
+  } else {
+    columnsOrder.splice(index, 0, payload.id);
+    newColumnsOrder = cloneDeep(columnsOrder);
+  }
+
+  const newState = {
+    ...state,
+    features: {
+      ...state.features,
+      userConfiguration: {
+        ...state.features.userConfiguration,
+        columnsOrder: newColumnsOrder
+      }
+    }
+  };
+
+  return {
+    ...newState,
+    dimensions: {
+      ...newState.dimensions,
+      columnSizeMultiplier: updateRowSizeMultiplier(newState)
+    }
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -562,6 +599,8 @@ const datatableReducer = (state = defaultState, action) => {
       return setRowsSelected(state, payload);
     case "SEARCH":
       return search(state, payload);
+    case "SET_COLUMN_VISIBILITY":
+      return setColumnVisibilty(state, payload);
     default:
       return state;
   }

@@ -67,6 +67,11 @@ export const search = payload => ({
   payload
 });
 
+export const setColumnVisibilty = payload => ({
+  type: "SET_COLUMN_VISIBILITY",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
