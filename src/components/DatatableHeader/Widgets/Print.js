@@ -11,7 +11,7 @@ class Print extends Component {
     return (
       <Tooltip TransitionComponent={Zoom} title="Print">
         <span>
-          <IconButton onClick={() => this.print()}>
+          <IconButton className="print-icon" onClick={() => this.print()}>
             <PrintIcon color="primary" />
           </IconButton>
         </span>
