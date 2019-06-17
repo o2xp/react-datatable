@@ -192,4 +192,13 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.search(payload)).toEqual(expectedAction);
   });
+
+  it("set visibility of column", () => {
+    const payload = simpleOptionsSample.data.columns[0];
+    const expectedAction = {
+      type: "SET_COLUMN_VISIBILITY",
+      payload
+    };
+    expect(actions.setColumnVisibilty(payload)).toEqual(expectedAction);
+  });
 });
