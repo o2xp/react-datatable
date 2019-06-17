@@ -6,3 +6,4 @@ storybook-static/
 webpack.config.js
 index.js
 config/*
+data/storyOptionsSample.js

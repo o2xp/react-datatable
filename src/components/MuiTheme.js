@@ -12,6 +12,23 @@ export const mainTheme = createMuiTheme({
         color: "black"
       }
     },
+    MuiPaper: {
+      root: {
+        "&:before": {
+          content: '""',
+          display: "block",
+          width: "0",
+          height: "0",
+          position: "absolute",
+          borderLeft: "8px solid transparent",
+          borderRight: "8px solid transparent",
+          borderBottom: "8px solid #616161",
+          left: "calc(50% - 8px)",
+          marginTop: "-8px",
+          top: "0"
+        }
+      }
+    },
     MuiTooltip: {
       popper: {
         marginTop: "-5px"
