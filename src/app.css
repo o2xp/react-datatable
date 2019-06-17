@@ -1,31 +1,31 @@
-.o2xp {
+#o2xp {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),  
   0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 }
 
-.o2xp .searchAnimationInput {
+#o2xp .searchAnimationInput {
   width: 0;
   transition: width ease-out 350ms, margin-left ease-out 0ms 350ms;
   margin-left: 0!important;
 }
 
-.o2xp .searchAnimationInputActive {
+#o2xp .searchAnimationInputActive {
   margin-left: 12px!important;
   transition: width ease-in 350ms;
   width: 180px;
 }
 
-.o2xp .Header {  
+#o2xp .Header {  
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.o2xp .disabled-icon span svg {
+#o2xp .disabled-icon span svg {
   color: rgba(0, 0, 0, 0.26)!important;
 }
 
-.o2xp .title {
+#o2xp .title {
   margin-right: auto;
   display: flex;
   align-items: center;
@@ -33,33 +33,33 @@
   padding-left: 14px;
 }
 
-.o2xp .Table {
+#o2xp .Table {
   display: table;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 0.9rem;
 }
 
-.o2xp .Table-Header {
+#o2xp .Table-Header {
   display: table-header-group;
   vertical-align: middle;
   border-color: inherit;
   overflow: auto;
 }
 
-.o2xp .Table-Body {
+#o2xp .Table-Body {
   display: table-row-group;
   vertical-align: middle;
   border-color: inherit;
 }
 
-.o2xp .Table-Row {
+#o2xp .Table-Row {
   color: inherit;
   display: table-row;
   outline: none;
   top: 50%;
 }
 
-.o2xp .Table-Cell {
+#o2xp .Table-Cell {
   display: table-cell;
   padding: 5px 25px;
   text-align: left;
@@ -68,17 +68,17 @@
   border-bottom: 1px solid rgba(224, 224, 244, 1);
 }
 
-.o2xp .scrolling-shadow {
+#o2xp .scrolling-shadow {
   border-right: solid 2px rgba(0,0,0,0.15);
 }
 
-.o2xp .Table-Cell > div > div{
+#o2xp .Table-Cell > div > div{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.o2xp .Table-Header-Cell {
+#o2xp .Table-Header-Cell {
   display: table-cell;
   padding: 5px 25px;
   text-align: left;
@@ -89,7 +89,7 @@
   background: white;
 }
 
-.o2xp .Table-Header-Cell:hover {
+#o2xp .Table-Header-Cell:hover {
   cursor: grab;
 }
 
@@ -108,18 +108,18 @@
   0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
 }
 
-.o2xp .Footer {
+#o2xp .Footer {
   border-top: 1px solid #7e7e7e;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.o2xp .Footer, .o2xp .Footer > *, .o2xp .Footer-Element > *{
+#o2xp .Footer, #o2xp .Footer > *, #o2xp .Footer-Element > *{
   font-size: 0.8rem;
 }
 
-.o2xp .Footer-Element > div{
+#o2xp .Footer-Element > div{
   margin: 0px 8px 0px 12px;
   text-align: center;
 }

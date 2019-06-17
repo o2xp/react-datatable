@@ -8,13 +8,15 @@ import {
   selectionIconsPropType,
   canFilterColumnsPropType,
   canDownloadPropType,
-  canSearchPropType
+  canSearchPropType,
+  canPrintPropType
 } from "../../proptypes";
 import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
 import DownloadData from "./Widgets/DownloadData";
 import Search from "./Widgets/Search";
 import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
+import Print from "./Widgets/Print";
 
 class DatatableHeader extends Component {
   render() {
@@ -26,9 +28,11 @@ class DatatableHeader extends Component {
       selectionIcons,
       canFilterColumns,
       canDownload,
-      canSearch
+      canSearch,
+      canPrint
     } = this.props;
-    const hasBaseIcons = canSearch || canDownload || canFilterColumns;
+    const hasBaseIcons =
+      canSearch || canDownload || canFilterColumns || canPrint;
     const hasSelectionIcons = selectionIcons.length > 0;
     const hasAdditionalIcons = additionalIcons.length > 0;
     return (
@@ -37,6 +41,7 @@ class DatatableHeader extends Component {
         {canSearch && <Search />}
         {canDownload && <DownloadData />}
         {canFilterColumns && <ColumnsDisplayer />}
+        {canPrint && <Print />}
         <div
           className="selection-icons-separator"
           style={{
@@ -70,7 +75,8 @@ DatatableHeader.propTypes = {
   selectionIcons: selectionIconsPropType.isRequired,
   canFilterColumns: canFilterColumnsPropType.isRequired,
   canDownload: canDownloadPropType.isRequired,
-  canSearch: canSearchPropType.isRequired
+  canSearch: canSearchPropType.isRequired,
+  canPrint: canPrintPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -82,7 +88,8 @@ const mapStateToProps = state => {
     selectionIcons: state.datatableReducer.features.selectionIcons,
     canFilterColumns: state.datatableReducer.features.canFilterColumns,
     canDownload: state.datatableReducer.features.canDownload,
-    canSearch: state.datatableReducer.features.canSearch
+    canSearch: state.datatableReducer.features.canSearch,
+    canPrint: state.datatableReducer.features.canPrint
   };
 };
 
