@@ -43,6 +43,7 @@ const defaultState = {
   rowsEdited: [],
   rowsSelected: [],
   actionsRow: null,
+  snackbarOpen: false,
   features: {
     canEdit: false,
     canPrint: false,
@@ -567,6 +568,13 @@ const setColumnVisibilty = (state, payload) => {
   };
 };
 
+const toggleSnackbar = (state, payload) => {
+  return {
+    ...state,
+    snackbarOpen: payload
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -601,6 +609,8 @@ const datatableReducer = (state = defaultState, action) => {
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
+    case "TOGGLE_SNACKBAR":
+      return toggleSnackbar(state, payload);
     default:
       return state;
   }

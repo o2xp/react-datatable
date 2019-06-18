@@ -9,6 +9,7 @@ import {
   pagination,
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -40,6 +41,7 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
   },
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   features: {
     ...features,
     userConfiguration: {
