@@ -4,6 +4,7 @@ import {
   keyColumn,
   pagination,
   font,
+  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -20,6 +21,7 @@ const storeNoDataSample = {
     },
     rowsEdited: [],
     rowsSelected: [],
+    snackbarOpen,
     actionsRow: null,
     features: {
       ...features,
