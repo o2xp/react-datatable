@@ -9,6 +9,7 @@ import {
   pagination,
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -33,6 +34,7 @@ const mergedSimpleOptionsSample = {
   font,
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   actionsRow: null,
   features: {
     ...features,
