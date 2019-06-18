@@ -72,6 +72,11 @@ export const setColumnVisibilty = payload => ({
   payload
 });
 
+export const toggleSnackbar = payload => ({
+  type: "TOGGLE_SNACKBAR",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

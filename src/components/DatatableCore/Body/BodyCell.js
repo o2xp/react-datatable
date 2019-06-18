@@ -11,6 +11,7 @@ import {
   rowIdPropType,
   editingPropType,
   setRowEditedPropType,
+  onClickPropType,
   fontPropType
 } from "../../../proptypes";
 import {
@@ -32,7 +33,8 @@ export class BodyCell extends Component {
       font,
       rowId,
       editing,
-      setRowEdited
+      setRowEdited,
+      onClick
     } = this.props;
     const customDatatype = customDataTypes.find(
       cd => cd.dataType === column.dataType
@@ -90,7 +92,12 @@ export class BodyCell extends Component {
     }
 
     return (
-      <div className={`Table-Cell ${column.id}`}>
+      <div
+        className={`Table-Cell ${column.id}`}
+        onClick={() => onClick(cellVal)}
+        onKeyDown={this.handleKeyDown}
+        role="presentation"
+      >
         <Tooltip
           title={overlap && !editing ? cellVal : ""}
           TransitionComponent={Zoom}
@@ -115,6 +122,7 @@ BodyCell.propTypes = {
   rowId: rowIdPropType.isRequired,
   editing: editingPropType.isRequired,
   setRowEdited: setRowEditedPropType,
+  onClick: onClickPropType,
   font: fontPropType
 };
 
