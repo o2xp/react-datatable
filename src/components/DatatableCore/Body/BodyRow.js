@@ -17,7 +17,7 @@ import BodyCell from "./BodyCell";
 import BodyActionsCell from "./BodyActionsCell";
 import { toggleSnackbar as toggleSnackbarAction } from "../../../redux/actions/datatableActions";
 
-class BodyRow extends Component {
+export class BodyRow extends Component {
   copyToClipboard = val => {
     const { toggleSnackbar } = this.props;
     copy(val);

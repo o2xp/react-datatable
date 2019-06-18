@@ -2,37 +2,39 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import BodyRow from "../../../../src/components/DatatableCore/Body/BodyRow";
+import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import MomentUtils from "@date-io/moment";
+import BodyRow, {
+  BodyRow as BodyRowPureComponent
+} from "../../../../src/components/DatatableCore/Body/BodyRow";
 import BodyCell from "../../../../src/components/DatatableCore/Body/BodyCell";
 import {
   storeNoCustomComponentsSample,
   storeCustomTableBodyCellComponentSample
 } from "../../../../data/samples";
+import { moment, locale } from "../../../../src/moment.config";
 
 const mockStore = configureStore();
 const store = mockStore(storeNoCustomComponentsSample);
 const storeCustomComponent = mockStore(storeCustomTableBodyCellComponentSample);
 
 const row = storeNoCustomComponentsSample.datatableReducer.data.rows[0];
+const { keyColumn } = storeNoCustomComponentsSample.datatableReducer;
 const { columns } = storeNoCustomComponentsSample.datatableReducer.data;
 const {
   columnsOrder
 } = storeNoCustomComponentsSample.datatableReducer.features.userConfiguration;
-const rowIndex = 0;
 const style = { top: 0, height: "60px", position: "absolute" };
+const toggleSnackbar = jest.fn();
+const {
+  CustomTableBodyCell
+} = storeCustomTableBodyCellComponentSample.customComponentsReducer;
 
 describe("BodyRow component", () => {
   it("connected should render without errors", () => {
     const rowWrapper = shallow(
       <Provider store={store}>
-        <BodyRow
-          row={row}
-          columns={columns}
-          columnsOrder={columnsOrder}
-          rowIndex={rowIndex}
-          style={style}
-          CustomTableBodyCell={null}
-        />
+        <BodyRow row={row} style={style} editing={false} />
       </Provider>
     );
     expect(rowWrapper.find("Connect(BodyRow)")).toHaveLength(1);
@@ -41,16 +43,20 @@ describe("BodyRow component", () => {
   describe("should create a row", () => {
     const rowWrapper = mount(
       <Provider store={store}>
-        <BodyRow
-          row={row}
-          columns={columns}
-          columnsOrder={columnsOrder}
-          style={style}
-          editing={false}
-          CustomTableBodyCell={null}
-        />
+        <MuiPickersUtilsProvider
+          utils={MomentUtils}
+          locale={locale}
+          moment={moment}
+        >
+          <BodyRow row={row} style={style} editing={false} />
+        </MuiPickersUtilsProvider>
       </Provider>
     );
+
+    rowWrapper
+      .find(BodyCell)
+      .first()
+      .simulate("click");
 
     it("of 8 cells", () => {
       expect(rowWrapper.find("div.Table-Cell")).toHaveLength(8);
@@ -65,17 +71,37 @@ describe("BodyRow component", () => {
     });
   });
 
+  describe("should create edited row", () => {
+    const rowWrapper = mount(
+      <Provider store={store}>
+        <MuiPickersUtilsProvider
+          utils={MomentUtils}
+          locale={locale}
+          moment={moment}
+        >
+          <BodyRow row={row} style={style} editing />
+        </MuiPickersUtilsProvider>
+      </Provider>
+    );
+
+    rowWrapper
+      .find(BodyCell)
+      .first()
+      .simulate("click");
+
+    it("of 8 cells", () => {
+      expect(rowWrapper.find("div.Table-Cell")).toHaveLength(8);
+    });
+
+    it("with 7 cells input", () => {
+      expect(rowWrapper.find(BodyCell)).toHaveLength(7);
+    });
+  });
+
   describe("should create a row with custom cell", () => {
     const rowWrapper = mount(
       <Provider store={storeCustomComponent}>
-        <BodyRow
-          row={row}
-          columns={columns}
-          columnsOrder={columnsOrder}
-          style={style}
-          editing={false}
-          CustomTableBodyCell={null}
-        />
+        <BodyRow row={row} style={style} editing={false} />
       </Provider>
     );
     it("of 8 cells", () => {
@@ -92,6 +118,68 @@ describe("BodyRow component", () => {
 
     it("with 1 cell containing boolean", () => {
       expect(rowWrapper.find(".data-boolean").hostNodes()).toHaveLength(1);
+    });
+  });
+
+  describe("click on cell should", () => {
+    const rowWrapper = shallow(
+      <BodyRowPureComponent
+        row={row}
+        columns={columns}
+        columnsOrder={columnsOrder}
+        rowsSelected={[]}
+        style={style}
+        editing={false}
+        columnSizeMultiplier={1}
+        keyColumn={keyColumn}
+        toggleSnackbar={toggleSnackbar}
+        CustomTableBodyCell={null}
+      />
+    );
+
+    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboard");
+    rowWrapper
+      .find(BodyCell)
+      .first()
+      .simulate("click");
+
+    it("call copyToClipboard", () => {
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it("dispatch toggleSnackbar", () => {
+      expect(toggleSnackbar).toHaveBeenCalled();
+    });
+  });
+
+  describe("click on custom cell should", () => {
+    const rowWrapper = shallow(
+      <BodyRowPureComponent
+        row={row}
+        columns={columns}
+        columnsOrder={columnsOrder}
+        rowsSelected={[]}
+        style={style}
+        editing={false}
+        columnSizeMultiplier={1}
+        keyColumn={keyColumn}
+        toggleSnackbar={toggleSnackbar}
+        CustomTableBodyCell={CustomTableBodyCell}
+      />
+    );
+
+    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboard");
+    rowWrapper
+      .find(CustomTableBodyCell)
+      .first()
+      .simulate("click");
+
+    it("call copyToClipboard", () => {
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it("dispatch toggleSnackbar", () => {
+      expect(toggleSnackbar).toHaveBeenCalled();
     });
   });
 });
