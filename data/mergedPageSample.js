@@ -5,6 +5,7 @@ import {
   keyColumn,
   font,
   data,
+  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -27,6 +28,7 @@ const mergedPageSample = {
   actionsRow: null,
   font,
   data,
+  snackbarOpen,
   features: {
     ...features,
     additionalIcons: []

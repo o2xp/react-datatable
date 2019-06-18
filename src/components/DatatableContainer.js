@@ -5,6 +5,7 @@ import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
 import DatatableHeader from "./DatatableHeader/DatatableHeader";
 import DatatableFooter from "./DatatableFooter/DatatableFooter";
+import SnackbarCopy from "./SnackbarCopy";
 import {
   dataPropType,
   heightNumberPropType,
@@ -30,52 +31,55 @@ class DatatableContainer extends Component {
     const hasHeader = title !== "" || canSelectRow || canDownload || canSearch;
 
     return (
-      <ScrollSync>
-        <div id="o2xp" style={{ width }}>
-          {hasHeader && <DatatableHeader />}
+      <Fragment>
+        <ScrollSync>
+          <div id="o2xp" style={{ width }}>
+            {hasHeader && <DatatableHeader />}
 
-          <div className="Table">
-            {data.columns.length > 0 && (
-              <Fragment>
-                <Header />
-                {data.rows.length > 0 && <Body />}
-              </Fragment>
-            )}
-            {(data.columns.length === 0 || data.rows.length === 0) && (
-              <Fragment>
-                <div
-                  id="no-rows"
-                  style={{ height: height - 15, width: width - 15 }}
-                >
-                  There is no data yet, try to refresh <span> .</span>
-                  <span>.</span>
-                  <span>.</span>
-                </div>
-                <ScrollSyncPane>
+            <div className="Table">
+              {data.columns.length > 0 && (
+                <Fragment>
+                  <Header />
+                  {data.rows.length > 0 && <Body />}
+                </Fragment>
+              )}
+              {(data.columns.length === 0 || data.rows.length === 0) && (
+                <Fragment>
                   <div
-                    style={{
-                      overflowX:
-                        columnSizeMultiplier === 1 ? "scroll" : "hidden",
-                      overflowY: "hidden",
-                      height: "15px",
-                      width: width - 15
-                    }}
+                    id="no-rows"
+                    style={{ height: height - 15, width: width - 15 }}
                   >
+                    There is no data yet, try to refresh <span> .</span>
+                    <span>.</span>
+                    <span>.</span>
+                  </div>
+                  <ScrollSyncPane>
                     <div
                       style={{
-                        width: totalWidthNumber
+                        overflowX:
+                          columnSizeMultiplier === 1 ? "scroll" : "hidden",
+                        overflowY: "hidden",
+                        height: "15px",
+                        width: width - 15
                       }}
                     >
-                      .
+                      <div
+                        style={{
+                          width: totalWidthNumber
+                        }}
+                      >
+                        .
+                      </div>
                     </div>
-                  </div>
-                </ScrollSyncPane>
-              </Fragment>
-            )}
+                  </ScrollSyncPane>
+                </Fragment>
+              )}
+            </div>
+            <DatatableFooter />
           </div>
-          <DatatableFooter />
-        </div>
-      </ScrollSync>
+        </ScrollSync>
+        <SnackbarCopy />
+      </Fragment>
     );
   }
 }

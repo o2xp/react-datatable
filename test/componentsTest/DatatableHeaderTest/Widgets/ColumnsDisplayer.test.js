@@ -34,6 +34,23 @@ describe("ColumnsDisplayer component", () => {
     expect(wrapper.find("Connect(ColumnsDisplayer)")).toHaveLength(1);
   });
 
+  it("connected should mount without errors", () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <ColumnsDisplayer />
+      </Provider>
+    );
+
+    const button = wrapper.find("button.display-columns-icon");
+    button.simulate("click");
+    wrapper
+      .find("MenuItem")
+      .at(2)
+      .simulate("click");
+
+    expect(wrapper.find("Connect(ColumnsDisplayer)")).toHaveLength(1);
+  });
+
   describe("click on display columns button", () => {
     const wrapper = mount(
       <ColumnsDisplayerPureComponent

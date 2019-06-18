@@ -30,6 +30,7 @@ const defaultOptionsSample = {
   rowsEdited: [],
   rowsSelected: [],
   actionsRow: null,
+  snackbarOpen: false,
   pagination: {
     pageSelected: 1,
     pageTotal: 1,

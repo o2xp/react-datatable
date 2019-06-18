@@ -7,12 +7,15 @@ import DownloadData, {
 } from "../../../../src/components/DatatableHeader/Widgets/DownloadData";
 import { storeSample } from "../../../../data/samples";
 
+const rowsSelected = [storeSample.datatableReducer.data.rows[1]];
 const mockStore = configureStore();
-const store = mockStore(storeSample);
+const store = mockStore({
+  ...storeSample,
+  datatableReducer: { ...storeSample.datatableReducer, rowsSelected }
+});
 
 const setRowsSelected = jest.fn();
 const { datatableReducer } = storeSample;
-const rowsSelected = [storeSample.datatableReducer.data.rows[1]];
 const { columns, rows } = datatableReducer.data;
 const { rowsCurrentPage } = datatableReducer.pagination;
 
@@ -23,6 +26,20 @@ describe("DownloadData component", () => {
         <DownloadData />
       </Provider>
     );
+    expect(wrapper.find("Connect(DownloadData)")).toHaveLength(1);
+  });
+
+  it("connected should mount without errors", () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <DownloadData />
+      </Provider>
+    );
+
+    const buttonDialog = wrapper.find("button.download-data-icon");
+    buttonDialog.simulate("click");
+    const button = wrapper.find("button.rows-selected");
+    button.simulate("click");
     expect(wrapper.find("Connect(DownloadData)")).toHaveLength(1);
   });
 

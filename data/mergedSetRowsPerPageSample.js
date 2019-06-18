@@ -9,6 +9,7 @@ import {
   userConfiguration,
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -36,6 +37,7 @@ const mergedSetRowsPerPageSample = {
   },
   rowsEdited,
   rowsSelected,
+  snackbarOpen,
   features: {
     ...features,
     userConfiguration: {

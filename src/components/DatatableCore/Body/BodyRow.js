@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import copy from "copy-to-clipboard";
 import {
   rowPropType,
   columnsPropType,
@@ -9,12 +10,20 @@ import {
   keyColumnPropType,
   editingPropType,
   rowsSelectedPropType,
-  stylePropType
+  stylePropType,
+  toggleSnackbarPropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
 import BodyActionsCell from "./BodyActionsCell";
+import { toggleSnackbar as toggleSnackbarAction } from "../../../redux/actions/datatableActions";
 
-class BodyRow extends Component {
+export class BodyRow extends Component {
+  copyToClipboard = val => {
+    const { toggleSnackbar } = this.props;
+    copy(val);
+    toggleSnackbar(true);
+  };
+
   bodyCellBuilder = (val, columnId, cellIndex, row, editing) => {
     const {
       columns,
@@ -59,7 +68,12 @@ class BodyRow extends Component {
       return (
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>
-            <CustomTableBodyCell cellVal={val} column={column} rowId={rowId} />
+            <CustomTableBodyCell
+              cellVal={val}
+              column={column}
+              rowId={rowId}
+              onClick={() => this.copyToClipboard(val)}
+            />
           </div>
         </div>
       );
@@ -73,37 +87,41 @@ class BodyRow extends Component {
         column={column}
         rowId={rowId}
         key={key}
+        onClick={() => this.copyToClipboard(val)}
       />
     );
   };
 
   render() {
     const { style, row, columnsOrder, editing } = this.props;
+
     return (
-      <div
-        style={{
-          top: style.top,
-          height: style.height,
-          position: style.position
-        }}
-      >
+      <Fragment>
         <div
-          className="Table-Row"
           style={{
-            height: style.height
+            top: style.top,
+            height: style.height,
+            position: style.position
           }}
         >
-          {columnsOrder.map((columnId, cellIndex) => {
-            return this.bodyCellBuilder(
-              row[columnId],
-              columnId,
-              cellIndex,
-              row,
-              editing
-            );
-          })}
+          <div
+            className="Table-Row"
+            style={{
+              height: style.height
+            }}
+          >
+            {columnsOrder.map((columnId, cellIndex) => {
+              return this.bodyCellBuilder(
+                row[columnId],
+                columnId,
+                cellIndex,
+                row,
+                editing
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
@@ -116,8 +134,15 @@ BodyRow.propTypes = {
   style: stylePropType.isRequired,
   keyColumn: keyColumnPropType.isRequired,
   editing: editingPropType.isRequired,
+  toggleSnackbar: toggleSnackbarPropType,
   rowsSelected: rowsSelectedPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleSnackbar: bool => dispatch(toggleSnackbarAction(bool))
+  };
 };
 
 const mapStateToProps = state => {
@@ -129,9 +154,11 @@ const mapStateToProps = state => {
       state.datatableReducer.features.userConfiguration.columnsOrder,
     columnSizeMultiplier:
       state.datatableReducer.dimensions.columnSizeMultiplier,
-
     CustomTableBodyCell: state.customComponentsReducer.CustomTableBodyCell
   };
 };
 
-export default connect(mapStateToProps)(BodyRow);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BodyRow);

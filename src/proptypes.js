@@ -17,9 +17,11 @@ export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
+export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
+export const snackbarOpenPropType = PropTypes.bool;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
 

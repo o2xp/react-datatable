@@ -1297,4 +1297,38 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
     });
   });
+
+  describe("should handle TOGGLE_SNACKBAR and", () => {
+    it("show it", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "TOGGLE_SNACKBAR",
+        payload: true
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        snackbarOpen: true
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("hide it", () => {
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "TOGGLE_SNACKBAR",
+        payload: true
+      });
+
+      result = datatableReducer(result, {
+        type: "TOGGLE_SNACKBAR",
+        payload: false
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        snackbarOpen: false
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
 });

@@ -11,6 +11,7 @@
     "react/no-find-dom-node": 0,
     "import/no-named-as-default": 0,
     "react/no-multi-comp": 0,
+    "react/no-unescaped-entities": 0,
     "react/jsx-filename-extension": [
       1,
       {

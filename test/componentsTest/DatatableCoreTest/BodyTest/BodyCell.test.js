@@ -2,20 +2,10 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow } from "enzyme";
-import twidth from "text-width";
-import { Tooltip, Zoom } from "@material-ui/core";
 import BodyCell, {
   BodyCell as BodyCellPureComponent
 } from "../../../../src/components/DatatableCore/Body/BodyCell";
 import { storeSample } from "../../../../data/samples";
-import {
-  NumberType,
-  TextType,
-  BooleanType,
-  DateType,
-  TimeType,
-  DateTimeType
-} from "../../../../src/components/DatatableCore/CellTypes";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
@@ -95,21 +85,22 @@ const customDataTypes = [
 ];
 
 const setRowEdited = jest.fn();
+const onClick = jest.fn();
 const rowId = "5cd9307025f4f0572995990f";
 
 describe("BodyCell component", () => {
   it("connected should render without errors", () => {
-    const cell = shallow(
+    const wrapper = shallow(
       <Provider store={store}>
         <BodyCell column={columnText} cellVal={cellValText} />
       </Provider>
     );
-    expect(cell.find("Connect(BodyCell)")).toHaveLength(1);
+    expect(wrapper.find("Connect(BodyCell)")).toHaveLength(1);
   });
 
   describe("should create a cell of type", () => {
     it("number", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValNumber}
           column={columnNumber}
@@ -118,33 +109,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValNumber, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnNumber.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnNumber.id}`}>
-          <Tooltip
-            title={overlap ? cellValNumber : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnNumber.colSize }}>
-              {NumberType({ cellVal: cellValNumber })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnNumber.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("text", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValText}
           column={columnText}
@@ -153,32 +129,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValText, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap = textWidth - 5 > Number(columnText.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnText.id}`}>
-          <Tooltip
-            title={overlap ? cellValText : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnText.colSize }}>
-              {TextType({ cellVal: cellValText })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnText.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("boolean", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValBoolean}
           column={columnBoolean}
@@ -187,33 +149,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValBoolean, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnBoolean.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnBoolean.id}`}>
-          <Tooltip
-            title={overlap ? cellValBoolean : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnBoolean.colSize }}>
-              {BooleanType({ cellVal: cellValBoolean })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnBoolean.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("date", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnDate}
@@ -222,32 +169,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValDateTime, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap = textWidth - 5 > Number(columnDate.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnDate.id}`}>
-          <Tooltip
-            title={overlap ? cellValDateTime : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnDate.colSize }}>
-              {DateType({ cellVal: cellValDateTime })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnDate.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("time", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnTime}
@@ -256,32 +189,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValDateTime, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap = textWidth - 5 > Number(columnTime.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnTime.id}`}>
-          <Tooltip
-            title={overlap ? cellValDateTime : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnTime.colSize }}>
-              {TimeType({ cellVal: cellValDateTime })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnTime.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("dateTime", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValDateTime}
           column={columnDateTime}
@@ -290,33 +209,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValDateTime, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnDateTime.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnDateTime.id}`}>
-          <Tooltip
-            title={overlap ? cellValDateTime : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnDateTime.colSize }}>
-              {DateTimeType({ cellVal: cellValDateTime })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnDateTime.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("default", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValDefault}
           column={columnDefault}
@@ -325,33 +229,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={[]}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValDefault, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnDefault.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnDefault.id}`}>
-          <Tooltip
-            title={overlap ? cellValDefault : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnDefault.colSize }}>
-              {TextType({ cellVal: cellValDefault })}
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnDefault.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("custom iban", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValCustomIban}
           column={columnCustomIban}
@@ -360,33 +249,18 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={customDataTypes}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValCustomIban, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnCustomIban.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnCustomIban.id}`}>
-          <Tooltip
-            title={overlap ? cellValCustomIban : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnCustomIban.colSize }}>
-              <div style={{ color: "red" }}>{cellValCustomIban}</div>
-            </div>
-          </Tooltip>
-        </div>
-      );
+      const cell = wrapper.find(`div.Table-Cell.${columnCustomIban.id}`);
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
 
     it("custom override text", () => {
-      const cell = shallow(
+      const wrapper = shallow(
         <BodyCellPureComponent
           cellVal={cellValCustomOverrideText}
           column={columnCustomOverrideText}
@@ -395,29 +269,16 @@ describe("BodyCell component", () => {
           setRowEdited={setRowEdited}
           rowId={rowId}
           customDataTypes={customDataTypes}
+          onClick={onClick}
         />
       );
 
-      const textWidth = twidth(cellValCustomOverrideText, {
-        family: "Roboto",
-        size: 15
-      });
-      const overlap =
-        textWidth - 5 > Number(columnCustomOverrideText.colSize.split("px")[0]);
-
-      expect(cell.instance().buildCell()).toEqual(
-        <div className={`Table-Cell ${columnCustomOverrideText.id}`}>
-          <Tooltip
-            title={overlap ? cellValCustomOverrideText : ""}
-            TransitionComponent={Zoom}
-            interactive
-          >
-            <div style={{ width: columnCustomOverrideText.colSize }}>
-              <div style={{ color: "purple" }}>{cellValCustomOverrideText}</div>
-            </div>
-          </Tooltip>
-        </div>
+      const cell = wrapper.find(
+        `div.Table-Cell.${columnCustomOverrideText.id}`
       );
+      expect(cell.exists()).toBeTruthy();
+      cell.simulate("click");
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });
