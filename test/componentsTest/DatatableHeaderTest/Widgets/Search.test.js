@@ -21,6 +21,21 @@ describe("Search component", () => {
     expect(wrapper.find("Connect(Search)")).toHaveLength(1);
   });
 
+  it("connected should mount without errors", () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Search />
+      </Provider>
+    );
+    const button = wrapper.find("button.search-icon");
+    button.simulate("click");
+    wrapper
+      .find("div.search-input input")
+      .simulate("change", { target: { value: "Hunt" } });
+
+    expect(wrapper.find("Connect(Search)")).toHaveLength(1);
+  });
+
   describe("click on search button", () => {
     const wrapper = mount(<SearchPureComponent search={search} canSearch />);
     const button = wrapper.find("button.search-icon");
@@ -30,7 +45,18 @@ describe("Search component", () => {
       expect(wrapper.state("openSearch")).toBeTruthy();
     });
 
+    it("should not close input if user search", () => {
+      wrapper
+        .find("div.search-input input")
+        .simulate("change", { target: { value: "sd" } });
+      button.simulate("click");
+      expect(wrapper.state("openSearch")).toBeTruthy();
+    });
+
     it("should close input", () => {
+      wrapper
+        .find("div.search-input input")
+        .simulate("change", { target: { value: "" } });
       button.simulate("click");
       expect(wrapper.state("openSearch")).toBeFalsy();
     });
