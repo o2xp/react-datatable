@@ -15,7 +15,7 @@ import {
 import { toggleSnackbar as toggleSnackbarAction } from "../redux/actions/datatableActions";
 import { customVariant } from "./MuiTheme";
 
-class SnackbarCopy extends Component {
+export class SnackbarCopy extends Component {
   render() {
     const { snackbarOpen, toggleSnackbar, classes } = this.props;
 
@@ -30,7 +30,10 @@ class SnackbarCopy extends Component {
           className={classes.infoSnackbar}
           message={<span>Cell's content has been copied to clipboard.</span>}
           action={
-            <IconButton onClick={() => toggleSnackbar(false)}>
+            <IconButton
+              className="close-snackbar-icon"
+              onClick={() => toggleSnackbar(false)}
+            >
               <CloseIcon className={classes.whiteIcon} />
             </IconButton>
           }
