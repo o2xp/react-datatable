@@ -213,8 +213,8 @@ describe("Datatable actions should create an action to", () => {
 
   it("set user configuration", () => {
     const payload = {
-      copyToClipboardState: true,
-      columnsOrderState: ["id", "age", "name", "adult"],
+      copyToClipboard: true,
+      columnsOrder: ["id", "age", "name", "adult"],
       type: "save"
     };
     const expectedAction = {

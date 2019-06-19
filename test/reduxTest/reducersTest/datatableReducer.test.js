@@ -1,5 +1,5 @@
 import equal from "fast-deep-equal";
-import { chunk, cloneDeep } from "lodash";
+import { chunk, cloneDeep, shuffle } from "lodash";
 import datatableReducer from "../../../src/redux/reducers/datatableReducer";
 import {
   defaultOptionsSample,
@@ -1326,6 +1326,41 @@ describe("datatableReducer reducer", () => {
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         snackbarOpen: false
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle SET_USER_CONFIGURATION and", () => {
+    it("save it", () => {
+      const actions = jest.fn();
+      const {
+        columnsOrder
+      } = mergedSimpleOptionsSample.features.userConfiguration;
+      const columnsOrderShuffled = shuffle(columnsOrder);
+      const result = datatableReducer(
+        { ...mergedSimpleOptionsSample, actions },
+        {
+          type: "SET_USER_CONFIGURATION",
+          payload: {
+            copyToClipboard: true,
+            columnsOrder: columnsOrderShuffled,
+            action: "save"
+          }
+        }
+      );
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        actions,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          userConfiguration: {
+            columnsOrder: columnsOrderShuffled,
+            copyToClipboard: true
+          }
+        }
       };
 
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
