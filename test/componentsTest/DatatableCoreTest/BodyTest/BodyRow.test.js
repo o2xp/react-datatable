@@ -15,7 +15,20 @@ import {
 import { moment, locale } from "../../../../src/moment.config";
 
 const mockStore = configureStore();
-const store = mockStore(storeNoCustomComponentsSample);
+const store = mockStore({
+  ...storeNoCustomComponentsSample,
+  datatableReducer: {
+    ...storeNoCustomComponentsSample.datatableReducer,
+    features: {
+      ...storeNoCustomComponentsSample.datatableReducer.features,
+      userConfiguration: {
+        ...storeNoCustomComponentsSample.datatableReducer.features
+          .userConfiguration,
+        copyToClipboard: true
+      }
+    }
+  }
+});
 const storeCustomComponent = mockStore(storeCustomTableBodyCellComponentSample);
 
 const row = storeNoCustomComponentsSample.datatableReducer.data.rows[0];
@@ -25,7 +38,6 @@ const {
   columnsOrder
 } = storeNoCustomComponentsSample.datatableReducer.features.userConfiguration;
 const style = { top: 0, height: "60px", position: "absolute" };
-const toggleSnackbar = jest.fn();
 const {
   CustomTableBodyCell
 } = storeCustomTableBodyCellComponentSample.customComponentsReducer;
@@ -122,6 +134,7 @@ describe("BodyRow component", () => {
   });
 
   describe("click on cell should", () => {
+    const toggleSnackbar = jest.fn();
     const rowWrapper = shallow(
       <BodyRowPureComponent
         row={row}
@@ -132,12 +145,13 @@ describe("BodyRow component", () => {
         editing={false}
         columnSizeMultiplier={1}
         keyColumn={keyColumn}
+        copyToClipboard
         toggleSnackbar={toggleSnackbar}
         CustomTableBodyCell={null}
       />
     );
 
-    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboard");
+    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboardFunction");
     rowWrapper
       .find(BodyCell)
       .first()
@@ -152,7 +166,8 @@ describe("BodyRow component", () => {
     });
   });
 
-  describe("click on custom cell should", () => {
+  describe("click on cell without copy to clipboard should", () => {
+    const toggleSnackbar = jest.fn();
     const rowWrapper = shallow(
       <BodyRowPureComponent
         row={row}
@@ -163,12 +178,46 @@ describe("BodyRow component", () => {
         editing={false}
         columnSizeMultiplier={1}
         keyColumn={keyColumn}
+        copyToClipboard={false}
+        toggleSnackbar={toggleSnackbar}
+        CustomTableBodyCell={null}
+      />
+    );
+
+    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboardFunction");
+    rowWrapper
+      .find(BodyCell)
+      .first()
+      .simulate("click");
+
+    it("call copyToClipboard", () => {
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it("not dispatch toggleSnackbar", () => {
+      expect(toggleSnackbar).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe("click on custom cell should", () => {
+    const toggleSnackbar = jest.fn();
+    const rowWrapper = shallow(
+      <BodyRowPureComponent
+        row={row}
+        columns={columns}
+        columnsOrder={columnsOrder}
+        rowsSelected={[]}
+        style={style}
+        editing={false}
+        columnSizeMultiplier={1}
+        keyColumn={keyColumn}
+        copyToClipboard
         toggleSnackbar={toggleSnackbar}
         CustomTableBodyCell={CustomTableBodyCell}
       />
     );
 
-    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboard");
+    const spy = jest.spyOn(rowWrapper.instance(), "copyToClipboardFunction");
     rowWrapper
       .find(CustomTableBodyCell)
       .first()
