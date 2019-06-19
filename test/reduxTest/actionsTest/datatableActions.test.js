@@ -210,4 +210,17 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.toggleSnackbar(payload)).toEqual(expectedAction);
   });
+
+  it("set user configuration", () => {
+    const payload = {
+      copyToClipboardState: true,
+      columnsOrderState: ["id", "age", "name", "adult"],
+      type: "save"
+    };
+    const expectedAction = {
+      type: "SET_USER_CONFIGURATION",
+      payload
+    };
+    expect(actions.setUserConfiguration(payload)).toEqual(expectedAction);
+  });
 });
