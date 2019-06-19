@@ -10,7 +10,7 @@ class Datatable extends Component {
     const {
       options = {},
       forceRerender = false,
-      actionsRow = null,
+      actions = null,
       CustomTableBodyCell = null,
       CustomTableBodyRow = null,
       CustomTableHeaderCell = null,
@@ -28,7 +28,7 @@ class Datatable extends Component {
               <DatatableInitializer
                 optionsInit={cloneDeep(options)}
                 forceRerender={forceRerender}
-                actionsRow={actionsRow}
+                actions={actions}
                 CustomTableBodyCell={CustomTableBodyCell}
                 CustomTableBodyRow={CustomTableBodyRow}
                 CustomTableHeaderCell={CustomTableHeaderCell}

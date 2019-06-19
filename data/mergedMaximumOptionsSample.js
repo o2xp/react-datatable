@@ -25,7 +25,7 @@ const mergedMaximumOptionsSample = {
   rowsEdited,
   rowsSelected,
   snackbarOpen,
-  actionsRow: null,
+  actions: null,
   keyColumn,
   font,
   data: {

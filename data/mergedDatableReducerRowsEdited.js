@@ -30,7 +30,7 @@ const mergedDatableReducerRowsEdited = {
     rowsCurrentPage: data.rows
   },
   keyColumn,
-  actionsRow: null,
+  actions: null,
   snackbarOpen,
   font,
   rowsEdited: [

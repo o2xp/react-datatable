@@ -9,7 +9,8 @@ import {
   canFilterColumnsPropType,
   canDownloadPropType,
   canSearchPropType,
-  canPrintPropType
+  canPrintPropType,
+  canSaveUserConfigurationPropType
 } from "../../proptypes";
 import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
@@ -17,6 +18,7 @@ import DownloadData from "./Widgets/DownloadData";
 import Search from "./Widgets/Search";
 import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
 import Print from "./Widgets/Print";
+import UserConfiguration from "./Widgets/UserConfiguration";
 
 class DatatableHeader extends Component {
   render() {
@@ -29,10 +31,15 @@ class DatatableHeader extends Component {
       canFilterColumns,
       canDownload,
       canSearch,
-      canPrint
+      canPrint,
+      canSaveUserConfiguration
     } = this.props;
     const hasBaseIcons =
-      canSearch || canDownload || canFilterColumns || canPrint;
+      canSearch ||
+      canDownload ||
+      canFilterColumns ||
+      canPrint ||
+      canSaveUserConfiguration;
     const hasSelectionIcons = selectionIcons.length > 0;
     const hasAdditionalIcons = additionalIcons.length > 0;
     return (
@@ -42,6 +49,7 @@ class DatatableHeader extends Component {
         {canDownload && <DownloadData />}
         {canFilterColumns && <ColumnsDisplayer />}
         {canPrint && <Print />}
+        {canSaveUserConfiguration && <UserConfiguration />}
         <div
           className="selection-icons-separator"
           style={{
@@ -76,7 +84,8 @@ DatatableHeader.propTypes = {
   canFilterColumns: canFilterColumnsPropType.isRequired,
   canDownload: canDownloadPropType.isRequired,
   canSearch: canSearchPropType.isRequired,
-  canPrint: canPrintPropType.isRequired
+  canPrint: canPrintPropType.isRequired,
+  canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -89,7 +98,9 @@ const mapStateToProps = state => {
     canFilterColumns: state.datatableReducer.features.canFilterColumns,
     canDownload: state.datatableReducer.features.canDownload,
     canSearch: state.datatableReducer.features.canSearch,
-    canPrint: state.datatableReducer.features.canPrint
+    canPrint: state.datatableReducer.features.canPrint,
+    canSaveUserConfiguration:
+      state.datatableReducer.features.canSaveUserConfiguration
   };
 };
 

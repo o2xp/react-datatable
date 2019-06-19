@@ -29,7 +29,7 @@ const defaultOptionsSample = {
   },
   rowsEdited: [],
   rowsSelected: [],
-  actionsRow: null,
+  actions: null,
   snackbarOpen: false,
   pagination: {
     pageSelected: 1,
