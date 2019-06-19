@@ -69,7 +69,7 @@ export class UserConfiguration extends Component {
         <Tooltip TransitionComponent={Zoom} title="Configuration">
           <span>
             <IconButton
-              className="download-data-icon"
+              className="user-configuration-icon"
               onClick={() => this.toggleDialog(true)}
             >
               <SettingsIcon color="primary" />
@@ -97,6 +97,7 @@ export class UserConfiguration extends Component {
           <DialogContent>
             Save cell's content to clipboard on click
             <Switch
+              className="switch-copy-icon"
               checked={copyToClipboardState}
               onChange={() =>
                 this.setState({ copyToClipboardState: !copyToClipboardState })
@@ -110,7 +111,7 @@ export class UserConfiguration extends Component {
           <DialogActions>
             <Button
               disabled={disabled}
-              className="save-configuration"
+              className="reset-configuration"
               onClick={() =>
                 this.userConfiguration({
                   copyToClipboard,
