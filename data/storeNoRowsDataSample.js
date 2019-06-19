@@ -23,7 +23,7 @@ const storeNoRowsDataSample = {
     rowsEdited: [],
     rowsSelected: [],
     snackbarOpen,
-    actionsRow: null,
+    actions: null,
     features: {
       ...features,
       additionalIcons: []

@@ -42,7 +42,7 @@ const defaultState = {
   },
   rowsEdited: [],
   rowsSelected: [],
-  actionsRow: null,
+  actions: null,
   snackbarOpen: false,
   features: {
     canEdit: false,
@@ -231,7 +231,7 @@ const setPagination = ({
 
 const initializeOptions = (
   state,
-  { optionsInit, forceRerender = false, actionsRow = null }
+  { optionsInit, forceRerender = false, actions = null }
 ) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
@@ -240,7 +240,7 @@ const initializeOptions = (
       arrayMerge: overwriteMerge
     }
   );
-  newState.actionsRow = actionsRow;
+  newState.actions = actions;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
@@ -249,8 +249,8 @@ const initializeOptions = (
   }
 
   const { canEdit, canDelete, canSelectRow } = newState.features;
-  const actions = [canEdit, canDelete, canSelectRow];
-  const numberOfActions = actions.filter(v => v).length;
+  const actionsUser = [canEdit, canDelete, canSelectRow];
+  const numberOfActions = actionsUser.filter(v => v).length;
 
   if (
     numberOfActions > 0 &&
@@ -258,7 +258,7 @@ const initializeOptions = (
   ) {
     newState.features.userConfiguration.columnsOrder.unshift("actions");
     let colSize = 0;
-    switch (actions.join(" ")) {
+    switch (actionsUser.join(" ")) {
       case "true true true":
       case "false true true":
       case "true false true":
@@ -434,9 +434,9 @@ const saveRowEdited = (state, payload) => {
   const row = payload;
   delete row.idOfColumnErr;
   delete row.hasBeenEdited;
-  const { data, rowsEdited, keyColumn, pagination, actionsRow } = state;
-  if (actionsRow) {
-    actionsRow({ type: "save", payload: row });
+  const { data, rowsEdited, keyColumn, pagination, actions } = state;
+  if (actions) {
+    actions({ type: "save", payload: row });
   }
   return {
     ...state,
@@ -467,10 +467,10 @@ const revertRowEdited = (state, payload) => {
 
 const deleteRow = (state, payload) => {
   const row = payload;
-  const { data, keyColumn, actionsRow } = state;
+  const { data, keyColumn, actions } = state;
 
-  if (actionsRow) {
-    actionsRow({ type: "delete", payload: row });
+  if (actions) {
+    actions({ type: "delete", payload: row });
   }
 
   let newState = {
@@ -575,6 +575,37 @@ const toggleSnackbar = (state, payload) => {
   };
 };
 
+const setUserConfiguration = (state, payload) => {
+  const { columnsOrder, copyToClipboard, action } = payload;
+  const { actions } = state;
+
+  if (action === "save" && actions) {
+    actions({
+      type: "saveUserConfiguration",
+      payload: { columnsOrder, copyToClipboard }
+    });
+  }
+
+  const newState = {
+    ...state,
+    features: {
+      ...state.features,
+      userConfiguration: {
+        columnsOrder,
+        copyToClipboard
+      }
+    }
+  };
+
+  return {
+    ...newState,
+    dimensions: {
+      ...newState.dimensions,
+      columnSizeMultiplier: updateRowSizeMultiplier(newState)
+    }
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -611,6 +642,8 @@ const datatableReducer = (state = defaultState, action) => {
       return setColumnVisibilty(state, payload);
     case "TOGGLE_SNACKBAR":
       return toggleSnackbar(state, payload);
+    case "SET_USER_CONFIGURATION":
+      return setUserConfiguration(state, payload);
     default:
       return state;
   }
