@@ -35,7 +35,7 @@ const mergedSimpleOptionsSample = {
   rowsEdited,
   rowsSelected,
   snackbarOpen,
-  actionsRow: null,
+  actions: null,
   features: {
     ...features,
     userConfiguration: {

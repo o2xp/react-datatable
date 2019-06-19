@@ -29,7 +29,7 @@ const mergedSetRowsPerPageSample = {
     rowsCurrentPage: chunk(data.rows, 10)[0]
   },
   keyColumn,
-  actionsRow: null,
+  actions: null,
   font,
   data: {
     ...data,

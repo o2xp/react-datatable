@@ -912,7 +912,7 @@ describe("datatableReducer reducer", () => {
   });
 
   describe("should handle SAVE_ROW_EDITED", () => {
-    it("without actionsRow", () => {
+    it("without actions", () => {
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[0];
       row.age = 21;
@@ -940,14 +940,14 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
 
-    it("with actionsRow", () => {
-      const actionsRow = jest.fn();
+    it("with actions", () => {
+      const actions = jest.fn();
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[0];
       row.age = 21;
       const store = cloneDeep({
         ...mergedSimpleOptionsSample,
-        actionsRow,
+        actions,
         rowsEdited: [
           { ...rows[0], age: 21, idOfColumnErr: [], hasBeenEdited: false }
         ]
@@ -963,13 +963,13 @@ describe("datatableReducer reducer", () => {
       pagination.rowsCurrentPage[0].age = 21;
       const mergedDatableReducerExpect = {
         ...mergedSimpleOptionsSample,
-        actionsRow,
+        actions,
         data,
         pagination
       };
 
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
-      expect(actionsRow).toHaveBeenCalled();
+      expect(actions).toHaveBeenCalled();
     });
   });
 
@@ -990,7 +990,7 @@ describe("datatableReducer reducer", () => {
   });
 
   describe("should handle DELETE_ROW", () => {
-    it("without actionsRow", () => {
+    it("without actions", () => {
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[0];
 
@@ -1026,13 +1026,13 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
 
-    it("with actionsRow", () => {
-      const actionsRow = jest.fn();
+    it("with actions", () => {
+      const actions = jest.fn();
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[0];
 
       const result = datatableReducer(
-        { ...mergedSimpleOptionsSample, actionsRow },
+        { ...mergedSimpleOptionsSample, actions },
         {
           type: "DELETE_ROW",
           payload: row
@@ -1051,7 +1051,7 @@ describe("datatableReducer reducer", () => {
       const { rowsPerPageSelected, pageSelected } = pagination;
       mergedDatableReducerExpect = {
         ...mergedDatableReducerExpect,
-        actionsRow,
+        actions,
         pagination: {
           ...pagination,
           rowsCurrentPage:
@@ -1064,7 +1064,7 @@ describe("datatableReducer reducer", () => {
         }
       };
 
-      expect(actionsRow).toHaveBeenCalled();
+      expect(actions).toHaveBeenCalled();
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
     });
   });

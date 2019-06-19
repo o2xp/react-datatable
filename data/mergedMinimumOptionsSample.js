@@ -28,7 +28,7 @@ const mergedMinimumOptionsSample = {
   rowsEdited,
   rowsSelected,
   snackbarOpen,
-  actionsRow: null,
+  actions: null,
   keyColumn,
   data,
   font,

@@ -77,6 +77,11 @@ export const toggleSnackbar = payload => ({
   payload
 });
 
+export const setUserConfiguration = payload => ({
+  type: "SET_USER_CONFIGURATION",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload

@@ -25,7 +25,7 @@ const mergedPageSample = {
     rowsCurrentPage: chunk(data.rows, 10)[4]
   },
   keyColumn,
-  actionsRow: null,
+  actions: null,
   font,
   data,
   snackbarOpen,

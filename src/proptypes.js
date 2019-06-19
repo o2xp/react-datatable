@@ -18,6 +18,7 @@ export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
+export const setUserConfigurationPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
@@ -57,7 +58,7 @@ export const paginationPropType = PropTypes.shape({
 });
 
 // Options propTypes
-export const actionsRowPropType = PropTypes.func;
+export const actionsPropType = PropTypes.func;
 export const forceRerenderPropType = PropTypes.bool;
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;

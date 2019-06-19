@@ -11,6 +11,7 @@ import {
   editingPropType,
   rowsSelectedPropType,
   stylePropType,
+  copyToClipboardPropType,
   toggleSnackbarPropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
@@ -18,10 +19,12 @@ import BodyActionsCell from "./BodyActionsCell";
 import { toggleSnackbar as toggleSnackbarAction } from "../../../redux/actions/datatableActions";
 
 export class BodyRow extends Component {
-  copyToClipboard = val => {
-    const { toggleSnackbar } = this.props;
-    copy(val);
-    toggleSnackbar(true);
+  copyToClipboardFunction = val => {
+    const { toggleSnackbar, copyToClipboard } = this.props;
+    if (copyToClipboard) {
+      copy(val);
+      toggleSnackbar(true);
+    }
   };
 
   bodyCellBuilder = (val, columnId, cellIndex, row, editing) => {
@@ -72,7 +75,7 @@ export class BodyRow extends Component {
               cellVal={val}
               column={column}
               rowId={rowId}
-              onClick={() => this.copyToClipboard(val)}
+              onClick={() => this.copyToClipboardFunction(val)}
             />
           </div>
         </div>
@@ -87,7 +90,7 @@ export class BodyRow extends Component {
         column={column}
         rowId={rowId}
         key={key}
-        onClick={() => this.copyToClipboard(val)}
+        onClick={() => this.copyToClipboardFunction(val)}
       />
     );
   };
@@ -136,6 +139,7 @@ BodyRow.propTypes = {
   editing: editingPropType.isRequired,
   toggleSnackbar: toggleSnackbarPropType,
   rowsSelected: rowsSelectedPropType.isRequired,
+  copyToClipboard: copyToClipboardPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
 };
 
@@ -148,6 +152,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     columns: state.datatableReducer.data.columns,
+    copyToClipboard:
+      state.datatableReducer.features.userConfiguration.copyToClipboard,
     keyColumn: state.datatableReducer.keyColumn,
     rowsSelected: state.datatableReducer.rowsSelected,
     columnsOrder:

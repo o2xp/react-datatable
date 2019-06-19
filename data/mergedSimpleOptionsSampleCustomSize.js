@@ -27,7 +27,7 @@ const mergedSimpleOptionsSampleCustomSize = {
     rowsCurrentPage: data.rows
   },
   keyColumn,
-  actionsRow: null,
+  actions: null,
   font,
   data: {
     ...data,

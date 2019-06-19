@@ -29,7 +29,7 @@ const mergedSimpleOptionsSampleWidthResize = {
     rowsCurrentPage: data.rows
   },
   keyColumn,
-  actionsRow: null,
+  actions: null,
   font,
   data: {
     ...data,
