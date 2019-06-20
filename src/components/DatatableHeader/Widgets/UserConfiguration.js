@@ -119,7 +119,6 @@ export class UserConfiguration extends Component {
                   action: "reset"
                 })
               }
-              variant="contained"
               size="small"
               color="secondary"
             >

@@ -10,6 +10,7 @@ import {
   canDownloadPropType,
   canSearchPropType,
   canPrintPropType,
+  canRefreshRowsPropType,
   canSaveUserConfigurationPropType
 } from "../../proptypes";
 import SelectionIcons from "./Widgets/SelectionIcons";
@@ -19,6 +20,7 @@ import Search from "./Widgets/Search";
 import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
 import Print from "./Widgets/Print";
 import UserConfiguration from "./Widgets/UserConfiguration";
+import RefreshRows from "./Widgets/RefreshRows";
 
 class DatatableHeader extends Component {
   render() {
@@ -32,6 +34,7 @@ class DatatableHeader extends Component {
       canDownload,
       canSearch,
       canPrint,
+      canRefreshRows,
       canSaveUserConfiguration
     } = this.props;
     const hasBaseIcons =
@@ -39,6 +42,7 @@ class DatatableHeader extends Component {
       canDownload ||
       canFilterColumns ||
       canPrint ||
+      canRefreshRows ||
       canSaveUserConfiguration;
     const hasSelectionIcons = selectionIcons.length > 0;
     const hasAdditionalIcons = additionalIcons.length > 0;
@@ -49,6 +53,7 @@ class DatatableHeader extends Component {
         {canDownload && <DownloadData />}
         {canFilterColumns && <ColumnsDisplayer />}
         {canPrint && <Print />}
+        {canRefreshRows && <RefreshRows />}
         {canSaveUserConfiguration && <UserConfiguration />}
         <div
           className="selection-icons-separator"
@@ -85,6 +90,7 @@ DatatableHeader.propTypes = {
   canDownload: canDownloadPropType.isRequired,
   canSearch: canSearchPropType.isRequired,
   canPrint: canPrintPropType.isRequired,
+  canRefreshRows: canRefreshRowsPropType.isRequired,
   canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired
 };
 
@@ -99,6 +105,7 @@ const mapStateToProps = state => {
     canDownload: state.datatableReducer.features.canDownload,
     canSearch: state.datatableReducer.features.canSearch,
     canPrint: state.datatableReducer.features.canPrint,
+    canRefreshRows: state.datatableReducer.features.canRefreshRows,
     canSaveUserConfiguration:
       state.datatableReducer.features.canSaveUserConfiguration
   };

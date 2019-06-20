@@ -2,9 +2,9 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
-import SnackbarCopy, {
-  SnackbarCopy as SnackbarCopyPureComponent
-} from "../../src/components/SnackbarCopy";
+import Notifier, {
+  Notifier as NotifierPureComponent
+} from "../../src/components/Notifier";
 import { storeSample } from "../../data/samples";
 import { customVariant } from "../../src/components/MuiTheme";
 
@@ -16,31 +16,31 @@ const store = mockStore({
 
 const toggleSnackbar = jest.fn();
 
-describe("SnackbarCopy component", () => {
+describe("Notifier component", () => {
   it("connected should render without errors", () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <SnackbarCopy />
+        <Notifier />
       </Provider>
     );
-    expect(wrapper.find("Connect(WithStyles(SnackbarCopy))")).toHaveLength(1);
+    expect(wrapper.find("Connect(WithStyles(Notifier))")).toHaveLength(1);
   });
 
   it("connected should mount without errors", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <SnackbarCopy />
+        <Notifier />
       </Provider>
     );
     const button = wrapper.find("button.close-snackbar-icon");
     button.simulate("click");
 
-    expect(wrapper.find("Connect(WithStyles(SnackbarCopy))")).toHaveLength(1);
+    expect(wrapper.find("Connect(WithStyles(Notifier))")).toHaveLength(1);
   });
 
   it("onClose should call toggleSnackbar", () => {
     const wrapper = mount(
-      <SnackbarCopyPureComponent
+      <NotifierPureComponent
         classes={{ customVariant }}
         snackbarOpen
         toggleSnackbar={toggleSnackbar}
@@ -55,7 +55,7 @@ describe("SnackbarCopy component", () => {
 
   it("icon close click should call toggleSnackbar", () => {
     const wrapper = mount(
-      <SnackbarCopyPureComponent
+      <NotifierPureComponent
         classes={{ customVariant }}
         snackbarOpen
         toggleSnackbar={toggleSnackbar}
@@ -70,7 +70,7 @@ describe("SnackbarCopy component", () => {
 
   it("wait 2500ms should call toggleSnackbar", () => {
     mount(
-      <SnackbarCopyPureComponent
+      <NotifierPureComponent
         classes={{ customVariant }}
         snackbarOpen
         toggleSnackbar={toggleSnackbar}

@@ -13,6 +13,7 @@ import {
   optionsPropType,
   forceRerenderPropType,
   actionsPropType,
+  refreshRowsPropType,
   CustomTableBodyRowPropType,
   CustomTableBodyCellPropType,
   CustomTableHeaderRowPropType,
@@ -32,6 +33,7 @@ export class DatatableInitializer extends Component {
       optionsInit,
       forceRerender,
       actions,
+      refreshRows,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
@@ -42,7 +44,7 @@ export class DatatableInitializer extends Component {
       initializeCustomComponents
     } = this.props;
 
-    initializeOptions({ optionsInit, forceRerender, actions });
+    initializeOptions({ optionsInit, forceRerender, actions, refreshRows });
     initializeCustomComponents({
       CustomTableBodyCell,
       CustomTableBodyRow,
@@ -92,6 +94,7 @@ DatatableInitializer.propTypes = {
   optionsInit: optionsPropType.isRequired,
   forceRerender: forceRerenderPropType,
   actions: actionsPropType,
+  refreshRows: refreshRowsPropType,
   CustomTableBodyCell: CustomTableBodyCellPropType,
   CustomTableBodyRow: CustomTableBodyRowPropType,
   CustomTableHeaderCell: CustomTableHeaderCellPropType,

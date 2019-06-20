@@ -4,6 +4,7 @@ import store from "./redux/store/store";
 import DatatableInitializer from "./components/DatatableInitializer";
 import "./app.css";
 import { cloneDeep } from "lodash";
+import { SnackbarProvider } from "notistack";
 
 class Datatable extends Component {
   render() {
@@ -11,6 +12,7 @@ class Datatable extends Component {
       options = {},
       forceRerender = false,
       actions = null,
+      refreshRows = null,
       CustomTableBodyCell = null,
       CustomTableBodyRow = null,
       CustomTableHeaderCell = null,
@@ -25,16 +27,19 @@ class Datatable extends Component {
           options.data.columns.length > 0 &&
           options.keyColumn && (
             <Provider store={store}>
-              <DatatableInitializer
-                optionsInit={cloneDeep(options)}
-                forceRerender={forceRerender}
-                actions={actions}
-                CustomTableBodyCell={CustomTableBodyCell}
-                CustomTableBodyRow={CustomTableBodyRow}
-                CustomTableHeaderCell={CustomTableHeaderCell}
-                CustomTableHeaderRow={CustomTableHeaderRow}
-                customDataTypes={customDataTypes}
-              />
+              <SnackbarProvider>
+                <DatatableInitializer
+                  optionsInit={cloneDeep(options)}
+                  forceRerender={forceRerender}
+                  actions={actions}
+                  refreshRows={refreshRows}
+                  CustomTableBodyCell={CustomTableBodyCell}
+                  CustomTableBodyRow={CustomTableBodyRow}
+                  CustomTableHeaderCell={CustomTableHeaderCell}
+                  CustomTableHeaderRow={CustomTableHeaderRow}
+                  customDataTypes={customDataTypes}
+                />
+              </SnackbarProvider>
             </Provider>
           )}
         {options.data && !options.keyColumn && (

@@ -19,10 +19,15 @@ export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const setUserConfigurationPropType = PropTypes.func.isRequired;
+export const enqueueSnackbarPropType = PropTypes.func.isRequired;
+export const refreshRowsUserPropType = PropTypes.func.isRequired;
+export const refreshRowsPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
 export const snackbarOpenPropType = PropTypes.bool;
+export const isRefreshingPropType = PropTypes.bool;
+export const searchTermPropType = PropTypes.string;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
 
