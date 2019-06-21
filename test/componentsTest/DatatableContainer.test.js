@@ -18,6 +18,7 @@ const store = mockStore(storeSample);
 const storeNoData = mockStore(storeNoDataSample);
 const storeNoRowsData = mockStore(storeNoRowsDataSample);
 const refreshRows = jest.fn();
+
 describe("Datatable container component", () => {
   it("connected should render without errors", () => {
     const wrapper = shallow(

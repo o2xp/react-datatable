@@ -7,12 +7,13 @@ import { storeSample, simpleOptionsSample } from "../data/samples";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
+const refreshRows = jest.fn();
 
 describe("Datatable component", () => {
   it("should render DatatableInitializer", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <Datatable options={simpleOptionsSample} />
+        <Datatable options={simpleOptionsSample} refreshRows={refreshRows} />
       </Provider>
     );
 
@@ -27,7 +28,7 @@ describe("Datatable component", () => {
   it("with missing data and keyColumn should render div error", () => {
     const wrapper2 = mount(
       <Provider store={store}>
-        <Datatable />
+        <Datatable refreshRows={refreshRows} />
       </Provider>
     );
 
@@ -40,7 +41,7 @@ describe("Datatable component", () => {
   it("with missing data should render div error", () => {
     const wrapper3 = mount(
       <Provider store={store}>
-        <Datatable options={{ keyColumn: "id" }} />
+        <Datatable options={{ keyColumn: "id" }} refreshRows={refreshRows} />
       </Provider>
     );
 
@@ -51,7 +52,7 @@ describe("Datatable component", () => {
   it("with missing keyColumn should render div error", () => {
     const wrapper4 = mount(
       <Provider store={store}>
-        <Datatable options={{ data: [] }} />
+        <Datatable options={{ data: [] }} refreshRows={refreshRows} />
       </Provider>
     );
 
