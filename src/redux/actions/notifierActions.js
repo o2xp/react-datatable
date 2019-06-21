@@ -5,7 +5,7 @@ export const enqueueSnackbar = payload => {
     type: "ENQUEUE_SNACKBAR",
     payload: {
       ...payload,
-      key: key || new Date().getTime() + Math.random()
+      key
     }
   };
 };
