@@ -244,19 +244,10 @@ describe("Datatable actions should create an action to", () => {
   });
 
   it("refresh row error", () => {
-    const payload = {
-      message: "Refresh error.",
-      options: {
-        key: new Date().getTime() + Math.random(),
-        variant: "error"
-      }
-    };
-
     const expectedAction = {
-      type: "REFRESH_ROWS_ERROR",
-      payload
+      type: "REFRESH_ROWS_ERROR"
     };
-    expect(actions.refreshRowsError(payload)).toEqual(expectedAction);
+    expect(actions.refreshRowsError()).toEqual(expectedAction);
   });
 
   it("refresh row resolve", () => {
@@ -285,7 +276,7 @@ describe("Datatable actions should create an action to", () => {
   });
 
   it("refresh row reject", () => {
-    const payload = () => Promise.reject(new Error(false));
+    const payload = () => Promise.reject();
     const store = mockStore();
 
     store.dispatch(actions.refreshRows(payload)).then(() => {
@@ -303,7 +294,7 @@ describe("Datatable actions should create an action to", () => {
             }
           }
         },
-        { type: "REFRESH_ROWS_ERROR", payload: new Error(false) }
+        { type: "REFRESH_ROWS_ERROR" }
       ];
       expect(store.getActions()).toEqual(expectedActions);
     });
