@@ -202,15 +202,6 @@ describe("Datatable actions should create an action to", () => {
     expect(actions.setColumnVisibilty(payload)).toEqual(expectedAction);
   });
 
-  it("toggle snackbar", () => {
-    const payload = true;
-    const expectedAction = {
-      type: "TOGGLE_SNACKBAR",
-      payload
-    };
-    expect(actions.toggleSnackbar(payload)).toEqual(expectedAction);
-  });
-
   it("set user configuration", () => {
     const payload = {
       copyToClipboard: true,
