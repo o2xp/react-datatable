@@ -25,7 +25,6 @@ export const refreshRowsPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
-export const snackbarOpenPropType = PropTypes.bool;
 export const isRefreshingPropType = PropTypes.bool;
 export const searchTermPropType = PropTypes.string;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);

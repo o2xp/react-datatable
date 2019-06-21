@@ -39,7 +39,8 @@ const storeNoRowsDataSample = {
     CustomTableHeaderCell: null,
     CustomTableHeaderRow: null,
     customDataTypes: null
-  }
+  },
+  notifierReducer: { notifications: [] }
 };
 
 export default storeNoRowsDataSample;
