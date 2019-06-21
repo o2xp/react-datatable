@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
+import { PulseLoader } from "react-spinners";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
 import DatatableHeader from "./DatatableHeader/DatatableHeader";
@@ -84,9 +85,12 @@ class DatatableContainer extends Component {
                     id="no-rows"
                     style={{ height: height - 15, width: width - 15 }}
                   >
-                    We are refreshing your data<span> .</span>
-                    <span>.</span>
-                    <span>.</span>
+                    <PulseLoader
+                      sizeUnit="px"
+                      size={15}
+                      color="#3f51b5"
+                      loading={isRefreshing}
+                    />
                   </div>
                   <ScrollSyncPane>
                     <div

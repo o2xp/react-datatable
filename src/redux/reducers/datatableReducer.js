@@ -44,6 +44,7 @@ const defaultState = {
   rowsSelected: [],
   actions: null,
   refreshRows: null,
+  isRefreshing: false,
   searchTerm: "",
   snackbar: {
     title: "",

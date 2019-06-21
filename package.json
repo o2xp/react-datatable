@@ -19,6 +19,7 @@
     "react-redux": "^6.0.1",
     "react-scroll-sync": "^0.7.0",
     "react-sortable-hoc": "^1.9.1",
+    "react-spinners": "^0.5.4",
     "react-window": "^1.8.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

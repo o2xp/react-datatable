@@ -40,13 +40,10 @@ export default (state = defaultState, action) => {
   switch (type) {
     case "ENQUEUE_SNACKBAR":
       return enqueueSnackbar(state, payload);
-
     case "CLOSE_SNACKBAR":
       return closeSnackbar(state, payload);
-
     case "REMOVE_SNACKBAR":
       return removeSnackbar(state, payload);
-
     default:
       return state;
   }

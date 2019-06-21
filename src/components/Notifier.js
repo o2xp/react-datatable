@@ -32,7 +32,7 @@ export class Notifier extends Component {
         removeSnackbar(newSnack.key);
       }
 
-      if (notExists) {
+      if (!notExists) {
         notExists =
           notExists ||
           !currentSnacks.filter(({ key }) => newSnack.key === key).length;
