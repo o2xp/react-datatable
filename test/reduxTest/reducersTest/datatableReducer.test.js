@@ -1335,4 +1335,62 @@ describe("datatableReducer reducer", () => {
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
     });
   });
+
+  describe("should handle REFRESH_ROWS_STARTED and", () => {
+    it("set store to refreshing", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_STARTED"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: true,
+        searchTerm: "",
+        rowsEdited: [],
+        rowsSelected: []
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle REFRESH_ROWS_ERROR and", () => {
+    it("set store to stop refreshing", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_ERROR"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: false
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle REFRESH_ROWS_SUCCESS and", () => {
+    it("set store to stop refreshing ans set paginaiton and rows", () => {
+      const rows = chunk(mergedSimpleOptionsSample.data.rows, 15)[0];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_SUCCESS",
+        payload: rows
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: false,
+        data: {
+          ...mergedSimpleOptionsSample.data,
+          rows
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: rows
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
 });

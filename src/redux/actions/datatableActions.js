@@ -84,9 +84,8 @@ export const refreshRowsSuccess = payload => ({
   payload
 });
 
-export const refreshRowsError = payload => ({
-  type: "REFRESH_ROWS_ERROR",
-  payload
+export const refreshRowsError = () => ({
+  type: "REFRESH_ROWS_ERROR"
 });
 
 export const refreshRowsStarted = () => ({
