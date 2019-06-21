@@ -35,7 +35,7 @@ const removeSnackbar = (state, payload) => {
   };
 };
 
-export default (state = defaultState, action) => {
+const notifierReducer = (state = defaultState, action) => {
   const { payload, type } = action;
   switch (type) {
     case "ENQUEUE_SNACKBAR":
@@ -48,3 +48,5 @@ export default (state = defaultState, action) => {
       return state;
   }
 };
+
+export default notifierReducer;
