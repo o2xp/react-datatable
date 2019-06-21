@@ -10,7 +10,8 @@ import { storeSample } from "../../../../data/samples";
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const search = jest.fn();
-
+const { rowsSelected, searchTerm } = storeSample.datatableReducer;
+const { rows } = storeSample.datatableReducer.data;
 describe("Search component", () => {
   it("connected should render without errors", () => {
     const wrapper = shallow(
@@ -37,43 +38,80 @@ describe("Search component", () => {
   });
 
   describe("click on search button", () => {
-    const wrapper = mount(<SearchPureComponent search={search} canSearch />);
-    const button = wrapper.find("button.search-icon");
-
     it("should open input", () => {
+      const wrapper = mount(
+        <SearchPureComponent
+          search={search}
+          canSearch
+          isRefreshing={false}
+          rowsSelected={rowsSelected}
+          searchTerm={searchTerm}
+          rows={rows}
+        />
+      );
+      const button = wrapper.find("button.search-icon");
       button.simulate("click");
       expect(wrapper.state("openSearch")).toBeTruthy();
     });
 
     it("should not close input if user search", () => {
-      wrapper
-        .find("div.search-input input")
-        .simulate("change", { target: { value: "sd" } });
+      const wrapper = mount(
+        <SearchPureComponent
+          search={search}
+          canSearch
+          isRefreshing={false}
+          rowsSelected={rowsSelected}
+          searchTerm={searchTerm}
+          rows={rows}
+        />
+      );
+      const button = wrapper.find("button.search-icon");
+      button.simulate("click");
+      wrapper.setProps({ searchTerm: "sd" });
       button.simulate("click");
       expect(wrapper.state("openSearch")).toBeTruthy();
     });
 
     it("should close input", () => {
-      wrapper
-        .find("div.search-input input")
-        .simulate("change", { target: { value: "" } });
+      const wrapper = mount(
+        <SearchPureComponent
+          search={search}
+          canSearch
+          isRefreshing={false}
+          rowsSelected={rowsSelected}
+          searchTerm={searchTerm}
+          rows={rows}
+        />
+      );
+      const button = wrapper.find("button.search-icon");
+      button.simulate("click");
+      wrapper.setProps({ searchTerm: "" });
       button.simulate("click");
       expect(wrapper.state("openSearch")).toBeFalsy();
     });
   });
 
   describe("type in search input", () => {
-    const wrapper = mount(<SearchPureComponent search={search} canSearch />);
+    const wrapper = mount(
+      <SearchPureComponent
+        search={search}
+        canSearch
+        isRefreshing={false}
+        rowsSelected={rowsSelected}
+        searchTerm={searchTerm}
+        rows={rows}
+      />
+    );
     const button = wrapper.find("button.search-icon");
     button.simulate("click");
 
-    it("should call function and change state value", () => {
+    it("should call function search with value 'Hunt'", () => {
       wrapper
         .find("div.search-input input")
         .simulate("change", { target: { value: "Hunt" } });
 
       expect(search).toHaveBeenCalled();
-      expect(wrapper.state("searchValue")).toEqual("Hunt");
+      expect(search).toHaveBeenCalledWith("Hunt");
     });
   });
 });
