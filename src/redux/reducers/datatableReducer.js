@@ -46,11 +46,6 @@ const defaultState = {
   refreshRows: null,
   isRefreshing: false,
   searchTerm: "",
-  snackbar: {
-    title: "",
-    variant: "",
-    open: false
-  },
   features: {
     canEdit: false,
     canPrint: false,

@@ -10,6 +10,7 @@ import {
   columnAction,
   refreshRows,
   isRefreshing,
+  searchTerm,
   selectionIcons
 } from "./optionsObjectSample";
 
@@ -27,6 +28,7 @@ const mergedMaximumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  searchTerm,
   actions: null,
   keyColumn,
   font,

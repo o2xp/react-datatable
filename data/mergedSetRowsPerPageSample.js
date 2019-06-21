@@ -11,6 +11,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  searchTerm,
   features
 } from "./optionsObjectSample";
 
@@ -32,6 +33,7 @@ const mergedSetRowsPerPageSample = {
   keyColumn,
   refreshRows,
   isRefreshing,
+  searchTerm,
   actions: null,
   font,
   data: {

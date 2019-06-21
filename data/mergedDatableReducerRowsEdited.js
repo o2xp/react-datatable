@@ -10,6 +10,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  searchTerm,
   features
 } from "./optionsObjectSample";
 
@@ -34,6 +35,7 @@ const mergedDatableReducerRowsEdited = {
   actions: null,
   refreshRows,
   isRefreshing,
+  searchTerm,
   font,
   rowsEdited: [
     { ...data.rows[0], idOfColumnErr: [], hasBeenEdited: false },

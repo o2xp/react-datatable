@@ -7,6 +7,7 @@ import {
   data,
   refreshRows,
   isRefreshing,
+  searchTerm,
   features
 } from "./optionsObjectSample";
 
@@ -29,6 +30,7 @@ const mergedPageSample = {
   actions: null,
   refreshRows,
   isRefreshing,
+  searchTerm,
   font,
   data,
   features: {

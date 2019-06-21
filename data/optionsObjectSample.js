@@ -140,6 +140,7 @@ export const rowsEdited = [];
 export const rowsSelected = [];
 export const refreshRows = null;
 export const isRefreshing = false;
+export const searchTerm = "";
 export const data = {
   columns,
   rows

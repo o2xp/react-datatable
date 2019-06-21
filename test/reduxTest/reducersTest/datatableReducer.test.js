@@ -1191,6 +1191,7 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "Hunt Valdez",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: [mergedSimpleOptionsSample.data.rows[0]]
@@ -1209,6 +1210,7 @@ describe("datatableReducer reducer", () => {
       const { rows } = mergedSimpleOptionsSample.data;
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "hun",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: [rows[0], rows[134]]
@@ -1225,6 +1227,7 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "kjqshkhqakeazjhkazhekzl",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: []
@@ -1292,40 +1295,6 @@ describe("datatableReducer reducer", () => {
             ]
           }
         }
-      };
-
-      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
-    });
-  });
-
-  describe("should handle TOGGLE_SNACKBAR and", () => {
-    it("show it", () => {
-      const result = datatableReducer(mergedSimpleOptionsSample, {
-        type: "TOGGLE_SNACKBAR",
-        payload: true
-      });
-      const resultExpected = {
-        ...mergedSimpleOptionsSample,
-        snackbarOpen: true
-      };
-
-      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
-    });
-
-    it("hide it", () => {
-      let result = datatableReducer(mergedSimpleOptionsSample, {
-        type: "TOGGLE_SNACKBAR",
-        payload: true
-      });
-
-      result = datatableReducer(result, {
-        type: "TOGGLE_SNACKBAR",
-        payload: false
-      });
-
-      const resultExpected = {
-        ...mergedSimpleOptionsSample,
-        snackbarOpen: false
       };
 
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();

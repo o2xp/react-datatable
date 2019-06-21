@@ -9,6 +9,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  searchTerm,
   rowsPerPage
 } from "./optionsObjectSample";
 
@@ -30,6 +31,7 @@ const mergedMinimumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  searchTerm,
   actions: null,
   keyColumn,
   data,

@@ -32,6 +32,7 @@ const defaultOptionsSample = {
   actions: null,
   refreshRows: null,
   isRefreshing: false,
+  searchTerm: "",
   pagination: {
     pageSelected: 1,
     pageTotal: 1,
