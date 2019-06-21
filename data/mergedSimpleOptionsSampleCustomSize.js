@@ -8,8 +8,9 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  refreshRows,
+  isRefreshing,
   rowsSelected,
-  snackbarOpen,
   features
 } from "./optionsObjectSample";
 
@@ -28,6 +29,8 @@ const mergedSimpleOptionsSampleCustomSize = {
   },
   keyColumn,
   actions: null,
+  refreshRows,
+  isRefreshing,
   font,
   data: {
     ...data,
@@ -35,7 +38,6 @@ const mergedSimpleOptionsSampleCustomSize = {
   },
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
   features: {
     ...features,
     userConfiguration: {

@@ -134,7 +134,7 @@ describe("BodyRow component", () => {
   });
 
   describe("click on cell should", () => {
-    const toggleSnackbar = jest.fn();
+    const enqueueSnackbar = jest.fn();
     const rowWrapper = shallow(
       <BodyRowPureComponent
         row={row}
@@ -146,7 +146,7 @@ describe("BodyRow component", () => {
         columnSizeMultiplier={1}
         keyColumn={keyColumn}
         copyToClipboard
-        toggleSnackbar={toggleSnackbar}
+        enqueueSnackbar={enqueueSnackbar}
         CustomTableBodyCell={null}
       />
     );
@@ -161,13 +161,13 @@ describe("BodyRow component", () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it("dispatch toggleSnackbar", () => {
-      expect(toggleSnackbar).toHaveBeenCalled();
+    it("dispatch enqueueSnackbar", () => {
+      expect(enqueueSnackbar).toHaveBeenCalled();
     });
   });
 
   describe("click on cell without copy to clipboard should", () => {
-    const toggleSnackbar = jest.fn();
+    const enqueueSnackbar = jest.fn();
     const rowWrapper = shallow(
       <BodyRowPureComponent
         row={row}
@@ -179,7 +179,7 @@ describe("BodyRow component", () => {
         columnSizeMultiplier={1}
         keyColumn={keyColumn}
         copyToClipboard={false}
-        toggleSnackbar={toggleSnackbar}
+        enqueueSnackbar={enqueueSnackbar}
         CustomTableBodyCell={null}
       />
     );
@@ -194,13 +194,13 @@ describe("BodyRow component", () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it("not dispatch toggleSnackbar", () => {
-      expect(toggleSnackbar).toHaveBeenCalledTimes(0);
+    it("not dispatch enqueueSnackbar", () => {
+      expect(enqueueSnackbar).toHaveBeenCalledTimes(0);
     });
   });
 
   describe("click on custom cell should", () => {
-    const toggleSnackbar = jest.fn();
+    const enqueueSnackbar = jest.fn();
     const rowWrapper = shallow(
       <BodyRowPureComponent
         row={row}
@@ -212,7 +212,7 @@ describe("BodyRow component", () => {
         columnSizeMultiplier={1}
         keyColumn={keyColumn}
         copyToClipboard
-        toggleSnackbar={toggleSnackbar}
+        enqueueSnackbar={enqueueSnackbar}
         CustomTableBodyCell={CustomTableBodyCell}
       />
     );
@@ -227,8 +227,8 @@ describe("BodyRow component", () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it("dispatch toggleSnackbar", () => {
-      expect(toggleSnackbar).toHaveBeenCalled();
+    it("dispatch enqueueSnackbar", () => {
+      expect(enqueueSnackbar).toHaveBeenCalled();
     });
   });
 });

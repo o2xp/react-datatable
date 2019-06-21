@@ -7,7 +7,8 @@ import {
   pagination,
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   rowsPerPage
 } from "./optionsObjectSample";
 
@@ -27,7 +28,8 @@ const mergedMinimumOptionsSample = {
   },
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   actions: null,
   keyColumn,
   data,

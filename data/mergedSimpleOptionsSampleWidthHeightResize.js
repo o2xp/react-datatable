@@ -9,7 +9,8 @@ import {
   pagination,
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   features
 } from "./optionsObjectSample";
 
@@ -33,6 +34,8 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
     rowsCurrentPage: data.rows
   },
   keyColumn,
+  refreshRows,
+  isRefreshing,
   actions: null,
   font,
   data: {
@@ -41,7 +44,6 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
   },
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
   features: {
     ...features,
     userConfiguration: {

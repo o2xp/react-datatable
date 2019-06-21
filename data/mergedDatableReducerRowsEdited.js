@@ -8,7 +8,8 @@ import {
   userConfiguration,
   pagination,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   features
 } from "./optionsObjectSample";
 
@@ -31,7 +32,8 @@ const mergedDatableReducerRowsEdited = {
   },
   keyColumn,
   actions: null,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   font,
   rowsEdited: [
     { ...data.rows[0], idOfColumnErr: [], hasBeenEdited: false },

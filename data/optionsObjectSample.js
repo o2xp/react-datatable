@@ -138,7 +138,8 @@ export const columns = [
 ];
 export const rowsEdited = [];
 export const rowsSelected = [];
-export const snackbarOpen = false;
+export const refreshRows = null;
+export const isRefreshing = false;
 export const data = {
   columns,
   rows

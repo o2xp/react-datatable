@@ -5,7 +5,8 @@ import {
   keyColumn,
   font,
   data,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
   features
 } from "./optionsObjectSample";
 
@@ -26,9 +27,10 @@ const mergedPageSample = {
   },
   keyColumn,
   actions: null,
+  refreshRows,
+  isRefreshing,
   font,
   data,
-  snackbarOpen,
   features: {
     ...features,
     additionalIcons: []
