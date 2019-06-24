@@ -25,7 +25,8 @@ import {
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-class RefreshRows extends Component {
+
+export class RefreshRows extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +37,7 @@ class RefreshRows extends Component {
     };
   }
 
-  t = (forceRefresh = false) => {
+  refresh = (forceRefresh = false) => {
     const {
       refreshRows,
       refreshRowsUser,
@@ -87,7 +88,7 @@ class RefreshRows extends Component {
               className={
                 isRefreshing ? "disabled-icon refresh-icon" : "refresh-icon"
               }
-              onClick={() => this.t()}
+              onClick={() => this.refresh()}
             >
               <RefreshIcon color="primary" />
             </IconButton>
@@ -114,9 +115,17 @@ class RefreshRows extends Component {
             Attention, you are trying to refresh data while:
             <span>
               <ul>
-                {searchTermMessage && <li>You did a search</li>}
-                {rowsSelectedMessage && <li>You have selected row(s)</li>}
-                {rowsEditedMessage && <li>You are editing row(s)</li>}
+                {searchTermMessage && (
+                  <li className="error-search">You did a search</li>
+                )}
+                {rowsSelectedMessage && (
+                  <li className="error-rows-selected">
+                    You have selected row(s)
+                  </li>
+                )}
+                {rowsEditedMessage && (
+                  <li className="error-rows-edited">You are editing row(s)</li>
+                )}
               </ul>
             </span>
             Refreshing will reset all these action(s). Do you want to continue ?
@@ -132,7 +141,7 @@ class RefreshRows extends Component {
             </Button>
             <Button
               className="force-refresh"
-              onClick={() => this.t(true)}
+              onClick={() => this.refresh(true)}
               variant="contained"
               size="small"
               color="primary"
