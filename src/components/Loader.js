@@ -12,7 +12,7 @@ const Loader = props => {
 
   return (
     <Fragment>
-      <div id="no-rows" style={{ height: height - 15, width: width - 15 }}>
+      <div id="loader" style={{ height: height - 15, width: width - 15 }}>
         <PulseLoader sizeUnit="px" size={15} color="#3f51b5" loading />
       </div>
       <ScrollSyncPane>
