@@ -12,8 +12,7 @@ import {
   Button,
   Select,
   MenuItem,
-  Input,
-  Slide
+  Input
 } from "@material-ui/core";
 import {
   CloudDownload as CloudDownloadIcon,
@@ -24,15 +23,13 @@ import {
   columnsPropType,
   rowsCurrentPagePropType,
   rowsSelectedPropType,
+  isRefreshingPropType,
   setRowsSelectedPropType
 } from "../../../proptypes";
 import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
+import Transition from "./Transition";
 
 const Json2csvParser = require("json2csv").Parser;
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export class DownloadData extends Component {
   constructor(props) {
@@ -104,16 +101,24 @@ export class DownloadData extends Component {
   };
 
   render() {
-    const { rowsSelected } = this.props;
+    const { rowsSelected, rows, isRefreshing } = this.props;
     const { dialogOpen, fileType, fileName } = this.state;
-
+    const disabled = rows.length === 0 || isRefreshing;
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title="Download data">
+        <Tooltip
+          TransitionComponent={Zoom}
+          title={disabled ? "No data to download" : "Download data"}
+        >
           <span>
             <IconButton
-              className="download-data-icon"
+              className={
+                disabled
+                  ? "disabled-icon download-data-icon"
+                  : "download-data-icon"
+              }
               onClick={() => this.toggleDialog(true)}
+              disabled={disabled}
             >
               <CloudDownloadIcon color="primary" />
             </IconButton>
@@ -201,6 +206,7 @@ DownloadData.propTypes = {
   columns: columnsPropType.isRequired,
   rowsCurrentPage: rowsCurrentPagePropType.isRequired,
   rowsSelected: rowsSelectedPropType.isRequired,
+  isRefreshing: isRefreshingPropType.isRequired,
   setRowsSelected: setRowsSelectedPropType
 };
 
@@ -213,6 +219,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     rowsSelected: state.datatableReducer.rowsSelected,
+    isRefreshing: state.datatableReducer.isRefreshing,
     columns: state.datatableReducer.data.columns,
     rows: state.datatableReducer.data.rows,
     rowsCurrentPage: state.datatableReducer.pagination.rowsCurrentPage

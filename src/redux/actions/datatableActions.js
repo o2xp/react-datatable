@@ -1,3 +1,5 @@
+import { enqueueSnackbar } from "./notifierActions";
+
 export const initializeOptions = payload => ({
   type: "INITIALIZE_OPTIONS",
   payload
@@ -72,15 +74,55 @@ export const setColumnVisibilty = payload => ({
   payload
 });
 
-export const toggleSnackbar = payload => ({
-  type: "TOGGLE_SNACKBAR",
-  payload
-});
-
 export const setUserConfiguration = payload => ({
   type: "SET_USER_CONFIGURATION",
   payload
 });
+
+export const refreshRowsSuccess = payload => ({
+  type: "REFRESH_ROWS_SUCCESS",
+  payload
+});
+
+export const refreshRowsError = () => ({
+  type: "REFRESH_ROWS_ERROR"
+});
+
+export const refreshRowsStarted = () => ({
+  type: "REFRESH_ROWS_STARTED"
+});
+
+export const refreshRows = payload => {
+  const key = new Date().getTime() + Math.random();
+  return dispatch => {
+    dispatch(refreshRowsStarted());
+    return Promise.resolve(payload())
+      .then(res => {
+        dispatch(
+          enqueueSnackbar({
+            message: "Rows have been refreshed.",
+            options: {
+              key,
+              variant: "success"
+            }
+          })
+        );
+        dispatch(refreshRowsSuccess(res));
+      })
+      .catch(err => {
+        dispatch(
+          enqueueSnackbar({
+            message: "Rows couldn't be refreshed.",
+            options: {
+              key,
+              variant: "error"
+            }
+          })
+        );
+        dispatch(refreshRowsError(err));
+      });
+  };
+};
 
 export const updateOptions = payload => ({
   type: "UPDATE",

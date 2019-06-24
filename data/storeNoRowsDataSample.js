@@ -5,7 +5,9 @@ import {
   font,
   pagination,
   features,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
+  searchTerm,
   columns
 } from "./optionsObjectSample";
 
@@ -22,8 +24,10 @@ const storeNoRowsDataSample = {
     },
     rowsEdited: [],
     rowsSelected: [],
-    snackbarOpen,
     actions: null,
+    refreshRows,
+    isRefreshing,
+    searchTerm,
     features: {
       ...features,
       additionalIcons: []
@@ -35,7 +39,8 @@ const storeNoRowsDataSample = {
     CustomTableHeaderCell: null,
     CustomTableHeaderRow: null,
     customDataTypes: null
-  }
+  },
+  notifierReducer: { notifications: [] }
 };
 
 export default storeNoRowsDataSample;

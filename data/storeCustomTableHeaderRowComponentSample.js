@@ -9,7 +9,8 @@ const storeCustomTableHeaderRowComponentSample = {
     CustomTableHeaderCell: null,
     CustomTableHeaderRow: customTableHeaderRowSample,
     customDataTypes: []
-  }
+  },
+  notifierReducer: { notifications: [] }
 };
 
 export default storeCustomTableHeaderRowComponentSample;

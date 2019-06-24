@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { SnackbarProvider } from "notistack";
 import DatatableContainer from "../../src/components/DatatableContainer";
 import DatatableInitializer, {
   DatatableInitializer as DatatableInitializerPureComponent
@@ -10,6 +11,7 @@ import { storeSample, simpleOptionsSample } from "../../data/samples";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
+const refreshRows = jest.fn();
 
 describe("Datatable initializer component", () => {
   it("connected should render without errors", () => {
@@ -24,7 +26,12 @@ describe("Datatable initializer component", () => {
   it("should render DatatableInitializer component", () => {
     const wrapper = mount(
       <Provider store={store}>
-        <DatatableInitializer optionsInit={simpleOptionsSample} />
+        <SnackbarProvider>
+          <DatatableInitializer
+            optionsInit={simpleOptionsSample}
+            refreshRows={refreshRows}
+          />
+        </SnackbarProvider>
       </Provider>
     );
     expect(wrapper.find(DatatableContainer)).toHaveLength(1);
@@ -38,7 +45,12 @@ describe("Datatable initializer component", () => {
 
     mount(
       <Provider store={store}>
-        <DatatableInitializer optionsInit={simpleOptionsSample} />
+        <SnackbarProvider>
+          <DatatableInitializer
+            optionsInit={simpleOptionsSample}
+            refreshRows={refreshRows}
+          />
+        </SnackbarProvider>
       </Provider>
     );
     it("call componentDidMount", () => {
@@ -71,7 +83,12 @@ describe("Datatable initializer component", () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <DatatableInitializer optionsInit={simpleOptionsSample} />
+        <SnackbarProvider>
+          <DatatableInitializer
+            optionsInit={simpleOptionsSample}
+            refreshRows={refreshRows}
+          />
+        </SnackbarProvider>
       </Provider>
     );
     wrapper.unmount();

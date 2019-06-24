@@ -5,13 +5,15 @@ import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
 import DatatableHeader from "./DatatableHeader/DatatableHeader";
 import DatatableFooter from "./DatatableFooter/DatatableFooter";
-import SnackbarCopy from "./SnackbarCopy";
+import Notifier from "./Notifier";
+import Loader from "./Loader";
 import {
   dataPropType,
   heightNumberPropType,
   widthNumberPropType,
   featuresPropType,
   titlePropType,
+  isRefreshingPropType,
   columnSizeMultiplierPropType
 } from "../proptypes";
 
@@ -24,7 +26,8 @@ class DatatableContainer extends Component {
       width,
       features,
       title,
-      totalWidthNumber
+      totalWidthNumber,
+      isRefreshing
     } = this.props;
 
     const { canSelectRow, canDownload, canSearch } = features;
@@ -40,45 +43,54 @@ class DatatableContainer extends Component {
               {data.columns.length > 0 && (
                 <Fragment>
                   <Header />
-                  {data.rows.length > 0 && <Body />}
+                  {data.rows.length > 0 && !isRefreshing && <Body />}
                 </Fragment>
               )}
-              {(data.columns.length === 0 || data.rows.length === 0) && (
-                <Fragment>
-                  <div
-                    id="no-rows"
-                    style={{ height: height - 15, width: width - 15 }}
-                  >
-                    There is no data yet, try to refresh <span> .</span>
-                    <span>.</span>
-                    <span>.</span>
-                  </div>
-                  <ScrollSyncPane>
+              {(data.columns.length === 0 || data.rows.length === 0) &&
+                !isRefreshing && (
+                  <Fragment>
                     <div
-                      style={{
-                        overflowX:
-                          columnSizeMultiplier === 1 ? "scroll" : "hidden",
-                        overflowY: "hidden",
-                        height: "15px",
-                        width: width - 15
-                      }}
+                      id="no-rows"
+                      style={{ height: height - 15, width: width - 15 }}
                     >
+                      There is no data yet, try to refresh <span> .</span>
+                      <span>.</span>
+                      <span>.</span>
+                    </div>
+                    <ScrollSyncPane>
                       <div
                         style={{
-                          width: totalWidthNumber
+                          overflowX:
+                            columnSizeMultiplier === 1 ? "scroll" : "hidden",
+                          overflowY: "hidden",
+                          height: "15px",
+                          width: width - 15
                         }}
                       >
-                        .
+                        <div
+                          style={{
+                            width: totalWidthNumber
+                          }}
+                        >
+                          .
+                        </div>
                       </div>
-                    </div>
-                  </ScrollSyncPane>
-                </Fragment>
-              )}
+                    </ScrollSyncPane>
+                  </Fragment>
+                )}
+
+              {isRefreshing &&
+                Loader({
+                  height,
+                  width,
+                  columnSizeMultiplier,
+                  totalWidthNumber
+                })}
             </div>
             <DatatableFooter />
           </div>
         </ScrollSync>
-        <SnackbarCopy />
+        <Notifier />
       </Fragment>
     );
   }
@@ -88,6 +100,7 @@ DatatableContainer.propTypes = {
   data: dataPropType.isRequired,
   height: heightNumberPropType.isRequired,
   width: widthNumberPropType.isRequired,
+  isRefreshing: isRefreshingPropType.isRequired,
   totalWidthNumber: widthNumberPropType,
   features: featuresPropType,
   title: titlePropType,
@@ -101,6 +114,7 @@ const mapStateToProps = state => {
     width: state.datatableReducer.dimensions.datatable.widthNumber,
     features: state.datatableReducer.features,
     title: state.datatableReducer.title,
+    isRefreshing: state.datatableReducer.isRefreshing,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier: state.datatableReducer.dimensions.columnSizeMultiplier
