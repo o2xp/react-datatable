@@ -17,6 +17,10 @@ const mockStore = configureStore();
 const store = mockStore(storeSample);
 const storeNoData = mockStore(storeNoDataSample);
 const storeNoRowsData = mockStore(storeNoRowsDataSample);
+const storeIsRefreshing = mockStore({
+  ...storeSample,
+  datatableReducer: { ...storeSample.datatableReducer, isRefreshing: true }
+});
 const refreshRows = jest.fn();
 
 describe("Datatable container component", () => {
@@ -102,6 +106,20 @@ describe("Datatable container component", () => {
 
     it("and a Footer", () => {
       expect(wrapperNoData.find(DatatableFooter)).toHaveLength(1);
+    });
+  });
+
+  describe("when you is Refreshing", () => {
+    const wrapperNoData = mount(
+      <Provider store={storeIsRefreshing}>
+        <SnackbarProvider>
+          <DatatableContainer refreshRows={refreshRows} />
+        </SnackbarProvider>
+      </Provider>
+    );
+
+    it("Loader", () => {
+      expect(wrapperNoData.find("Loader")).toHaveLength(1);
     });
   });
 });

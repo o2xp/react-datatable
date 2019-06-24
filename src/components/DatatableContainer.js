@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
-import { PulseLoader } from "react-spinners";
 import Header from "./DatatableCore/Header/Header";
 import Body from "./DatatableCore/Body/Body";
 import DatatableHeader from "./DatatableHeader/DatatableHeader";
 import DatatableFooter from "./DatatableFooter/DatatableFooter";
 import Notifier from "./Notifier";
+import Loader from "./Loader";
 import {
   dataPropType,
   heightNumberPropType,
@@ -79,40 +79,13 @@ class DatatableContainer extends Component {
                   </Fragment>
                 )}
 
-              {isRefreshing && (
-                <Fragment>
-                  <div
-                    id="no-rows"
-                    style={{ height: height - 15, width: width - 15 }}
-                  >
-                    <PulseLoader
-                      sizeUnit="px"
-                      size={15}
-                      color="#3f51b5"
-                      loading={isRefreshing}
-                    />
-                  </div>
-                  <ScrollSyncPane>
-                    <div
-                      style={{
-                        overflowX:
-                          columnSizeMultiplier === 1 ? "scroll" : "hidden",
-                        overflowY: "hidden",
-                        height: "15px",
-                        width: width - 15
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: totalWidthNumber
-                        }}
-                      >
-                        .
-                      </div>
-                    </div>
-                  </ScrollSyncPane>
-                </Fragment>
-              )}
+              {isRefreshing &&
+                Loader({
+                  height,
+                  width,
+                  columnSizeMultiplier,
+                  totalWidthNumber
+                })}
             </div>
             <DatatableFooter />
           </div>
