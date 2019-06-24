@@ -2,15 +2,19 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { IconButton, Tooltip, Zoom, TextField } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
-import { searchPropType } from "../../../proptypes";
+import {
+  searchPropType,
+  searchTermPropType,
+  rowsPropType,
+  isRefreshingPropType
+} from "../../../proptypes";
 import { search as searchAction } from "../../../redux/actions/datatableActions";
 
 export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSearch: false,
-      searchValue: ""
+      openSearch: false
     };
     this.searchInput = React.createRef();
   }
@@ -19,21 +23,24 @@ export class Search extends Component {
     const { search } = this.props;
     const { value } = e.target;
     search(value);
-    this.setState({ searchValue: value });
   };
 
   toggleSearch = () => {
-    const { searchValue, openSearch } = this.state;
+    const { openSearch } = this.state;
+    const { searchTerm } = this.props;
     if (!openSearch) {
       this.searchInput.current.focus();
     }
-    if (searchValue.length === 0) {
+    if (searchTerm.length === 0) {
       this.setState({ openSearch: !openSearch });
     }
   };
 
   render() {
-    const { searchValue, openSearch } = this.state;
+    const { openSearch } = this.state;
+    const { searchTerm, rows, isRefreshing } = this.props;
+    const disabled = rows.length === 0 || isRefreshing;
+
     return (
       <Fragment>
         <TextField
@@ -44,19 +51,23 @@ export class Search extends Component {
           }
           inputRef={this.searchInput}
           onChange={this.searchUpdate}
-          value={searchValue}
+          value={searchTerm}
+          disabled={disabled}
           placeholder="Search.."
         />
         <Tooltip
           TransitionComponent={Zoom}
-          title={openSearch ? "Close" : "Open"}
+          title={disabled ? "No data to filter" : "Toggle"}
         >
-          <IconButton
-            className="search-icon"
-            onClick={() => this.toggleSearch()}
-          >
-            <SearchIcon color="primary" />
-          </IconButton>
+          <span>
+            <IconButton
+              className={disabled ? "disabled-icon search-icon" : "search-icon"}
+              onClick={() => this.toggleSearch()}
+              disabled={disabled}
+            >
+              <SearchIcon color="primary" />
+            </IconButton>
+          </span>
         </Tooltip>
       </Fragment>
     );
@@ -64,7 +75,10 @@ export class Search extends Component {
 }
 
 Search.propTypes = {
-  search: searchPropType
+  search: searchPropType,
+  searchTerm: searchTermPropType.isRequired,
+  rows: rowsPropType.isRequired,
+  isRefreshing: isRefreshingPropType.isRequired
 };
 
 const mapDispatchToProps = dispatch => {
@@ -75,7 +89,10 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    rowsSelected: state.datatableReducer.rowsSelected
+    rowsSelected: state.datatableReducer.rowsSelected,
+    isRefreshing: state.datatableReducer.isRefreshing,
+    rows: state.datatableReducer.data.rows,
+    searchTerm: state.datatableReducer.searchTerm
   };
 };
 

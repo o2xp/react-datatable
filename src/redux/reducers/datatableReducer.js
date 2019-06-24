@@ -43,7 +43,9 @@ const defaultState = {
   rowsEdited: [],
   rowsSelected: [],
   actions: null,
-  snackbarOpen: false,
+  refreshRows: null,
+  isRefreshing: false,
+  searchTerm: "",
   features: {
     canEdit: false,
     canPrint: false,
@@ -231,7 +233,7 @@ const setPagination = ({
 
 const initializeOptions = (
   state,
-  { optionsInit, forceRerender = false, actions = null }
+  { optionsInit, forceRerender = false, actions = null, refreshRows = null }
 ) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
@@ -241,6 +243,7 @@ const initializeOptions = (
     }
   );
   newState.actions = actions;
+  newState.refreshRows = refreshRows;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
@@ -522,11 +525,12 @@ const search = (state, payload) => {
     minMatchCharLength: 1,
     keys: state.features.userConfiguration.columnsOrder
   };
-  const fuse = new Fuse(state.data.rows, options); // "list" is the item array
+  const fuse = new Fuse(state.data.rows, options);
   const result = fuse.search(payload);
 
   return {
     ...state,
+    searchTerm: payload,
     pagination: setPagination({ state, rowsFiltered: result })
   };
 };
@@ -568,13 +572,6 @@ const setColumnVisibilty = (state, payload) => {
   };
 };
 
-const toggleSnackbar = (state, payload) => {
-  return {
-    ...state,
-    snackbarOpen: payload
-  };
-};
-
 const setUserConfiguration = (state, payload) => {
   const { columnsOrder, copyToClipboard, action } = payload;
   const { actions } = state;
@@ -604,6 +601,35 @@ const setUserConfiguration = (state, payload) => {
       columnSizeMultiplier: updateRowSizeMultiplier(newState)
     }
   };
+};
+
+const refreshRowsStarted = state => {
+  return {
+    ...state,
+    isRefreshing: true,
+    searchTerm: "",
+    rowsEdited: [],
+    rowsSelected: []
+  };
+};
+
+const refreshRowsSuccess = (state, payload) => {
+  const newState = {
+    ...state,
+    data: {
+      ...state.data,
+      rows: payload
+    },
+    isRefreshing: false
+  };
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
+  };
+};
+
+const refreshRowsError = state => {
+  return { ...state, isRefreshing: false };
 };
 
 const datatableReducer = (state = defaultState, action) => {
@@ -640,10 +666,14 @@ const datatableReducer = (state = defaultState, action) => {
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
-    case "TOGGLE_SNACKBAR":
-      return toggleSnackbar(state, payload);
     case "SET_USER_CONFIGURATION":
       return setUserConfiguration(state, payload);
+    case "REFRESH_ROWS_STARTED":
+      return refreshRowsStarted(state);
+    case "REFRESH_ROWS_SUCCESS":
+      return refreshRowsSuccess(state, payload);
+    case "REFRESH_ROWS_ERROR":
+      return refreshRowsError(state);
     default:
       return state;
   }

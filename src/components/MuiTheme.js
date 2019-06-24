@@ -77,14 +77,5 @@ export const customVariant = () => ({
   },
   whiteIcon: {
     color: "white"
-  },
-  infoSnackbar: {
-    backgroundColor: "#2196f3",
-    color: "white",
-    "&:before": {
-      borderLeft: "0",
-      borderRight: "0",
-      borderBottom: "0"
-    }
   }
 });

@@ -51,6 +51,7 @@ describe("DownloadData component", () => {
         rows={rows}
         columns={columns}
         rowsCurrentPage={rowsCurrentPage}
+        isRefreshing={false}
       />
     );
 
@@ -61,6 +62,7 @@ describe("DownloadData component", () => {
         rows={rows}
         columns={columns}
         rowsCurrentPage={rowsCurrentPage}
+        isRefreshing={false}
       />
     );
 

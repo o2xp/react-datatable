@@ -13,7 +13,8 @@ const storeSample = {
     CustomTableHeaderCell: customTableHeaderCellSample,
     CustomTableHeaderRow: customTableHeaderRowSample,
     customDataTypes: customDataTypesSample
-  }
+  },
+  notifierReducer: { notifications: [] }
 };
 
 export default storeSample;

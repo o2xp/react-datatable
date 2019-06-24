@@ -12,18 +12,24 @@ import {
   rowsSelectedPropType,
   stylePropType,
   copyToClipboardPropType,
-  toggleSnackbarPropType
+  enqueueSnackbarPropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
 import BodyActionsCell from "./BodyActionsCell";
-import { toggleSnackbar as toggleSnackbarAction } from "../../../redux/actions/datatableActions";
+import { enqueueSnackbar as enqueueSnackbarAction } from "../../../redux/actions/notifierActions";
 
 export class BodyRow extends Component {
   copyToClipboardFunction = val => {
-    const { toggleSnackbar, copyToClipboard } = this.props;
+    const { enqueueSnackbar, copyToClipboard } = this.props;
     if (copyToClipboard) {
       copy(val);
-      toggleSnackbar(true);
+      enqueueSnackbar({
+        message: "Cell's content has been copied to clipboard.",
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: "info"
+        }
+      });
     }
   };
 
@@ -137,7 +143,7 @@ BodyRow.propTypes = {
   style: stylePropType.isRequired,
   keyColumn: keyColumnPropType.isRequired,
   editing: editingPropType.isRequired,
-  toggleSnackbar: toggleSnackbarPropType,
+  enqueueSnackbar: enqueueSnackbarPropType,
   rowsSelected: rowsSelectedPropType.isRequired,
   copyToClipboard: copyToClipboardPropType.isRequired,
   CustomTableBodyCell: CustomTableBodyCellPropType
@@ -145,7 +151,8 @@ BodyRow.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleSnackbar: bool => dispatch(toggleSnackbarAction(bool))
+    enqueueSnackbar: ({ message, options }) =>
+      dispatch(enqueueSnackbarAction({ message, options }))
   };
 };
 

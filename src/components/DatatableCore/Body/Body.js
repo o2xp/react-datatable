@@ -31,7 +31,10 @@ export class Body extends Component {
   }
 
   componentWillUnmount() {
-    findDOMNode(tableRef.current).removeEventListener("scroll", null);
+    const { rows } = this.props;
+    if (rows.length > 0) {
+      findDOMNode(tableRef.current).removeEventListener("scroll", null);
+    }
   }
 
   handleScroll = scrollLeft => {

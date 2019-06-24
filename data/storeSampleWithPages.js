@@ -13,7 +13,8 @@ const storeSampleWithPages = {
     CustomTableHeaderCell: customTableHeaderCellSample,
     CustomTableHeaderRow: customTableHeaderRowSample,
     customDataTypes: customDataTypesSample
-  }
+  },
+  notifierReducer: { notifications: [] }
 };
 
 export default storeSampleWithPages;

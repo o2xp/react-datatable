@@ -1191,6 +1191,7 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "Hunt Valdez",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: [mergedSimpleOptionsSample.data.rows[0]]
@@ -1209,6 +1210,7 @@ describe("datatableReducer reducer", () => {
       const { rows } = mergedSimpleOptionsSample.data;
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "hun",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: [rows[0], rows[134]]
@@ -1225,6 +1227,7 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
+        searchTerm: "kjqshkhqakeazjhkazhekzl",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: []
@@ -1298,40 +1301,6 @@ describe("datatableReducer reducer", () => {
     });
   });
 
-  describe("should handle TOGGLE_SNACKBAR and", () => {
-    it("show it", () => {
-      const result = datatableReducer(mergedSimpleOptionsSample, {
-        type: "TOGGLE_SNACKBAR",
-        payload: true
-      });
-      const resultExpected = {
-        ...mergedSimpleOptionsSample,
-        snackbarOpen: true
-      };
-
-      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
-    });
-
-    it("hide it", () => {
-      let result = datatableReducer(mergedSimpleOptionsSample, {
-        type: "TOGGLE_SNACKBAR",
-        payload: true
-      });
-
-      result = datatableReducer(result, {
-        type: "TOGGLE_SNACKBAR",
-        payload: false
-      });
-
-      const resultExpected = {
-        ...mergedSimpleOptionsSample,
-        snackbarOpen: false
-      };
-
-      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
-    });
-  });
-
   describe("should handle SET_USER_CONFIGURATION and", () => {
     it("save it", () => {
       const actions = jest.fn();
@@ -1360,6 +1329,64 @@ describe("datatableReducer reducer", () => {
             columnsOrder: columnsOrderShuffled,
             copyToClipboard: true
           }
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle REFRESH_ROWS_STARTED and", () => {
+    it("set store to refreshing", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_STARTED"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: true,
+        searchTerm: "",
+        rowsEdited: [],
+        rowsSelected: []
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle REFRESH_ROWS_ERROR and", () => {
+    it("set store to stop refreshing", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_ERROR"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: false
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle REFRESH_ROWS_SUCCESS and", () => {
+    it("set store to stop refreshing ans set paginaiton and rows", () => {
+      const rows = chunk(mergedSimpleOptionsSample.data.rows, 15)[0];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "REFRESH_ROWS_SUCCESS",
+        payload: rows
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isRefreshing: false,
+        data: {
+          ...mergedSimpleOptionsSample.data,
+          rows
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: rows
         }
       };
 

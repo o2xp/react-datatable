@@ -8,7 +8,9 @@ import {
   rowsEdited,
   rowsSelected,
   columnAction,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
+  searchTerm,
   selectionIcons
 } from "./optionsObjectSample";
 
@@ -24,7 +26,9 @@ const mergedMaximumOptionsSample = {
   },
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
+  searchTerm,
   actions: null,
   keyColumn,
   font,

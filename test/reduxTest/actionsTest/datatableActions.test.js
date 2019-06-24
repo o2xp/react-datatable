@@ -1,5 +1,10 @@
-import * as actions from "../../../src/redux/actions/datatableActions";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
 import { simpleOptionsSample } from "../../../data/samples";
+import * as actions from "../../../src/redux/actions/datatableActions";
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe("Datatable actions should create an action to", () => {
   it("initialize options", () => {
@@ -202,15 +207,6 @@ describe("Datatable actions should create an action to", () => {
     expect(actions.setColumnVisibilty(payload)).toEqual(expectedAction);
   });
 
-  it("toggle snackbar", () => {
-    const payload = true;
-    const expectedAction = {
-      type: "TOGGLE_SNACKBAR",
-      payload
-    };
-    expect(actions.toggleSnackbar(payload)).toEqual(expectedAction);
-  });
-
   it("set user configuration", () => {
     const payload = {
       copyToClipboard: true,
@@ -222,5 +218,85 @@ describe("Datatable actions should create an action to", () => {
       payload
     };
     expect(actions.setUserConfiguration(payload)).toEqual(expectedAction);
+  });
+
+  it("refresh row started", () => {
+    const expectedAction = {
+      type: "REFRESH_ROWS_STARTED"
+    };
+    expect(actions.refreshRowsStarted()).toEqual(expectedAction);
+  });
+
+  it("refresh row success", () => {
+    const payload = {
+      message: "Refresh success.",
+      options: {
+        key: new Date().getTime() + Math.random(),
+        variant: "info"
+      }
+    };
+
+    const expectedAction = {
+      type: "REFRESH_ROWS_SUCCESS",
+      payload
+    };
+    expect(actions.refreshRowsSuccess(payload)).toEqual(expectedAction);
+  });
+
+  it("refresh row error", () => {
+    const expectedAction = {
+      type: "REFRESH_ROWS_ERROR"
+    };
+    expect(actions.refreshRowsError()).toEqual(expectedAction);
+  });
+
+  it("refresh row resolve", () => {
+    const payload = () => Promise.resolve(true);
+    const store = mockStore();
+
+    store.dispatch(actions.refreshRows(payload)).then(() => {
+      const { key } = store.getActions()[1].payload.options;
+      const expectedActions = [
+        { type: "REFRESH_ROWS_STARTED" },
+        {
+          type: "ENQUEUE_SNACKBAR",
+          payload: {
+            message: "Rows have been refreshed.",
+            key,
+            options: {
+              key,
+              variant: "success"
+            }
+          }
+        },
+        { type: "REFRESH_ROWS_SUCCESS", payload: true }
+      ];
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it("refresh row reject", () => {
+    const payload = () => Promise.reject();
+    const store = mockStore();
+
+    store.dispatch(actions.refreshRows(payload)).then(() => {
+      const { key } = store.getActions()[1].payload.options;
+      const expectedActions = [
+        { type: "REFRESH_ROWS_STARTED" },
+        {
+          type: "ENQUEUE_SNACKBAR",
+          payload: {
+            message: "Rows couldn't be refreshed.",
+            key,
+            options: {
+              key,
+              variant: "error"
+            }
+          }
+        },
+        { type: "REFRESH_ROWS_ERROR" }
+      ];
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });

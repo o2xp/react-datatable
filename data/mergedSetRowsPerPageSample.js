@@ -9,7 +9,9 @@ import {
   userConfiguration,
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
+  refreshRows,
+  isRefreshing,
+  searchTerm,
   features
 } from "./optionsObjectSample";
 
@@ -29,6 +31,9 @@ const mergedSetRowsPerPageSample = {
     rowsCurrentPage: chunk(data.rows, 10)[0]
   },
   keyColumn,
+  refreshRows,
+  isRefreshing,
+  searchTerm,
   actions: null,
   font,
   data: {
@@ -37,7 +42,6 @@ const mergedSetRowsPerPageSample = {
   },
   rowsEdited,
   rowsSelected,
-  snackbarOpen,
   features: {
     ...features,
     userConfiguration: {
