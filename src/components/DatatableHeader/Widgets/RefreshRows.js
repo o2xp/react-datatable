@@ -4,7 +4,6 @@ import {
   Tooltip,
   Button,
   Zoom,
-  Slide,
   Dialog,
   DialogActions,
   DialogContent,
@@ -21,10 +20,7 @@ import {
   rowsEditedPropType,
   isRefreshingPropType
 } from "../../../proptypes";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import Transition from "./Transition";
 
 export class RefreshRows extends Component {
   constructor(props) {

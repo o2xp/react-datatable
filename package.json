@@ -86,7 +86,9 @@
       "src/**/*.{js,jsx}"
     ],
     "coveragePathIgnorePatterns": [
-      "/redux/store/"
+      "/redux/store/",
+      "/redux/reducers/reducers.js",
+      "components/Notifier.js"
     ],
     "collectCoverage": true,
     "moduleNameMapper": {

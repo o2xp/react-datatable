@@ -12,8 +12,7 @@ import {
   Button,
   Select,
   MenuItem,
-  Input,
-  Slide
+  Input
 } from "@material-ui/core";
 import {
   CloudDownload as CloudDownloadIcon,
@@ -28,12 +27,9 @@ import {
   setRowsSelectedPropType
 } from "../../../proptypes";
 import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
+import Transition from "./Transition";
 
 const Json2csvParser = require("json2csv").Parser;
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export class DownloadData extends Component {
   constructor(props) {

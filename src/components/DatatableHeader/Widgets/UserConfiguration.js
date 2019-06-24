@@ -10,7 +10,6 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-  Slide,
   Switch
 } from "@material-ui/core";
 import {
@@ -23,10 +22,7 @@ import {
   setUserConfigurationPropType
 } from "../../../proptypes";
 import { setUserConfiguration as setUserConfigurationAction } from "../../../redux/actions/datatableActions";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import Transition from "./Transition";
 
 export class UserConfiguration extends Component {
   constructor(props) {
