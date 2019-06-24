@@ -114,4 +114,26 @@ describe("Search component", () => {
       expect(search).toHaveBeenCalledWith("Hunt");
     });
   });
+
+  describe("when refreshing", () => {
+    const wrapper = mount(
+      <SearchPureComponent
+        search={search}
+        canSearch
+        isRefreshing
+        rowsSelected={rowsSelected}
+        searchTerm={searchTerm}
+        rows={rows}
+      />
+    );
+
+    it("button should be disabled", () => {
+      const button = wrapper.find("button.search-icon");
+      expect(button.props().disabled).toBeTruthy();
+    });
+    it("input should be disabled", () => {
+      const button = wrapper.find(".search-input input");
+      expect(button.props().disabled).toBeTruthy();
+    });
+  });
 });
