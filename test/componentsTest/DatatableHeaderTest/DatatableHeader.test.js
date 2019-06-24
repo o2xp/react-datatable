@@ -11,11 +11,15 @@ const store = mockStore({
   ...storeSample,
   datatableReducer: {
     ...storeSample.datatableReducer,
+    refreshRows: jest.fn(),
     features: {
       ...storeSample.datatableReducer.features,
       canSearch: true,
+      canDownload: true,
       canFilterColumns: true,
-      canSelectRow: true,
+      canPrint: true,
+      canRefreshRows: true,
+      canSaveUserConfiguration: true,
       additionalIcons: [
         {
           title: "Coffee",
@@ -31,7 +35,16 @@ const storeBasicIcons = mockStore({
   ...storeSample,
   datatableReducer: {
     ...storeSample.datatableReducer,
-    features: { ...storeSample.datatableReducer.features, selectionIcons: [] }
+    features: {
+      ...storeSample.datatableReducer.features,
+      canSearch: false,
+      canDownload: false,
+      canFilterColumns: false,
+      canPrint: false,
+      canRefreshRows: false,
+      canSaveUserConfiguration: false,
+      selectionIcons: []
+    }
   }
 });
 
