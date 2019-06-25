@@ -10,6 +10,7 @@ import {
   refreshRows,
   isRefreshing,
   searchTerm,
+  orderBy,
   rowsPerPage
 } from "./optionsObjectSample";
 
@@ -35,6 +36,7 @@ const mergedMinimumOptionsSample = {
   actions: null,
   keyColumn,
   data,
+  orderBy,
   font,
   pagination: {
     ...pagination,
@@ -48,7 +50,7 @@ const mergedMinimumOptionsSample = {
     canDelete: false,
     canSelectRow: false,
     canRefreshRows: false,
-    canFilterColumns: false,
+    canOrderColumns: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
       ...userConfiguration,

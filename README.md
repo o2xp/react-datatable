@@ -141,7 +141,7 @@ let options  = {
         canDownload: true,
         canSearch: true,
         canRefreshRows: true,
-        canFilterColumns: true,
+        canOrderColumns: true,
         canSaveUserConfiguration: true,
         userConfiguration: {
             columnsOrder: ["id", "name", "age"],
@@ -198,7 +198,7 @@ render() {
 | features .canDownload | boolean | no | false |  If the user can download the data. |
 | features .canSearch | boolean | no | false |  If the user can filter the data by text through a search input. |
 | features .canRefreshRows | boolean | no | false |  If the user can click to refresh the rows. |
-| features .canFilterColumns | boolean | false |  no | If the user can select the columns to display. |
+| features .canOrderColumns | boolean | false |  no | If the user can select the columns to display. |
 | features .canSaveUserConfiguration | boolean | no | false |  If the user can save his columns configuration. (order and which one is displayed) |
 | features .userConfiguration .columnsOrder | array of strings | no | [ ] |  An array of strings where the strings are the column identifier. Datatable will be rendered only with the columns present in the array. |
 | features .userConfiguration .copyToClipboard | boolean | no | true |  If true, when the user click on cell it will copy the value in the clipboard. |
