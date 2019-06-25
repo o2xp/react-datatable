@@ -299,4 +299,13 @@ describe("Datatable actions should create an action to", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it("refresh row error", () => {
+    const payload = "id";
+    const expectedAction = {
+      type: "ORDER_BY_COLUMNS",
+      payload
+    };
+    expect(actions.orderByColumns(payload)).toEqual(expectedAction);
+  });
 });
