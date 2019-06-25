@@ -33,6 +33,10 @@ const defaultOptionsSample = {
   refreshRows: null,
   isRefreshing: false,
   searchTerm: "",
+  orderBy: {
+    keys: [],
+    order: []
+  },
   pagination: {
     pageSelected: 1,
     pageTotal: 1,
@@ -47,7 +51,7 @@ const defaultOptionsSample = {
     canSearch: false,
     canRefreshRows: false,
     canSelectRow: false,
-    canFilterColumns: false,
+    canOrderColumns: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
       columnsOrder: [],

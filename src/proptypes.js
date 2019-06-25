@@ -22,9 +22,11 @@ export const setUserConfigurationPropType = PropTypes.func.isRequired;
 export const enqueueSnackbarPropType = PropTypes.func.isRequired;
 export const refreshRowsUserPropType = PropTypes.func.isRequired;
 export const refreshRowsPropType = PropTypes.func.isRequired;
+export const orderByColumnsPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
+export const orderByPropType = PropTypes.object;
 export const isRefreshingPropType = PropTypes.bool;
 export const searchTermPropType = PropTypes.string;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
@@ -90,7 +92,7 @@ export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
 export const canSearchPropType = PropTypes.bool;
 export const canRefreshRowsPropType = PropTypes.bool;
-export const canFilterColumnsPropType = PropTypes.bool;
+export const canOrderColumnsPropType = PropTypes.bool;
 export const canSelectRowPropType = PropTypes.bool;
 export const canSaveUserConfigurationPropType = PropTypes.bool;
 export const columnsOrderPropType = PropTypes.arrayOf(PropTypes.string);
@@ -191,7 +193,7 @@ export const featuresPropType = PropTypes.shape({
   canDownload: canDownloadPropType,
   canSearch: canSearchPropType,
   canRefreshRows: canRefreshRowsPropType,
-  canFilterColumns: canFilterColumnsPropType,
+  canOrderColumns: canOrderColumnsPropType,
   canSaveUserConfiguration: canSaveUserConfigurationPropType,
   canSelectRow: canSelectRowPropType,
   userConfiguration: userConfigurationPropType,

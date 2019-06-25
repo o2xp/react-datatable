@@ -141,6 +141,10 @@ export const rowsSelected = [];
 export const refreshRows = null;
 export const isRefreshing = false;
 export const searchTerm = "";
+export const orderBy = {
+  keys: [],
+  order: []
+};
 export const data = {
   columns,
   rows
@@ -186,7 +190,7 @@ export const features = {
   canSearch: false,
   canRefreshRows: false,
   canSelectRow: true,
-  canFilterColumns: false,
+  canOrderColumns: false,
   canSaveUserConfiguration: false,
   userConfiguration,
   rowsPerPage,

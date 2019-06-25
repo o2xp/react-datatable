@@ -6,7 +6,7 @@ import {
   titlePropType,
   additionalIconsPropType,
   selectionIconsPropType,
-  canFilterColumnsPropType,
+  canOrderColumnsPropType,
   canDownloadPropType,
   canSearchPropType,
   canPrintPropType,
@@ -30,7 +30,7 @@ class DatatableHeader extends Component {
       title,
       additionalIcons,
       selectionIcons,
-      canFilterColumns,
+      canOrderColumns,
       canDownload,
       canSearch,
       canPrint,
@@ -40,7 +40,7 @@ class DatatableHeader extends Component {
     const hasBaseIcons =
       canSearch ||
       canDownload ||
-      canFilterColumns ||
+      canOrderColumns ||
       canPrint ||
       canRefreshRows ||
       canSaveUserConfiguration;
@@ -51,7 +51,7 @@ class DatatableHeader extends Component {
         <div className="title">{title}</div>
         {canSearch && <Search />}
         {canDownload && <DownloadData />}
-        {canFilterColumns && <ColumnsDisplayer />}
+        {canOrderColumns && <ColumnsDisplayer />}
         {canPrint && <Print />}
         {canRefreshRows && <RefreshRows />}
         {canSaveUserConfiguration && <UserConfiguration />}
@@ -86,7 +86,7 @@ DatatableHeader.propTypes = {
   title: titlePropType.isRequired,
   additionalIcons: additionalIconsPropType.isRequired,
   selectionIcons: selectionIconsPropType.isRequired,
-  canFilterColumns: canFilterColumnsPropType.isRequired,
+  canOrderColumns: canOrderColumnsPropType.isRequired,
   canDownload: canDownloadPropType.isRequired,
   canSearch: canSearchPropType.isRequired,
   canPrint: canPrintPropType.isRequired,
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
     title: state.datatableReducer.title,
     additionalIcons: state.datatableReducer.features.additionalIcons,
     selectionIcons: state.datatableReducer.features.selectionIcons,
-    canFilterColumns: state.datatableReducer.features.canFilterColumns,
+    canOrderColumns: state.datatableReducer.features.canOrderColumns,
     canDownload: state.datatableReducer.features.canDownload,
     canSearch: state.datatableReducer.features.canSearch,
     canPrint: state.datatableReducer.features.canPrint,

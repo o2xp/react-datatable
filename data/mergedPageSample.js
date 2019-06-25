@@ -8,6 +8,7 @@ import {
   refreshRows,
   isRefreshing,
   searchTerm,
+  orderBy,
   features
 } from "./optionsObjectSample";
 
@@ -32,6 +33,7 @@ const mergedPageSample = {
   isRefreshing,
   searchTerm,
   font,
+  orderBy,
   data,
   features: {
     ...features,

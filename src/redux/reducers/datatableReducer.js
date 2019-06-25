@@ -1,10 +1,18 @@
 import deepmerge from "deepmerge";
 import arrayMove from "array-move";
-import { chunk, cloneDeep } from "lodash";
+import { chunk, cloneDeep, orderBy as orderByFunction } from "lodash";
 import { tableRef } from "../../components/DatatableCore/Body/Body";
 
 const Fuse = require("fuse.js");
 
+const optionsFuse = {
+  shouldSort: true,
+  threshold: 0.3,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1
+};
 const defaultState = {
   title: "",
   dimensions: {
@@ -46,6 +54,10 @@ const defaultState = {
   refreshRows: null,
   isRefreshing: false,
   searchTerm: "",
+  orderBy: {
+    keys: [],
+    order: []
+  },
   features: {
     canEdit: false,
     canPrint: false,
@@ -53,7 +65,7 @@ const defaultState = {
     canDelete: false,
     canSearch: false,
     canRefreshRows: false,
-    canFilterColumns: false,
+    canOrderColumns: false,
     canSelectRow: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
@@ -187,12 +199,21 @@ const calcComponentSize = state => {
 const setPagination = ({
   state,
   newPageSelected = null,
-  newRowsPerPageSelected = null,
-  rowsFiltered = null
+  newRowsPerPageSelected = null
 }) => {
+  const { searchTerm, orderBy } = state;
   let rowsToUse = state.data.rows;
-  if (rowsFiltered !== null) {
-    rowsToUse = rowsFiltered;
+  if (searchTerm.length) {
+    const fuse = new Fuse(state.data.rows, {
+      ...optionsFuse,
+      keys: state.features.userConfiguration.columnsOrder
+    });
+    rowsToUse = fuse.search(searchTerm);
+  }
+
+  const { keys, order } = orderBy;
+  if (keys.length) {
+    rowsToUse = orderByFunction(rowsToUse, keys, order);
   }
 
   const rowsPerPageSelected =
@@ -516,22 +537,14 @@ const setRowsSelected = (state, payload) => {
 };
 
 const search = (state, payload) => {
-  const options = {
-    shouldSort: true,
-    threshold: 0.3,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: state.features.userConfiguration.columnsOrder
+  const newState = {
+    ...state,
+    searchTerm: payload
   };
-  const fuse = new Fuse(state.data.rows, options);
-  const result = fuse.search(payload);
 
   return {
-    ...state,
-    searchTerm: payload,
-    pagination: setPagination({ state, rowsFiltered: result })
+    ...newState,
+    pagination: setPagination({ state: newState })
   };
 };
 
@@ -632,6 +645,33 @@ const refreshRowsError = state => {
   return { ...state, isRefreshing: false };
 };
 
+const orderByColumns = (state, payload) => {
+  const { orderBy } = state;
+  const { keys, order } = orderBy;
+  const index = keys.indexOf(payload);
+
+  if (index === -1) {
+    keys.push(payload);
+    order.push("asc");
+  } else if (order[index] === "desc") {
+    keys.splice(index, 1);
+    order.splice(index, 1);
+  } else {
+    order[index] = "desc";
+  }
+
+  const newState = {
+    ...state,
+    orderBy: { keys, order }
+  };
+  return {
+    ...newState,
+    pagination: setPagination({
+      state: newState
+    })
+  };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -674,6 +714,8 @@ const datatableReducer = (state = defaultState, action) => {
       return refreshRowsSuccess(state, payload);
     case "REFRESH_ROWS_ERROR":
       return refreshRowsError(state);
+    case "ORDER_BY_COLUMNS":
+      return orderByColumns(state, payload);
     default:
       return state;
   }
