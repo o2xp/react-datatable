@@ -1,6 +1,11 @@
 import React from "react";
-import { shallow } from "enzyme";
-import { HeaderCell as HeaderCellPureComponent } from "../../../../src/components/DatatableCore/Header/HeaderCell";
+import { shallow, mount } from "enzyme";
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import { sortableContainer } from "react-sortable-hoc";
+import HeaderCell, {
+  HeaderCell as HeaderCellPureComponent
+} from "../../../../src/components/DatatableCore/Header/HeaderCell";
 import {
   NumberWrapper,
   TextWrapper,
@@ -9,7 +14,19 @@ import {
   TimeWrapper,
   DateTimeWrapper
 } from "../../../../src/components/DatatableCore/CellTypes";
+import { storeSample } from "../../../../data/samples";
 
+const mockStore = configureStore();
+const store = mockStore({
+  ...storeSample,
+  datatableReducer: {
+    ...storeSample.datatableReducer,
+    features: {
+      ...storeSample.datatableReducer.features,
+      canOrderColumns: true
+    }
+  }
+});
 const columnNumber = {
   dataType: "number",
   id: "number",
@@ -55,8 +72,26 @@ const columnDefault = {
 
 const orderBy = { keys: [], order: [] };
 const orderByColumns = jest.fn();
+const onSortEnd = jest.fn();
+const SortableContainer = sortableContainer(({ children }) => {
+  return <div>{children}</div>;
+});
 
 describe("BodyCell component should create a cell of type", () => {
+  it("should render component connect", () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <HeaderCell
+          column={columnNumber}
+          width={columnNumber.colSize}
+          index={0}
+        />
+      </Provider>
+    );
+
+    expect(wrapper.find("Connect(HeaderCell)")).toHaveLength(1);
+  });
+
   it("number", () => {
     const wrapper = shallow(
       <HeaderCellPureComponent
@@ -181,5 +216,126 @@ describe("BodyCell component should create a cell of type", () => {
         {columnDefault.label}
       </TextWrapper>
     );
+  });
+
+  it("create cell-header", () => {
+    const wrapper = mount(
+      <SortableContainer
+        onSortEnd={onSortEnd}
+        axis="x"
+        lockAxis="x"
+        lockToContainerEdges
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
+        <HeaderCellPureComponent
+          column={columnDefault}
+          width={columnDefault.colSize}
+          index={0}
+          orderBy={orderBy}
+          orderByColumns={orderByColumns}
+          canOrderColumns
+        />
+      </SortableContainer>
+    );
+    expect(wrapper.find(".cell-header").length).toEqual(1);
+  });
+
+  it("on mouse over should set state", () => {
+    const wrapper = mount(
+      <SortableContainer
+        onSortEnd={onSortEnd}
+        axis="x"
+        lockAxis="x"
+        lockToContainerEdges
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
+        <HeaderCellPureComponent
+          column={columnDefault}
+          width={columnDefault.colSize}
+          index={0}
+          orderBy={orderBy}
+          orderByColumns={orderByColumns}
+          canOrderColumns
+        />
+      </SortableContainer>
+    );
+    const button = wrapper.find("button.button-header");
+    button.props().onMouseOver();
+    expect(
+      wrapper.find(HeaderCellPureComponent).state("childButtonHovered")
+    ).toBeTruthy();
+  });
+
+  it("on mouse leave should set state", () => {
+    const wrapper = mount(
+      <SortableContainer
+        onSortEnd={onSortEnd}
+        axis="x"
+        lockAxis="x"
+        lockToContainerEdges
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
+        <HeaderCellPureComponent
+          column={columnDefault}
+          width={columnDefault.colSize}
+          index={0}
+          orderBy={{ keys: ["default"], order: ["desc"] }}
+          orderByColumns={orderByColumns}
+          canOrderColumns
+        />
+      </SortableContainer>
+    );
+    const button = wrapper.find("button.button-header");
+    button.props().onMouseOver();
+    button.props().onMouseLeave();
+    expect(
+      wrapper.find(HeaderCellPureComponent).state("childButtonHovered")
+    ).toBeFalsy();
+  });
+
+  it("on focus should return null", () => {
+    const wrapper = mount(
+      <SortableContainer
+        onSortEnd={onSortEnd}
+        axis="x"
+        lockAxis="x"
+        lockToContainerEdges
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
+        <HeaderCellPureComponent
+          column={columnDefault}
+          width={columnDefault.colSize}
+          index={0}
+          orderBy={{ keys: ["default"], order: ["asc"] }}
+          orderByColumns={orderByColumns}
+          canOrderColumns
+        />
+      </SortableContainer>
+    );
+    const button = wrapper.find("button.button-header");
+    expect(button.props().onFocus()).toEqual(null);
+  });
+
+  it("connected", () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <SortableContainer
+          onSortEnd={onSortEnd}
+          axis="x"
+          lockAxis="x"
+          lockToContainerEdges
+          helperClass="Table-Header-Cell-Draging-o2xp"
+        >
+          <HeaderCell
+            column={columnDefault}
+            width={columnDefault.colSize}
+            index={0}
+          />
+        </SortableContainer>
+      </Provider>
+    );
+    const button = wrapper.find("button.button-header");
+    button.simulate("click");
+    expect(wrapper.find(".cell-header").length).toEqual(1);
   });
 });
