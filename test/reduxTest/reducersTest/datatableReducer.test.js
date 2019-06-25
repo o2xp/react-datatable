@@ -1,5 +1,5 @@
 import equal from "fast-deep-equal";
-import { chunk, cloneDeep, shuffle } from "lodash";
+import { chunk, cloneDeep, shuffle, orderBy as orderByFunction } from "lodash";
 import datatableReducer from "../../../src/redux/reducers/datatableReducer";
 import {
   defaultOptionsSample,
@@ -1387,6 +1387,145 @@ describe("datatableReducer reducer", () => {
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: rows
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle ORDER_BY_COLUMNS and return", () => {
+    it("sort asc by age", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "ORDER_BY_COLUMNS",
+        payload: "age"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        orderBy: {
+          keys: ["age"],
+          order: ["asc"]
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: orderByFunction(
+            mergedSimpleOptionsSample.data.rows,
+            ["age"],
+            ["asc"]
+          )
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("sort desc by age", () => {
+      const result = datatableReducer(
+        {
+          ...mergedSimpleOptionsSample,
+          orderBy: {
+            keys: ["age"],
+            order: ["asc"]
+          }
+        },
+        {
+          type: "ORDER_BY_COLUMNS",
+          payload: "age"
+        }
+      );
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        orderBy: {
+          keys: ["age"],
+          order: ["desc"]
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: orderByFunction(
+            mergedSimpleOptionsSample.data.rows,
+            ["age"],
+            ["desc"]
+          )
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("sort desc by age and name by asc", () => {
+      let result = datatableReducer(
+        {
+          ...mergedSimpleOptionsSample,
+          orderBy: {
+            keys: ["age"],
+            order: ["asc"]
+          }
+        },
+        {
+          type: "ORDER_BY_COLUMNS",
+          payload: "age"
+        }
+      );
+
+      result = datatableReducer(result, {
+        type: "ORDER_BY_COLUMNS",
+        payload: "name"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        orderBy: {
+          keys: ["age", "name"],
+          order: ["desc", "asc"]
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: orderByFunction(
+            mergedSimpleOptionsSample.data.rows,
+            ["age", "name"],
+            ["desc", "asc"]
+          )
+        }
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("sort name by asc", () => {
+      let result = datatableReducer(
+        {
+          ...mergedSimpleOptionsSample,
+          orderBy: {
+            keys: ["age"],
+            order: ["desc"]
+          }
+        },
+        {
+          type: "ORDER_BY_COLUMNS",
+          payload: "name"
+        }
+      );
+
+      result = datatableReducer(result, {
+        type: "ORDER_BY_COLUMNS",
+        payload: "age"
+      });
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        orderBy: {
+          keys: ["name"],
+          order: ["asc"]
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: orderByFunction(
+            mergedSimpleOptionsSample.data.rows,
+            ["name"],
+            ["asc"]
+          )
         }
       };
 
