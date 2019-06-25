@@ -11,6 +11,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  orderBy,
   searchTerm,
   features
 } from "./optionsObjectSample";
@@ -37,6 +38,7 @@ const mergedSimpleOptionsSample = {
   rowsEdited,
   refreshRows,
   isRefreshing,
+  orderBy,
   searchTerm,
   rowsSelected,
   actions: null,

@@ -7,6 +7,7 @@ import {
   features,
   refreshRows,
   isRefreshing,
+  orderBy,
   searchTerm,
   columns
 } from "./optionsObjectSample";
@@ -27,6 +28,7 @@ const storeNoRowsDataSample = {
     actions: null,
     refreshRows,
     isRefreshing,
+    orderBy,
     searchTerm,
     features: {
       ...features,

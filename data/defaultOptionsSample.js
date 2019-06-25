@@ -33,6 +33,10 @@ const defaultOptionsSample = {
   refreshRows: null,
   isRefreshing: false,
   searchTerm: "",
+  orderBy: {
+    keys: [],
+    order: []
+  },
   pagination: {
     pageSelected: 1,
     pageTotal: 1,

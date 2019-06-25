@@ -141,6 +141,10 @@ export const rowsSelected = [];
 export const refreshRows = null;
 export const isRefreshing = false;
 export const searchTerm = "";
+export const orderBy = {
+  keys: [],
+  order: []
+};
 export const data = {
   columns,
   rows

@@ -6,6 +6,7 @@ import {
   font,
   refreshRows,
   isRefreshing,
+  orderBy,
   searchTerm,
   features
 } from "./optionsObjectSample";
@@ -25,6 +26,7 @@ const storeNoDataSample = {
     rowsSelected: [],
     refreshRows,
     isRefreshing,
+    orderBy,
     searchTerm,
     actions: null,
     features: {
