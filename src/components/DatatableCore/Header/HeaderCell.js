@@ -21,7 +21,7 @@ import {
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
 
-class HeaderCell extends Component {
+export class HeaderCell extends Component {
   constructor(props) {
     super(props);
     this.state = {
