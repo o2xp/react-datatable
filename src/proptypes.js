@@ -31,6 +31,7 @@ export const isRefreshingPropType = PropTypes.bool;
 export const searchTermPropType = PropTypes.string;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
+export const maskPropType = PropTypes.array;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,

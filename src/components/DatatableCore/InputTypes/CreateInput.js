@@ -14,6 +14,7 @@ import {
   valuesPropType,
   dateFormatPropType,
   typePropType,
+  maskPropType,
   inputTypePropType
 } from "../../../proptypes";
 
@@ -26,6 +27,7 @@ const CreateInput = ({
   values,
   dateFormat,
   type,
+  mask,
   inputType
 }) => {
   switch (inputType) {
@@ -88,6 +90,7 @@ const CreateInput = ({
           rowId={rowId}
           columnId={columnId}
           setRowEdited={setRowEdited}
+          mask={mask}
         />
       );
   }
@@ -96,6 +99,7 @@ const CreateInput = ({
 CreateInput.propTypes = {
   cellVal: cellValPropType.isRequired,
   valueVerification: valueVerificationPropType,
+  mask: maskPropType,
   rowId: rowIdPropType.isRequired,
   columnId: columnIdPropType.isRequired,
   setRowEdited: setRowEditedPropType,

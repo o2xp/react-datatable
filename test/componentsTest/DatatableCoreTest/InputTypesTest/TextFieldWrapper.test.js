@@ -37,7 +37,38 @@ describe("Select wrapper", () => {
     }
   });
 
-  it("should render a Tootltip and Textfield", () => {
+  it("should render a Tootltip and Input and MaskedInput", () => {
+    const wrapper = mount(
+      <TextFieldWrapper
+        cellVal={10}
+        type="number"
+        columnId="age"
+        rowId={rowId}
+        valueVerification={valueVerification}
+        setRowEdited={setRowEdited}
+        mask={[
+          "(",
+          /[1-9]/,
+          /\d/,
+          /\d/,
+          ")",
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          "-",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/
+        ]}
+      />
+    );
+    expect(wrapper.find("Tooltip")).toHaveLength(1);
+    expect(wrapper.find("Input")).toHaveLength(1);
+  });
+
+  it("should render a Tootltip and Input", () => {
     const wrapper = mount(
       <TextFieldWrapper
         cellVal={10}
@@ -49,7 +80,7 @@ describe("Select wrapper", () => {
       />
     );
     expect(wrapper.find("Tooltip")).toHaveLength(1);
-    expect(wrapper.find("TextField")).toHaveLength(1);
+    expect(wrapper.find("Input")).toHaveLength(1);
   });
 
   describe("onValueChange", () => {

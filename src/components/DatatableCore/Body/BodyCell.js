@@ -50,7 +50,8 @@ export class BodyCell extends Component {
       dataType,
       values,
       valueVerification,
-      dateFormat
+      dateFormat,
+      mask
     } = column;
     const columnId = column.id;
     const properties = {
@@ -62,6 +63,7 @@ export class BodyCell extends Component {
       columnId,
       valueVerification,
       dateFormat,
+      mask,
       setRowEdited
     };
 
