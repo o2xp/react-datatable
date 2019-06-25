@@ -96,7 +96,7 @@ export class BodyRow extends Component {
         column={column}
         rowId={rowId}
         key={key}
-        onClick={() => this.copyToClipboardFunction(val)}
+        onClick={() => (isEditing ? null : this.copyToClipboardFunction(val))}
       />
     );
   };
