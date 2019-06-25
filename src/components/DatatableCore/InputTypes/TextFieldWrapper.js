@@ -1,12 +1,20 @@
 import React, { Component, Fragment } from "react";
 import equal from "fast-deep-equal";
-import { TextField, Tooltip, Zoom, withStyles } from "@material-ui/core";
+import {
+  Tooltip,
+  Zoom,
+  withStyles,
+  FormControl,
+  Input
+} from "@material-ui/core";
+import MaskedInput from "react-text-mask";
 import { checkValue, setValue } from "./PickersFunction";
 import { customVariant } from "../../MuiTheme";
 import {
   valueVerificationPropType,
   cellValPropType,
   classesPropType,
+  maskPropType,
   typePropType
 } from "../../../proptypes";
 
@@ -50,10 +58,36 @@ export class TextFieldWrapper extends Component {
     }
   };
 
+  textMaskCustom = properties => {
+    const { inputRef, ...other } = properties;
+    const { mask } = this.props;
+    return (
+      <Fragment>
+        {(!mask || mask.length === 0) && (
+          <input
+            {...other}
+            ref={ref => {
+              inputRef(ref ? ref.inputElement : null);
+            }}
+          />
+        )}
+        {mask && mask.length > 0 && (
+          <MaskedInput
+            {...other}
+            ref={ref => {
+              inputRef(ref ? ref.inputElement : null);
+            }}
+            mask={mask}
+            showMask
+          />
+        )}
+      </Fragment>
+    );
+  };
+
   render() {
     const { type, cellVal, classes } = this.props;
     const { tooltipOpen, message, error } = this.state;
-
     return (
       <Tooltip
         open={tooltipOpen}
@@ -64,8 +98,8 @@ export class TextFieldWrapper extends Component {
         TransitionComponent={Zoom}
         interactive
       >
-        <Fragment>
-          <TextField
+        <FormControl>
+          <Input
             value={cellVal}
             error={error}
             onFocus={() => this.toggleTooltip(true)}
@@ -73,8 +107,9 @@ export class TextFieldWrapper extends Component {
             onChange={e => this.onValueChange(e.target.value)}
             type={type}
             fullWidth
+            inputComponent={this.textMaskCustom}
           />
-        </Fragment>
+        </FormControl>
       </Tooltip>
     );
   }
@@ -84,6 +119,7 @@ TextFieldWrapper.propTypes = {
   cellVal: cellValPropType.isRequired,
   classes: classesPropType.isRequired,
   type: typePropType.isRequired,
+  mask: maskPropType,
   valueVerification: valueVerificationPropType
 };
 
