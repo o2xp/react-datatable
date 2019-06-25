@@ -47,7 +47,7 @@ const defaultOptionsSample = {
     canSearch: false,
     canRefreshRows: false,
     canSelectRow: false,
-    canFilterColumns: false,
+    canOrderColumns: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
       columnsOrder: [],

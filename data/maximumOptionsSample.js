@@ -33,7 +33,7 @@ const maximumOptionsSample = {
     canDelete: true,
     canSearch: true,
     canRefreshRows: true,
-    canFilterColumns: true,
+    canOrderColumns: true,
     canSelectRow: true,
     canSaveUserConfiguration: true,
     userConfiguration: {

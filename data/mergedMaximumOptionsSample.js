@@ -50,7 +50,7 @@ const mergedMaximumOptionsSample = {
     canDelete: true,
     canRefreshRows: true,
     canSelectRow: true,
-    canFilterColumns: true,
+    canOrderColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {
       columnsOrder: ["actions", "id", "name", "age"],

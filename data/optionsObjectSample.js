@@ -186,7 +186,7 @@ export const features = {
   canSearch: false,
   canRefreshRows: false,
   canSelectRow: true,
-  canFilterColumns: false,
+  canOrderColumns: false,
   canSaveUserConfiguration: false,
   userConfiguration,
   rowsPerPage,

@@ -48,7 +48,7 @@ const mergedMinimumOptionsSample = {
     canDelete: false,
     canSelectRow: false,
     canRefreshRows: false,
-    canFilterColumns: false,
+    canOrderColumns: false,
     canSaveUserConfiguration: false,
     userConfiguration: {
       ...userConfiguration,

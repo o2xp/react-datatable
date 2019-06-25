@@ -124,6 +124,11 @@ export const refreshRows = payload => {
   };
 };
 
+export const orderByColumns = payload => ({
+  type: "ORDER_BY_COLUMNS",
+  payload
+});
+
 export const updateOptions = payload => ({
   type: "UPDATE",
   payload
