@@ -1,6 +1,6 @@
 Component example : 
 ```jsx
-/ ES6
+// ES6
 import { Datatable } from "@o2xp/react-datatable";
 import React, { Component } from "react";
 
