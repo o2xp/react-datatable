@@ -24,9 +24,26 @@ const storyOptionsSample = {
   },
   features: {
     canEdit: true,
+    canDelete: true,
     canPrint: true,
     canDownload: true,
+    canSearch: true,
+    canRefreshRows: true,
+    canOrderColumns: true,
     canSelectRow: true,
+    canSaveUserConfiguration: true,
+    userConfiguration: {
+      columnsOrder: [
+        "id",
+        "name",
+        "age",
+        "adult",
+        "birthDate",
+        "eyeColor",
+        "iban"
+      ],
+      copyToClipboard: true
+    },
     selectionIcons: [
       {
         title: "Action 1",
