@@ -4,7 +4,8 @@ In your file :
 
 ```jsx
 // ES6
-import {Datatable} from "@o2xp/react-datatable";
+import { Datatable } from "@o2xp/react-datatable";
+import React, { Component } from "react;
 
 // Advanced Example
 const options = {
@@ -155,7 +156,9 @@ const options = {
     }
 };
 
-render() {
-    <Datatable options={options} />
+class App extends Component {
+    render() {
+        return <Datatable options={options} />;
+    }
 }
 ```
