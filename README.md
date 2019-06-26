@@ -12,7 +12,7 @@ See a show case [just here](https://o2xp.github.io/react-datatable/).
 - [**Getting Started**](#getting-started)
     - [**Installing**](#installing)
     - [**Prop Types**](#prop-types)
-        - [**datatable Properties**](#datatable-properties)
+        - [**Datatable Properties**](#datatable-properties)
         - [**Options Properties**](#options-properties)
         - [**Columns Props**](#columns-props)
         - [**Additional Icons Props**](#additional-icons-props)
