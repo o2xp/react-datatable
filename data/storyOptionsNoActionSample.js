@@ -18,7 +18,23 @@ const storyOptionsNoActionSample = {
   },
   features: {
     canPrint: true,
-    canDownload: true
+    canDownload: true,
+    canSearch: true,
+    canRefreshRows: true,
+    canOrderColumns: true,
+    canSaveUserConfiguration: true,
+    userConfiguration: {
+      columnsOrder: [
+        "id",
+        "name",
+        "age",
+        "adult",
+        "birthDate",
+        "eyeColor",
+        "iban"
+      ],
+      copyToClipboard: true
+    }
   }
 };
 
