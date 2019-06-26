@@ -40,8 +40,8 @@ let options  = {
     data: {
         columns: [ 
             {
-                id: "index",
-                label: "index",
+                id: "id",
+                label: "id",
                 colSize: "80px"
             },
             {
@@ -80,6 +80,8 @@ class App extends Component {
         return <Datatable options={options} />;
     }
 }
+
+export default App;
 ```
 
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
