@@ -88,27 +88,7 @@ const options = {
         colSize: "150px",
         editable: true,
         inputType: "input",
-        mask: [
-          /\d/,
-          /\d/,
-          /\d/,
-          /\d/,
-          " ",
-          /\d/,
-          /\d/,
-          /\d/,
-          /\d/,
-          " ",
-          /\d/,
-          /\d/,
-          /\d/,
-          /\d/,
-          " ",
-          /\d/,
-          /\d/,
-          /\d/,
-          /\d/
-        ]
+        mask:[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]
       }
     ],
     rows: [
