@@ -32,8 +32,8 @@ In your file :
 // ES6
 import {Datatable} from "@o2xp/react-datatable";
 
-Basic Example
-...
+// Basic Example
+
 let options  = {
     keyColumn: 'id',
     data: {
@@ -73,7 +73,7 @@ let options  = {
         ],
     }
 }
-...
+
 render() {
     <Datatable options={options} />
 }
