@@ -143,7 +143,7 @@ Additional icons is an array of object construct with these keys :
 
 | Property | Type | Required? | Description |
 |:---|:---:|:---:|:---|
-| tooltip | string | yes | Description of the button. The text will be displayed on hovering the icon |
+| title | string | yes | Description of the button. The text will be displayed on hovering the icon |
 | icon | Component | yes | Use @material-ui/icons to provide an icon to display. |
 | onClick | function | yes | A function that doesn't take parameter. The function will be triggered on click. |
 
@@ -152,7 +152,7 @@ Additional selection icons is an array of object construct with these keys :
 
 | Property | Type | Required? | Description |
 |:---|:---:|:---:|:---|
-| tooltip | string | yes | Description of the button. The text will be displayed on hovering the icon |
+| title | string | yes | Description of the button. The text will be displayed on hovering the icon |
 | icon | Component | yes | Use @material-ui/icons to provide an icon to display. |
 | onClick | function | yes | A function that takes a parameter (the selected rows). . The function will be triggered on click.|
 
