@@ -10,8 +10,8 @@ const options  = {
     data: {
         columns: [ 
             {
-                id: "index",
-                label: "index",
+                id: "id",
+                label: "id",
                 colSize: "80px",
                 dataType: "text"
             },
