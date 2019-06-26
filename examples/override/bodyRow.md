@@ -4,7 +4,7 @@ Component example :
 import { Datatable } from "@o2xp/react-datatable";
 import React, { Component } from "react";
 
-// Custom datatype Example
+// Custom table body row Example
 const options = {
   keyColumn: "id",
   data: {
