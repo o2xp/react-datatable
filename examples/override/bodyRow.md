@@ -102,7 +102,7 @@ class App extends Component {
   };
 
   render() {
-        return (
+    return (
         <Datatable
             options={options}
             CustomTableBodyRow={this.buildCustomTableBodyRow}
