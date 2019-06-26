@@ -5,14 +5,15 @@
 
 @o2xp/react-datatable is a modulable component to render data in a table with some nice features !
 
-See a live example [just here](https://o2xp.github.io/react-datatable/).
+See a show case [just here](https://o2xp.github.io/react-datatable/).
 
 
 # Table of Contents
 - [**Getting Started**](#getting-started)
     - [**Installing**](#installing)
     - [**Prop Types**](#prop-types)
-        - [**Global Properties**](#global-properties)
+        - [**datatable Properties**](#datatable-properties)
+        - [**Options Properties**](#options-properties)
         - [**Columns Props**](#columns-props)
         - [**Additional Icons Props**](#additional-icons-props)
         - [**Additional Selection Icons Props**](#additional-selection-icons-props)
@@ -33,7 +34,6 @@ In your file :
 import {Datatable} from "@o2xp/react-datatable";
 
 // Basic Example
-
 let options  = {
     keyColumn: 'id',
     data: {
@@ -82,7 +82,20 @@ render() {
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
 
 ### Prop Types
-#### Global Properties
+#### Datatable Properties
+| Property | Type | Required? | Description |
+|:---|:---:|:---:|:---|
+| options | object | yes | An object that all the options to render the datatable. See [**Options Properties**](#options-properties). |
+| actions | function | no | Function that take as parameter {type, payload}, where type is the action performed (save, delete etc..) and payload the data needed to perform the action. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
+| refreshRows | function | no | Function that return an an array of objects where each object is defined by the columns identifier as key and the value. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
+| forceRerender | boolean | no | Do you want to rerender the component on route change or keep the state ? |
+| CustomTableBodyRow | function | no | Function that take { row, columnsOrder, rowIndex, columnSizeMultiplier, height } and return a react html element. See [**body row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
+| CustomTableBodyCell | function | no | Function that take { cellVal, column, rowId } and return a react html element. See [**body cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md) example. |
+| CustomTableHeaderRow | function | no | Function that take { columnsOrder, columnSizeMultiplier } and return a react html element. See [**header row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
+| CustomTableHeaderCell | function | no | Function that take { column } and return a react html element. See [**header cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md) example. |
+| customDataTypes | array | no |  object that return an array of object with datatypes and react html element. See [**datatypes cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/datatypes.md) example. |
+
+#### Options Properties
 | Property | Type | Required? | Default | Description |
 |:---|:---:|:---:|:---:|:---|
 | title | string | no | " " | Title of the datatable. |
@@ -144,7 +157,13 @@ Additional selection icons is an array of object construct with these keys :
 | onClick | function | yes | A function that takes a parameter (the selected rows). . The function will be triggered on click.|
 
 ## Overriding
-**_Coming soon !_**
+
+Because we want flexibility for our users we decide to leave a lot of possibility to users. So what can you override ?
+- datatypes - [documentation](https://github.com/o2xp/react-datatable/blob/develop/examples/override/datatypes.md)
+- body row - [documentation](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md)
+- body cell - [documentation](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md)
+- header row - [documentation](https://github.com/o2xp/react-datatable/blob/develop/examples/override/headerRow.md)
+- header cell - [documentation](https://github.com/o2xp/react-datatable/blob/develop/examples/override/headerCell.md)
 
 ## Contributing
 Do you want to contribute to this project ? Great ! You can start by reading our [**contributing guide**](https://github.com/o2xp/react-datatable/blob/develop/CONTRIBUTING.md).
