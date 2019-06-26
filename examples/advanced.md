@@ -1,3 +1,5 @@
+This example is regrouping all the options that offer the datatable.
+
 In your file : 
 
 ```jsx
