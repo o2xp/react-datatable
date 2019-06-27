@@ -1,11 +1,18 @@
 This example is regrouping all the options that offer the datatable.
 
+[**Live implementation**](https://codesandbox.io/s/advanced-example-for-o2xpreact-datatable-tsb2j)
+
 In your file : 
 
 ```jsx
 // ES6
-import { Datatable } from "@o2xp/react-datatable";
 import React, { Component } from "react";
+import { Datatable } from "@o2xp/react-datatable";
+import {
+  FreeBreakfast as CoffeeIcon,
+  CallSplit as CallSplitIcon
+} from "@material-ui/icons";
+import { chunk } from "lodash";
 
 // Advanced Example
 const options = {
@@ -88,7 +95,27 @@ const options = {
         colSize: "150px",
         editable: true,
         inputType: "input",
-        mask:[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]
+        mask: [
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/
+        ]
       }
     ],
     rows: [
@@ -142,14 +169,14 @@ const options = {
     additionalIcons: [
       {
         title: "Coffee",
-        icon: <CoffeeIcon />,
+        icon: <CoffeeIcon color="primary" />,
         onClick: () => alert("Coffee Time!")
       }
     ],
     selectionIcons: [
       {
         title: "Selected Rows",
-        icon: <CallSplitIcon />,
+        icon: <CallSplitIcon color="primary" />,
         onClick: rows => console.log(rows)
       }
     ]
@@ -157,8 +184,34 @@ const options = {
 };
 
 class App extends Component {
+  actionsRow = ({ type, payload }) => {
+    console.log(type);
+    console.log(payload);
+  };
+
+  refreshRows = () => {
+    const { rows } = options.data;
+    const randomRows = Math.floor(Math.random() * rows.length) + 1;
+    const randomTime = Math.floor(Math.random() * 4000) + 1000;
+    const randomResolve = Math.floor(Math.random() * 10) + 1;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (randomResolve > 3) {
+          resolve(chunk(rows, randomRows)[0]);
+        }
+        reject(new Error("err"));
+      }, randomTime);
+    });
+  };
+
   render() {
-    return <Datatable options={options} />;
+    return (
+      <Datatable
+        options={options}
+        refreshRows={this.refreshRows}
+        actions={this.actionsRow}
+      />
+    );
   }
 }
 
