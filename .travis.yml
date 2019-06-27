@@ -24,3 +24,9 @@ deploy:
   local_dir: storybook-static/
   on:
     branch: master
+deploy:
+  provider: npm
+  email: mailmorgandubois@gmail.com
+  api_key: $NPM_TOKEN
+  on:
+    branch: master
