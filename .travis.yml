@@ -17,6 +17,9 @@ after_success:
     fi
 before_deploy:
   - npm run build-storybook
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      npm run build;
+    fi
 deploy:
   provider: pages
   skip_cleanup: true

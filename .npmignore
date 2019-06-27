@@ -1,5 +1,5 @@
 dist/
-tests/
+test/
 stories/
 .storybook/
 .eslintignore
