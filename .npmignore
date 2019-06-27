@@ -5,3 +5,6 @@ stories/
 .eslintignore
 .eslintrc
 storybook-static/
+__mocks__/
+examples/
+data/
