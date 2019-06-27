@@ -83,7 +83,8 @@ class App extends Component {
 
 export default App;
 ```
-[**Live implementation**](https://codesandbox.io/s/basic-example-o2xpreact-datatable-wsmjp)
+[**Live implementation**](https://codesandbox.io/s/basic-example-o2xpreact-datatable-wsmjp) 
+
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
 
 ### Prop Types
