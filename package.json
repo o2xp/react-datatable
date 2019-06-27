@@ -1,6 +1,17 @@
 {
   "name": "@o2xp/react-datatable",
-  "version": "1.0.2",
+  "description": "@o2xp/react-datatable is a modulable component to render data in a table with some nice features !",
+  "keywords": [
+    "react", "component", "datatable", "data", "modulable", "table", "material-ui"
+  ],
+  "homepage": "https://github.com/o2xp/react-datatable",
+  "bugs": "https://github.com/o2xp/react-datatable/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/o2xp/react-datatable"
+  },
+  "version": "1.0.3",
   "dependencies": {
     "@date-io/moment": "^1.3.5",
     "@material-ui/core": "^3.9.3",
