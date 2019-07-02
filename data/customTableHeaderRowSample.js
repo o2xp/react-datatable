@@ -8,7 +8,7 @@ import { simpleOptionsSample } from "./samples";
 const customTableHeaderRowSample = ({ columnsOrder, columnSizeMultiplier }) => {
   const { columns } = simpleOptionsSample.data;
   const columnAction = {
-    id: "actions",
+    id: "o2xpActions",
     label: "Actions",
     colSize: "150px",
     editable: false
@@ -17,7 +17,7 @@ const customTableHeaderRowSample = ({ columnsOrder, columnSizeMultiplier }) => {
     <div className="Table-Row">
       {columnsOrder.map(columnId => {
         const column =
-          columnId === "actions"
+          columnId === "o2xpActions"
             ? columnAction
             : columns.find(col => col.id === columnId);
         const width = `${(

@@ -130,7 +130,7 @@ describe("datatableReducer reducer", () => {
       mergedSimpleOptionsSampleNoColSize.data.columns = mergedSimpleOptionsSampleNoColSize.data.columns.map(
         col => {
           const column = col;
-          column.colSize = col.id === "actions" ? "150px" : "100px";
+          column.colSize = col.id === "o2xpActions" ? "150px" : "100px";
           return column;
         }
       );
@@ -221,7 +221,7 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
-        "actions",
+        "o2xpActions",
         "name",
         "id",
         "age",
@@ -262,7 +262,7 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
-        "actions",
+        "o2xpActions",
         "name",
         "id",
         "adult",
@@ -296,7 +296,7 @@ describe("datatableReducer reducer", () => {
       );
 
       mergedSimpleOptionsSampleSortColumns.features.userConfiguration.columnsOrder = [
-        "actions",
+        "o2xpActions",
         "name",
         "age",
         "adult",
@@ -1252,7 +1252,7 @@ describe("datatableReducer reducer", () => {
           userConfiguration: {
             ...mergedSimpleOptionsSample.features.userConfiguration,
             columnsOrder: [
-              "actions",
+              "o2xpActions",
               "name",
               "age",
               "adult",
@@ -1284,7 +1284,7 @@ describe("datatableReducer reducer", () => {
           userConfiguration: {
             ...mergedSimpleOptionsSample.features.userConfiguration,
             columnsOrder: [
-              "actions",
+              "o2xpActions",
               "id",
               "name",
               "age",

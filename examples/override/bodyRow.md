@@ -58,7 +58,7 @@ class App extends Component {
   }) => {
     let columns = options.data.columns;
     const columnAction = {
-      id: "actions",
+      id: "o2xpActions",
       label: "Actions",
       colSize: "150px",
       editable: false
@@ -72,7 +72,7 @@ class App extends Component {
       >
         {columnsOrder.map(columnId => {
           let column =
-            columnId === "actions"
+            columnId === "o2xpActions"
               ? columnAction
               : columns.find(col => col.id === columnId);
           const width = `${(

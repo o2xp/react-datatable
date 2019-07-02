@@ -16,7 +16,7 @@ const revertRowEdited = jest.fn();
 const deleteRow = jest.fn();
 const selectRow = jest.fn();
 const column = {
-  id: "actions",
+  id: "o2xpActions",
   label: "Actions",
   colSize: "150px",
   editable: false
