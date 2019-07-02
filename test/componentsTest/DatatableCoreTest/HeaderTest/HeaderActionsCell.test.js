@@ -11,7 +11,7 @@ const mockStore = configureStore();
 const store = mockStore(storeSample);
 
 const column = {
-  id: "actions",
+  id: "o2xpActions",
   label: "Actions",
   colSize: "150px",
   editable: false

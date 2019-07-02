@@ -22,7 +22,7 @@ export class HeaderRow extends Component {
     ).toString()}px`;
     const key = `column-${columnId}`;
 
-    if (columnId === "actions") {
+    if (columnId === "o2xpActions") {
       return <HeaderActionsCell key={key} column={column} />;
     }
 
