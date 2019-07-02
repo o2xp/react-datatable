@@ -83,7 +83,7 @@ class App extends Component {
 
 export default App;
 ```
-
+**Attention :** the column id **"o2xpActions"** is reserved. Using it can result of unexpected behaviours.
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
 
 ### Prop Types
