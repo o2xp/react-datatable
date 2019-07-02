@@ -1,4 +1,7 @@
 Component example : 
+
+[**Live implementation**](https://codesandbox.io/s/header-row-override-example-for-o2xpreact-datatable-ssf72)
+
 ```jsx
 // ES6
 import { Datatable } from "@o2xp/react-datatable";

@@ -1,4 +1,7 @@
 Component example : 
+
+[**Live implementation**](https://codesandbox.io/s/custom-datatype-example-for-o2xpreact-datatable-ppl29)
+
 ```jsx
 // ES6
 import { Datatable } from "@o2xp/react-datatable";

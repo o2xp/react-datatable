@@ -1,4 +1,7 @@
 Component example : 
+
+[**Live implementation**](https://codesandbox.io/s/header-cell-override-example-for-o2xpreact-datatable-33tg2)
+
 ```jsx
 
 // ES6
