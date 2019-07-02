@@ -17,7 +17,7 @@ const customTableBodyRowSample = ({
 }) => {
   const { columns } = simpleOptionsSample.data;
   const columnAction = {
-    id: "actions",
+    id: "o2xpActions",
     label: "Actions",
     colSize: "150px",
     editable: false
@@ -33,7 +33,7 @@ const customTableBodyRowSample = ({
     >
       {columnsOrder.map(columnId => {
         const column =
-          columnId === "actions"
+          columnId === "o2xpActions"
             ? columnAction
             : columns.find(col => col.id === columnId);
         const width = `${(

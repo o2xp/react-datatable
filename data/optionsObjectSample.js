@@ -32,8 +32,8 @@ export const dimensions = {
 export const keyColumn = "id";
 export const font = "Roboto";
 export const columnAction = {
-  id: "actions",
-  label: "",
+  id: "o2xpActions",
+  label: "Actions",
   colSize: "150px",
   editable: false
 };

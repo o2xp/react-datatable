@@ -48,7 +48,7 @@ const mergedSetRowsPerPageSample = {
     ...features,
     userConfiguration: {
       ...userConfiguration,
-      columnsOrder: ["actions", ...userConfiguration.columnsOrder]
+      columnsOrder: ["o2xpActions", ...userConfiguration.columnsOrder]
     },
     additionalIcons: []
   }

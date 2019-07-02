@@ -113,10 +113,10 @@ const updateRowSizeMultiplier = state => {
 
   const widthColDisplayed = colDisplayed.map(col => {
     const column = col;
-    if (column.colSize && col.id !== "actions") {
+    if (column.colSize && col.id !== "o2xpActions") {
       return Number(column.colSize.split("px")[0]);
     }
-    if (col.id !== "actions") {
+    if (col.id !== "o2xpActions") {
       column.colSize = "100px";
       return 100;
     }
@@ -152,7 +152,7 @@ const totalWidth = state => {
   state.data.columns.forEach(col => {
     if (
       state.features.userConfiguration.columnsOrder.includes(col.id) &&
-      col.id !== "actions"
+      col.id !== "o2xpActions"
     ) {
       colDisplayed.push(col);
     }
@@ -278,9 +278,17 @@ const initializeOptions = (
 
   if (
     numberOfActions > 0 &&
-    !newState.data.columns.find(col => col.id === "actions")
+    !newState.data.columns.find(col => col.id === "o2xpActions")
   ) {
-    newState.features.userConfiguration.columnsOrder.unshift("actions");
+    newState.features.userConfiguration.columnsOrder = newState.features.userConfiguration.columnsOrder.filter(
+      colId => colId !== "o2xpActions"
+    );
+
+    newState.data.columns = newState.data.columns.filter(
+      column => column.id !== "o2xpActions"
+    );
+
+    newState.features.userConfiguration.columnsOrder.unshift("o2xpActions");
     let colSize = 0;
     switch (actionsUser.join(" ")) {
       case "true true true":
@@ -299,8 +307,8 @@ const initializeOptions = (
     }
 
     newState.data.columns.unshift({
-      id: "actions",
-      label: "",
+      id: "o2xpActions",
+      label: "Actions",
       colSize,
       editable: false
     });

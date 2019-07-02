@@ -43,7 +43,7 @@ export class ColumnsDisplayer extends Component {
     const { columnsOrder } = this.props;
     const { setColumnVisibilty } = this.props;
     const visible = columnsOrder.includes(column.id);
-    if (column.id !== "actions") {
+    if (column.id !== "o2xpActions") {
       return (
         <MenuItem key={column.id} onClick={() => setColumnVisibilty(column)}>
           <Checkbox checked={visible} color="primary" />

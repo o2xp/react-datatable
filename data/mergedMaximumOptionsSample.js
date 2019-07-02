@@ -55,7 +55,7 @@ const mergedMaximumOptionsSample = {
     canOrderColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {
-      columnsOrder: ["actions", "id", "name", "age"],
+      columnsOrder: ["o2xpActions", "id", "name", "age"],
       copyToClipboard: true
     },
     rowsPerPage: {

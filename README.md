@@ -83,8 +83,9 @@ class App extends Component {
 
 export default App;
 ```
-[**Live implementation**](https://codesandbox.io/s/basic-example-o2xpreact-datatable-wsmjp) 
 
+**Attention :** the column id **"o2xpActions"** is reserved. Using it can result of unexpected behaviours.
+[**Live implementation**](https://codesandbox.io/s/basic-example-o2xpreact-datatable-wsmjp) 
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
 
 ### Prop Types
