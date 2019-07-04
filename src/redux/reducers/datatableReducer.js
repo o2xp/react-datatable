@@ -84,7 +84,7 @@ const defaultState = {
 const overwriteMerge = (destinationArray, sourceArray) => sourceArray;
 
 const convertSizeToNumber = val => {
-  const splitSize = val.match(/[a-z]+|[^a-z]+/gi);
+  const splitSize = val.match(/[0-9]+|(px|%|vw|vh)/gi);
   let valSize = splitSize[0];
   const unitSize = splitSize[1];
   if (unitSize === "px") {
@@ -95,6 +95,11 @@ const convertSizeToNumber = val => {
   }
   if (unitSize === "vh") {
     valSize = window.innerHeight * (valSize / 100);
+  }
+  if (unitSize === "%") {
+    valSize =
+      document.getElementById("o2xp").parentElement.clientWidth *
+      (valSize / 100);
   }
 
   return valSize;
