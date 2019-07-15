@@ -10,9 +10,10 @@ class Datatable extends Component {
   render() {
     const {
       options = {},
-      forceRerender = false,
+      forceRerender = true,
       actions = null,
       refreshRows = null,
+      stripped = false,
       CustomTableBodyCell = null,
       CustomTableBodyRow = null,
       CustomTableHeaderCell = null,
@@ -33,6 +34,7 @@ class Datatable extends Component {
                   forceRerender={forceRerender}
                   actions={actions}
                   refreshRows={refreshRows}
+                  stripped={stripped}
                   CustomTableBodyCell={CustomTableBodyCell}
                   CustomTableBodyRow={CustomTableBodyRow}
                   CustomTableHeaderCell={CustomTableHeaderCell}
