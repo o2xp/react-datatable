@@ -11,6 +11,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   features
@@ -35,6 +36,7 @@ const mergedSimpleOptionsSampleWidthResize = {
   actions: null,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   font,

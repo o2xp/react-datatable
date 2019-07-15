@@ -17,7 +17,11 @@ describe("Datatable component", () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <Datatable options={simpleOptionsSample} refreshRows={refreshRows} />
+        <Datatable
+          options={simpleOptionsSample}
+          refreshRows={refreshRows}
+          stripped
+        />
       </Provider>,
       { attachTo: window.domNode }
     );

@@ -10,6 +10,7 @@ import {
   columnAction,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   orderBy,
   selectionIcons
@@ -29,6 +30,7 @@ const mergedMaximumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   actions: null,
   keyColumn,

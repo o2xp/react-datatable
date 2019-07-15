@@ -53,6 +53,7 @@ const defaultState = {
   actions: null,
   refreshRows: null,
   isRefreshing: false,
+  stripped: false,
   searchTerm: "",
   orderBy: {
     keys: [],
@@ -259,7 +260,13 @@ const setPagination = ({
 
 const initializeOptions = (
   state,
-  { optionsInit, forceRerender = false, actions = null, refreshRows = null }
+  {
+    optionsInit,
+    forceRerender = true,
+    actions = null,
+    refreshRows = null,
+    stripped = false
+  }
 ) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
@@ -270,6 +277,7 @@ const initializeOptions = (
   );
   newState.actions = actions;
   newState.refreshRows = refreshRows;
+  newState.stripped = stripped;
 
   const { height } = newState.dimensions.row;
   newState.dimensions.row.height = height.split("px")[0] < 60 ? "60px" : height;
