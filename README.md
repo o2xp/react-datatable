@@ -85,7 +85,9 @@ export default App;
 ```
 
 **Attention :** the column id **"o2xpActions"** is reserved. Using it can result of unexpected behaviours.
+
 [**Live implementation**](https://codesandbox.io/s/basic-example-o2xpreact-datatable-wsmjp) 
+
 To go **further** check all [**examples**](https://github.com/o2xp/react-datatable/tree/develop/examples)
 
 ### Prop Types
@@ -106,7 +108,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | Property | Type | Required? | Default | Description |
 |:---|:---:|:---:|:---:|:---|
 | title | string | no | " " | Title of the datatable. |
-| dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw or px) |
+| dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw / px / %) |
 | dimensions .header .height | string | no | "60px" |  Height of the header of the Datatable. (in vh or px) |
 | dimensions .body .height | string | no | "300px" |  Height of the body of the Datatable. (in vh or px) |
 | dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in vh or px) |
