@@ -111,7 +111,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw / px / %) |
 | dimensions .header .height | string | no | "60px" |  Height of the header of the Datatable. (in vh or px) |
 | dimensions .body .height | string | no | "300px" |  Height of the body of the Datatable. (in vh or px) |
-| dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in vh or px) |
+| dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in px) Minimum 60px. |
 | keyColumn | string | yes | / |  Name of the column that has unique value and allows to identify a row. |
 | font | string | no | "Roboto" | Name of the font you are using. It allows the datatable to calculate the overlapping of cells. |
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |

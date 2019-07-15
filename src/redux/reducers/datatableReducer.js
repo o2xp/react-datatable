@@ -271,6 +271,9 @@ const initializeOptions = (
   newState.actions = actions;
   newState.refreshRows = refreshRows;
 
+  const { height } = newState.dimensions.row;
+  newState.dimensions.row.height = height.split("px")[0] < 60 ? "60px" : height;
+
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
       col => col.id
