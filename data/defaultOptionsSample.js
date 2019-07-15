@@ -32,6 +32,7 @@ const defaultOptionsSample = {
   actions: null,
   refreshRows: null,
   isRefreshing: false,
+  stripped: false,
   searchTerm: "",
   orderBy: {
     keys: [],

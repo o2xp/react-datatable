@@ -7,6 +7,7 @@ import {
   features,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   columns
@@ -28,6 +29,7 @@ const storeNoRowsDataSample = {
     actions: null,
     refreshRows,
     isRefreshing,
+    stripped,
     orderBy,
     searchTerm,
     features: {

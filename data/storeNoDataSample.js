@@ -6,6 +6,7 @@ import {
   font,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   features
@@ -26,6 +27,7 @@ const storeNoDataSample = {
     rowsSelected: [],
     refreshRows,
     isRefreshing,
+    stripped,
     orderBy,
     searchTerm,
     actions: null,

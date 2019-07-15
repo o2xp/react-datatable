@@ -10,6 +10,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   orderBy,
   features
@@ -36,6 +37,7 @@ const mergedDatableReducerRowsEdited = {
   actions: null,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   font,
   orderBy,
