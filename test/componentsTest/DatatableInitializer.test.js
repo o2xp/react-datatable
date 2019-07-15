@@ -3,7 +3,6 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
 import { SnackbarProvider } from "notistack";
-import DatatableContainer from "../../src/components/DatatableContainer";
 import DatatableInitializer, {
   DatatableInitializer as DatatableInitializerPureComponent
 } from "../../src/components/DatatableInitializer";
@@ -34,10 +33,14 @@ describe("Datatable initializer component", () => {
         </SnackbarProvider>
       </Provider>
     );
-    expect(wrapper.find(DatatableContainer)).toHaveLength(1);
+    expect(wrapper.find("Connect(DatatableInitializer)")).toHaveLength(1);
   });
 
   describe("on mount should ", () => {
+    const div = document.createElement("div");
+    window.domNode = div;
+    document.body.appendChild(div);
+
     const componentDidMount = jest.spyOn(
       DatatableInitializerPureComponent.prototype,
       "componentDidMount"
@@ -51,14 +54,17 @@ describe("Datatable initializer component", () => {
             refreshRows={refreshRows}
           />
         </SnackbarProvider>
-      </Provider>
+      </Provider>,
+      { attachTo: window.domNode }
     );
+
     it("call componentDidMount", () => {
       global.innerWidth = 30000;
       global.dispatchEvent(new Event("resize"));
 
       expect(componentDidMount).toHaveBeenCalled();
     });
+
     describe("dispatch action type", () => {
       it("INITIALIZE_OPTIONS", () => {
         const action = store.getActions()[0];
@@ -73,25 +79,5 @@ describe("Datatable initializer component", () => {
         expect(action.type).toEqual("UPDATE_COMPONENT_SIZE");
       });
     });
-  });
-
-  it("should call componentWillUnmount", () => {
-    const componentWillUnmount = jest.spyOn(
-      DatatableInitializerPureComponent.prototype,
-      "componentWillUnmount"
-    );
-
-    const wrapper = mount(
-      <Provider store={store}>
-        <SnackbarProvider>
-          <DatatableInitializer
-            optionsInit={simpleOptionsSample}
-            refreshRows={refreshRows}
-          />
-        </SnackbarProvider>
-      </Provider>
-    );
-    wrapper.unmount();
-    expect(componentWillUnmount).toHaveBeenCalledTimes(1);
   });
 });

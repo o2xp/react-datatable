@@ -11,10 +11,15 @@ const refreshRows = jest.fn();
 
 describe("Datatable component", () => {
   it("should render DatatableInitializer", () => {
+    const div = document.createElement("div");
+    window.domNode = div;
+    document.body.appendChild(div);
+
     const wrapper = mount(
       <Provider store={store}>
         <Datatable options={simpleOptionsSample} refreshRows={refreshRows} />
-      </Provider>
+      </Provider>,
+      { attachTo: window.domNode }
     );
 
     expect(wrapper.find("div#no-data").hostNodes()).toHaveLength(0);

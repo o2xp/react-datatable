@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { throttle } from "lodash";
+import elementResizeEvent from "element-resize-event";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import MomentUtils from "@date-io/moment";
@@ -55,12 +56,9 @@ export class DatatableInitializer extends Component {
     updateComponentSize();
 
     const callBack = () => throttle(() => updateComponentSize(), 100);
-    window.addEventListener("resize", callBack());
-  }
+    const element = document.getElementById("o2xp").parentElement;
 
-  componentWillUnmount() {
-    const { updateComponentSize } = this.props;
-    window.removeEventListener("resize", () => updateComponentSize());
+    elementResizeEvent(element, callBack());
   }
 
   render() {
