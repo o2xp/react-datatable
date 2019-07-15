@@ -47,16 +47,14 @@ describe("Datatable initializer component", () => {
     );
 
     mount(
-      <div style={{ width: "1000px" }}>
-        <Provider store={store}>
-          <SnackbarProvider>
-            <DatatableInitializer
-              optionsInit={simpleOptionsSample}
-              refreshRows={refreshRows}
-            />
-          </SnackbarProvider>
-        </Provider>
-      </div>,
+      <Provider store={store}>
+        <SnackbarProvider>
+          <DatatableInitializer
+            optionsInit={simpleOptionsSample}
+            refreshRows={refreshRows}
+          />
+        </SnackbarProvider>
+      </Provider>,
       { attachTo: window.domNode }
     );
 
