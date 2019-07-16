@@ -17,7 +17,7 @@ const defaultState = {
   title: "",
   dimensions: {
     datatable: {
-      width: "100vw",
+      width: "100%",
       widthNumber: 0,
       totalWidthNumber: 0
     },
@@ -133,7 +133,9 @@ const updateRowSizeMultiplier = state => {
     return a + b;
   });
 
-  const splitWidth = state.dimensions.datatable.width.match(/[a-z]+|[^a-z]+/gi);
+  const splitWidth = state.dimensions.datatable.width.match(
+    /[0-9]+|(px|%|vw|vh)/gi
+  );
   let widthTable = splitWidth[0];
   const unitWidthTable = splitWidth[1];
 
@@ -141,6 +143,11 @@ const updateRowSizeMultiplier = state => {
     widthTable = (window.innerWidth * widthTable) / 100;
   }
 
+  if (unitWidthTable === "%") {
+    widthTable =
+      document.getElementById("o2xp").parentElement.clientWidth *
+      (widthTable / 100);
+  }
   widthTable -= numberOfActions * 50;
   widthTable -= state.features.userConfiguration.columnsOrder.length * 50;
   widthTable -= 22;
