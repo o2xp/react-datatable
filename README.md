@@ -98,6 +98,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | actions | function | no | Function that take as parameter {type, payload}, where type is the action performed (save, delete etc..) and payload the data needed to perform the action. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | refreshRows | function | no | Function that return an an array of objects where each object is defined by the columns identifier as key and the value. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | forceRerender | boolean | no | Do you want to rerender the component on route change or keep the state ? |
+| stripped | boolean | no | Do you want stripped rows ? |
 | CustomTableBodyRow | function | no | Function that take { row, columnsOrder, rowIndex, columnSizeMultiplier, height } and return a react html element. See [**body row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
 | CustomTableBodyCell | function | no | Function that take { cellVal, column, rowId } and return a react html element. See [**body cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md) example. |
 | CustomTableHeaderRow | function | no | Function that take { columnsOrder, columnSizeMultiplier } and return a react html element. See [**header row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
