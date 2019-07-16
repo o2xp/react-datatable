@@ -2,7 +2,7 @@ const defaultOptionsSample = {
   title: "",
   dimensions: {
     datatable: {
-      width: "100vw",
+      width: "100%",
       widthNumber: 0,
       totalWidthNumber: 0
     },
