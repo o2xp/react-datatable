@@ -190,7 +190,7 @@
   z-index: 9;
 }
 
-#no-rows, #loader {
+#no-rows, #loader, #no-rows-filtered {
   font-style: italic;
   overflow: auto;
   display: flex;
