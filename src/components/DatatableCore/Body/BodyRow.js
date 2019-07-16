@@ -116,7 +116,8 @@ export class BodyRow extends Component {
           <div
             className="Table-Row"
             style={{
-              height: style.height
+              height: style.height,
+              backgroundColor: style.backgroundColor
             }}
           >
             {columnsOrder.map((columnId, cellIndex) => {

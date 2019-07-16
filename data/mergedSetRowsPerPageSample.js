@@ -11,6 +11,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   features
@@ -34,6 +35,7 @@ const mergedSetRowsPerPageSample = {
   keyColumn,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   actions: null,

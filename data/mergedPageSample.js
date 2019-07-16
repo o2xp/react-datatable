@@ -7,6 +7,7 @@ import {
   data,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   orderBy,
   features
@@ -31,6 +32,7 @@ const mergedPageSample = {
   actions: null,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   font,
   orderBy,

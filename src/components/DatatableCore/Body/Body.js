@@ -11,6 +11,7 @@ import {
   CustomTableBodyRowPropType,
   columnsOrderPropType,
   dimensionsPropType,
+  strippedPropType,
   setIsScrollingPropType,
   isScrollingPropType,
   keyColumnPropType,
@@ -52,6 +53,7 @@ export class Body extends Component {
       dimensions,
       columnsOrder,
       keyColumn,
+      stripped,
       rowsEdited
     } = this.props;
     const key = `row-${index}`;
@@ -60,14 +62,19 @@ export class Body extends Component {
     row = rowsEdited.find(r => r[keyColumn] === row[keyColumn]) || row;
     const editing =
       rowsEdited.find(r => r[keyColumn] === row[keyColumn]) !== undefined;
+    const newStyle = {
+      ...style,
+      backgroundColor:
+        stripped && index % 2 === 0 ? "rgba(228, 228, 228, 1)" : "white"
+    };
 
     if (CustomTableBodyRow !== null) {
       return (
         <div
           style={{
-            top: style.top,
-            height: style.height,
-            position: style.position,
+            top: newStyle.top,
+            height: newStyle.height,
+            position: newStyle.position,
             borderBottom: "1px solid rgba(224, 224, 244, 1)"
           }}
         >
@@ -75,7 +82,7 @@ export class Body extends Component {
             row={row}
             columnsOrder={columnsOrder}
             rowIndex={index}
-            height={style.height}
+            height={newStyle.height}
             columnSizeMultiplier={columnSizeMultiplier}
             key={key}
           />
@@ -83,7 +90,7 @@ export class Body extends Component {
       );
     }
 
-    return <BodyRow row={row} editing={editing} style={style} key={key} />;
+    return <BodyRow row={row} editing={editing} style={newStyle} key={key} />;
   };
 
   render() {
@@ -160,6 +167,7 @@ Body.propTypes = {
   CustomTableBodyRow: CustomTableBodyRowPropType,
   setIsScrolling: setIsScrollingPropType,
   isScrolling: isScrollingPropType.isRequired,
+  stripped: strippedPropType.isRequired,
   keyColumn: keyColumnPropType.isRequired,
   rowsEdited: rowsEditedPropType.isRequired,
   height: heightNumberPropType.isRequired,
@@ -185,6 +193,7 @@ const mapStateToProps = state => {
     width: state.datatableReducer.dimensions.datatable.widthNumber,
     keyColumn: state.datatableReducer.keyColumn,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
+    stripped: state.datatableReducer.stripped,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier:

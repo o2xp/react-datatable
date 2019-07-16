@@ -11,6 +11,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   features
@@ -38,6 +39,7 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
   keyColumn,
   refreshRows,
   isRefreshing,
+  stripped,
   orderBy,
   searchTerm,
   actions: null,

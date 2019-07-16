@@ -98,6 +98,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | actions | function | no | Function that take as parameter {type, payload}, where type is the action performed (save, delete etc..) and payload the data needed to perform the action. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | refreshRows | function | no | Function that return an an array of objects where each object is defined by the columns identifier as key and the value. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | forceRerender | boolean | no | Do you want to rerender the component on route change or keep the state ? |
+| stripped | boolean | no | Do you want stripped rows ? |
 | CustomTableBodyRow | function | no | Function that take { row, columnsOrder, rowIndex, columnSizeMultiplier, height } and return a react html element. See [**body row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
 | CustomTableBodyCell | function | no | Function that take { cellVal, column, rowId } and return a react html element. See [**body cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md) example. |
 | CustomTableHeaderRow | function | no | Function that take { columnsOrder, columnSizeMultiplier } and return a react html element. See [**header row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
@@ -111,7 +112,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw / px / %) |
 | dimensions .header .height | string | no | "60px" |  Height of the header of the Datatable. (in vh or px) |
 | dimensions .body .height | string | no | "300px" |  Height of the body of the Datatable. (in vh or px) |
-| dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in vh or px) |
+| dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in px) Minimum 60px. |
 | keyColumn | string | yes | / |  Name of the column that has unique value and allows to identify a row. |
 | font | string | no | "Roboto" | Name of the font you are using. It allows the datatable to calculate the overlapping of cells. |
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |

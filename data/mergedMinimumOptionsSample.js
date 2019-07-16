@@ -9,6 +9,7 @@ import {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   orderBy,
   rowsPerPage
@@ -32,6 +33,7 @@ const mergedMinimumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  stripped,
   searchTerm,
   actions: null,
   keyColumn,
