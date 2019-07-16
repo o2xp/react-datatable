@@ -18,7 +18,15 @@ describe("Datatable component", () => {
     const wrapper = mount(
       <Provider store={store}>
         <Datatable
-          options={simpleOptionsSample}
+          options={{
+            ...simpleOptionsSample,
+            dimensions: {
+              ...simpleOptionsSample.dimensions,
+              datatable: {
+                width: "100%"
+              }
+            }
+          }}
           refreshRows={refreshRows}
           stripped
         />
