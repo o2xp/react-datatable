@@ -100,7 +100,7 @@
 }
 
 #o2xp .scrolling-shadow {
-  border-right: solid 2px rgba(0,0,0,0.15);
+  border-right: solid 2px lightgrey;
 }
 
 #o2xp .Table-Cell > div > div{

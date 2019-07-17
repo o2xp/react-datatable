@@ -33,6 +33,10 @@ const row = {
   eyeColor: "green"
 };
 
+const style = {
+  backgroundColor: "#fff"
+};
+
 describe("BodyActionsCell component", () => {
   it("connected should render without errors", () => {
     const wrapper = mount(
@@ -40,6 +44,7 @@ describe("BodyActionsCell component", () => {
         <BodyActionsCell
           column={column}
           row={row}
+          style={style}
           editing={false}
           checked={false}
         />
@@ -63,6 +68,7 @@ describe("BodyActionsCell component", () => {
           selectRow={selectRow}
           column={column}
           row={row}
+          style={style}
           editing={false}
           checked={false}
           classes={{ customVariant }}
@@ -85,6 +91,7 @@ describe("BodyActionsCell component", () => {
           selectRow={selectRow}
           column={column}
           row={row}
+          style={style}
           editing={false}
           checked={false}
           classes={{ customVariant }}
@@ -110,6 +117,7 @@ describe("BodyActionsCell component", () => {
             selectRow={selectRow}
             column={column}
             row={row}
+            style={style}
             editing={false}
             checked={false}
             classes={{ customVariant }}
@@ -134,6 +142,7 @@ describe("BodyActionsCell component", () => {
             selectRow={selectRow}
             column={column}
             row={row}
+            style={style}
             editing={false}
             checked={false}
             classes={{ customVariant }}
@@ -158,6 +167,7 @@ describe("BodyActionsCell component", () => {
             selectRow={selectRow}
             column={column}
             row={row}
+            style={style}
             editing={false}
             checked={false}
             classes={{ customVariant }}
@@ -176,6 +186,7 @@ describe("BodyActionsCell component", () => {
         <BodyActionsCell
           column={column}
           row={row}
+          style={style}
           editing={false}
           checked={false}
         />
@@ -187,6 +198,7 @@ describe("BodyActionsCell component", () => {
         <BodyActionsCell
           column={column}
           row={{ ...row, idOfColumnErr: [], hasBeenEdited: false }}
+          style={style}
           editing
           checked={false}
         />
@@ -198,6 +210,7 @@ describe("BodyActionsCell component", () => {
         <BodyActionsCell
           column={column}
           row={{ ...row, idOfColumnErr: [], hasBeenEdited: true }}
+          style={style}
           editing
           checked={false}
         />
@@ -280,6 +293,7 @@ describe("BodyActionsCell component", () => {
           selectRow={selectRow}
           column={column}
           row={row}
+          style={style}
           editing={false}
           checked={false}
           classes={{ customVariant }}

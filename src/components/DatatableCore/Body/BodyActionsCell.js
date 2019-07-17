@@ -30,6 +30,7 @@ import {
   revertRowEditedPropType,
   selectRowPropType,
   checkedPropType,
+  stylePropType,
   deleteRowPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
@@ -44,6 +45,7 @@ export class BodyActionsCell extends Component {
 
   render() {
     const {
+      style,
       column,
       isScrolling,
       canEdit,
@@ -71,6 +73,9 @@ export class BodyActionsCell extends Component {
             ? "Table-Cell action scrolling-shadow"
             : "Table-Cell action"
         }
+        style={{
+          backgroundColor: style.backgroundColor
+        }}
       >
         <div style={{ width: column.colSize }}>
           {canSelectRow && (
@@ -189,6 +194,7 @@ BodyActionsCell.propTypes = {
   editing: editingPropType.isRequired,
   classes: classesPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,
+  style: stylePropType.isRequired,
   canEdit: canEditPropType.isRequired,
   canDelete: canDeletePropType.isRequired,
   canSelectRow: canSelectRowPropType.isRequired,
