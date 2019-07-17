@@ -39,7 +39,8 @@ export class BodyRow extends Component {
       CustomTableBodyCell,
       columnSizeMultiplier,
       rowsSelected,
-      keyColumn
+      keyColumn,
+      style
     } = this.props;
     const column = columns.find(col => col.id === columnId);
     const rowId = row[keyColumn];
@@ -50,6 +51,7 @@ export class BodyRow extends Component {
       const checked = !!rowsSelected.find(r => r[keyColumn] === row[keyColumn]);
       return (
         <BodyActionsCell
+          style={style}
           key={key}
           column={column}
           row={row}
