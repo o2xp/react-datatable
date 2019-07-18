@@ -7,6 +7,7 @@ import {
   features,
   refreshRows,
   isRefreshing,
+  rowsGlobalEdited,
   stripped,
   orderBy,
   searchTerm,
@@ -25,6 +26,7 @@ const storeNoRowsDataSample = {
       rows: []
     },
     rowsEdited: [],
+    rowsGlobalEdited,
     rowsSelected: [],
     actions: null,
     refreshRows,

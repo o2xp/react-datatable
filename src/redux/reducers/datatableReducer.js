@@ -49,6 +49,7 @@ const defaultState = {
     rowsCurrentPage: []
   },
   rowsEdited: [],
+  rowsGlobalEdited: [],
   rowsSelected: [],
   actions: null,
   refreshRows: null,
@@ -61,6 +62,7 @@ const defaultState = {
   },
   features: {
     canEdit: false,
+    canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
     canDelete: false,
@@ -424,6 +426,22 @@ const addRowEdited = (state, row) => {
   };
 };
 
+const addAllRowsToEdited = state => {
+  const { rows } = state.data;
+  const rowsEdited = rows.map(row => {
+    return {
+      ...row,
+      idOfColumnErr: [],
+      hasBeenEdited: false
+    };
+  });
+
+  return {
+    ...state,
+    rowsEdited
+  };
+};
+
 const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
   const rowNonEdited = rows.find(
     row => row[keyColumn] === rowEdited[keyColumn]
@@ -439,7 +457,8 @@ const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
 };
 
 const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
-  const { rowsEdited, keyColumn } = state;
+  const { rowsEdited, keyColumn, rowsGlobalEdited, features } = state;
+  let newRowsGlobalEdited = [...rowsGlobalEdited];
   const rowsEditedUpdate = rowsEdited.map(row => {
     if (row[keyColumn] === rowId) {
       let idOfColumnErrUpdate = row.idOfColumnErr;
@@ -463,6 +482,16 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
         keyColumn
       });
 
+      if (features.canGlobalEdit) {
+        newRowsGlobalEdited = newRowsGlobalEdited.filter(
+          rowGlobalEdited => rowGlobalEdited[keyColumn] !== r[keyColumn]
+        );
+
+        if (hasBeenEdited) {
+          newRowsGlobalEdited = [...newRowsGlobalEdited, r];
+        }
+      }
+
       return {
         ...r,
         hasBeenEdited
@@ -470,14 +499,18 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
     }
     return row;
   });
-
-  return { ...state, rowsEdited: rowsEditedUpdate };
+  return {
+    ...state,
+    rowsEdited: rowsEditedUpdate,
+    rowsGlobalEdited: newRowsGlobalEdited
+  };
 };
 
-const mergeObjectInArray = (object, keyColumn, array) => {
+const mergeArrayInArray = (firstArray, keyColumn, secondArray) => {
   return [
-    ...array.map(el => {
-      if (el[keyColumn] === object[keyColumn]) {
+    ...secondArray.map(el => {
+      const object = firstArray.find(obj => el[keyColumn] === obj[keyColumn]);
+      if (object) {
         return object;
       }
       return el;
@@ -497,17 +530,50 @@ const saveRowEdited = (state, payload) => {
     ...state,
     data: {
       ...data,
-      rows: mergeObjectInArray(row, keyColumn, data.rows)
+      rows: mergeArrayInArray([row], keyColumn, data.rows)
     },
     pagination: {
       ...pagination,
-      rowsCurrentPage: mergeObjectInArray(
-        row,
+      rowsCurrentPage: mergeArrayInArray(
+        [row],
         keyColumn,
         pagination.rowsCurrentPage
       )
     },
+    rowsGlobalEdited: [],
     rowsEdited: [...rowsEdited.filter(r => r[keyColumn] !== row[keyColumn])]
+  };
+};
+
+const saveAllRowsEdited = state => {
+  const { data, keyColumn, rowsGlobalEdited, actions, pagination } = state;
+  const rows = rowsGlobalEdited.map(row => {
+    const r = row;
+    delete r.idOfColumnErr;
+    delete r.hasBeenEdited;
+    return r;
+  });
+
+  if (actions) {
+    actions({ type: "save", payload: rows });
+  }
+
+  return {
+    ...state,
+    data: {
+      ...data,
+      rows: mergeArrayInArray(rows, keyColumn, data.rows)
+    },
+    pagination: {
+      ...pagination,
+      rowsCurrentPage: mergeArrayInArray(
+        rows,
+        keyColumn,
+        pagination.rowsCurrentPage
+      )
+    },
+    rowsGlobalEdited: [],
+    rowsEdited: []
   };
 };
 
@@ -520,9 +586,17 @@ const revertRowEdited = (state, payload) => {
   };
 };
 
+const revertAllRowsToEdited = state => {
+  return {
+    ...state,
+    rowsEdited: [],
+    rowsGlobalEdited: []
+  };
+};
+
 const deleteRow = (state, payload) => {
   const row = payload;
-  const { data, keyColumn, actions } = state;
+  const { data, keyColumn, actions, rowsEdited, rowsGlobalEdited } = state;
 
   if (actions) {
     actions({ type: "delete", payload: row });
@@ -530,6 +604,10 @@ const deleteRow = (state, payload) => {
 
   let newState = {
     ...state,
+    rowsEdited: [...rowsEdited.filter(r => r[keyColumn] !== row[keyColumn])],
+    rowsGlobalEdited: [
+      ...rowsGlobalEdited.filter(r => r[keyColumn] !== row[keyColumn])
+    ],
     data: {
       ...data,
       rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
@@ -721,12 +799,18 @@ const datatableReducer = (state = defaultState, action) => {
       return setIsScrolling(state, payload);
     case "ADD_ROW_EDITED":
       return addRowEdited(state, payload);
+    case "ADD_ALL_ROWS_TO_EDITED":
+      return addAllRowsToEdited(state);
     case "SET_ROW_EDITED":
       return setRowEdited(state, payload);
     case "SAVE_ROW_EDITED":
       return saveRowEdited(state, payload);
+    case "SAVE_ALL_ROWS_EDITED":
+      return saveAllRowsEdited(state);
     case "REVERT_ROW_EDITED":
       return revertRowEdited(state, payload);
+    case "REVERT_ALL_ROWS_TO_EDITED":
+      return revertAllRowsToEdited(state);
     case "DELETE_ROW":
       return deleteRow(state, payload);
     case "SELECT_ROW":

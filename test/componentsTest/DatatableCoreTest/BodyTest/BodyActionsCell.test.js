@@ -70,6 +70,7 @@ describe("BodyActionsCell component", () => {
           row={row}
           style={style}
           editing={false}
+          canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
         />
@@ -93,6 +94,7 @@ describe("BodyActionsCell component", () => {
           row={row}
           style={style}
           editing={false}
+          canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
         />
@@ -119,6 +121,7 @@ describe("BodyActionsCell component", () => {
             row={row}
             style={style}
             editing={false}
+            canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
           />
@@ -144,6 +147,7 @@ describe("BodyActionsCell component", () => {
             row={row}
             style={style}
             editing={false}
+            canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
           />
@@ -169,6 +173,7 @@ describe("BodyActionsCell component", () => {
             row={row}
             style={style}
             editing={false}
+            canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
           />
@@ -295,6 +300,7 @@ describe("BodyActionsCell component", () => {
           row={row}
           style={style}
           editing={false}
+          canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
         />

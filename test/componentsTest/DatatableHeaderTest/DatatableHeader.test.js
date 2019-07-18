@@ -14,6 +14,8 @@ const store = mockStore({
     refreshRows: jest.fn(),
     features: {
       ...storeSample.datatableReducer.features,
+      canEdit: false,
+      canGlobalEdit: true,
       canSearch: true,
       canDownload: true,
       canOrderColumns: true,
@@ -80,6 +82,15 @@ describe("DatatableHeader component", () => {
 
     it("selection icons", () => {
       expect(wrapper.find("SelectionIcons")).toHaveLength(1);
+    });
+
+    it("a global edit icon separator", () => {
+      const element = wrapper.find("div.global-edit-icon-separator");
+      expect(element.props().style.height).toEqual("45%");
+    });
+
+    it("global edit", () => {
+      expect(wrapper.find("GlobalEdit")).toHaveLength(1);
     });
 
     it("an additional icons separator", () => {

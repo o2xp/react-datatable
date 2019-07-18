@@ -6,6 +6,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -30,6 +31,7 @@ const mergedMinimumOptionsSample = {
     }
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -46,6 +48,7 @@ const mergedMinimumOptionsSample = {
   },
   features: {
     canEdit: false,
+    canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
     canSearch: false,

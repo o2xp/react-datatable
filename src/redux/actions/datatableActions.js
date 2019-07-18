@@ -34,6 +34,10 @@ export const addRowEdited = payload => ({
   payload
 });
 
+export const addAllRowsToEdited = () => ({
+  type: "ADD_ALL_ROWS_TO_EDITED"
+});
+
 export const setRowEdited = payload => ({
   type: "SET_ROW_EDITED",
   payload
@@ -44,9 +48,17 @@ export const saveRowEdited = payload => ({
   payload
 });
 
+export const saveAllRowsEdited = () => ({
+  type: "SAVE_ALL_ROWS_EDITED"
+});
+
 export const revertRowEdited = payload => ({
   type: "REVERT_ROW_EDITED",
   payload
+});
+
+export const revertAllRowsToEdited = () => ({
+  type: "REVERT_ALL_ROWS_TO_EDITED"
 });
 
 export const deleteRow = payload => ({

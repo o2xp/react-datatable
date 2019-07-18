@@ -120,6 +120,7 @@ export class Body extends Component {
                 columnsOrder={columnsOrder}
                 rowsEdited={rowsEdited}
                 rows={rows}
+                style={{ overflowX: "auto", overflowY: "scroll" }}
               >
                 {this.rowBuilder}
               </FixedSizeList>
@@ -131,7 +132,10 @@ export class Body extends Component {
           <Fragment>
             <div
               id="no-rows-filtered"
-              style={{ height: height - 15, width: width - 15 }}
+              style={{
+                height: height - 15,
+                width: width - 15
+              }}
             >
               There is no result for your search
             </div>
