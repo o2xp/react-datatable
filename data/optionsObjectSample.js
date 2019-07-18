@@ -137,6 +137,7 @@ export const columns = [
   }
 ];
 export const rowsEdited = [];
+export const rowsGlobalEdited = [];
 export const rowsSelected = [];
 export const refreshRows = null;
 export const isRefreshing = false;
@@ -185,6 +186,7 @@ export const additionalIcons = [
 ];
 export const features = {
   canEdit: true,
+  canGlobalEdit: false,
   canPrint: true,
   canDownload: true,
   canDelete: true,

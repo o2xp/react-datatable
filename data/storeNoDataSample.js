@@ -6,6 +6,7 @@ import {
   font,
   refreshRows,
   isRefreshing,
+  rowsGlobalEdited,
   stripped,
   orderBy,
   searchTerm,
@@ -24,6 +25,7 @@ const storeNoDataSample = {
       rows: []
     },
     rowsEdited: [],
+    rowsGlobalEdited,
     rowsSelected: [],
     refreshRows,
     isRefreshing,

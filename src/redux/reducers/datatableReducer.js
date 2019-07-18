@@ -457,7 +457,7 @@ const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
 };
 
 const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
-  const { rowsEdited, keyColumn, rowsGlobalEdited } = state;
+  const { rowsEdited, keyColumn, rowsGlobalEdited, features } = state;
   let newRowsGlobalEdited = [...rowsGlobalEdited];
   const rowsEditedUpdate = rowsEdited.map(row => {
     if (row[keyColumn] === rowId) {
@@ -482,12 +482,16 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
         keyColumn
       });
 
-      newRowsGlobalEdited = newRowsGlobalEdited.filter(
-        rowGlobalEdited => rowGlobalEdited[keyColumn] !== r[keyColumn]
-      );
-      if (hasBeenEdited) {
-        newRowsGlobalEdited = [...newRowsGlobalEdited, r];
+      if (features.canGlobalEdit) {
+        newRowsGlobalEdited = newRowsGlobalEdited.filter(
+          rowGlobalEdited => rowGlobalEdited[keyColumn] !== r[keyColumn]
+        );
+
+        if (hasBeenEdited) {
+          newRowsGlobalEdited = [...newRowsGlobalEdited, r];
+        }
       }
+
       return {
         ...r,
         hasBeenEdited
