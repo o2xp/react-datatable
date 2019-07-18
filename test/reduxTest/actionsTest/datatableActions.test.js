@@ -87,6 +87,13 @@ describe("Datatable actions should create an action to", () => {
     expect(actions.addRowEdited(payload)).toEqual(expectedAction);
   });
 
+  it("add all rows to edited", () => {
+    const expectedAction = {
+      type: "ADD_ALL_ROWS_TO_EDITED"
+    };
+    expect(actions.addAllRowsToEdited()).toEqual(expectedAction);
+  });
+
   it("set an edited row", () => {
     const payload = {
       columnId: "age",
@@ -121,6 +128,13 @@ describe("Datatable actions should create an action to", () => {
     expect(actions.saveRowEdited(payload)).toEqual(expectedAction);
   });
 
+  it("save all rows edited", () => {
+    const expectedAction = {
+      type: "SAVE_ALL_ROWS_EDITED"
+    };
+    expect(actions.saveAllRowsEdited()).toEqual(expectedAction);
+  });
+
   it("revert changes on a row", () => {
     const payload = {
       index: 0,
@@ -139,6 +153,13 @@ describe("Datatable actions should create an action to", () => {
       payload
     };
     expect(actions.revertRowEdited(payload)).toEqual(expectedAction);
+  });
+
+  it("revert changes on all rows", () => {
+    const expectedAction = {
+      type: "REVERT_ALL_ROWS_TO_EDITED"
+    };
+    expect(actions.revertAllRowsToEdited()).toEqual(expectedAction);
   });
 
   it("delete a row", () => {
