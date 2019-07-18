@@ -22,7 +22,7 @@ import {
   classesPropType
 } from "../../../proptypes";
 
-class GlobalEdit extends Component {
+export class GlobalEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ class GlobalEdit extends Component {
           <Fragment>
             <Tooltip title="Clear row">
               <IconButton
-                className={`revert ${classes.errorIcon}`}
+                className={`revert-icon ${classes.errorIcon}`}
                 onClick={() => this.revert()}
               >
                 <ClearIcon />
@@ -91,7 +91,7 @@ class GlobalEdit extends Component {
             >
               <span>
                 <IconButton
-                  className={`save ${classes.validIcon}`}
+                  className={`save-icon ${classes.validIcon}`}
                   onClick={() => this.save()}
                   disabled={saveDisabled}
                 >
