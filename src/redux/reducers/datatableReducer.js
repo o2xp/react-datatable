@@ -18,15 +18,16 @@ const defaultState = {
   dimensions: {
     datatable: {
       width: "100%",
+      height: "100%",
       widthNumber: 0,
       totalWidthNumber: 0
     },
     header: {
-      height: "60px",
+      height: "0px",
       heightNumber: 0
     },
     body: {
-      height: "300px",
+      height: "0px",
       heightNumber: 0
     },
     row: {
@@ -86,7 +87,7 @@ const defaultState = {
 
 const overwriteMerge = (destinationArray, sourceArray) => sourceArray;
 
-const convertSizeToNumber = val => {
+const convertSizeToNumber = (val, height) => {
   const splitSize = val.match(/[0-9]+|(px|%|vw|vh)/gi);
   let valSize = splitSize[0];
   const unitSize = splitSize[1];
@@ -100,9 +101,15 @@ const convertSizeToNumber = val => {
     valSize = window.innerHeight * (valSize / 100);
   }
   if (unitSize === "%") {
-    valSize =
-      document.getElementById("o2xp").parentElement.clientWidth *
-      (valSize / 100);
+    if (height) {
+      valSize =
+        document.getElementById("o2xp").parentElement.clientHeight *
+        (valSize / 100);
+    } else {
+      valSize =
+        document.getElementById("o2xp").parentElement.clientWidth *
+        (valSize / 100);
+    }
   }
 
   return valSize;
@@ -185,7 +192,7 @@ const totalWidth = state => {
 };
 
 const calcComponentSize = state => {
-  return {
+  const newState = {
     ...state,
     dimensions: {
       ...state.dimensions,
@@ -194,14 +201,6 @@ const calcComponentSize = state => {
         widthNumber: convertSizeToNumber(state.dimensions.datatable.width),
         totalWidthNumber: totalWidth(state)
       },
-      header: {
-        ...state.dimensions.header,
-        heightNumber: convertSizeToNumber(state.dimensions.header.height)
-      },
-      body: {
-        ...state.dimensions.body,
-        heightNumber: convertSizeToNumber(state.dimensions.body.height)
-      },
       row: {
         ...state.dimensions.row,
         heightNumber: convertSizeToNumber(state.dimensions.row.height)
@@ -209,6 +208,13 @@ const calcComponentSize = state => {
       columnSizeMultiplier: updateRowSizeMultiplier(state)
     }
   };
+  const test = convertSizeToNumber(newState.dimensions.datatable.height, true);
+  newState.dimensions.body.heightNumber =
+    test -
+    newState.dimensions.header.heightNumber -
+    50 -
+    newState.dimensions.row.heightNumber;
+  return newState;
 };
 
 const setPagination = ({
@@ -345,19 +351,52 @@ const initializeOptions = (
     rowsPerPageSelected: newState.features.rowsPerPage.selected
   });
 
+  const { title, features } = newState;
+  const {
+    canGlobalEdit,
+    canPrint,
+    canDownload,
+    canSearch,
+    canRefreshRows,
+    canOrderColumns,
+    canSaveUserConfiguration,
+    additionalIcons,
+    selectionIcons
+  } = features;
+  const hasHeader =
+    canGlobalEdit ||
+    canPrint ||
+    canDownload ||
+    canSearch ||
+    canRefreshRows ||
+    canOrderColumns ||
+    canSaveUserConfiguration ||
+    title.length > 0 ||
+    additionalIcons.length > 0 ||
+    selectionIcons.length > 0;
+
   newState.dimensions.columnSizeMultiplier = updateRowSizeMultiplier(newState);
   newState.dimensions.datatable.widthNumber = convertSizeToNumber(
     newState.dimensions.datatable.width
   );
+
+  const test = convertSizeToNumber(newState.dimensions.datatable.height, true);
+  newState.dimensions.header.height = hasHeader ? "60px" : "0px";
+
   newState.dimensions.header.heightNumber = convertSizeToNumber(
     newState.dimensions.header.height
   );
-  newState.dimensions.body.heightNumber = convertSizeToNumber(
-    newState.dimensions.body.height
-  );
+
   newState.dimensions.row.heightNumber = convertSizeToNumber(
     newState.dimensions.row.height
   );
+
+  newState.dimensions.body.heightNumber =
+    test -
+    newState.dimensions.header.heightNumber -
+    50 -
+    newState.dimensions.row.heightNumber;
+
   return newState;
 };
 

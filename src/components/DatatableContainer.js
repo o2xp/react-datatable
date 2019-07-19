@@ -30,8 +30,28 @@ class DatatableContainer extends Component {
       isRefreshing
     } = this.props;
 
-    const { canSelectRow, canDownload, canSearch } = features;
-    const hasHeader = title !== "" || canSelectRow || canDownload || canSearch;
+    const {
+      canGlobalEdit,
+      canPrint,
+      canDownload,
+      canSearch,
+      canRefreshRows,
+      canOrderColumns,
+      canSaveUserConfiguration,
+      additionalIcons,
+      selectionIcons
+    } = features;
+    const hasHeader =
+      canGlobalEdit ||
+      canPrint ||
+      canDownload ||
+      canSearch ||
+      canRefreshRows ||
+      canOrderColumns ||
+      canSaveUserConfiguration ||
+      title.length > 0 ||
+      additionalIcons.length > 0 ||
+      selectionIcons.length > 0;
 
     return (
       <Fragment>
