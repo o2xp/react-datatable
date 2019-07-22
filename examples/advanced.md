@@ -19,13 +19,8 @@ const options = {
   title: "My super datatable",
   dimensions: {
     datatable: {
-      width: "90vw"
-    },
-    header: {
-      height: "60px"
-    },
-    body: {
-      height: "40vh"
+      width: "90%",
+      height: "40%"
     },
     row: {
       height: "60px"
