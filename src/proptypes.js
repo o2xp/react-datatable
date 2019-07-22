@@ -122,6 +122,7 @@ export const bodyOfTheTablePropType = PropTypes.element;
 
 export const datatablePropType = PropTypes.shape({
   width: widthPropType.isRequired,
+  height: heightPropType.isRequired,
   widthNumber: widthNumberPropType
 });
 
@@ -131,7 +132,6 @@ export const headerPropType = PropTypes.shape({
 });
 
 export const bodyPropType = PropTypes.shape({
-  height: heightPropType.isRequired,
   heightNumber: heightNumberPropType
 });
 
