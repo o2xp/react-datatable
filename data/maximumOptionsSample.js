@@ -11,13 +11,8 @@ const maximumOptionsSample = {
   title,
   dimensions: {
     datatable: {
-      width: "500px"
-    },
-    header: {
-      height: "60px"
-    },
-    body: {
-      height: "30vh"
+      width: "500px",
+      height: "40vh"
     },
     row: {
       height: "60px"

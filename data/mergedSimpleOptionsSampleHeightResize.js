@@ -24,11 +24,11 @@ const mergedSimpleOptionsSampleHeightResize = {
     ...dimensions,
     datatable: {
       ...dimensions.datatable,
+      height: "40vh",
       totalWidthNumber: 1288
     },
     body: {
-      height: "30vh",
-      heightNumber: 150
+      heightNumber: 30
     }
   },
   pagination: {

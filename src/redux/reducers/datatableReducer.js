@@ -27,7 +27,6 @@ const defaultState = {
       heightNumber: 0
     },
     body: {
-      height: "0px",
       heightNumber: 0
     },
     row: {

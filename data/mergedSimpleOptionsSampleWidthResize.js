@@ -23,6 +23,7 @@ const mergedSimpleOptionsSampleWidthResize = {
   dimensions: {
     ...dimensions,
     datatable: {
+      ...dimensions.datatable,
       width: "90vw",
       widthNumber: 1800,
       totalWidthNumber: 1288

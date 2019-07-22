@@ -11,9 +11,7 @@ const storyOptionsSample = {
   title,
   dimensions: {
     datatable: {
-      width: "90vw"
-    },
-    body: {
+      width: "90vw",
       height: "50vh"
     }
   },

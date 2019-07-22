@@ -4,7 +4,8 @@ const minimumOptionsSample = {
   // Only here to avoid error in reducer
   dimensions: {
     datatable: {
-      width: "100vw"
+      width: "100vw",
+      height: "100vh"
     }
   },
   keyColumn,

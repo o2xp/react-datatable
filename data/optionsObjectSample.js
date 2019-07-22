@@ -5,6 +5,7 @@ import rows from "./rows";
 export const title = "My super datatable";
 export const datatable = {
   width: "90vw",
+  height: "40vh",
   widthNumber: 921.6
 };
 export const header = {
@@ -12,8 +13,7 @@ export const header = {
   heightNumber: 60
 };
 export const body = {
-  height: "30vh",
-  heightNumber: 768 * 0.3
+  heightNumber: 768 * 0.4 - 170
 };
 export const row = {
   height: "60px",
