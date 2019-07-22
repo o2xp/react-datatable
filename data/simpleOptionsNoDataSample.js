@@ -9,10 +9,8 @@ const simpleOptionsNoDataSample = {
   title,
   dimensions: {
     datatable: {
-      width: "90vw"
-    },
-    body: {
-      height: "30vh"
+      width: "90vw",
+      height: "40vh"
     }
   },
   keyColumn,

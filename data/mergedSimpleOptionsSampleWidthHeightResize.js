@@ -24,12 +24,12 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
     ...dimensions,
     datatable: {
       width: "90vw",
+      height: "40vh",
       widthNumber: 1800,
       totalWidthNumber: 1288
     },
     body: {
-      height: "30vh",
-      heightNumber: 150
+      heightNumber: 30
     },
     columnSizeMultiplier: 1228 / 960
   },

@@ -22,6 +22,7 @@ const mergedMaximumOptionsSample = {
   dimensions: {
     ...dimensions,
     datatable: {
+      ...dimensions.datatable,
       width: "500px",
       widthNumber: 500,
       totalWidthNumber: 0
