@@ -122,7 +122,7 @@ export const bodyOfTheTablePropType = PropTypes.element;
 
 export const datatablePropType = PropTypes.shape({
   width: widthPropType.isRequired,
-  height: heightPropType.isRequired,
+  height: heightPropType,
   widthNumber: widthNumberPropType
 });
 

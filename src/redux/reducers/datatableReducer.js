@@ -207,9 +207,12 @@ const calcComponentSize = state => {
       columnSizeMultiplier: updateRowSizeMultiplier(state)
     }
   };
-  const test = convertSizeToNumber(newState.dimensions.datatable.height, true);
+  const heightNumber = convertSizeToNumber(
+    newState.dimensions.datatable.height,
+    true
+  );
   newState.dimensions.body.heightNumber =
-    test -
+    heightNumber -
     newState.dimensions.header.heightNumber -
     50 -
     newState.dimensions.row.heightNumber;
@@ -379,7 +382,10 @@ const initializeOptions = (
     newState.dimensions.datatable.width
   );
 
-  const test = convertSizeToNumber(newState.dimensions.datatable.height, true);
+  const heightNumber = convertSizeToNumber(
+    newState.dimensions.datatable.height,
+    true
+  );
   newState.dimensions.header.height = hasHeader ? "60px" : "0px";
 
   newState.dimensions.header.heightNumber = convertSizeToNumber(
@@ -391,7 +397,7 @@ const initializeOptions = (
   );
 
   newState.dimensions.body.heightNumber =
-    test -
+    heightNumber -
     newState.dimensions.header.heightNumber -
     50 -
     newState.dimensions.row.heightNumber;
