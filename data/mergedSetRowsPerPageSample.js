@@ -8,6 +8,7 @@ import {
   columnAction,
   userConfiguration,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -45,6 +46,7 @@ const mergedSetRowsPerPageSample = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   features: {
     ...features,

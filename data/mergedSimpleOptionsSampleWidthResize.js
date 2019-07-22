@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -22,6 +23,7 @@ const mergedSimpleOptionsSampleWidthResize = {
   dimensions: {
     ...dimensions,
     datatable: {
+      ...dimensions.datatable,
       width: "90vw",
       widthNumber: 1800,
       totalWidthNumber: 1288
@@ -45,6 +47,7 @@ const mergedSimpleOptionsSampleWidthResize = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   features: {
     ...features,

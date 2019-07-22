@@ -6,6 +6,7 @@ import {
   font,
   data,
   refreshRows,
+  rowsGlobalEdited,
   isRefreshing,
   stripped,
   searchTerm,
@@ -29,6 +30,7 @@ const mergedPageSample = {
     rowsCurrentPage: chunk(data.rows, 10)[4]
   },
   keyColumn,
+  rowsGlobalEdited,
   actions: null,
   refreshRows,
   isRefreshing,

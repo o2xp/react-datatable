@@ -23,6 +23,9 @@ export const enqueueSnackbarPropType = PropTypes.func.isRequired;
 export const refreshRowsUserPropType = PropTypes.func.isRequired;
 export const refreshRowsPropType = PropTypes.func;
 export const orderByColumnsPropType = PropTypes.func.isRequired;
+export const addAllRowsToEditedPropType = PropTypes.func.isRequired;
+export const saveAllRowsEditedPropType = PropTypes.func.isRequired;
+export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
@@ -32,6 +35,7 @@ export const strippedPropType = PropTypes.bool;
 export const searchTermPropType = PropTypes.string;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
+export const rowsGlobalEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const maskPropType = PropTypes.array;
 
 export const cellValPropType = PropTypes.oneOfType([
@@ -90,6 +94,7 @@ export const valueVerificationPropType = PropTypes.func;
 export const rowPropType = PropTypes.object;
 export const rowsPropType = PropTypes.arrayOf(rowPropType);
 export const canEditPropType = PropTypes.bool;
+export const canGlobalEditPropType = PropTypes.bool;
 export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
 export const canSearchPropType = PropTypes.bool;
@@ -117,6 +122,7 @@ export const bodyOfTheTablePropType = PropTypes.element;
 
 export const datatablePropType = PropTypes.shape({
   width: widthPropType.isRequired,
+  height: heightPropType,
   widthNumber: widthNumberPropType
 });
 
@@ -126,7 +132,6 @@ export const headerPropType = PropTypes.shape({
 });
 
 export const bodyPropType = PropTypes.shape({
-  height: heightPropType.isRequired,
   heightNumber: heightNumberPropType
 });
 

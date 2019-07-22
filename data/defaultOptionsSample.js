@@ -3,15 +3,15 @@ const defaultOptionsSample = {
   dimensions: {
     datatable: {
       width: "100%",
+      height: "100%",
       widthNumber: 0,
       totalWidthNumber: 0
     },
     header: {
-      height: "60px",
+      height: "0px",
       heightNumber: 0
     },
     body: {
-      height: "300px",
       heightNumber: 0
     },
     row: {
@@ -28,6 +28,7 @@ const defaultOptionsSample = {
     rows: []
   },
   rowsEdited: [],
+  rowsGlobalEdited: [],
   rowsSelected: [],
   actions: null,
   refreshRows: null,
@@ -46,6 +47,7 @@ const defaultOptionsSample = {
   },
   features: {
     canEdit: false,
+    canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
     canDelete: false,

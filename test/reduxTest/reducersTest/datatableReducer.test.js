@@ -528,6 +528,31 @@ describe("datatableReducer reducer", () => {
     });
   });
 
+  describe("should handle ADD_ALL_ROWS_TO_EDITED", () => {
+    it("add all rows", () => {
+      const { rows } = simpleOptionsSample.data;
+      const rowsEdited = rows.map(row => {
+        return {
+          ...row,
+          idOfColumnErr: [],
+          hasBeenEdited: false
+        };
+      });
+      const result = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
+        type: "ADD_ALL_ROWS_TO_EDITED"
+      });
+
+      const mergedSimpleOptionsSampleWithOneEditedRow = {
+        ...mergedSimpleOptionsSample,
+        rowsEdited
+      };
+
+      expect(
+        equal(result, cloneDeep(mergedSimpleOptionsSampleWithOneEditedRow))
+      ).toBeTruthy();
+    });
+  });
+
   describe("should handle SET_ROW_EDITED", () => {
     describe("when value is", () => {
       it("good", () => {
@@ -555,6 +580,56 @@ describe("datatableReducer reducer", () => {
             { ...rows[5], age: 50, idOfColumnErr: [], hasBeenEdited: true },
             { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
           ]
+        };
+
+        expect(
+          equal(result, cloneDeep(mergedDatableReducerRowsEditedExpect))
+        ).toBeTruthy();
+      });
+
+      it("good with canGlobalEdit", () => {
+        const { rows } = cloneDeep(simpleOptionsSample.data);
+        const row = rows[5];
+        const payload = {
+          columnId: "age",
+          rowId: row.id,
+          newValue: 50,
+          error: false
+        };
+
+        const result = datatableReducer(
+          cloneDeep({
+            ...mergedDatableReducerRowsEdited,
+            features: {
+              ...mergedDatableReducerRowsEdited.features,
+              canEdit: false,
+              canGlobalEdit: true
+            },
+            rowsGlobalEdited: [
+              { ...rows[5], age: 40, idOfColumnErr: [], hasBeenEdited: false }
+            ]
+          }),
+          {
+            type: "SET_ROW_EDITED",
+            payload
+          }
+        );
+
+        const mergedDatableReducerRowsEditedExpect = {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [
+            { ...rows[0], idOfColumnErr: [], hasBeenEdited: false },
+            { ...rows[5], age: 50, idOfColumnErr: [], hasBeenEdited: true },
+            { ...rows[45], idOfColumnErr: [], hasBeenEdited: false }
+          ],
+          rowsGlobalEdited: [
+            { ...rows[5], age: 50, idOfColumnErr: [], hasBeenEdited: false }
+          ],
+          features: {
+            ...mergedSimpleOptionsSample.features,
+            canEdit: false,
+            canGlobalEdit: true
+          }
         };
 
         expect(
@@ -973,6 +1048,87 @@ describe("datatableReducer reducer", () => {
     });
   });
 
+  describe("should handle SAVE_ALL_ROWS_EDITED", () => {
+    it("without actions", () => {
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const store = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        rowsGlobalEdited: [
+          { ...rows[0], age: 21, idOfColumnErr: [], hasBeenEdited: true },
+          { ...rows[5], age: 39, idOfColumnErr: [], hasBeenEdited: true }
+        ],
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          canEdit: false,
+          canGlobalEdit: true
+        }
+      });
+      const result = datatableReducer(store, {
+        type: "SAVE_ALL_ROWS_EDITED"
+      });
+
+      const { data, pagination } = mergedSimpleOptionsSample;
+      pagination.rowsCurrentPage[0].age = 21;
+      pagination.rowsCurrentPage[5].age = 39;
+      data.rows[0].age = 21;
+      data.rows[5].age = 39;
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        data,
+        pagination,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          canEdit: false,
+          canGlobalEdit: true
+        }
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+    });
+
+    it("with actions", () => {
+      const actions = jest.fn();
+      const { rows } = cloneDeep(simpleOptionsSample.data);
+      const store = cloneDeep({
+        ...mergedSimpleOptionsSample,
+        actions,
+        rowsGlobalEdited: [
+          { ...rows[0], age: 21, idOfColumnErr: [], hasBeenEdited: false },
+          { ...rows[5], age: 39, idOfColumnErr: [], hasBeenEdited: false }
+        ],
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          canEdit: false,
+          canGlobalEdit: true
+        }
+      });
+
+      const result = datatableReducer(store, {
+        type: "SAVE_ALL_ROWS_EDITED"
+      });
+
+      const { data, pagination } = mergedSimpleOptionsSample;
+      data.rows[0].age = 21;
+      data.rows[5].age = 39;
+      pagination.rowsCurrentPage[0].age = 21;
+      pagination.rowsCurrentPage[5].age = 39;
+      const mergedDatableReducerExpect = {
+        ...mergedSimpleOptionsSample,
+        actions,
+        data,
+        pagination,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          canEdit: false,
+          canGlobalEdit: true
+        }
+      };
+
+      expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+      expect(actions).toHaveBeenCalled();
+    });
+  });
+
   it("should handle REVERT_ROW_EDITED", () => {
     const { rows } = cloneDeep(simpleOptionsSample.data);
     const row = rows[0];
@@ -989,15 +1145,54 @@ describe("datatableReducer reducer", () => {
     expect(equal(result, cloneDeep(mergedSimpleOptionsSample))).toBeTruthy();
   });
 
+  it("should handle REVERT_ALL_ROWS_TO_EDITED", () => {
+    const { rows } = cloneDeep(simpleOptionsSample.data);
+    const row = rows[0];
+    const store = cloneDeep({
+      ...mergedSimpleOptionsSample,
+      rowsEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }],
+      rowsGlobalEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }],
+      features: {
+        ...mergedSimpleOptionsSample.features,
+        canEdit: false,
+        canGlobalEdit: true
+      }
+    });
+
+    const result = datatableReducer(store, {
+      type: "REVERT_ALL_ROWS_TO_EDITED"
+    });
+
+    const mergedDatableReducerExpect = {
+      ...mergedSimpleOptionsSample,
+      features: {
+        ...mergedSimpleOptionsSample.features,
+        canEdit: false,
+        canGlobalEdit: true
+      }
+    };
+
+    expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+  });
+
   describe("should handle DELETE_ROW", () => {
     it("without actions", () => {
       const { rows } = cloneDeep(simpleOptionsSample.data);
       const row = rows[0];
 
-      const result = datatableReducer(mergedSimpleOptionsSample, {
-        type: "DELETE_ROW",
-        payload: row
-      });
+      const result = datatableReducer(
+        {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }],
+          rowsGlobalEdited: [
+            { ...row, idOfColumnErr: [], hasBeenEdited: false }
+          ]
+        },
+        {
+          type: "DELETE_ROW",
+          payload: row
+        }
+      );
 
       const { data, keyColumn } = mergedSimpleOptionsSample;
       let mergedDatableReducerExpect = {

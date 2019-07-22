@@ -6,6 +6,7 @@ import {
   data,
   additionalIcons,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   columnAction,
   refreshRows,
@@ -21,12 +22,14 @@ const mergedMaximumOptionsSample = {
   dimensions: {
     ...dimensions,
     datatable: {
+      ...dimensions.datatable,
       width: "500px",
       widthNumber: 500,
       totalWidthNumber: 0
     }
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -48,6 +51,7 @@ const mergedMaximumOptionsSample = {
   },
   features: {
     canEdit: true,
+    canGlobalEdit: false,
     canPrint: true,
     canDownload: true,
     canSearch: true,

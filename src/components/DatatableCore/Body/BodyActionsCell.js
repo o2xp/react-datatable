@@ -30,7 +30,9 @@ import {
   revertRowEditedPropType,
   selectRowPropType,
   checkedPropType,
-  deleteRowPropType
+  stylePropType,
+  deleteRowPropType,
+  canGlobalEditPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -44,9 +46,11 @@ export class BodyActionsCell extends Component {
 
   render() {
     const {
+      style,
       column,
       isScrolling,
       canEdit,
+      canGlobalEdit,
       canDelete,
       canSelectRow,
       row,
@@ -71,6 +75,9 @@ export class BodyActionsCell extends Component {
             ? "Table-Cell action scrolling-shadow"
             : "Table-Cell action"
         }
+        style={{
+          backgroundColor: style.backgroundColor
+        }}
       >
         <div style={{ width: column.colSize }}>
           {canSelectRow && (
@@ -81,7 +88,7 @@ export class BodyActionsCell extends Component {
               checked={checked}
             />
           )}
-          {canDelete && !editing && !deleting && (
+          {canDelete && (!editing || canGlobalEdit) && !deleting && (
             <Tooltip title="Confirm delete">
               <IconButton
                 className={`delete ${classes.defaultIcon}`}
@@ -128,7 +135,7 @@ export class BodyActionsCell extends Component {
             </Tooltip>
           )}
 
-          {editing && !deleting && (
+          {editing && !deleting && !canGlobalEdit && (
             <Fragment>
               <Tooltip title="Clear row">
                 <IconButton
@@ -179,6 +186,7 @@ const mapStateToProps = state => {
     keyColumn: state.datatableReducer.keyColumn,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
     canEdit: state.datatableReducer.features.canEdit,
+    canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canDelete: state.datatableReducer.features.canDelete,
     canSelectRow: state.datatableReducer.features.canSelectRow
   };
@@ -189,6 +197,7 @@ BodyActionsCell.propTypes = {
   editing: editingPropType.isRequired,
   classes: classesPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,
+  style: stylePropType.isRequired,
   canEdit: canEditPropType.isRequired,
   canDelete: canDeletePropType.isRequired,
   canSelectRow: canSelectRowPropType.isRequired,
@@ -198,7 +207,8 @@ BodyActionsCell.propTypes = {
   addRowEdited: addRowEditedPropType,
   selectRow: selectRowPropType,
   revertRowEdited: revertRowEditedPropType,
-  deleteRow: deleteRowPropType
+  deleteRow: deleteRowPropType,
+  canGlobalEdit: canGlobalEditPropType.isRequired
 };
 
 export default compose(

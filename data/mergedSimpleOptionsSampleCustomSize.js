@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsGlobalEdited,
   refreshRows,
   isRefreshing,
   stripped,
@@ -43,6 +44,7 @@ const mergedSimpleOptionsSampleCustomSize = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   features: {
     ...features,

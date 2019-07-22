@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -23,11 +24,11 @@ const mergedSimpleOptionsSampleHeightResize = {
     ...dimensions,
     datatable: {
       ...dimensions.datatable,
+      height: "40vh",
       totalWidthNumber: 1288
     },
     body: {
-      height: "30vh",
-      heightNumber: 150
+      heightNumber: 30
     }
   },
   pagination: {
@@ -47,6 +48,7 @@ const mergedSimpleOptionsSampleHeightResize = {
     columns: [columnAction, ...data.columns]
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   features: {
     ...features,

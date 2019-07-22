@@ -6,6 +6,7 @@ import {
   userConfiguration,
   pagination,
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -21,15 +22,17 @@ const mergedMinimumOptionsSample = {
     ...dimensions,
     datatable: {
       width: "100vw",
+      height: "100vh",
       widthNumber: 1024,
       totalWidthNumber: 0
     },
+    header: { height: "0px", heightNumber: 0 },
     body: {
-      height: "300px",
-      heightNumber: 300
+      heightNumber: 658
     }
   },
   rowsEdited,
+  rowsGlobalEdited,
   rowsSelected,
   refreshRows,
   isRefreshing,
@@ -46,6 +49,7 @@ const mergedMinimumOptionsSample = {
   },
   features: {
     canEdit: false,
+    canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
     canSearch: false,

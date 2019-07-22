@@ -8,6 +8,7 @@ import {
   userConfiguration,
   pagination,
   rowsSelected,
+  rowsGlobalEdited,
   refreshRows,
   isRefreshing,
   stripped,
@@ -41,6 +42,7 @@ const mergedDatableReducerRowsEdited = {
   searchTerm,
   font,
   orderBy,
+  rowsGlobalEdited,
   rowsEdited: [
     { ...data.rows[0], idOfColumnErr: [], hasBeenEdited: false },
     { ...data.rows[5], idOfColumnErr: [], hasBeenEdited: false },

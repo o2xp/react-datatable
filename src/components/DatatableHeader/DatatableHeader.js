@@ -11,7 +11,8 @@ import {
   canSearchPropType,
   canPrintPropType,
   canRefreshRowsPropType,
-  canSaveUserConfigurationPropType
+  canSaveUserConfigurationPropType,
+  canGlobalEditPropType
 } from "../../proptypes";
 import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
@@ -21,6 +22,7 @@ import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
 import Print from "./Widgets/Print";
 import UserConfiguration from "./Widgets/UserConfiguration";
 import RefreshRows from "./Widgets/RefreshRows";
+import GlobalEdit from "./Widgets/GlobalEdit";
 
 class DatatableHeader extends Component {
   render() {
@@ -32,6 +34,7 @@ class DatatableHeader extends Component {
       selectionIcons,
       canOrderColumns,
       canDownload,
+      canGlobalEdit,
       canSearch,
       canPrint,
       canRefreshRows,
@@ -40,6 +43,7 @@ class DatatableHeader extends Component {
     const hasBaseIcons =
       canSearch ||
       canDownload ||
+      canGlobalEdit ||
       canOrderColumns ||
       canPrint ||
       canRefreshRows ||
@@ -55,6 +59,14 @@ class DatatableHeader extends Component {
         {canPrint && <Print />}
         {canRefreshRows && <RefreshRows />}
         {canSaveUserConfiguration && <UserConfiguration />}
+        <div
+          className="global-edit-icon-separator"
+          style={{
+            borderRight: "1px solid rgba(0, 0, 0, 0.35)",
+            height: canGlobalEdit ? "45%" : "0%"
+          }}
+        />
+        {canGlobalEdit && <GlobalEdit />}
         <div
           className="selection-icons-separator"
           style={{
@@ -91,7 +103,8 @@ DatatableHeader.propTypes = {
   canSearch: canSearchPropType.isRequired,
   canPrint: canPrintPropType.isRequired,
   canRefreshRows: canRefreshRowsPropType.isRequired,
-  canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired
+  canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired,
+  canGlobalEdit: canGlobalEditPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -103,6 +116,7 @@ const mapStateToProps = state => {
     selectionIcons: state.datatableReducer.features.selectionIcons,
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
     canDownload: state.datatableReducer.features.canDownload,
+    canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canSearch: state.datatableReducer.features.canSearch,
     canPrint: state.datatableReducer.features.canPrint,
     canRefreshRows: state.datatableReducer.features.canRefreshRows,
