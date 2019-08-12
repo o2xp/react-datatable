@@ -275,6 +275,19 @@ const setPagination = ({
   };
 };
 
+const removeNullUndefined = obj => {
+  Object.keys(obj).forEach(key => {
+    if (obj[key] && typeof obj[key] === "object" && key !== "icon")
+      removeNullUndefined(obj[key]);
+    /* eslint-disable no-param-reassign */ else if (
+      obj[key] == null ||
+      obj[key] === undefined
+    )
+      delete obj[key]; // delete
+  });
+  return obj;
+};
+
 const initializeOptions = (
   state,
   {
@@ -287,7 +300,7 @@ const initializeOptions = (
 ) => {
   const newState = deepmerge(
     forceRerender ? defaultState : state,
-    optionsInit,
+    removeNullUndefined(optionsInit),
     {
       arrayMerge: overwriteMerge
     }
