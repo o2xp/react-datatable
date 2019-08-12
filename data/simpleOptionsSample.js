@@ -16,6 +16,8 @@ const simpleOptionsSample = {
     canDownload: true,
     canDelete: true,
     canSelectRow: true,
+    canSearch: null,
+    canSaveUserConfiguration: undefined,
     selectionIcons
   }
 };
