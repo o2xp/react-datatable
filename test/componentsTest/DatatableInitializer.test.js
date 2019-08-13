@@ -80,4 +80,45 @@ describe("Datatable initializer component", () => {
       });
     });
   });
+
+  describe("should handle shouldComponentUpdate", () => {
+    it("no update if same options init", () => {
+      const initializeOptions = jest.fn();
+      const initializeCustomComponents = jest.fn();
+      const updateComponentSize = jest.fn();
+      const wrapper = shallow(
+        <DatatableInitializerPureComponent
+          optionsInit={simpleOptionsSample}
+          initializeOptions={initializeOptions}
+          initializeCustomComponents={initializeCustomComponents}
+          updateComponentSize={updateComponentSize}
+        />
+      );
+
+      const shouldUpdate = wrapper
+        .instance()
+        .shouldComponentUpdate({ optionsInit: simpleOptionsSample });
+      expect(shouldUpdate).toBe(false);
+    });
+
+    it("update if different options init", () => {
+      const initializeOptions = jest.fn();
+      const initializeCustomComponents = jest.fn();
+      const updateComponentSize = jest.fn();
+      const wrapper = shallow(
+        <DatatableInitializerPureComponent
+          optionsInit={simpleOptionsSample}
+          initializeOptions={initializeOptions}
+          initializeCustomComponents={initializeCustomComponents}
+          updateComponentSize={updateComponentSize}
+        />
+      );
+
+      const shouldUpdate2 = wrapper.instance().shouldComponentUpdate({
+        optionsInit: { ...simpleOptionsSample, title: "change" },
+        initializeOptions
+      });
+      expect(shouldUpdate2).toBe(true);
+    });
+  });
 });
