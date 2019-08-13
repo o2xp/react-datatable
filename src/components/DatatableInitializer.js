@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { throttle } from "lodash";
+import equal from "fast-deep-equal";
 import elementResizeEvent from "element-resize-event";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
@@ -67,6 +68,30 @@ export class DatatableInitializer extends Component {
     const element = document.getElementById("o2xp").parentElement;
 
     elementResizeEvent(element, callBack());
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      optionsInit,
+      forceRerender,
+      actions,
+      refreshRows,
+      stripped,
+      initializeOptions
+    } = nextProps;
+    const { optionsInit: optionsInitProps } = this.props;
+    const update = equal(optionsInit, optionsInitProps);
+
+    if (!update) {
+      initializeOptions({
+        optionsInit,
+        forceRerender,
+        actions,
+        refreshRows,
+        stripped
+      });
+    }
+    return !update;
   }
 
   render() {
