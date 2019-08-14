@@ -88,6 +88,9 @@ export class TextFieldWrapper extends Component {
   render() {
     const { type, cellVal, classes } = this.props;
     const { tooltipOpen, message, error } = this.state;
+    const inputValue =
+      type === "number" && !cellVal && cellVal !== 0 ? "" : cellVal;
+
     return (
       <Tooltip
         open={tooltipOpen}
@@ -100,7 +103,7 @@ export class TextFieldWrapper extends Component {
       >
         <FormControl>
           <Input
-            value={cellVal}
+            value={inputValue}
             error={error}
             onFocus={() => this.toggleTooltip(true)}
             onBlur={() => this.setState({ tooltipOpen: false })}
