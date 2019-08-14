@@ -16,8 +16,13 @@ class AdditionalIcons extends Component {
           >
             <span>
               <IconButton
-                className={`additional-icon-${i}`}
+                className={
+                  icon.disabled
+                    ? `disabled-icon additional-icon-${i}`
+                    : `additional-icon-${i}`
+                }
                 onClick={() => icon.onClick()}
+                disabled={icon.disabled}
               >
                 {icon.icon}
               </IconButton>
