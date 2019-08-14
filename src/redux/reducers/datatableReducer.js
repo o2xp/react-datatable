@@ -526,10 +526,11 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
       } else {
         idOfColumnErrUpdate = idOfColumnErrUpdate.filter(e => e !== columnId);
       }
-
+      /* eslint-disable no-restricted-globals */
       const r = {
         ...row,
-        [columnId]: newValue,
+        [columnId]:
+          isNaN(newValue) && typeof newValue !== "string" ? "" : newValue,
         idOfColumnErr: idOfColumnErrUpdate
       };
 
