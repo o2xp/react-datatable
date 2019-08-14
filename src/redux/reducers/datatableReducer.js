@@ -529,7 +529,8 @@ const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
       /* eslint-disable no-restricted-globals */
       const r = {
         ...row,
-        [columnId]: isNaN(newValue) ? "" : newValue,
+        [columnId]:
+          isNaN(newValue) && typeof newValue !== "string" ? "" : newValue,
         idOfColumnErr: idOfColumnErrUpdate
       };
 
