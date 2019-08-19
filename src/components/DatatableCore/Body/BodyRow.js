@@ -45,8 +45,11 @@ export class BodyRow extends Component {
     const column = columns.find(col => col.id === columnId);
     const rowId = row[keyColumn];
     const key = `row-${row[keyColumn]}-cell-${columnId}`;
-    const isEditing = editing && column.editable;
+    let isEditing = editing && column.editable;
 
+    if (row.editableId && !row.editableId.includes(columnId)) {
+      isEditing = false;
+    }
     if (columnId === "o2xpActions") {
       const checked = !!rowsSelected.find(r => r[keyColumn] === row[keyColumn]);
       return (
