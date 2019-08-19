@@ -32,7 +32,9 @@ import {
   checkedPropType,
   stylePropType,
   deleteRowPropType,
-  canGlobalEditPropType
+  canGlobalEditPropType,
+  rowsEditedPropType,
+  keyColumnPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -61,12 +63,17 @@ export class BodyActionsCell extends Component {
       revertRowEdited,
       deleteRow,
       selectRow,
-      classes
+      classes,
+      rowsEdited,
+      keyColumn
     } = this.props;
 
     const { deleting } = this.state;
     const { hasBeenEdited, idOfColumnErr } = row;
     const saveDisabled = !hasBeenEdited || idOfColumnErr.length > 0;
+
+    const canEditDisable =
+      rowsEdited.length > 0 && rowsEdited[0][keyColumn] !== row[keyColumn];
 
     return (
       <div
@@ -129,6 +136,7 @@ export class BodyActionsCell extends Component {
                 className="edit"
                 color="primary"
                 onClick={() => addRowEdited(row)}
+                disabled={canEditDisable}
               >
                 <CreateIcon />
               </IconButton>
@@ -184,6 +192,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     keyColumn: state.datatableReducer.keyColumn,
+    rowsEdited: state.datatableReducer.rowsEdited,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
     canEdit: state.datatableReducer.features.canEdit,
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
@@ -194,6 +203,8 @@ const mapStateToProps = state => {
 
 BodyActionsCell.propTypes = {
   column: columnPropType.isRequired,
+  rowsEdited: rowsEditedPropType.isRequired,
+  keyColumn: keyColumnPropType.isRequired,
   editing: editingPropType.isRequired,
   classes: classesPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,

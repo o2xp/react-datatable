@@ -61,6 +61,7 @@ describe("BodyActionsCell component", () => {
           canEdit
           canDelete
           canSelectRow
+          rowsEdited={[]}
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
@@ -85,6 +86,7 @@ describe("BodyActionsCell component", () => {
           canEdit
           canDelete
           canSelectRow
+          rowsEdited={[]}
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
@@ -112,6 +114,7 @@ describe("BodyActionsCell component", () => {
             canEdit={false}
             canDelete
             canSelectRow
+            rowsEdited={[]}
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -138,6 +141,7 @@ describe("BodyActionsCell component", () => {
             canEdit
             canDelete={false}
             canSelectRow
+            rowsEdited={[]}
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -164,6 +168,7 @@ describe("BodyActionsCell component", () => {
             canEdit
             canDelete
             canSelectRow={false}
+            rowsEdited={[]}
             addRowEdited={addRowEdited}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
@@ -291,6 +296,7 @@ describe("BodyActionsCell component", () => {
           canEdit
           canDelete
           canSelectRow
+          rowsEdited={[]}
           addRowEdited={addRowEdited}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
