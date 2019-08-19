@@ -362,7 +362,7 @@ const initializeOptions = (
 
   newState.pagination = setPagination({
     state: newState,
-    current: 1,
+    current: newState.pagination.current,
     rowsPerPageSelected: newState.features.rowsPerPage.selected
   });
 
