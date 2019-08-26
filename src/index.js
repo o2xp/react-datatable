@@ -15,6 +15,7 @@ class Datatable extends Component {
       actions = null,
       refreshRows = null,
       stripped = false,
+      customProps = null,
       CustomTableBodyCell = null,
       CustomTableBodyRow = null,
       CustomTableHeaderCell = null,
@@ -37,6 +38,7 @@ class Datatable extends Component {
                   actions={actions}
                   refreshRows={refreshRows}
                   stripped={stripped}
+                  customProps={customProps}
                   CustomTableBodyCell={CustomTableBodyCell}
                   CustomTableBodyRow={CustomTableBodyRow}
                   CustomTableHeaderCell={CustomTableHeaderCell}

@@ -241,6 +241,8 @@ export const componentPropType = PropTypes.oneOfType([
   PropTypes.element
 ]);
 
+export const customPropsPropType = PropTypes.any;
+
 export const customDataTypePropType = PropTypes.shape({
   dataType: dataTypePropType.isRequired,
   component: componentPropType.isRequired

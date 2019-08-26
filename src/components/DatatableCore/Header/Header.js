@@ -5,7 +5,8 @@ import {
   columnsOrderPropType,
   columnSizeMultiplierPropType,
   widthNumberPropType,
-  CustomTableHeaderRowPropType
+  CustomTableHeaderRowPropType,
+  customPropsPropType
 } from "../../../proptypes";
 import HeaderRow from "./HeaderRow";
 
@@ -15,7 +16,8 @@ class Header extends Component {
       columnsOrder,
       CustomTableHeaderRow,
       columnSizeMultiplier,
-      widthDatatable
+      widthDatatable,
+      customProps
     } = this.props;
 
     if (CustomTableHeaderRow !== null) {
@@ -28,6 +30,7 @@ class Header extends Component {
           }}
         >
           <CustomTableHeaderRow
+            customProps={customProps}
             columnsOrder={columnsOrder}
             columnSizeMultiplier={columnSizeMultiplier}
           />
@@ -43,6 +46,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  customProps: customPropsPropType,
   columnsOrder: columnsOrderPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
   widthDatatable: widthNumberPropType.isRequired,
@@ -51,6 +55,7 @@ Header.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    customProps: state.customComponentsReducer.customProps,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     widthDatatable: state.datatableReducer.dimensions.datatable.widthNumber,

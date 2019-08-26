@@ -18,7 +18,8 @@ import {
   rowsEditedPropType,
   heightNumberPropType,
   widthNumberPropType,
-  columnSizeMultiplierPropType
+  columnSizeMultiplierPropType,
+  customPropsPropType
 } from "../../../proptypes";
 
 export const tableRef = React.createRef();
@@ -54,7 +55,8 @@ export class Body extends Component {
       columnsOrder,
       keyColumn,
       stripped,
-      rowsEdited
+      rowsEdited,
+      customProps
     } = this.props;
     const key = `row-${index}`;
     const { columnSizeMultiplier } = dimensions;
@@ -79,6 +81,7 @@ export class Body extends Component {
           }}
         >
           <CustomTableBodyRow
+            customProps={customProps}
             row={row}
             columnsOrder={columnsOrder}
             rowIndex={index}
@@ -166,6 +169,7 @@ export class Body extends Component {
 
 Body.propTypes = {
   rows: rowsPropType.isRequired,
+  customProps: customPropsPropType,
   columnsOrder: columnsOrderPropType.isRequired,
   dimensions: dimensionsPropType.isRequired,
   CustomTableBodyRow: CustomTableBodyRowPropType,
@@ -188,6 +192,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    customProps: state.customComponentsReducer.customProps,
     rows: state.datatableReducer.pagination.rowsCurrentPage,
     dimensions: state.datatableReducer.dimensions,
     columnsOrder:
