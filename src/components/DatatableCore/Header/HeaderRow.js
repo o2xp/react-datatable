@@ -7,7 +7,8 @@ import {
   columnSizeMultiplierPropType,
   sortColumnsPropType,
   widthNumberPropType,
-  CustomTableHeaderCellPropType
+  CustomTableHeaderCellPropType,
+  customPropsPropType
 } from "../../../proptypes";
 import HeaderCell from "./HeaderCell";
 import HeaderActionsCell from "./HeaderActionsCell";
@@ -15,7 +16,12 @@ import { sortColumns as sortColumnsAction } from "../../../redux/actions/datatab
 
 export class HeaderRow extends Component {
   headerCellBuilder = (columnId, index) => {
-    const { columns, CustomTableHeaderCell, columnSizeMultiplier } = this.props;
+    const {
+      columns,
+      CustomTableHeaderCell,
+      columnSizeMultiplier,
+      customProps
+    } = this.props;
     const column = columns.find(col => col.id === columnId);
     const width = `${(
       column.colSize.split("px")[0] * columnSizeMultiplier
@@ -32,7 +38,13 @@ export class HeaderRow extends Component {
           key={key}
           index={index}
           width={width}
-          value={<CustomTableHeaderCell column={column} width={width} />}
+          value={
+            <CustomTableHeaderCell
+              customProps={customProps}
+              column={column}
+              width={width}
+            />
+          }
         />
       );
     }
@@ -86,6 +98,7 @@ const SortableItem = sortableElement(({ width, value }) => (
 ));
 
 HeaderRow.propTypes = {
+  customProps: customPropsPropType,
   columns: columnsPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
@@ -103,6 +116,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    customProps: state.customComponentsReducer.customProps,
     columns: state.datatableReducer.data.columns,
     widthDatatable: state.datatableReducer.dimensions.datatable.widthNumber,
     columnSizeMultiplier:

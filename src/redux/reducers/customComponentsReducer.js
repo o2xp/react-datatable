@@ -1,4 +1,5 @@
 const defaultState = {
+  customProps: null,
   CustomTableBodyCell: null,
   CustomTableBodyRow: null,
   CustomTableHeaderCell: null,

@@ -22,6 +22,7 @@ import {
   CustomTableHeaderRowPropType,
   CustomTableHeaderCellPropType,
   customDataTypesPropType,
+  customPropsPropType,
   dtKeyPropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
@@ -40,6 +41,7 @@ export class DatatableInitializer extends Component {
       actions,
       refreshRows,
       stripped,
+      customProps,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
@@ -59,6 +61,7 @@ export class DatatableInitializer extends Component {
       stripped
     });
     initializeCustomComponents({
+      customProps,
       CustomTableBodyCell,
       CustomTableBodyRow,
       CustomTableHeaderCell,
@@ -75,16 +78,25 @@ export class DatatableInitializer extends Component {
 
   shouldComponentUpdate(nextProps) {
     const {
+      customProps,
+      CustomTableBodyCell,
+      CustomTableBodyRow,
+      CustomTableHeaderCell,
+      CustomTableHeaderRow,
+      customDataTypes,
       optionsInit,
       dtKey,
       forceRerender,
       actions,
       refreshRows,
       stripped,
-      initializeOptions
+      initializeOptions,
+      initializeCustomComponents
     } = nextProps;
     const { optionsInit: optionsInitProps } = this.props;
     const update = equal(optionsInit, optionsInitProps);
+    const { customProps: customPropsProps } = this.props;
+    const updateCustomProps = equal(customProps, customPropsProps);
 
     if (!update) {
       initializeOptions({
@@ -96,7 +108,18 @@ export class DatatableInitializer extends Component {
         stripped
       });
     }
-    return !update;
+
+    if (!updateCustomProps) {
+      initializeCustomComponents({
+        customProps,
+        CustomTableBodyCell,
+        CustomTableBodyRow,
+        CustomTableHeaderCell,
+        CustomTableHeaderRow,
+        customDataTypes
+      });
+    }
+    return !update || !updateCustomProps;
   }
 
   render() {
@@ -124,6 +147,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 DatatableInitializer.propTypes = {
+  customProps: customPropsPropType,
   initializeOptions: initializeOptionsPropType,
   dtKey: dtKeyPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
