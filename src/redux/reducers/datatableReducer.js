@@ -14,6 +14,7 @@ const optionsFuse = {
   minMatchCharLength: 1
 };
 const defaultState = {
+  dtKey: "",
   title: "",
   dimensions: {
     datatable: {
@@ -62,6 +63,7 @@ const defaultState = {
   },
   features: {
     canEdit: false,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
@@ -292,15 +294,16 @@ const initializeOptions = (
   state,
   {
     optionsInit,
-    forceRerender = true,
+    dtKey,
+    forceRerender = false,
     actions = null,
     refreshRows = null,
     stripped = false
   }
 ) => {
   const newState = deepmerge(
-    forceRerender ? defaultState : state,
-    removeNullUndefined(optionsInit),
+    forceRerender || dtKey !== state.dtKey ? defaultState : state,
+    removeNullUndefined({ ...optionsInit, dtKey }),
     {
       arrayMerge: overwriteMerge
     }

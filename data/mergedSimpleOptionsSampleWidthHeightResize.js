@@ -19,6 +19,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedSimpleOptionsSampleWidthHeightResize = {
+  dtKey: "",
   title,
   dimensions: {
     ...dimensions,

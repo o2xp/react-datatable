@@ -71,6 +71,8 @@ export const paginationPropType = PropTypes.shape({
 
 // Options propTypes
 export const actionsPropType = PropTypes.func;
+export const canEditRowPropType = PropTypes.func;
+export const dtKeyPropType = PropTypes.string;
 export const forceRerenderPropType = PropTypes.bool;
 export const titlePropType = PropTypes.string;
 export const widthPropType = PropTypes.string;

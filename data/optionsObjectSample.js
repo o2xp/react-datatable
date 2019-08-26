@@ -186,6 +186,7 @@ export const additionalIcons = [
 ];
 export const features = {
   canEdit: true,
+  canEditRow: null,
   canGlobalEdit: false,
   canPrint: true,
   canDownload: true,

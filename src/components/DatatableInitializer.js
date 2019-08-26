@@ -21,7 +21,8 @@ import {
   CustomTableBodyCellPropType,
   CustomTableHeaderRowPropType,
   CustomTableHeaderCellPropType,
-  customDataTypesPropType
+  customDataTypesPropType,
+  dtKeyPropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
 import {
@@ -34,6 +35,7 @@ export class DatatableInitializer extends Component {
   componentDidMount() {
     const {
       optionsInit,
+      dtKey,
       forceRerender,
       actions,
       refreshRows,
@@ -50,6 +52,7 @@ export class DatatableInitializer extends Component {
 
     initializeOptions({
       optionsInit,
+      dtKey,
       forceRerender,
       actions,
       refreshRows,
@@ -73,6 +76,7 @@ export class DatatableInitializer extends Component {
   shouldComponentUpdate(nextProps) {
     const {
       optionsInit,
+      dtKey,
       forceRerender,
       actions,
       refreshRows,
@@ -85,6 +89,7 @@ export class DatatableInitializer extends Component {
     if (!update) {
       initializeOptions({
         optionsInit,
+        dtKey,
         forceRerender,
         actions,
         refreshRows,
@@ -120,6 +125,7 @@ const mapDispatchToProps = dispatch => {
 
 DatatableInitializer.propTypes = {
   initializeOptions: initializeOptionsPropType,
+  dtKey: dtKeyPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
   updateComponentSize: updateComponentSizePropType,
   optionsInit: optionsPropType.isRequired,

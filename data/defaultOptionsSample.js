@@ -1,4 +1,5 @@
 const defaultOptionsSample = {
+  dtKey: "",
   title: "",
   dimensions: {
     datatable: {
@@ -47,6 +48,7 @@ const defaultOptionsSample = {
   },
   features: {
     canEdit: false,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,

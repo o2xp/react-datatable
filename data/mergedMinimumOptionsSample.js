@@ -17,6 +17,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedMinimumOptionsSample = {
+  dtKey: "",
   title: "",
   dimensions: {
     ...dimensions,
@@ -49,6 +50,7 @@ const mergedMinimumOptionsSample = {
   },
   features: {
     canEdit: false,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,

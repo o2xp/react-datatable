@@ -18,6 +18,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedMaximumOptionsSample = {
+  dtKey: "",
   title: "My super datatable",
   dimensions: {
     ...dimensions,
@@ -51,6 +52,7 @@ const mergedMaximumOptionsSample = {
   },
   features: {
     canEdit: true,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: true,
     canDownload: true,
