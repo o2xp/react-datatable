@@ -95,6 +95,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | Property | Type | Required? | Description |
 |:---|:---:|:---:|:---|
 | options | object | yes | An object that all the options to render the datatable. See [**Options Properties**](#options-properties). |
+| dtKey | string | no | If you are using our Datatable in multiple component, you should provide us an unique key in order to reset the redux store. |
 | actions | function | no | Function that take as parameter {type, payload}, where type is the action performed (save, delete etc..) and payload the data needed to perform the action. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | refreshRows | function | no | Function that return an an array of objects where each object is defined by the columns identifier as key and the value. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | forceRerender | boolean | no | Do you want to rerender the component on route change or keep the state ? |
@@ -115,7 +116,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | keyColumn | string | yes | / |  Name of the column that has unique value and allows to identify a row. |
 | font | string | no | "Roboto" | Name of the font you are using. It allows the datatable to calculate the overlapping of cells. |
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |
-| data .rows | array of object | yes | / |  An array of objects where each object is defined by the columns identifier as key and the value. |
+| data .rows | array of object | yes | / |  An array of objects where each object is defined by the columns identifier as key and the value. Click [here](#rows-props) to have more information. |
 | features .canEdit | boolean | no | false |  If the user can edit the rows. |
 | features .canGlobalEdit | boolean | no | false |  If the user can turn in edit mode all the rows. |
 | features .canPrint | boolean | no | false |  If you want stripped rows. |
@@ -147,6 +148,13 @@ Columns is an array of object construct with these keys :
 | values | array | yes (only if inputType === "select") | Possible values displayed in the select. |
 | valueVerification | function | no | If you want to verify value on save. You need to provide a function which take a parameter (the new value) and return and object in this format {error: boolean, message: string} |
 | mask | array of regex | no | Works only with inputType === input. To build regex see [**react-text-mask**](https://github.com/text-mask/text-mask/tree/master/react/#readme)|
+
+#### Rows Props
+Rows is an array of object where each object is defined by the columns identifier as key and the value. You can add this key for edit purpose :
+
+| Property | Type | Required? | Description |
+|:---|:---:|:---:|:---|
+| editableId | Array<string> | no | Id of the columns where fields should be editable. |
 
 #### Additional Icons Props
 Additional icons is an array of object construct with these keys :

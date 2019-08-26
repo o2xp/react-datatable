@@ -15,6 +15,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedPageSample = {
+  dtKey: "",
   title,
   dimensions: {
     ...dimensions,

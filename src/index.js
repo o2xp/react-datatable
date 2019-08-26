@@ -10,7 +10,8 @@ class Datatable extends Component {
   render() {
     const {
       options = {},
-      forceRerender = true,
+      dtKey = "",
+      forceRerender = false,
       actions = null,
       refreshRows = null,
       stripped = false,
@@ -20,7 +21,7 @@ class Datatable extends Component {
       CustomTableHeaderRow = null,
       customDataTypes = []
     } = this.props;
-
+    
     return (
       <Fragment>
         {options.data &&
@@ -31,6 +32,7 @@ class Datatable extends Component {
               <SnackbarProvider>
                 <DatatableInitializer
                   optionsInit={cloneDeep(options)}
+                  dtKey={dtKey}
                   forceRerender={forceRerender}
                   actions={actions}
                   refreshRows={refreshRows}

@@ -58,6 +58,7 @@ describe("BodyActionsCell component", () => {
       const wrapper = shallow(
         <BodyActionsCellPureComponent
           isScrolling={false}
+          keyColumn="id"
           canEdit
           canDelete
           canSelectRow
@@ -83,6 +84,7 @@ describe("BodyActionsCell component", () => {
       const wrapper = shallow(
         <BodyActionsCellPureComponent
           isScrolling
+          keyColumn="id"
           canEdit
           canDelete
           canSelectRow
@@ -111,6 +113,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
+            keyColumn="id"
             canEdit={false}
             canDelete
             canSelectRow
@@ -138,6 +141,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
+            keyColumn="id"
             canEdit
             canDelete={false}
             canSelectRow
@@ -165,6 +169,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
+            keyColumn="id"
             canEdit
             canDelete
             canSelectRow={false}
@@ -293,6 +298,7 @@ describe("BodyActionsCell component", () => {
       const pure = mount(
         <BodyActionsCellPureComponent
           isScrolling={false}
+          keyColumn="id"
           canEdit
           canDelete
           canSelectRow

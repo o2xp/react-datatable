@@ -18,6 +18,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedDatableReducerRowsEdited = {
+  dtKey: "",
   title,
   dimensions: {
     ...dimensions,

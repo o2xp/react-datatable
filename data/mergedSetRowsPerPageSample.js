@@ -19,6 +19,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedSetRowsPerPageSample = {
+  dtKey: "",
   title,
   dimensions: {
     ...dimensions,
