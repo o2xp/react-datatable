@@ -50,6 +50,7 @@ const mergedMinimumOptionsSample = {
   },
   features: {
     canEdit: false,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,

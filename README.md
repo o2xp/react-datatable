@@ -118,6 +118,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |
 | data .rows | array of object | yes | / |  An array of objects where each object is defined by the columns identifier as key and the value. Click [here](#rows-props) to have more information. |
 | features .canEdit | boolean | no | false |  If the user can edit the rows. |
+| features .canEditRow | (row) => boolean | no | () => true |  Giving row as parameter and expecting a boolean as result. Do determine if a row is editable or not. |
 | features .canGlobalEdit | boolean | no | false |  If the user can turn in edit mode all the rows. |
 | features .canPrint | boolean | no | false |  If you want stripped rows. |
 | features .canDownload | boolean | no | false |  If the user can download the data. |
