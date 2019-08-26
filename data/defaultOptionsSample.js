@@ -48,6 +48,7 @@ const defaultOptionsSample = {
   },
   features: {
     canEdit: false,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,

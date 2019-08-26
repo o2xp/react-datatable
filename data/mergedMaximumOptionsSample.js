@@ -52,6 +52,7 @@ const mergedMaximumOptionsSample = {
   },
   features: {
     canEdit: true,
+    canEditRow: null,
     canGlobalEdit: false,
     canPrint: true,
     canDownload: true,

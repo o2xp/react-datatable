@@ -20,6 +20,7 @@ import {
   columnPropType,
   isScrollingPropType,
   canEditPropType,
+  canEditRowPropType,
   canDeletePropType,
   canSelectRowPropType,
   rowPropType,
@@ -65,6 +66,7 @@ export class BodyActionsCell extends Component {
       selectRow,
       classes,
       rowsEdited,
+      canEditRow,
       keyColumn
     } = this.props;
 
@@ -74,6 +76,8 @@ export class BodyActionsCell extends Component {
 
     const canEditDisable =
       rowsEdited.length > 0 && rowsEdited[0][keyColumn] !== row[keyColumn];
+
+    const editableRow = canEditRow ? canEditRow(row) : true;
 
     return (
       <div
@@ -130,7 +134,7 @@ export class BodyActionsCell extends Component {
             </Fragment>
           )}
 
-          {canEdit && !editing && !deleting && (
+          {canEdit && editableRow && !editing && !deleting && (
             <Tooltip title="Edit row">
               <IconButton
                 className="edit"
@@ -195,6 +199,7 @@ const mapStateToProps = state => {
     rowsEdited: state.datatableReducer.rowsEdited,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
     canEdit: state.datatableReducer.features.canEdit,
+    canEditRow: state.datatableReducer.features.canEditRow,
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canDelete: state.datatableReducer.features.canDelete,
     canSelectRow: state.datatableReducer.features.canSelectRow
@@ -210,6 +215,7 @@ BodyActionsCell.propTypes = {
   isScrolling: isScrollingPropType.isRequired,
   style: stylePropType.isRequired,
   canEdit: canEditPropType.isRequired,
+  canEditRow: canEditRowPropType,
   canDelete: canDeletePropType.isRequired,
   canSelectRow: canSelectRowPropType.isRequired,
   checked: checkedPropType.isRequired,
