@@ -17,6 +17,7 @@ import {
 } from "./optionsObjectSample";
 
 const mergedMinimumOptionsSample = {
+  dtKey: "",
   title: "",
   dimensions: {
     ...dimensions,
