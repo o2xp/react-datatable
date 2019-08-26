@@ -12,7 +12,8 @@ import {
   rowsSelectedPropType,
   stylePropType,
   copyToClipboardPropType,
-  enqueueSnackbarPropType
+  enqueueSnackbarPropType,
+  customPropsPropType
 } from "../../../proptypes";
 import BodyCell from "./BodyCell";
 import BodyActionsCell from "./BodyActionsCell";
@@ -40,7 +41,8 @@ export class BodyRow extends Component {
       columnSizeMultiplier,
       rowsSelected,
       keyColumn,
-      style
+      style,
+      customProps
     } = this.props;
     const column = columns.find(col => col.id === columnId);
     const rowId = row[keyColumn];
@@ -83,6 +85,7 @@ export class BodyRow extends Component {
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>
             <CustomTableBodyCell
+              customProps={customProps}
               cellVal={val}
               column={column}
               rowId={rowId}
@@ -143,6 +146,7 @@ export class BodyRow extends Component {
 
 BodyRow.propTypes = {
   row: rowPropType.isRequired,
+  customProps: customPropsPropType,
   columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
   columnSizeMultiplier: columnSizeMultiplierPropType.isRequired,
@@ -164,6 +168,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    customProps: state.customComponentsReducer.customProps,
     columns: state.datatableReducer.data.columns,
     copyToClipboard:
       state.datatableReducer.features.userConfiguration.copyToClipboard,

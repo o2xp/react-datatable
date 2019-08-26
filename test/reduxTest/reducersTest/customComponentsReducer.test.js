@@ -13,7 +13,8 @@ const defaultState = {
   CustomTableBodyRow: null,
   CustomTableHeaderCell: null,
   CustomTableHeaderRow: null,
-  customDataTypes: []
+  customDataTypes: [],
+  customProps: null
 };
 
 describe("componentReducer reducer", () => {
