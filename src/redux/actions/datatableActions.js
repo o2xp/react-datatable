@@ -71,6 +71,11 @@ export const deleteRow = payload => ({
   payload
 });
 
+export const addToDeleteRow = payload => ({
+  type: "ADD_TO_DELETE_ROW",
+  payload
+});
+
 export const selectRow = payload => ({
   type: "SELECT_ROW",
   payload

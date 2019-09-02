@@ -20,6 +20,7 @@ import {
   saveAllRowsEditedPropType,
   revertAllRowsToEditedPropType,
   rowsGlobalEditedPropType,
+  rowsDeletedPropType,
   canAddPropType,
   classesPropType
 } from "../../../proptypes";
@@ -51,7 +52,7 @@ export class GlobalEdit extends Component {
   };
 
   render() {
-    const { rowsGlobalEdited, canAdd, classes } = this.props;
+    const { rowsGlobalEdited, rowsDeleted, canAdd, classes } = this.props;
     const { editing } = this.state;
     let error = false;
     rowsGlobalEdited.forEach(row => {
@@ -59,7 +60,7 @@ export class GlobalEdit extends Component {
         error = true;
       }
     });
-    const save = !!rowsGlobalEdited.length;
+    const save = !!rowsGlobalEdited.length || !!rowsDeleted.length;
     const saveDisabled = error || !save;
 
     return (
@@ -112,6 +113,7 @@ export class GlobalEdit extends Component {
 
 GlobalEdit.propTypes = {
   canAdd: canAddPropType,
+  rowsDeleted: rowsDeletedPropType,
   addAllRowsToEdited: addAllRowsToEditedPropType,
   saveAllRowsEdited: saveAllRowsEditedPropType,
   revertAllRowsToEdited: revertAllRowsToEditedPropType,
@@ -130,6 +132,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     rowsGlobalEdited: state.datatableReducer.rowsGlobalEdited,
+    rowsDeleted: state.datatableReducer.rowsDeleted,
     canAdd: state.datatableReducer.features.canAdd
   };
 };
