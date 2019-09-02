@@ -111,7 +111,6 @@ export class BodyRow extends Component {
 
   render() {
     const { style, row, columnsOrder, editing } = this.props;
-
     return (
       <Fragment>
         <div

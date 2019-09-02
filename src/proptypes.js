@@ -10,6 +10,7 @@ export const setRowsPerPagePropType = PropTypes.func.isRequired;
 export const setRowEditedPropType = PropTypes.func.isRequired;
 export const addRowEditedPropType = PropTypes.func.isRequired;
 export const revertRowEditedPropType = PropTypes.func.isRequired;
+export const addNewRowPropType = PropTypes.func.isRequired;
 export const saveRowEditedPropType = PropTypes.func.isRequired;
 export const deleteRowPropType = PropTypes.func.isRequired;
 export const setIsScrollingPropType = PropTypes.func.isRequired;
@@ -100,6 +101,7 @@ export const canGlobalEditPropType = PropTypes.bool;
 export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
 export const canSearchPropType = PropTypes.bool;
+export const canAddPropType = PropTypes.bool;
 export const canRefreshRowsPropType = PropTypes.bool;
 export const canOrderColumnsPropType = PropTypes.bool;
 export const canSelectRowPropType = PropTypes.bool;
@@ -198,6 +200,7 @@ export const selectionIconsPropType = PropTypes.arrayOf(
 
 export const featuresPropType = PropTypes.shape({
   canEdit: canEditPropType,
+  canAdd: canAddPropType,
   canPrint: canPrintPropType,
   canDownload: canDownloadPropType,
   canSearch: canSearchPropType,

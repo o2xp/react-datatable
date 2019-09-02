@@ -13,12 +13,14 @@ import {
   revertAllRowsToEdited as revertAllRowsToEditedAction
 } from "../../../redux/actions/datatableActions";
 import { customVariant } from "../../MuiTheme";
+import Add from "./Add";
 
 import {
   addAllRowsToEditedPropType,
   saveAllRowsEditedPropType,
   revertAllRowsToEditedPropType,
   rowsGlobalEditedPropType,
+  canAddPropType,
   classesPropType
 } from "../../../proptypes";
 
@@ -49,7 +51,7 @@ export class GlobalEdit extends Component {
   };
 
   render() {
-    const { rowsGlobalEdited, classes } = this.props;
+    const { rowsGlobalEdited, canAdd, classes } = this.props;
     const { editing } = this.state;
     let error = false;
     rowsGlobalEdited.forEach(row => {
@@ -101,12 +103,15 @@ export class GlobalEdit extends Component {
             </Tooltip>
           </Fragment>
         )}
+
+        {canAdd && <Add editing={editing} />}
       </Fragment>
     );
   }
 }
 
 GlobalEdit.propTypes = {
+  canAdd: canAddPropType,
   addAllRowsToEdited: addAllRowsToEditedPropType,
   saveAllRowsEdited: saveAllRowsEditedPropType,
   revertAllRowsToEdited: revertAllRowsToEditedPropType,
@@ -124,7 +129,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    rowsGlobalEdited: state.datatableReducer.rowsGlobalEdited
+    rowsGlobalEdited: state.datatableReducer.rowsGlobalEdited,
+    canAdd: state.datatableReducer.features.canAdd
   };
 };
 

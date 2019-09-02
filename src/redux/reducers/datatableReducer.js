@@ -49,6 +49,7 @@ const defaultState = {
     rowsPerPageSelected: "",
     rowsCurrentPage: []
   },
+  newRows: [],
   rowsEdited: [],
   rowsGlobalEdited: [],
   rowsSelected: [],
@@ -67,6 +68,7 @@ const defaultState = {
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
+    canAdd: false,
     canDelete: false,
     canSearch: false,
     canRefreshRows: false,
@@ -359,6 +361,7 @@ const initializeOptions = (
       id: "o2xpActions",
       label: "Actions",
       colSize,
+      hiddenCreate: true,
       editable: false
     });
   }
@@ -516,6 +519,41 @@ const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
   return hasBeenEdited;
 };
 
+const addNewRow = (state, payload) => {
+  const { keyColumn, data, pagination, rowsGlobalEdited, rowsEdited } = state;
+  const { columns, rows } = data;
+  let newRow = { hasBeenEdited: true, idOfColumnErr: [] };
+  columns.forEach(col => {
+    switch (col.id) {
+      case "o2xpActions":
+      case "modalOpen":
+        break;
+      case keyColumn:
+        newRow[keyColumn] = `_${Math.random()
+          .toString(36)
+          .substr(2, 9)}`;
+        break;
+      default:
+        newRow[col.id] = "";
+    }
+  });
+
+  newRow = { ...newRow, ...payload };
+  const newState = {
+    ...state,
+    rowsGlobalEdited: [newRow, ...rowsGlobalEdited],
+    rowsEdited: [newRow, ...rowsEdited],
+    data: { ...data, rows: [newRow, ...rows] },
+    newRows: [...state.newRows, newRow]
+  };
+  const newPagination = setPagination({
+    state: newState,
+    newPageSelected: pagination.pageSelected,
+    newRowsPerPageSelected: pagination.rowsPerPageSelected
+  });
+  return { ...newState, pagination: newPagination };
+};
+
 const setRowEdited = (state, { columnId, rowId, newValue, error }) => {
   const { rowsEdited, keyColumn, rowsGlobalEdited, features } = state;
   let newRowsGlobalEdited = [...rowsGlobalEdited];
@@ -633,6 +671,7 @@ const saveAllRowsEdited = state => {
         pagination.rowsCurrentPage
       )
     },
+    newRows: [],
     rowsGlobalEdited: [],
     rowsEdited: []
   };
@@ -648,10 +687,29 @@ const revertRowEdited = (state, payload) => {
 };
 
 const revertAllRowsToEdited = state => {
-  return {
+  const { newRows, data, keyColumn, pagination } = state;
+  const newRowsId = newRows.map(r => r[keyColumn]);
+
+  const newState = {
     ...state,
+    newRows: [],
     rowsEdited: [],
-    rowsGlobalEdited: []
+    rowsGlobalEdited: [],
+    data: {
+      ...data,
+      rows: data.rows.filter(r => !newRowsId.includes(r[keyColumn]))
+    }
+  };
+
+  const newPagination = setPagination({
+    state: newState,
+    newPageSelected: pagination.pageSelected,
+    newRowsPerPageSelected: pagination.rowsPerPageSelected
+  });
+
+  return {
+    ...newState,
+    pagination: newPagination
   };
 };
 
@@ -860,6 +918,8 @@ const datatableReducer = (state = defaultState, action) => {
       return setIsScrolling(state, payload);
     case "ADD_ROW_EDITED":
       return addRowEdited(state, payload);
+    case "ADD_NEW_ROW":
+      return addNewRow(state, payload);
     case "ADD_ALL_ROWS_TO_EDITED":
       return addAllRowsToEdited(state);
     case "SET_ROW_EDITED":

@@ -16,6 +16,7 @@ import { timeFormatUser } from "../../../moment.config";
 import {
   valueVerificationPropType,
   cellValPropType,
+  labelPropType,
   classesPropType
 } from "../../../proptypes";
 
@@ -60,7 +61,7 @@ export class TimePickerWrapper extends Component {
   };
 
   render() {
-    const { cellVal, classes } = this.props;
+    const { cellVal, classes, label } = this.props;
     const { tooltipOpen, message, error } = this.state;
     return (
       <Tooltip
@@ -74,6 +75,7 @@ export class TimePickerWrapper extends Component {
       >
         <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <TimePicker
+            label={label}
             clearable
             error={error}
             ampm={timeFormatUser[timeFormatUser.length - 1] === "A"}
@@ -98,6 +100,7 @@ export class TimePickerWrapper extends Component {
 }
 
 TimePickerWrapper.propTypes = {
+  label: labelPropType,
   classes: classesPropType.isRequired,
   cellVal: cellValPropType.isRequired,
   valueVerification: valueVerificationPropType
