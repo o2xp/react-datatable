@@ -13,6 +13,8 @@ import {
   isRefreshing,
   stripped,
   orderBy,
+  newRows,
+  rowsDeleted,
   searchTerm,
   rowsSelected,
   features
@@ -36,6 +38,8 @@ const mergedSimpleOptionsSampleCustomSize = {
   actions: null,
   refreshRows,
   isRefreshing,
+  newRows,
+  rowsDeleted,
   stripped,
   orderBy,
   searchTerm,

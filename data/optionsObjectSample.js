@@ -34,6 +34,7 @@ export const font = "Roboto";
 export const columnAction = {
   id: "o2xpActions",
   label: "Actions",
+  hiddenCreate: true,
   colSize: "150px",
   editable: false
 };
@@ -139,6 +140,8 @@ export const columns = [
 export const rowsEdited = [];
 export const rowsGlobalEdited = [];
 export const rowsSelected = [];
+export const newRows = [];
+export const rowsDeleted = [];
 export const refreshRows = null;
 export const isRefreshing = false;
 export const stripped = false;
@@ -188,6 +191,7 @@ export const features = {
   canEdit: true,
   canEditRow: null,
   canGlobalEdit: false,
+  canAdd: false,
   canPrint: true,
   canDownload: true,
   canDelete: true,
