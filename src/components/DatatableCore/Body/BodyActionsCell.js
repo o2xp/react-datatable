@@ -115,7 +115,7 @@ export class BodyActionsCell extends Component {
                 <IconButton
                   className={`delete ${classes.defaultIcon}`}
                   onClick={() => this.setState({ deleting: true })}
-                  disabled={!editing}
+                  disabled={!editing && canGlobalEdit}
                 >
                   <DeleteIcon />
                 </IconButton>
