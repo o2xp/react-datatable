@@ -28,7 +28,7 @@ import {
   editingPropType
 } from "../../../proptypes";
 
-class Add extends Component {
+export class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,7 +121,13 @@ class Add extends Component {
         }
 
         return (
-          <Grid container item xs={4} key={column.id}>
+          <Grid
+            container
+            item
+            xs={4}
+            key={column.id}
+            className={`new-row-${dataType}`}
+          >
             {cellContent}
           </Grid>
         );
@@ -155,10 +161,15 @@ class Add extends Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.handleClose()} color="secondary">
+            <Button
+              onClick={() => this.handleClose()}
+              color="secondary"
+              className="cancel"
+            >
               Cancel
             </Button>
             <Button
+              className="create"
               disabled={errors.length > 0}
               onClick={() => this.send()}
               color="primary"
