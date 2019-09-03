@@ -67,6 +67,7 @@ const mergedMaximumOptionsSample = {
     canSelectRow: true,
     canOrderColumns: true,
     canSaveUserConfiguration: true,
+    editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: ["o2xpActions", "id", "name", "age"],
       copyToClipboard: true

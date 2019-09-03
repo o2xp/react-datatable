@@ -200,6 +200,7 @@ export const features = {
   canSelectRow: true,
   canOrderColumns: false,
   canSaveUserConfiguration: false,
+  editableIdNewRow: [],
   userConfiguration,
   rowsPerPage,
   additionalIcons,
