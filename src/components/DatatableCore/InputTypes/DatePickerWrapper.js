@@ -16,6 +16,7 @@ import { dateFormatUser } from "../../../moment.config";
 import {
   valueVerificationPropType,
   cellValPropType,
+  labelPropType,
   classesPropType
 } from "../../../proptypes";
 
@@ -60,7 +61,7 @@ export class DatePickerWrapper extends Component {
   };
 
   render() {
-    const { cellVal, classes } = this.props;
+    const { cellVal, label, classes } = this.props;
     const { tooltipOpen, message, error } = this.state;
 
     return (
@@ -75,6 +76,7 @@ export class DatePickerWrapper extends Component {
       >
         <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <DatePicker
+            label={label}
             clearable
             error={error}
             onOpen={() => this.setState({ tooltipOpen: false })}
@@ -99,6 +101,7 @@ export class DatePickerWrapper extends Component {
 }
 
 DatePickerWrapper.propTypes = {
+  label: labelPropType,
   classes: classesPropType.isRequired,
   cellVal: cellValPropType.isRequired,
   valueVerification: valueVerificationPropType

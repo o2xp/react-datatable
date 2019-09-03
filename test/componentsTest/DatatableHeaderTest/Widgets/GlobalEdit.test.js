@@ -62,6 +62,7 @@ describe("GlobalEdit component", () => {
         saveAllRowsEdited={saveAllRowsEdited}
         revertAllRowsToEdited={revertAllRowsToEdited}
         rowsGlobalEdited={[]}
+        rowsDeleted={[]}
         classes={{ customVariant }}
       />
     );
@@ -86,6 +87,7 @@ describe("GlobalEdit component", () => {
         saveAllRowsEdited={saveAllRowsEdited}
         revertAllRowsToEdited={revertAllRowsToEdited}
         rowsGlobalEdited={[]}
+        rowsDeleted={[]}
         classes={{ customVariant }}
       />
     );
@@ -113,6 +115,7 @@ describe("GlobalEdit component", () => {
         saveAllRowsEdited={saveAllRowsEdited}
         revertAllRowsToEdited={revertAllRowsToEdited}
         rowsGlobalEdited={[rowAdded]}
+        rowsDeleted={[]}
         classes={{ customVariant }}
       />
     );
@@ -139,6 +142,7 @@ describe("GlobalEdit component", () => {
         saveAllRowsEdited={saveAllRowsEdited}
         revertAllRowsToEdited={revertAllRowsToEdited}
         rowsGlobalEdited={[rowAddedError]}
+        rowsDeleted={[]}
         classes={{ customVariant }}
       />
     );

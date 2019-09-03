@@ -1264,6 +1264,98 @@ describe("datatableReducer reducer", () => {
     });
   });
 
+  it("should handle ADD_TO_DELETE_ROW", () => {
+    const { rows } = cloneDeep(simpleOptionsSample.data);
+    const row = rows[0];
+
+    const result = datatableReducer(
+      {
+        ...mergedSimpleOptionsSample,
+        rowsEdited: [row],
+        rowsGlobalEdited: [row]
+      },
+      {
+        type: "ADD_TO_DELETE_ROW",
+        payload: row
+      }
+    );
+
+    const { data, keyColumn } = mergedSimpleOptionsSample;
+    let mergedDatableReducerExpect = {
+      ...mergedSimpleOptionsSample,
+      rowsDeleted: [{ ...row, indexInsert: 0 }],
+      data: {
+        ...data,
+        rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
+      }
+    };
+    const { pagination } = mergedDatableReducerExpect;
+    const { rowsPerPageSelected, pageSelected } = pagination;
+    mergedDatableReducerExpect = {
+      ...mergedDatableReducerExpect,
+      pagination: {
+        ...pagination,
+        rowsCurrentPage:
+          rowsPerPageSelected === "All"
+            ? mergedDatableReducerExpect.data.rows
+            : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+                pageSelected ? pageSelected - 1 : 0
+              ]
+      }
+    };
+
+    expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+  });
+
+  it("should handle ADD_NEW_ROW", () => {
+    const { rows } = cloneDeep(simpleOptionsSample.data);
+
+    const newRow = {
+      adult: "",
+      age: "",
+      birthDate: "",
+      eyeColor: "",
+      hasBeenEdited: true,
+      iban: "",
+      id: "test",
+      idOfColumnErr: [],
+      name: ""
+    };
+
+    const result = datatableReducer(
+      mergedSimpleOptionsSample,
+
+      {
+        type: "ADD_NEW_ROW",
+        payload: newRow
+      }
+    );
+
+    let mergedDatableReducerExpect = {
+      ...mergedSimpleOptionsSample,
+      rowsGlobalEdited: [newRow],
+      rowsEdited: [newRow],
+      data: { ...mergedSimpleOptionsSample.data, rows: [newRow, ...rows] },
+      newRows: [newRow]
+    };
+    const { pagination } = mergedDatableReducerExpect;
+    const { rowsPerPageSelected, pageSelected } = pagination;
+    mergedDatableReducerExpect = {
+      ...mergedDatableReducerExpect,
+      pagination: {
+        ...pagination,
+        rowsCurrentPage:
+          rowsPerPageSelected === "All"
+            ? mergedDatableReducerExpect.data.rows
+            : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+                pageSelected ? pageSelected - 1 : 0
+              ]
+      }
+    };
+
+    expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
+  });
+
   describe("should handle SELECT_ROW", () => {
     it("when row isn't selected", () => {
       const { rows } = cloneDeep(simpleOptionsSample.data);

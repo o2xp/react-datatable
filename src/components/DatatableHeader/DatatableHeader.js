@@ -119,6 +119,7 @@ const mapStateToProps = state => {
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canSearch: state.datatableReducer.features.canSearch,
     canPrint: state.datatableReducer.features.canPrint,
+    canAdd: state.datatableReducer.features.canAdd,
     canRefreshRows: state.datatableReducer.features.canRefreshRows,
     canSaveUserConfiguration:
       state.datatableReducer.features.canSaveUserConfiguration

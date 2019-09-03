@@ -13,6 +13,7 @@ const store = mockStore(storeSample);
 const addRowEdited = jest.fn();
 const saveRowEdited = jest.fn();
 const revertRowEdited = jest.fn();
+const addToDeleteRow = jest.fn();
 const deleteRow = jest.fn();
 const selectRow = jest.fn();
 const column = {
@@ -64,6 +65,7 @@ describe("BodyActionsCell component", () => {
           canSelectRow
           rowsEdited={[]}
           addRowEdited={addRowEdited}
+          addToDeleteRow={addToDeleteRow}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
@@ -90,6 +92,7 @@ describe("BodyActionsCell component", () => {
           canSelectRow
           rowsEdited={[]}
           addRowEdited={addRowEdited}
+          addToDeleteRow={addToDeleteRow}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
@@ -119,6 +122,7 @@ describe("BodyActionsCell component", () => {
             canSelectRow
             rowsEdited={[]}
             addRowEdited={addRowEdited}
+            addToDeleteRow={addToDeleteRow}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
@@ -147,6 +151,7 @@ describe("BodyActionsCell component", () => {
             canSelectRow
             rowsEdited={[]}
             addRowEdited={addRowEdited}
+            addToDeleteRow={addToDeleteRow}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
@@ -175,6 +180,7 @@ describe("BodyActionsCell component", () => {
             canSelectRow={false}
             rowsEdited={[]}
             addRowEdited={addRowEdited}
+            addToDeleteRow={addToDeleteRow}
             saveRowEdited={saveRowEdited}
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
@@ -304,6 +310,7 @@ describe("BodyActionsCell component", () => {
           canSelectRow
           rowsEdited={[]}
           addRowEdited={addRowEdited}
+          addToDeleteRow={addToDeleteRow}
           saveRowEdited={saveRowEdited}
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}

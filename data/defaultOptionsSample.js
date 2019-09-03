@@ -31,6 +31,8 @@ const defaultOptionsSample = {
   rowsEdited: [],
   rowsGlobalEdited: [],
   rowsSelected: [],
+  newRows: [],
+  rowsDeleted: [],
   actions: null,
   refreshRows: null,
   isRefreshing: false,
@@ -48,6 +50,7 @@ const defaultOptionsSample = {
   },
   features: {
     canEdit: false,
+    canAdd: false,
     canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,

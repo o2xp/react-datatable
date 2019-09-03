@@ -14,6 +14,8 @@ import {
   stripped,
   searchTerm,
   orderBy,
+  newRows,
+  rowsDeleted,
   features
 } from "./optionsObjectSample";
 
@@ -41,6 +43,8 @@ const mergedDatableReducerRowsEdited = {
   isRefreshing,
   stripped,
   searchTerm,
+  newRows,
+  rowsDeleted,
   font,
   orderBy,
   rowsGlobalEdited,

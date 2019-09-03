@@ -5,7 +5,8 @@ import {
   Zoom,
   withStyles,
   FormControl,
-  Input
+  Input,
+  InputLabel
 } from "@material-ui/core";
 import MaskedInput from "react-text-mask";
 import { checkValue, setValue } from "./PickersFunction";
@@ -15,6 +16,7 @@ import {
   cellValPropType,
   classesPropType,
   maskPropType,
+  labelPropType,
   typePropType
 } from "../../../proptypes";
 
@@ -86,7 +88,7 @@ export class TextFieldWrapper extends Component {
   };
 
   render() {
-    const { type, cellVal, classes } = this.props;
+    const { type, cellVal, classes, label } = this.props;
     const { tooltipOpen, message, error } = this.state;
     const inputValue =
       type === "number" && !cellVal && cellVal !== 0 ? "" : cellVal;
@@ -102,6 +104,7 @@ export class TextFieldWrapper extends Component {
         interactive
       >
         <FormControl>
+          <InputLabel>{label}</InputLabel>
           <Input
             value={inputValue}
             error={error}
@@ -119,7 +122,8 @@ export class TextFieldWrapper extends Component {
 }
 
 TextFieldWrapper.propTypes = {
-  cellVal: cellValPropType.isRequired,
+  label: labelPropType,
+  cellVal: cellValPropType,
   classes: classesPropType.isRequired,
   type: typePropType.isRequired,
   mask: maskPropType,

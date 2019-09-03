@@ -14,7 +14,8 @@ import {
   saveRowEdited as saveRowEditedAction,
   revertRowEdited as revertRowEditedAction,
   selectRow as selectRowAction,
-  deleteRow as deleteRowAction
+  deleteRow as deleteRowAction,
+  addToDeleteRow as addToDeleteRowAction
 } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
@@ -35,7 +36,8 @@ import {
   deleteRowPropType,
   canGlobalEditPropType,
   rowsEditedPropType,
-  keyColumnPropType
+  keyColumnPropType,
+  addToDeleteRowPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -46,6 +48,15 @@ export class BodyActionsCell extends Component {
       deleting: false
     };
   }
+
+  dispatchToDeleteRow = row => {
+    const { deleteRow, addToDeleteRow, canGlobalEdit } = this.props;
+    if (canGlobalEdit) {
+      addToDeleteRow(row);
+    } else {
+      deleteRow(row);
+    }
+  };
 
   render() {
     const {
@@ -62,7 +73,6 @@ export class BodyActionsCell extends Component {
       addRowEdited,
       saveRowEdited,
       revertRowEdited,
-      deleteRow,
       selectRow,
       classes,
       rowsEdited,
@@ -101,12 +111,15 @@ export class BodyActionsCell extends Component {
           )}
           {canDelete && (!editing || canGlobalEdit) && !deleting && (
             <Tooltip title="Confirm delete">
-              <IconButton
-                className={`delete ${classes.defaultIcon}`}
-                onClick={() => this.setState({ deleting: true })}
-              >
-                <DeleteIcon />
-              </IconButton>
+              <span>
+                <IconButton
+                  className={`delete ${classes.defaultIcon}`}
+                  onClick={() => this.setState({ deleting: true })}
+                  disabled={!editing && canGlobalEdit}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </span>
             </Tooltip>
           )}
 
@@ -125,7 +138,7 @@ export class BodyActionsCell extends Component {
                   className={`confirm-delete ${classes.errorIcon}`}
                   onClick={() => {
                     this.setState({ deleting: false });
-                    deleteRow(row);
+                    this.dispatchToDeleteRow(row);
                   }}
                 >
                   <DeleteForeverIcon />
@@ -186,6 +199,7 @@ export class BodyActionsCell extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     addRowEdited: row => dispatch(addRowEditedAction(row)),
+    addToDeleteRow: row => dispatch(addToDeleteRowAction(row)),
     saveRowEdited: row => dispatch(saveRowEditedAction(row)),
     selectRow: row => dispatch(selectRowAction(row)),
     revertRowEdited: row => dispatch(revertRowEditedAction(row)),
@@ -225,6 +239,7 @@ BodyActionsCell.propTypes = {
   selectRow: selectRowPropType,
   revertRowEdited: revertRowEditedPropType,
   deleteRow: deleteRowPropType,
+  addToDeleteRow: addToDeleteRowPropType,
   canGlobalEdit: canGlobalEditPropType.isRequired
 };
 

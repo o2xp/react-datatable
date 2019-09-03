@@ -15,6 +15,8 @@ import {
   stripped,
   orderBy,
   searchTerm,
+  newRows,
+  rowsDeleted,
   features
 } from "./optionsObjectSample";
 
@@ -42,6 +44,8 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
   refreshRows,
   isRefreshing,
   stripped,
+  newRows,
+  rowsDeleted,
   orderBy,
   searchTerm,
   actions: null,
