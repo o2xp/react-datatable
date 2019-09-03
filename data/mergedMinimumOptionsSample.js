@@ -65,6 +65,7 @@ const mergedMinimumOptionsSample = {
     canRefreshRows: false,
     canOrderColumns: false,
     canSaveUserConfiguration: false,
+    editableIdNewRow: [],
     userConfiguration: {
       ...userConfiguration,
       columnsOrder: [...userConfiguration.columnsOrder]
