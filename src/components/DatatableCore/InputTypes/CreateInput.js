@@ -15,7 +15,8 @@ import {
   dateFormatPropType,
   typePropType,
   maskPropType,
-  inputTypePropType
+  inputTypePropType,
+  labelPropType
 } from "../../../proptypes";
 
 const CreateInput = ({
@@ -28,7 +29,8 @@ const CreateInput = ({
   dateFormat,
   type,
   mask,
-  inputType
+  inputType,
+  label = ""
 }) => {
   switch (inputType) {
     case "datePicker":
@@ -40,6 +42,7 @@ const CreateInput = ({
           columnId={columnId}
           dateFormat={dateFormat}
           setRowEdited={setRowEdited}
+          label={label}
         />
       );
     case "timePicker":
@@ -51,6 +54,7 @@ const CreateInput = ({
           columnId={columnId}
           dateFormat={dateFormat}
           setRowEdited={setRowEdited}
+          label={label}
         />
       );
     case "dateTimePicker":
@@ -62,6 +66,7 @@ const CreateInput = ({
           columnId={columnId}
           dateFormat={dateFormat}
           setRowEdited={setRowEdited}
+          label={label}
         />
       );
     case "select":
@@ -71,14 +76,16 @@ const CreateInput = ({
         rowId,
         dateFormat,
         columnId,
-        setRowEdited
+        setRowEdited,
+        label
       });
     case "boolean":
       return BooleanWrapper({
         cellVal,
         rowId,
         columnId,
-        setRowEdited
+        setRowEdited,
+        label
       });
     case "input":
     default:
@@ -91,6 +98,7 @@ const CreateInput = ({
           columnId={columnId}
           setRowEdited={setRowEdited}
           mask={mask}
+          label={label}
         />
       );
   }
@@ -98,6 +106,7 @@ const CreateInput = ({
 
 CreateInput.propTypes = {
   cellVal: cellValPropType.isRequired,
+  label: labelPropType,
   valueVerification: valueVerificationPropType,
   mask: maskPropType,
   rowId: rowIdPropType.isRequired,

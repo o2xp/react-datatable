@@ -15,6 +15,8 @@ import {
   stripped,
   orderBy,
   searchTerm,
+  newRows,
+  rowsDeleted,
   features
 } from "./optionsObjectSample";
 
@@ -40,6 +42,8 @@ const mergedSetRowsPerPageSample = {
   stripped,
   orderBy,
   searchTerm,
+  newRows,
+  rowsDeleted,
   actions: null,
   font,
   data: {

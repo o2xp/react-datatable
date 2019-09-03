@@ -14,6 +14,8 @@ import {
   isRefreshing,
   stripped,
   orderBy,
+  newRows,
+  rowsDeleted,
   searchTerm,
   features
 } from "./optionsObjectSample";
@@ -44,6 +46,8 @@ const mergedSimpleOptionsSample = {
   isRefreshing,
   stripped,
   orderBy,
+  newRows,
+  rowsDeleted,
   searchTerm,
   rowsSelected,
   actions: null,

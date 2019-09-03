@@ -13,6 +13,8 @@ import {
   isRefreshing,
   stripped,
   searchTerm,
+  newRows,
+  rowsDeleted,
   orderBy,
   selectionIcons
 } from "./optionsObjectSample";
@@ -34,6 +36,8 @@ const mergedMaximumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  newRows,
+  rowsDeleted,
   stripped,
   searchTerm,
   actions: null,
@@ -54,6 +58,7 @@ const mergedMaximumOptionsSample = {
     canEdit: true,
     canEditRow: null,
     canGlobalEdit: false,
+    canAdd: false,
     canPrint: true,
     canDownload: true,
     canSearch: true,

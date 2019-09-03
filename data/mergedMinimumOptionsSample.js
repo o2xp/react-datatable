@@ -12,6 +12,8 @@ import {
   isRefreshing,
   stripped,
   searchTerm,
+  newRows,
+  rowsDeleted,
   orderBy,
   rowsPerPage
 } from "./optionsObjectSample";
@@ -37,6 +39,8 @@ const mergedMinimumOptionsSample = {
   rowsSelected,
   refreshRows,
   isRefreshing,
+  newRows,
+  rowsDeleted,
   stripped,
   searchTerm,
   actions: null,
@@ -52,6 +56,7 @@ const mergedMinimumOptionsSample = {
     canEdit: false,
     canEditRow: null,
     canGlobalEdit: false,
+    canAdd: false,
     canPrint: false,
     canDownload: false,
     canSearch: false,
