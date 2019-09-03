@@ -536,7 +536,7 @@ const addNewRow = (state, payload) => {
     idOfColumnErr: []
   };
 
-  if (features.editableIdNewRow) {
+  if (features.editableIdNewRow.length > 0) {
     newRow.editableId = features.editableIdNewRow;
   }
 

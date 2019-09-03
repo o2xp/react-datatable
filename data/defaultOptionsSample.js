@@ -61,6 +61,7 @@ const defaultOptionsSample = {
     canSelectRow: false,
     canOrderColumns: false,
     canSaveUserConfiguration: false,
+    editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],
       copyToClipboard: false
