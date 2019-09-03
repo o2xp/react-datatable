@@ -76,6 +76,7 @@ const defaultState = {
     canOrderColumns: false,
     canSelectRow: false,
     canSaveUserConfiguration: false,
+    editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],
       copyToClipboard: false
@@ -521,9 +522,24 @@ const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
 };
 
 const addNewRow = (state, payload) => {
-  const { keyColumn, data, pagination, rowsGlobalEdited, rowsEdited } = state;
+  const {
+    keyColumn,
+    data,
+    pagination,
+    rowsGlobalEdited,
+    rowsEdited,
+    features
+  } = state;
   const { columns, rows } = data;
-  let newRow = { hasBeenEdited: true, idOfColumnErr: [] };
+  let newRow = {
+    hasBeenEdited: true,
+    idOfColumnErr: []
+  };
+
+  if (features.editableIdNewRow) {
+    newRow.editableId = features.editableIdNewRow;
+  }
+
   columns.forEach(col => {
     switch (col.id) {
       case "o2xpActions":
