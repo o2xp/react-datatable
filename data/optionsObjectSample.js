@@ -68,7 +68,6 @@ export const columns = [
     label: "age",
     colSize: "60px",
     editable: true,
-    required: false,
     dataType: "number",
     valueVerification: val => {
       let error;

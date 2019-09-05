@@ -17,7 +17,8 @@ import {
   classesPropType,
   maskPropType,
   labelPropType,
-  typePropType
+  typePropType,
+  requiredPropType
 } from "../../../proptypes";
 
 export class TextFieldWrapper extends Component {
@@ -88,7 +89,7 @@ export class TextFieldWrapper extends Component {
   };
 
   render() {
-    const { type, cellVal, classes, label } = this.props;
+    const { type, cellVal, classes, label, required } = this.props;
     const { tooltipOpen, message, error } = this.state;
     const inputValue =
       type === "number" && !cellVal && cellVal !== 0 ? "" : cellVal;
@@ -103,7 +104,7 @@ export class TextFieldWrapper extends Component {
         TransitionComponent={Zoom}
         interactive
       >
-        <FormControl>
+        <FormControl required={required}>
           <InputLabel>{label}</InputLabel>
           <Input
             value={inputValue}
@@ -122,6 +123,7 @@ export class TextFieldWrapper extends Component {
 }
 
 TextFieldWrapper.propTypes = {
+  required: requiredPropType,
   label: labelPropType,
   cellVal: cellValPropType,
   classes: classesPropType.isRequired,

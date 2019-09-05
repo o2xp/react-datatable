@@ -668,7 +668,8 @@ const saveAllRowsEdited = state => {
     rowsGlobalEdited,
     rowsDeleted,
     actions,
-    pagination
+    pagination,
+    newRows
   } = state;
   const rows = rowsGlobalEdited.map(row => {
     const r = row;
@@ -679,11 +680,21 @@ const saveAllRowsEdited = state => {
 
   rowsDeleted.forEach(rd => delete rd.indexInsert);
 
+  const newRowsId = newRows.map(nr => nr[keyColumn]);
+
+  const rowsEdited = rowsGlobalEdited.filter(
+    rge => !newRowsId.includes(rge[keyColumn])
+  );
+  const rowsAdded = rowsGlobalEdited.filter(rge =>
+    newRowsId.includes(rge[keyColumn])
+  );
+
   if (actions) {
-    actions([
-      { type: "save", payload: rows },
-      { type: "delete", payload: rowsDeleted }
-    ]);
+    actions({
+      rowsDeleted,
+      rowsEdited,
+      rowsAdded
+    });
   }
 
   return {
