@@ -150,7 +150,7 @@ export class Add extends Component {
             item
             xs={4}
             key={column.id}
-            className={`new-row-${dataType}`}
+            className={`new-row-${id}`}
           >
             {cellContent}
           </Grid>

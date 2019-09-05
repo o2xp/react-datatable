@@ -123,6 +123,10 @@ describe("Add component", () => {
     );
     const addRowButton = wrapper.find("button.add-row-icon");
     addRowButton.simulate("click");
+    wrapper
+      .find("div.new-row-id")
+      .find("input")
+      .simulate("change", { target: { value: "_id" } });
     const buttonCreate = wrapper.find("button.create");
     buttonCreate.simulate("click");
     expect(wrapper.find("Connect(Add)")).toHaveLength(1);
@@ -145,6 +149,10 @@ describe("Add component", () => {
     addRowButton.simulate("click");
     expect(wrapper.find("Add").state("modalOpen")).toBeTruthy();
 
+    wrapper
+      .find("div.new-row-id")
+      .find("input")
+      .simulate("change", { target: { value: "_id" } });
     const buttonCreate = wrapper.find("button.create");
     buttonCreate.simulate("click");
     expect(wrapper.find("Add").state("modalOpen")).toBeFalsy();
@@ -180,12 +188,12 @@ describe("Add component", () => {
     addRowButton.simulate("click");
     expect(wrapper.find("Add").state("modalOpen")).toBeTruthy();
 
-    expect(wrapper.find("div.new-row-number")).toHaveLength(1);
-    expect(wrapper.find("div.new-row-text")).toHaveLength(1);
-    expect(wrapper.find("div.new-row-date")).toHaveLength(1);
-    expect(wrapper.find("div.new-row-dateTime")).toHaveLength(1);
-    expect(wrapper.find("div.new-row-time")).toHaveLength(1);
-    expect(wrapper.find("div.new-row-boolean")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-age")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-id")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-birthDate")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-birthDateTime")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-birthTime")).toHaveLength(1);
+    expect(wrapper.find("div.new-row-adult")).toHaveLength(1);
   });
 
   it(" without ", () => {
@@ -215,31 +223,35 @@ describe("Add component", () => {
     expect(wrapper.find("Add").state("modalOpen")).toBeTruthy();
 
     wrapper
-      .find("div.new-row-number")
+      .find("div.new-row-age")
       .find("input")
       .simulate("change", { target: { value: 75 } });
     expect(wrapper.find("Add").state("newRow")).toEqual({ age: 75 });
 
     wrapper
-      .find("div.new-row-number")
+      .find("div.new-row-age")
       .find("input")
       .simulate("change", { target: { value: 150 } });
 
     expect(wrapper.find("Add").state()).toEqual({
+      buttonDisabled: true,
       modalOpen: true,
       newRow: { age: 150 },
-      errors: ["age"]
+      errors: ["age"],
+      requiredVal: []
     });
 
     wrapper
-      .find("div.new-row-number")
+      .find("div.new-row-age")
       .find("input")
       .simulate("change", { target: { value: 90 } });
 
     expect(wrapper.find("Add").state()).toEqual({
+      buttonDisabled: false,
       modalOpen: true,
       newRow: { age: 90 },
-      errors: []
+      errors: [],
+      requiredVal: []
     });
   });
 });
