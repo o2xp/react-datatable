@@ -8,7 +8,8 @@ import {
   setRowEditedPropType,
   valuesPropType,
   labelPropType,
-  dateFormatPropType
+  dateFormatPropType,
+  requiredPropType
 } from "../../../proptypes";
 
 const SelectWrapper = ({
@@ -18,10 +19,11 @@ const SelectWrapper = ({
   columnId,
   setRowEdited,
   values,
-  dateFormat
+  dateFormat,
+  required
 }) => {
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth required={required}>
       <InputLabel>{label}</InputLabel>
       <Select
         value={cellVal}
@@ -42,6 +44,7 @@ const SelectWrapper = ({
 };
 
 SelectWrapper.propTypes = {
+  required: requiredPropType,
   label: labelPropType,
   cellVal: cellValPropType.isRequired,
   rowId: rowIdPropType.isRequired,

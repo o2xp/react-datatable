@@ -17,7 +17,8 @@ import {
   valueVerificationPropType,
   cellValPropType,
   labelPropType,
-  classesPropType
+  classesPropType,
+  requiredPropType
 } from "../../../proptypes";
 
 export class DatePickerWrapper extends Component {
@@ -61,7 +62,7 @@ export class DatePickerWrapper extends Component {
   };
 
   render() {
-    const { cellVal, label, classes } = this.props;
+    const { cellVal, label, classes, required } = this.props;
     const { tooltipOpen, message, error } = this.state;
 
     return (
@@ -76,6 +77,7 @@ export class DatePickerWrapper extends Component {
       >
         <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <DatePicker
+            required={required}
             label={label}
             clearable
             error={error}
@@ -101,6 +103,7 @@ export class DatePickerWrapper extends Component {
 }
 
 DatePickerWrapper.propTypes = {
+  required: requiredPropType,
   label: labelPropType,
   classes: classesPropType.isRequired,
   cellVal: cellValPropType.isRequired,

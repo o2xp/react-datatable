@@ -17,7 +17,8 @@ import {
   valueVerificationPropType,
   cellValPropType,
   labelPropType,
-  classesPropType
+  classesPropType,
+  requiredPropType
 } from "../../../proptypes";
 
 export class DateTimePickerWrapper extends Component {
@@ -61,7 +62,7 @@ export class DateTimePickerWrapper extends Component {
   };
 
   render() {
-    const { cellVal, classes, label } = this.props;
+    const { cellVal, classes, label, required } = this.props;
     const { tooltipOpen, message, error } = this.state;
 
     return (
@@ -77,6 +78,7 @@ export class DateTimePickerWrapper extends Component {
         <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <DateTimePicker
             clearable
+            required={required}
             label={label}
             error={error}
             ampm={dateTimeFormatUser[dateTimeFormatUser.length - 1] === "A"}
@@ -102,6 +104,7 @@ export class DateTimePickerWrapper extends Component {
 }
 
 DateTimePickerWrapper.propTypes = {
+  required: requiredPropType,
   label: labelPropType,
   classes: classesPropType.isRequired,
   cellVal: cellValPropType.isRequired,
