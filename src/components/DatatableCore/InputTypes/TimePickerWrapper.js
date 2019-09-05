@@ -17,7 +17,8 @@ import {
   valueVerificationPropType,
   cellValPropType,
   labelPropType,
-  classesPropType
+  classesPropType,
+  requiredPropType
 } from "../../../proptypes";
 
 export class TimePickerWrapper extends Component {
@@ -61,7 +62,7 @@ export class TimePickerWrapper extends Component {
   };
 
   render() {
-    const { cellVal, classes, label } = this.props;
+    const { cellVal, classes, label, required } = this.props;
     const { tooltipOpen, message, error } = this.state;
     return (
       <Tooltip
@@ -75,6 +76,7 @@ export class TimePickerWrapper extends Component {
       >
         <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
           <TimePicker
+            required={required}
             label={label}
             clearable
             error={error}
@@ -100,6 +102,7 @@ export class TimePickerWrapper extends Component {
 }
 
 TimePickerWrapper.propTypes = {
+  required: requiredPropType,
   label: labelPropType,
   classes: classesPropType.isRequired,
   cellVal: cellValPropType.isRequired,

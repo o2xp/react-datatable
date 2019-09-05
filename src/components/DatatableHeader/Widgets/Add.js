@@ -31,15 +31,35 @@ import {
 export class Add extends Component {
   constructor(props) {
     super(props);
+    const { columns } = props;
+    const requiredVal = [];
+    columns.forEach(col => {
+      if (col.required) {
+        requiredVal.push(col.id);
+      }
+    });
     this.state = {
       modalOpen: false,
+      buttonDisabled: this.getDisabledButton({}, requiredVal, []),
       newRow: {},
-      errors: []
+      errors: [],
+      requiredVal
     };
   }
 
   handleClose = () => {
     this.setState({ modalOpen: false, newRow: {}, errors: [] });
+  };
+
+  getDisabledButton = (newRow, requiredVal, newErrors) => {
+    let newButtonDisabled = newErrors.length > 0;
+    requiredVal.forEach(rv => {
+      if (!newRow[rv] || newRow[rv].length === 0) {
+        newButtonDisabled = true;
+      }
+    });
+
+    return newButtonDisabled;
   };
 
   send = () => {
@@ -50,14 +70,16 @@ export class Add extends Component {
   };
 
   test = ({ columnId, newValue, error }) => {
-    const { newRow, errors } = this.state;
+    const { newRow, errors, requiredVal } = this.state;
     const newErrors = error
       ? uniq([columnId, ...errors])
       : errors.filter(err => err !== columnId);
+    const nr = { ...newRow, [columnId]: newValue };
 
     this.setState({
       errors: newErrors,
-      newRow: { ...newRow, [columnId]: newValue }
+      newRow: nr,
+      buttonDisabled: this.getDisabledButton(nr, requiredVal, newErrors)
     });
   };
 
@@ -75,12 +97,14 @@ export class Add extends Component {
           dateFormat = "",
           dataType = "",
           mask,
+          required,
           inputType = undefined
         } = column;
 
         let properties = {
           cellVal: newRow[id] || "",
           editing: true,
+          required,
           label,
           inputType,
           values,
@@ -135,7 +159,7 @@ export class Add extends Component {
   };
 
   render() {
-    const { modalOpen, errors } = this.state;
+    const { modalOpen, buttonDisabled } = this.state;
     const { editing } = this.props;
 
     return (
@@ -170,7 +194,7 @@ export class Add extends Component {
             </Button>
             <Button
               className="create"
-              disabled={errors.length > 0}
+              disabled={buttonDisabled}
               onClick={() => this.send()}
               color="primary"
               autoFocus

@@ -4,12 +4,20 @@ import {
   cellValPropType,
   rowIdPropType,
   columnIdPropType,
-  setRowEditedPropType
+  setRowEditedPropType,
+  requiredPropType
 } from "../../../proptypes";
 
-const BooleanWrapper = ({ cellVal, rowId, columnId, setRowEdited }) => {
+const BooleanWrapper = ({
+  cellVal,
+  rowId,
+  columnId,
+  setRowEdited,
+  required
+}) => {
   return (
     <Checkbox
+      required={required}
       checked={cellVal}
       color="primary"
       onChange={(e, checked) =>
@@ -20,6 +28,7 @@ const BooleanWrapper = ({ cellVal, rowId, columnId, setRowEdited }) => {
 };
 
 BooleanWrapper.propTypes = {
+  required: requiredPropType,
   cellVal: cellValPropType.isRequired,
   rowId: rowIdPropType.isRequired,
   columnId: columnIdPropType.isRequired,
