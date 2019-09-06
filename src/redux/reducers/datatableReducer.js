@@ -533,7 +533,10 @@ const addNewRow = (state, payload) => {
   const { columns, rows } = data;
   let newRow = {
     hasBeenEdited: true,
-    idOfColumnErr: []
+    idOfColumnErr: [],
+    [keyColumn]: `_${Math.random()
+      .toString(36)
+      .substr(2, 18)}`
   };
 
   if (features.editableIdNewRow.length > 0) {
@@ -568,6 +571,7 @@ const addNewRow = (state, payload) => {
     newPageSelected: pagination.pageSelected,
     newRowsPerPageSelected: pagination.rowsPerPageSelected
   });
+
   return { ...newState, pagination: newPagination };
 };
 
