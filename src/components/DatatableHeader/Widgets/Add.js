@@ -48,7 +48,12 @@ export class Add extends Component {
   }
 
   handleClose = () => {
-    this.setState({ modalOpen: false, newRow: {}, errors: [] });
+    this.setState({
+      modalOpen: false,
+      newRow: {},
+      errors: [],
+      buttonDisabled: true
+    });
   };
 
   getDisabledButton = (newRow, requiredVal, newErrors) => {
