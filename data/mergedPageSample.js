@@ -46,7 +46,8 @@ const mergedPageSample = {
   data,
   features: {
     ...features,
-    additionalIcons: []
+    additionalIcons: [],
+    additionalActions: []
   }
 };
 

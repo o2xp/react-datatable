@@ -60,6 +60,7 @@ const mergedSimpleOptionsSampleWidthResize = {
       ...userConfiguration,
       columnsOrder: ["o2xpActions", ...userConfiguration.columnsOrder]
     },
+    additionalActions: [],
     additionalIcons: []
   }
 };

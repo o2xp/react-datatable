@@ -70,6 +70,7 @@ const defaultOptionsSample = {
       available: [10, 25, 50, 100, "All"],
       selected: "All"
     },
+    additionalActions: [],
     additionalIcons: [],
     selectionIcons: []
   }

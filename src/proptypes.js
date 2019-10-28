@@ -192,6 +192,14 @@ export const additionalIconsPropType = PropTypes.arrayOf(
   })
 );
 
+export const additionalActionsPropType = PropTypes.arrayOf(
+  PropTypes.shape({
+    tooltip: tooltipPropType,
+    icon: iconPropType.isRequired,
+    onClick: onClickPropType.isRequired
+  })
+);
+
 export const selectionIconsPropType = PropTypes.arrayOf(
   PropTypes.shape({
     tooltip: tooltipPropType,
@@ -212,6 +220,7 @@ export const featuresPropType = PropTypes.shape({
   canSelectRow: canSelectRowPropType,
   userConfiguration: userConfigurationPropType,
   rowsPerPage: rowsPerPagePropType,
+  additionalActions: additionalActionsPropType,
   additionalIcons: additionalIconsPropType,
   selectionIcons: selectionIconsPropType
 });

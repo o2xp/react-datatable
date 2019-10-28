@@ -186,6 +186,13 @@ export const additionalIcons = [
     onClick: () => true
   }
 ];
+export const additionalActions = [
+  {
+    title: "Coffee",
+    icon: <CallSplitIcon />,
+    onClick: res => res
+  }
+];
 export const features = {
   canEdit: true,
   canEditRow: null,
