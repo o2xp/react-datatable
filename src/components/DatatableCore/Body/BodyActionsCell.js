@@ -117,7 +117,7 @@ export class BodyActionsCell extends Component {
               <span>
                 <IconButton
                   className={
-                    !editing
+                    !editing && canGlobalEdit
                       ? `disabled-icon additional-action-icon`
                       : `additional-action-icon`
                   }
