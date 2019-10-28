@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { CallSplit as CallSplitIcon } from "@material-ui/icons";
 import BodyActionsCell, {
   BodyActionsCell as BodyActionsCellPureComponent
 } from "../../../../src/components/DatatableCore/Body/BodyActionsCell";
@@ -204,6 +205,43 @@ describe("BodyActionsCell component", () => {
         expect(wrapper.find("span.select")).toHaveLength(0);
       });
     });
+  });
+
+  it("should render dupplication action button", () => {
+    const pure = mount(
+      <BodyActionsCellPureComponent
+        isScrolling={false}
+        keyColumn="id"
+        canEdit
+        canDelete
+        canSelectRow
+        rowsEdited={[]}
+        addRowEdited={addRowEdited}
+        addToDeleteRow={addToDeleteRow}
+        saveRowEdited={saveRowEdited}
+        revertRowEdited={revertRowEdited}
+        deleteRow={deleteRow}
+        selectRow={selectRow}
+        column={column}
+        row={row}
+        style={style}
+        editing={false}
+        canGlobalEdit={false}
+        checked={false}
+        classes={{ customVariant }}
+        additionalActions={[
+          {
+            title: "Coffee",
+            icon: <CallSplitIcon />,
+            onClick: res => res
+          }
+        ]}
+      />
+    );
+
+    const button = pure.find("button.additional-action-icon");
+    button.simulate("click");
+    expect(button).toHaveLength(1);
   });
 
   describe("click on", () => {
