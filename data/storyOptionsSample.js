@@ -54,6 +54,13 @@ const storyOptionsSample = {
         onClick: res => alert(`You have exported ${res.length} rows !`)
       }
     ],
+    additionalActions: [
+      {
+        title: "Action 3",
+        icon: <CoffeeIcon color="primary" />,
+        onClick: res => alert(res)
+      }
+    ],
     additionalIcons: [
       {
         title: "Action 3",

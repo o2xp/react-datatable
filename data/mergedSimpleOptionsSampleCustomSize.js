@@ -57,6 +57,7 @@ const mergedSimpleOptionsSampleCustomSize = {
       ...userConfiguration,
       columnsOrder: ["o2xpActions", ...userConfiguration.columnsOrder]
     },
+    additionalActions: [],
     additionalIcons: []
   }
 };

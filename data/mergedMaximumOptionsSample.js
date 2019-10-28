@@ -16,7 +16,8 @@ import {
   newRows,
   rowsDeleted,
   orderBy,
-  selectionIcons
+  selectionIcons,
+  additionalActions
 } from "./optionsObjectSample";
 
 const mergedMaximumOptionsSample = {
@@ -46,7 +47,7 @@ const mergedMaximumOptionsSample = {
   orderBy,
   data: {
     ...data,
-    columns: [columnAction, ...data.columns]
+    columns: [{ ...columnAction, colSize: "200px" }, ...data.columns]
   },
   pagination: {
     pageSelected: 1,
@@ -76,6 +77,7 @@ const mergedMaximumOptionsSample = {
       available: [50],
       selected: 50
     },
+    additionalActions,
     additionalIcons,
     selectionIcons
   }

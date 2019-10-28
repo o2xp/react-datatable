@@ -85,6 +85,7 @@ const defaultState = {
       available: [10, 25, 50, 100, "All"],
       selected: "All"
     },
+    additionalActions: [],
     additionalIcons: [],
     selectionIcons: []
   }
@@ -312,6 +313,7 @@ const initializeOptions = (
       arrayMerge: overwriteMerge
     }
   );
+
   newState.actions = actions;
   newState.refreshRows = refreshRows;
   newState.stripped = stripped;
@@ -347,17 +349,19 @@ const initializeOptions = (
       case "true true true":
       case "false true true":
       case "true false true":
-        colSize = "150px";
+        colSize = 150;
         break;
       case "true true false":
       case "false true false":
       case "true false false":
-        colSize = "100px";
+        colSize = 100;
         break;
       default:
-        colSize = "50px";
+        colSize = 50;
         break;
     }
+
+    colSize = `${colSize + newState.features.additionalActions.length * 50}px`;
 
     newState.data.columns.unshift({
       id: "o2xpActions",

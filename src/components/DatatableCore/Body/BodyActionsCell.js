@@ -37,7 +37,8 @@ import {
   canGlobalEditPropType,
   rowsEditedPropType,
   keyColumnPropType,
-  addToDeleteRowPropType
+  addToDeleteRowPropType,
+  additionalActionsPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -77,7 +78,8 @@ export class BodyActionsCell extends Component {
       classes,
       rowsEdited,
       canEditRow,
-      keyColumn
+      keyColumn,
+      additionalActions
     } = this.props;
 
     const { deleting } = this.state;
@@ -109,6 +111,25 @@ export class BodyActionsCell extends Component {
               checked={checked}
             />
           )}
+
+          {additionalActions.map(aa => (
+            <Tooltip title={aa.title} key={aa.title}>
+              <span>
+                <IconButton
+                  className={
+                    !editing
+                      ? `disabled-icon additional-action-icon`
+                      : `additional-action-icon`
+                  }
+                  onClick={() => aa.onClick(row)}
+                  disabled={!editing && canGlobalEdit}
+                >
+                  {aa.icon}
+                </IconButton>
+              </span>
+            </Tooltip>
+          ))}
+
           {canDelete && (!editing || canGlobalEdit) && !deleting && (
             <Tooltip title="Confirm delete">
               <span>
@@ -209,6 +230,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    additionalActions: state.datatableReducer.features.additionalActions,
     keyColumn: state.datatableReducer.keyColumn,
     rowsEdited: state.datatableReducer.rowsEdited,
     isScrolling: state.datatableReducer.dimensions.isScrolling,
@@ -240,7 +262,8 @@ BodyActionsCell.propTypes = {
   revertRowEdited: revertRowEditedPropType,
   deleteRow: deleteRowPropType,
   addToDeleteRow: addToDeleteRowPropType,
-  canGlobalEdit: canGlobalEditPropType.isRequired
+  canGlobalEdit: canGlobalEditPropType.isRequired,
+  additionalActions: additionalActionsPropType.isRequired
 };
 
 export default compose(
