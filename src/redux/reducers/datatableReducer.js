@@ -496,7 +496,13 @@ const addRowEdited = (state, row) => {
 };
 
 const addAllRowsToEdited = state => {
-  const { rows } = state.data;
+  const { actions, data } = state;
+  const { rows } = data;
+
+  if (actions) {
+    actions({ type: "editMode" });
+  }
+
   const rowsEdited = rows.map(row => {
     return {
       ...row,
@@ -699,9 +705,12 @@ const saveAllRowsEdited = state => {
 
   if (actions) {
     actions({
-      rowsDeleted,
-      rowsEdited,
-      rowsAdded
+      type: "save",
+      payload: {
+        rowsDeleted,
+        rowsEdited,
+        rowsAdded
+      }
     });
   }
 
@@ -736,11 +745,17 @@ const revertRowEdited = (state, payload) => {
 };
 
 const revertAllRowsToEdited = state => {
-  const { newRows, data, keyColumn, pagination, rowsDeleted } = state;
+  const { newRows, data, keyColumn, pagination, rowsDeleted, actions } = state;
   const newRowsId = newRows.map(r => r[keyColumn]);
   const { rows } = data;
 
   rowsDeleted.forEach((rd, i) => rows.splice(rd.indexInsert + i, 0, rd));
+
+  if (actions) {
+    actions({
+      type: "revert"
+    });
+  }
 
   const newState = {
     ...state,
