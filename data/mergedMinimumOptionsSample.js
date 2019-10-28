@@ -71,6 +71,7 @@ const mergedMinimumOptionsSample = {
       columnsOrder: [...userConfiguration.columnsOrder]
     },
     rowsPerPage,
+    additionalActions: [],
     additionalIcons: [],
     selectionIcons: []
   }

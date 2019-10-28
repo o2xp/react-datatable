@@ -77,6 +77,7 @@ describe("BodyActionsCell component", () => {
           canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
+          additionalActions={[]}
         />
       );
       expect(wrapper.find(".Table-Cell.action")).toHaveLength(1);
@@ -104,6 +105,7 @@ describe("BodyActionsCell component", () => {
           canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
+          additionalActions={[]}
         />
       );
       expect(wrapper.find(".Table-Cell.action.scrolling-shadow")).toHaveLength(
@@ -134,6 +136,7 @@ describe("BodyActionsCell component", () => {
             canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
+            additionalActions={[]}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(0);
@@ -163,6 +166,7 @@ describe("BodyActionsCell component", () => {
             canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
+            additionalActions={[]}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -192,6 +196,7 @@ describe("BodyActionsCell component", () => {
             canGlobalEdit={false}
             checked={false}
             classes={{ customVariant }}
+            additionalActions={[]}
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -322,6 +327,7 @@ describe("BodyActionsCell component", () => {
           canGlobalEdit={false}
           checked={false}
           classes={{ customVariant }}
+          additionalActions={[]}
         />
       );
 

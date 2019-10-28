@@ -4,7 +4,8 @@ import {
   font,
   data,
   additionalIcons,
-  selectionIcons
+  selectionIcons,
+  additionalActions
 } from "./optionsObjectSample";
 
 const maximumOptionsSample = {
@@ -39,6 +40,7 @@ const maximumOptionsSample = {
       available: [50],
       selected: 50
     },
+    additionalActions,
     additionalIcons,
     selectionIcons
   }
