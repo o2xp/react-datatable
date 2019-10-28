@@ -332,7 +332,7 @@ const initializeOptions = (
   const numberOfActions = actionsUser.filter(v => v).length;
 
   if (
-    numberOfActions > 0 &&
+    (numberOfActions > 0 || newState.features.additionalActions.length > 0) &&
     !newState.data.columns.find(col => col.id === "o2xpActions")
   ) {
     newState.features.userConfiguration.columnsOrder = newState.features.userConfiguration.columnsOrder.filter(
