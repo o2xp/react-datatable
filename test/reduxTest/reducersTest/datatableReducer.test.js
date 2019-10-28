@@ -530,6 +530,7 @@ describe("datatableReducer reducer", () => {
 
   describe("should handle ADD_ALL_ROWS_TO_EDITED", () => {
     it("add all rows", () => {
+      const actions = jest.fn();
       const { rows } = simpleOptionsSample.data;
       const rowsEdited = rows.map(row => {
         return {
@@ -538,12 +539,16 @@ describe("datatableReducer reducer", () => {
           hasBeenEdited: false
         };
       });
-      const result = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
-        type: "ADD_ALL_ROWS_TO_EDITED"
-      });
+      const result = datatableReducer(
+        cloneDeep({ ...mergedSimpleOptionsSample, actions }),
+        {
+          type: "ADD_ALL_ROWS_TO_EDITED"
+        }
+      );
 
       const mergedSimpleOptionsSampleWithOneEditedRow = {
         ...mergedSimpleOptionsSample,
+        actions,
         rowsEdited
       };
 
@@ -1146,10 +1151,12 @@ describe("datatableReducer reducer", () => {
   });
 
   it("should handle REVERT_ALL_ROWS_TO_EDITED", () => {
+    const actions = jest.fn();
     const { rows } = cloneDeep(simpleOptionsSample.data);
     const row = rows[0];
     const store = cloneDeep({
       ...mergedSimpleOptionsSample,
+      actions,
       rowsEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }],
       rowsGlobalEdited: [{ ...row, idOfColumnErr: [], hasBeenEdited: false }],
       features: {
@@ -1165,6 +1172,7 @@ describe("datatableReducer reducer", () => {
 
     const mergedDatableReducerExpect = {
       ...mergedSimpleOptionsSample,
+      actions,
       features: {
         ...mergedSimpleOptionsSample.features,
         canEdit: false,
