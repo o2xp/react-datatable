@@ -131,6 +131,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .userConfiguration .copyToClipboard | boolean | no | false |  If true, when the user click on cell it will copy the value in the clipboard. |
 | features .rowsPerPage .available | array of number and string | no | [10, 25, 50, 100, "All"] |  An array with the numbers of rows per page you want available. |
 | features .rowsPerPage .selected | number or string | no | "All" |  The number of rows per page selected by default. |
+| features .additionalActions | array of object | no | [ ] |  If you want to add actions icon which trigger a function on a row. Click [here](#additional-actions-props) to have more information. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
@@ -156,6 +157,15 @@ Rows is an array of object where each object is defined by the columns identifie
 | Property | Type | Required? | Description |
 |:---|:---:|:---:|:---|
 | editableId | Array<string> | no | Id of the columns where fields should be editable. |
+
+#### Additional Actions Props
+Additional actions is an array of object construct with these keys :
+
+| Property | Type | Required? | Description |
+|:---|:---:|:---:|:---|
+| title | string | yes | Description of the button. The text will be displayed on hovering the icon |
+| icon | Component | yes | Use @material-ui/icons to provide an icon to display. |
+| onClick | function | yes | A function that take a row as parameter. The function will be triggered on click. |
 
 #### Additional Icons Props
 Additional icons is an array of object construct with these keys :
