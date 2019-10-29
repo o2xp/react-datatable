@@ -155,3 +155,8 @@ export const updateOptions = payload => ({
   type: "UPDATE",
   payload
 });
+
+export const duplicateRow = payload => ({
+  type: "DUPLICATE_ROW",
+  payload
+});

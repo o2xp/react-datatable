@@ -5,7 +5,8 @@ import {
   Create as CreateIcon,
   Save as SaveIcon,
   Clear as ClearIcon,
-  DeleteForever as DeleteForeverIcon
+  DeleteForever as DeleteForeverIcon,
+  Queue as QueueIcon
 } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,7 +16,8 @@ import {
   revertRowEdited as revertRowEditedAction,
   selectRow as selectRowAction,
   deleteRow as deleteRowAction,
-  addToDeleteRow as addToDeleteRowAction
+  addToDeleteRow as addToDeleteRowAction,
+  duplicateRow as duplicateRowAction
 } from "../../../redux/actions/datatableActions";
 import {
   columnPropType,
@@ -38,7 +40,9 @@ import {
   rowsEditedPropType,
   keyColumnPropType,
   addToDeleteRowPropType,
-  additionalActionsPropType
+  additionalActionsPropType,
+  canDuplicatePropType,
+  duplicateRowPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -67,6 +71,7 @@ export class BodyActionsCell extends Component {
       canEdit,
       canGlobalEdit,
       canDelete,
+      canDuplicate,
       canSelectRow,
       row,
       checked,
@@ -79,7 +84,8 @@ export class BodyActionsCell extends Component {
       rowsEdited,
       canEditRow,
       keyColumn,
-      additionalActions
+      additionalActions,
+      duplicateRow
     } = this.props;
 
     const { deleting } = this.state;
@@ -129,6 +135,24 @@ export class BodyActionsCell extends Component {
               </span>
             </Tooltip>
           ))}
+
+          {canDuplicate && (
+            <Tooltip title="Duplicate">
+              <span>
+                <IconButton
+                  className={
+                    !editing && canGlobalEdit
+                      ? `disabled-icon duplicate-icon`
+                      : `duplicate-icon`
+                  }
+                  onClick={() => duplicateRow(row)}
+                  disabled={!editing && canGlobalEdit}
+                >
+                  <QueueIcon color="primary" />
+                </IconButton>
+              </span>
+            </Tooltip>
+          )}
 
           {canDelete && (!editing || canGlobalEdit) && !deleting && (
             <Tooltip title="Confirm delete">
@@ -224,7 +248,8 @@ const mapDispatchToProps = dispatch => {
     saveRowEdited: row => dispatch(saveRowEditedAction(row)),
     selectRow: row => dispatch(selectRowAction(row)),
     revertRowEdited: row => dispatch(revertRowEditedAction(row)),
-    deleteRow: row => dispatch(deleteRowAction(row))
+    deleteRow: row => dispatch(deleteRowAction(row)),
+    duplicateRow: row => dispatch(duplicateRowAction(row))
   };
 };
 
@@ -238,7 +263,8 @@ const mapStateToProps = state => {
     canEditRow: state.datatableReducer.features.canEditRow,
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canDelete: state.datatableReducer.features.canDelete,
-    canSelectRow: state.datatableReducer.features.canSelectRow
+    canSelectRow: state.datatableReducer.features.canSelectRow,
+    canDuplicate: state.datatableReducer.features.canDuplicate
   };
 };
 
@@ -263,7 +289,9 @@ BodyActionsCell.propTypes = {
   deleteRow: deleteRowPropType,
   addToDeleteRow: addToDeleteRowPropType,
   canGlobalEdit: canGlobalEditPropType.isRequired,
-  additionalActions: additionalActionsPropType.isRequired
+  additionalActions: additionalActionsPropType.isRequired,
+  canDuplicate: canDuplicatePropType.isRequired,
+  duplicateRow: duplicateRowPropType
 };
 
 export default compose(
