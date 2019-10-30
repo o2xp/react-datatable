@@ -71,6 +71,7 @@ const defaultState = {
     canDownload: false,
     canAdd: false,
     canDelete: false,
+    canDuplicate: false,
     canSearch: false,
     canRefreshRows: false,
     canOrderColumns: false,
@@ -327,12 +328,14 @@ const initializeOptions = (
     );
   }
 
-  const { canEdit, canDelete, canSelectRow } = newState.features;
+  const { canEdit, canDelete, canSelectRow, canDuplicate } = newState.features;
   const actionsUser = [canEdit, canDelete, canSelectRow];
   const numberOfActions = actionsUser.filter(v => v).length;
 
   if (
-    (numberOfActions > 0 || newState.features.additionalActions.length > 0) &&
+    (numberOfActions > 0 ||
+      newState.features.additionalActions.length > 0 ||
+      canDuplicate) &&
     !newState.data.columns.find(col => col.id === "o2xpActions")
   ) {
     newState.features.userConfiguration.columnsOrder = newState.features.userConfiguration.columnsOrder.filter(
@@ -344,20 +347,20 @@ const initializeOptions = (
     );
 
     newState.features.userConfiguration.columnsOrder.unshift("o2xpActions");
-    let colSize = 0;
+    let colSize = canDuplicate ? 50 : 0;
     switch (actionsUser.join(" ")) {
       case "true true true":
       case "false true true":
       case "true false true":
-        colSize = 150;
+        colSize += 150;
         break;
       case "true true false":
       case "false true false":
       case "true false false":
-        colSize = 100;
+        colSize += 100;
         break;
       default:
-        colSize = 50;
+        colSize += 50;
         break;
     }
 
@@ -1005,6 +1008,44 @@ const orderByColumns = (state, payload) => {
   };
 };
 
+const insert = (arr, index, newItem) => [
+  ...arr.slice(0, index),
+  newItem,
+  ...arr.slice(index)
+];
+
+const duplicateRow = (state, payload) => {
+  const { keyColumn, data, pagination, rowsGlobalEdited, rowsEdited } = state;
+  const { rows } = data;
+  const newRow = {
+    ...payload,
+    hasBeenEdited: true,
+    idOfColumnErr: [],
+    [keyColumn]: `_${Math.random()
+      .toString(36)
+      .substr(2, 18)}`
+  };
+
+  const index =
+    data.rows.findIndex(r => r[keyColumn] === payload[keyColumn]) + 1;
+
+  const newState = {
+    ...state,
+    rowsGlobalEdited: insert(rowsGlobalEdited, index, newRow),
+    rowsEdited: insert(rowsEdited, index, newRow),
+    data: { ...data, rows: insert(rows, index, newRow) },
+    newRows: [...state.newRows, newRow]
+  };
+
+  const newPagination = setPagination({
+    state: newState,
+    newPageSelected: pagination.pageSelected,
+    newRowsPerPageSelected: pagination.rowsPerPageSelected
+  });
+
+  return { ...newState, pagination: newPagination };
+};
+
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -1059,6 +1100,8 @@ const datatableReducer = (state = defaultState, action) => {
       return refreshRowsError(state);
     case "ORDER_BY_COLUMNS":
       return orderByColumns(state, payload);
+    case "DUPLICATE_ROW":
+      return duplicateRow(state, payload);
     default:
       return state;
   }

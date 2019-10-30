@@ -55,6 +55,7 @@ const defaultOptionsSample = {
     canGlobalEdit: false,
     canPrint: false,
     canDownload: false,
+    canDuplicate: false,
     canDelete: false,
     canSearch: false,
     canRefreshRows: false,

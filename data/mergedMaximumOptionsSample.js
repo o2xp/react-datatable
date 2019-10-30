@@ -47,7 +47,7 @@ const mergedMaximumOptionsSample = {
   orderBy,
   data: {
     ...data,
-    columns: [{ ...columnAction, colSize: "200px" }, ...data.columns]
+    columns: [{ ...columnAction, colSize: "250px" }, ...data.columns]
   },
   pagination: {
     pageSelected: 1,
@@ -62,6 +62,7 @@ const mergedMaximumOptionsSample = {
     canAdd: false,
     canPrint: true,
     canDownload: true,
+    canDuplicate: true,
     canSearch: true,
     canDelete: true,
     canRefreshRows: true,

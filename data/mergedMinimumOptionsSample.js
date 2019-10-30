@@ -59,6 +59,7 @@ const mergedMinimumOptionsSample = {
     canAdd: false,
     canPrint: false,
     canDownload: false,
+    canDuplicate: false,
     canSearch: false,
     canDelete: false,
     canSelectRow: false,
