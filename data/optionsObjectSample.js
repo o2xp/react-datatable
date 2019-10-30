@@ -200,6 +200,7 @@ export const features = {
   canAdd: false,
   canPrint: true,
   canDownload: true,
+  canDuplicate: false,
   canDelete: true,
   canSearch: false,
   canRefreshRows: false,

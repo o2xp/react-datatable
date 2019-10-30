@@ -329,4 +329,11 @@ describe("Datatable actions should create an action to", () => {
     };
     expect(actions.orderByColumns(payload)).toEqual(expectedAction);
   });
+
+  it("duplicate row", () => {
+    const expectedAction = {
+      type: "DUPLICATE_ROW"
+    };
+    expect(actions.duplicateRow()).toEqual(expectedAction);
+  });
 });
