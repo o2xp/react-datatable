@@ -10,13 +10,20 @@ import { storeSample } from "../../../../data/samples";
 import { customVariant } from "../../../../src/components/MuiTheme";
 
 const mockStore = configureStore();
-const store = mockStore(storeSample);
+const store = mockStore({
+  ...storeSample,
+  datatableReducer: {
+    ...storeSample.datatableReducer,
+    features: { ...storeSample.datatableReducer.features, canDuplicate: true }
+  }
+});
 const addRowEdited = jest.fn();
 const saveRowEdited = jest.fn();
 const revertRowEdited = jest.fn();
 const addToDeleteRow = jest.fn();
 const deleteRow = jest.fn();
 const selectRow = jest.fn();
+const duplicateRow = jest.fn();
 const column = {
   id: "o2xpActions",
   label: "Actions",
@@ -71,12 +78,14 @@ describe("BodyActionsCell component", () => {
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
           selectRow={selectRow}
+          duplicateRow={duplicateRow}
           column={column}
           row={row}
           style={style}
           editing={false}
           canGlobalEdit={false}
           checked={false}
+          canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
         />
@@ -99,12 +108,14 @@ describe("BodyActionsCell component", () => {
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
           selectRow={selectRow}
+          duplicateRow={duplicateRow}
           column={column}
           row={row}
           style={style}
           editing={false}
           canGlobalEdit={false}
           checked={false}
+          canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
         />
@@ -130,12 +141,14 @@ describe("BodyActionsCell component", () => {
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
             selectRow={selectRow}
+            duplicateRow={duplicateRow}
             column={column}
             row={row}
             style={style}
             editing={false}
             canGlobalEdit={false}
             checked={false}
+            canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
           />
@@ -160,12 +173,14 @@ describe("BodyActionsCell component", () => {
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
             selectRow={selectRow}
+            duplicateRow={duplicateRow}
             column={column}
             row={row}
             style={style}
             editing={false}
             canGlobalEdit={false}
             checked={false}
+            canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
           />
@@ -190,12 +205,14 @@ describe("BodyActionsCell component", () => {
             revertRowEdited={revertRowEdited}
             deleteRow={deleteRow}
             selectRow={selectRow}
+            duplicateRow={duplicateRow}
             column={column}
             row={row}
             style={style}
             editing={false}
             canGlobalEdit={false}
             checked={false}
+            canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
           />
@@ -222,12 +239,14 @@ describe("BodyActionsCell component", () => {
         revertRowEdited={revertRowEdited}
         deleteRow={deleteRow}
         selectRow={selectRow}
+        duplicateRow={duplicateRow}
         column={column}
         row={row}
         style={style}
         editing={false}
         canGlobalEdit={false}
         checked={false}
+        canDuplicate={false}
         classes={{ customVariant }}
         additionalActions={[
           {
@@ -341,6 +360,21 @@ describe("BodyActionsCell component", () => {
           hasBeenEdited: true
         });
       });
+
+      describe("duplicate button", () => {
+        const duplicateButton = wrapper.find("button.duplicate-icon");
+        it("should dispatch action type DUPLICATE_ROW", () => {
+          duplicateButton.simulate("click");
+          const action = store.getActions()[6];
+          expect(action.type).toEqual("DUPLICATE_ROW");
+        });
+
+        it("should dispatch action with payload", () => {
+          duplicateButton.simulate("click");
+          const action = store.getActions()[7];
+          expect(action.payload).toEqual(row);
+        });
+      });
     });
 
     describe("delete button", () => {
@@ -358,12 +392,14 @@ describe("BodyActionsCell component", () => {
           revertRowEdited={revertRowEdited}
           deleteRow={deleteRow}
           selectRow={selectRow}
+          duplicateRow={duplicateRow}
           column={column}
           row={row}
           style={style}
           editing={false}
           canGlobalEdit={false}
           checked={false}
+          canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
         />
@@ -398,7 +434,7 @@ describe("BodyActionsCell component", () => {
         deleteButton.simulate("click");
         const confirmDeleteButton = wrapper.find("button.confirm-delete");
         confirmDeleteButton.simulate("click");
-        const action = store.getActions()[6];
+        const action = store.getActions()[8];
         expect(action.type).toEqual("DELETE_ROW");
       });
 
@@ -407,7 +443,7 @@ describe("BodyActionsCell component", () => {
         deleteButton.simulate("click");
         const confirmDeleteButton = wrapper.find("button.confirm-delete");
         confirmDeleteButton.simulate("click");
-        const action = store.getActions()[7];
+        const action = store.getActions()[9];
         expect(action.payload).toEqual(row);
       });
     });
@@ -416,13 +452,13 @@ describe("BodyActionsCell component", () => {
       const checkbox = wrapper.find(".select input");
       it("should dispatch action type SELECT_ROW", () => {
         checkbox.simulate("change", { target: { checked: true } });
-        const action = store.getActions()[8];
+        const action = store.getActions()[10];
         expect(action.type).toEqual("SELECT_ROW");
       });
 
       it("should dispatch action with payload", () => {
         checkbox.simulate("change", { target: { checked: true } });
-        const action = store.getActions()[9];
+        const action = store.getActions()[11];
         expect(action.payload).toEqual({ checked: true, row });
       });
     });
