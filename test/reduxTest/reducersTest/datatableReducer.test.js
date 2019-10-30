@@ -1689,6 +1689,57 @@ describe("datatableReducer reducer", () => {
     });
   });
 
+  describe("should handle DUPLICATE_ROW", () => {
+    const insert = (arr, index, newItem) => [
+      ...arr.slice(0, index),
+      newItem,
+      ...arr.slice(index)
+    ];
+
+    it("", () => {
+      const row = mergedSimpleOptionsSample.data.rows[5];
+
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "DUPLICATE_ROW",
+        payload: row
+      });
+
+      const { id } = result.data.rows[6];
+
+      const newRow = {
+        ...row,
+        id,
+        hasBeenEdited: true,
+        idOfColumnErr: []
+      };
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        rowsGlobalEdited: insert(
+          mergedSimpleOptionsSample.rowsGlobalEdited,
+          6,
+          newRow
+        ),
+        rowsEdited: insert(mergedSimpleOptionsSample.rowsEdited, 6, newRow),
+        data: {
+          ...mergedSimpleOptionsSample.data,
+          rows: insert(mergedSimpleOptionsSample.data.rows, 6, newRow)
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: insert(
+            mergedSimpleOptionsSample.data.rows,
+            6,
+            newRow
+          )
+        },
+        newRows: [...mergedSimpleOptionsSample.newRows, newRow]
+      };
+
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
   describe("should handle ORDER_BY_COLUMNS and return", () => {
     it("sort asc by age", () => {
       const result = datatableReducer(mergedSimpleOptionsSample, {
