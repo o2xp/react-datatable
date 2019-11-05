@@ -52,7 +52,10 @@ export const classesPropType = PropTypes.object;
 
 // Input propTypes
 export const typePropType = PropTypes.string;
-export const rowIdPropType = PropTypes.string;
+export const rowIdPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number
+]);
 export const columnIdPropType = PropTypes.string;
 export const editingPropType = PropTypes.bool;
 
