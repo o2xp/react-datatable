@@ -123,9 +123,13 @@ const convertSizeToNumber = (val, height) => {
 };
 
 const updateRowSizeMultiplier = state => {
-  const { canEdit, canDelete, canSelectRow } = state.features;
-  const numberOfActions = [canEdit, canDelete, canSelectRow].filter(v => v)
-    .length;
+  const { canEdit, canDelete, canSelectRow, canDuplicate } = state.features;
+  const numberOfActions = [
+    canEdit,
+    canDelete,
+    canSelectRow,
+    canDuplicate
+  ].filter(v => v).length;
   const colDisplayed = [];
   state.data.columns.forEach(col => {
     if (state.features.userConfiguration.columnsOrder.includes(col.id)) {
@@ -164,7 +168,31 @@ const updateRowSizeMultiplier = state => {
       document.getElementById("o2xp").parentElement.clientWidth *
       (widthTable / 100);
   }
-  widthTable -= numberOfActions * 50;
+
+  if (numberOfActions.length > 0) {
+    widthTable -= 50;
+  }
+
+  if (canEdit) {
+    widthTable -= 100;
+  }
+
+  if (canDelete) {
+    widthTable -= 100;
+  }
+
+  if (canDuplicate) {
+    widthTable -= 50;
+  }
+
+  if (canSelectRow) {
+    widthTable -= 50;
+  }
+
+  if (canEdit && canDelete) {
+    widthTable += 100;
+  }
+
   widthTable -= state.features.userConfiguration.columnsOrder.length * 50;
   widthTable -= 22;
   let mult = 1;
