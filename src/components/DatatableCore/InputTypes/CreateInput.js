@@ -34,11 +34,15 @@ const CreateInput = ({
   required = false,
   label = ""
 }) => {
+  const val = cellVal || "";
+  const isNull = cellVal == null;
+
   switch (inputType) {
     case "datePicker":
       return (
         <DatePickerWrapper
-          cellVal={cellVal}
+          cellVal={val}
+          isNull={isNull}
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
@@ -51,7 +55,8 @@ const CreateInput = ({
     case "timePicker":
       return (
         <TimePickerWrapper
-          cellVal={cellVal}
+          cellVal={val}
+          isNull={isNull}
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
@@ -64,7 +69,8 @@ const CreateInput = ({
     case "dateTimePicker":
       return (
         <DateTimePickerWrapper
-          cellVal={cellVal}
+          cellVal={val}
+          isNull={isNull}
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
@@ -76,7 +82,8 @@ const CreateInput = ({
       );
     case "select":
       return SelectWrapper({
-        cellVal,
+        cellVal: val,
+        isNull,
         values,
         rowId,
         dateFormat,
@@ -87,7 +94,8 @@ const CreateInput = ({
       });
     case "boolean":
       return BooleanWrapper({
-        cellVal,
+        cellVal: val,
+        isNull,
         rowId,
         columnId,
         setRowEdited,
@@ -98,7 +106,8 @@ const CreateInput = ({
     default:
       return (
         <TextFieldWrapper
-          cellVal={cellVal}
+          cellVal={val}
+          isNull={isNull}
           type={type}
           valueVerification={valueVerification}
           rowId={rowId}
