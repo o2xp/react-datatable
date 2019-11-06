@@ -313,7 +313,12 @@ const setPagination = ({
 
 const removeNullUndefined = obj => {
   Object.keys(obj).forEach(key => {
-    if (obj[key] && typeof obj[key] === "object" && key !== "icon")
+    if (
+      obj[key] &&
+      typeof obj[key] === "object" &&
+      key !== "icon" &&
+      key !== "rows"
+    )
       removeNullUndefined(obj[key]);
     /* eslint-disable no-param-reassign */ else if (
       obj[key] == null ||
@@ -555,7 +560,10 @@ const checkHasBeenEdited = ({ rows, rowEdited, keyColumn }) => {
 
   let hasBeenEdited = false;
   Object.keys(rowNonEdited).forEach(key => {
-    if (rowNonEdited[key] !== rowEdited[key]) {
+    if (
+      rowNonEdited[key] !== rowEdited[key] &&
+      !(rowNonEdited[key] == null && rowEdited[key].length === 0)
+    ) {
       hasBeenEdited = true;
     }
   });
@@ -684,6 +692,20 @@ const saveRowEdited = (state, payload) => {
   delete row.idOfColumnErr;
   delete row.hasBeenEdited;
   const { data, rowsEdited, keyColumn, pagination, actions } = state;
+
+  const { rows, columns } = state.data;
+  const rowNonEdited = rows.find(r => r[keyColumn] === row[keyColumn]);
+
+  columns.forEach(col => {
+    if (
+      row[col.id] != null &&
+      row[col.id].length === 0 &&
+      rowNonEdited[col.id] == null
+    ) {
+      row[col.id] = rowNonEdited[col.id];
+    }
+  });
+
   if (actions) {
     actions({ type: "save", payload: row });
   }
@@ -716,6 +738,7 @@ const saveAllRowsEdited = state => {
     pagination,
     newRows
   } = state;
+
   const rows = rowsGlobalEdited.map(row => {
     const r = row;
     delete r.idOfColumnErr;
@@ -733,6 +756,27 @@ const saveAllRowsEdited = state => {
   const rowsAdded = rowsGlobalEdited.filter(rge =>
     newRowsId.includes(rge[keyColumn])
   );
+
+  const { rows: rowsNonEdited, columns } = state.data;
+  const rowsEditedId = rowsEdited.map(re => re[keyColumn]);
+  const rowsNonEditedFiltered = rowsNonEdited.filter(rne =>
+    rowsEditedId.includes(rne[keyColumn])
+  );
+
+  rowsEdited.forEach(re => {
+    const rowNonEdited = rowsNonEditedFiltered.find(
+      rne => rne[keyColumn] === re[keyColumn]
+    );
+    columns.forEach(col => {
+      if (
+        re[col.id] != null &&
+        re[col.id].length === 0 &&
+        rowNonEdited[col.id] == null
+      ) {
+        re[col.id] = rowNonEdited[col.id];
+      }
+    });
+  });
 
   if (actions) {
     actions({
