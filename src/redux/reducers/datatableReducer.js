@@ -778,10 +778,13 @@ const saveAllRowsEdited = state => {
     });
   });
 
+  const rowsMerged = mergeArrayInArray(rows, keyColumn, data.rows);
+
   if (actions) {
     actions({
       type: "save",
       payload: {
+        rows: rowsMerged,
         rowsDeleted,
         rowsEdited,
         rowsAdded
@@ -793,7 +796,7 @@ const saveAllRowsEdited = state => {
     ...state,
     data: {
       ...data,
-      rows: mergeArrayInArray(rows, keyColumn, data.rows)
+      rows: rowsMerged
     },
     pagination: {
       ...pagination,
