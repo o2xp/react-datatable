@@ -110,7 +110,7 @@ export class BodyRow extends Component {
   };
 
   render() {
-    const { style, row, columnsOrder, editing } = this.props;
+    const { style, row, columnsOrder, editing, keyColumn } = this.props;
     return (
       <Fragment>
         <div
@@ -121,7 +121,7 @@ export class BodyRow extends Component {
           }}
         >
           <div
-            className="Table-Row"
+            className={`Table-Row ${row[keyColumn]}`}
             style={{
               height: style.height,
               backgroundColor: style.backgroundColor
