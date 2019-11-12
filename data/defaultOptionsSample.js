@@ -1,5 +1,4 @@
 const defaultOptionsSample = {
-  dtKey: "",
   title: "",
   dimensions: {
     datatable: {
