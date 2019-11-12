@@ -21,7 +21,6 @@ import {
 } from "./optionsObjectSample";
 
 const mergedMaximumOptionsSample = {
-  dtKey: "",
   title: "My super datatable",
   dimensions: {
     ...dimensions,

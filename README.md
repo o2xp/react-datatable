@@ -95,7 +95,6 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | Property | Type | Required? | Description |
 |:---|:---:|:---:|:---|
 | options | object | yes | An object that all the options to render the datatable. See [**Options Properties**](#options-properties). |
-| dtKey | string | no | If you are using our Datatable in multiple component, you should provide us an unique key in order to reset the redux store. |
 | actions | function | no | Function that take as parameter {type, payload}, where type is the action performed (save, delete etc..) and payload the data needed to perform the action. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | refreshRows | function | no | Function that return an an array of objects where each object is defined by the columns identifier as key and the value. See [**advanced**](https://github.com/o2xp/react-datatable/blob/develop/examples/advanced.md) example. |
 | forceRerender | boolean | no | Do you want to rerender the component on route change or keep the state ? |

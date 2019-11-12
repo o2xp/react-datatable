@@ -14,7 +14,6 @@ const optionsFuse = {
   minMatchCharLength: 1
 };
 const defaultState = {
-  dtKey: "",
   title: "",
   dimensions: {
     datatable: {
@@ -333,7 +332,6 @@ const initializeOptions = (
   state,
   {
     optionsInit,
-    dtKey,
     forceRerender = false,
     actions = null,
     refreshRows = null,
@@ -341,8 +339,8 @@ const initializeOptions = (
   }
 ) => {
   const newState = deepmerge(
-    forceRerender || dtKey !== state.dtKey ? defaultState : state,
-    removeNullUndefined({ ...optionsInit, dtKey }),
+    forceRerender ? defaultState : state,
+    removeNullUndefined({ ...optionsInit }),
     {
       arrayMerge: overwriteMerge
     }
