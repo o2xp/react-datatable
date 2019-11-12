@@ -21,7 +21,6 @@ import {
 } from "./optionsObjectSample";
 
 const mergedSimpleOptionsSampleCustomSize = {
-  dtKey: "",
   title,
   dimensions: {
     ...dimensions,

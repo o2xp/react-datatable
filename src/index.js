@@ -1,16 +1,22 @@
 import React, { Component, Fragment } from "react";
 import { Provider } from "react-redux";
-import store from "./redux/store/store";
 import DatatableInitializer from "./components/DatatableInitializer";
 import "./app.css";
 import { cloneDeep } from "lodash";
 import { SnackbarProvider } from "notistack";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import reducers from "./redux/reducers/reducers";
 
 class Datatable extends Component {
+  constructor(props) {
+    super(props)
+    this.store = createStore(reducers, applyMiddleware(thunk));
+  }
+
   render() {
     const {
       options = {},
-      dtKey = "",
       forceRerender = false,
       actions = null,
       refreshRows = null,
@@ -29,11 +35,10 @@ class Datatable extends Component {
           options.data.columns &&
           options.data.columns.length > 0 &&
           options.keyColumn && (
-            <Provider store={store}>
+            <Provider store={this.store}>
               <SnackbarProvider>
                 <DatatableInitializer
                   optionsInit={cloneDeep(options)}
-                  dtKey={dtKey}
                   forceRerender={forceRerender}
                   actions={actions}
                   refreshRows={refreshRows}
