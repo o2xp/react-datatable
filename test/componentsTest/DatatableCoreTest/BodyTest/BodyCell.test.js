@@ -113,7 +113,7 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnNumber.id}`);
+      const cell = wrapper.find(`div.Table-Cell.Table-Cell-${columnNumber.id}`);
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -133,7 +133,7 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnText.id}`);
+      const cell = wrapper.find(`div.Table-Cell.Table-Cell-${columnText.id}`);
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -153,7 +153,9 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnBoolean.id}`);
+      const cell = wrapper.find(
+        `div.Table-Cell.Table-Cell-${columnBoolean.id}`
+      );
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -173,7 +175,7 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnDate.id}`);
+      const cell = wrapper.find(`div.Table-Cell.Table-Cell-${columnDate.id}`);
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -193,7 +195,7 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnTime.id}`);
+      const cell = wrapper.find(`div.Table-Cell.Table-Cell-${columnTime.id}`);
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -213,7 +215,9 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnDateTime.id}`);
+      const cell = wrapper.find(
+        `div.Table-Cell.Table-Cell-${columnDateTime.id}`
+      );
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -233,7 +237,9 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnDefault.id}`);
+      const cell = wrapper.find(
+        `div.Table-Cell.Table-Cell-${columnDefault.id}`
+      );
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -253,7 +259,9 @@ describe("BodyCell component", () => {
         />
       );
 
-      const cell = wrapper.find(`div.Table-Cell.${columnCustomIban.id}`);
+      const cell = wrapper.find(
+        `div.Table-Cell.Table-Cell-${columnCustomIban.id}`
+      );
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
       expect(onClick).toHaveBeenCalled();
@@ -274,7 +282,7 @@ describe("BodyCell component", () => {
       );
 
       const cell = wrapper.find(
-        `div.Table-Cell.${columnCustomOverrideText.id}`
+        `div.Table-Cell.Table-Cell-${columnCustomOverrideText.id}`
       );
       expect(cell.exists()).toBeTruthy();
       cell.simulate("click");
