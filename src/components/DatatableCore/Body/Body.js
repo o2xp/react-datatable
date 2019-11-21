@@ -5,7 +5,10 @@ import { ScrollSyncPane } from "react-scroll-sync";
 import { FixedSizeList } from "react-window";
 import { throttle } from "lodash";
 import BodyRow from "./BodyRow";
-import { setIsScrolling as setIsScrollingAction } from "../../../redux/actions/datatableActions";
+import {
+  setIsScrolling as setIsScrollingAction,
+  setTableRef as setTableRefAction
+} from "../../../redux/actions/datatableActions";
 import {
   rowsPropType,
   CustomTableBodyRowPropType,
@@ -19,23 +22,31 @@ import {
   heightNumberPropType,
   widthNumberPropType,
   columnSizeMultiplierPropType,
-  customPropsPropType
+  customPropsPropType,
+  setTableRefPropType
 } from "../../../proptypes";
 
-export const tableRef = React.createRef();
-
 export class Body extends Component {
+  constructor(props) {
+    super(props);
+    this.tableRef = React.createRef();
+  }
+
   componentDidMount() {
-    const virtualizedContainer = findDOMNode(tableRef.current);
+    const { setTableRef } = this.props;
+    setTableRef(this.tableRef);
+    const virtualizedContainer = findDOMNode(this.tableRef.current);
     const callBack = () =>
       throttle(() => this.handleScroll(virtualizedContainer.scrollLeft), 500);
-    virtualizedContainer.addEventListener("scroll", callBack());
+    if (virtualizedContainer) {
+      virtualizedContainer.addEventListener("scroll", callBack());
+    }
   }
 
   componentWillUnmount() {
     const { rows } = this.props;
-    if (rows.length > 0) {
-      findDOMNode(tableRef.current).removeEventListener("scroll", null);
+    if (rows.length > 0 && this.tableRef) {
+      findDOMNode(this.tableRef.current).removeEventListener("scroll", null);
     }
   }
 
@@ -114,7 +125,7 @@ export class Body extends Component {
           <div className="Table-Body">
             <ScrollSyncPane>
               <FixedSizeList
-                ref={tableRef}
+                ref={this.tableRef}
                 className="virtualized-container"
                 height={dimensions.body.heightNumber}
                 itemCount={rows.length}
@@ -181,12 +192,14 @@ Body.propTypes = {
   height: heightNumberPropType.isRequired,
   width: widthNumberPropType.isRequired,
   totalWidthNumber: widthNumberPropType,
-  columnSizeMultiplier: columnSizeMultiplierPropType
+  columnSizeMultiplier: columnSizeMultiplierPropType,
+  setTableRef: setTableRefPropType
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setIsScrolling: bool => dispatch(setIsScrollingAction(bool))
+    setIsScrolling: bool => dispatch(setIsScrollingAction(bool)),
+    setTableRef: ref => dispatch(setTableRefAction(ref))
   };
 };
 

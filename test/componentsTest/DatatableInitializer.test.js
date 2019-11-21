@@ -67,15 +67,15 @@ describe("Datatable initializer component", () => {
 
     describe("dispatch action type", () => {
       it("INITIALIZE_OPTIONS", () => {
-        const action = store.getActions()[0];
+        const action = store.getActions()[1];
         expect(action.type).toEqual("INITIALIZE_OPTIONS");
       });
       it("INITIALIZE_CUSTOM_COMPONENTS", () => {
-        const action = store.getActions()[1];
+        const action = store.getActions()[2];
         expect(action.type).toEqual("INITIALIZE_CUSTOM_COMPONENTS");
       });
       it("UPDATE_COMPONENT_SIZE", () => {
-        const action = store.getActions()[2];
+        const action = store.getActions()[3];
         expect(action.type).toEqual("UPDATE_COMPONENT_SIZE");
       });
     });

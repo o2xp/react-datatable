@@ -22,6 +22,10 @@ import {
 
 const mergedMaximumOptionsSample = {
   title: "My super datatable",
+  tableRef: null,
+  text: {
+    noRow: "There is no data yet, try to refresh"
+  },
   dimensions: {
     ...dimensions,
     datatable: {

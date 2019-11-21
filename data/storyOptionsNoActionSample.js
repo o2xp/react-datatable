@@ -3,6 +3,7 @@ import rows from "./rows";
 
 const storyOptionsNoActionSample = {
   title,
+  tableRef: null,
   dimensions: {
     datatable: {
       width: "100%",
