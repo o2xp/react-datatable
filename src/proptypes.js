@@ -82,6 +82,7 @@ export const actionsPropType = PropTypes.func;
 export const canEditRowPropType = PropTypes.func;
 export const forceRerenderPropType = PropTypes.bool;
 export const titlePropType = PropTypes.string;
+export const overrideTextPropType = PropTypes.string;
 export const widthPropType = PropTypes.string;
 export const widthNumberPropType = PropTypes.number;
 export const heightPropType = PropTypes.string;

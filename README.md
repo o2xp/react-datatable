@@ -109,6 +109,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | Property | Type | Required? | Default | Description |
 |:---|:---:|:---:|:---:|:---|
 | title | string | no | " " | Title of the datatable. |
+| text | object | no |  | Un object with key taking a string as value.  Click [here](#override-text) to have more information.|
 | dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw / px / %) |
 | dimensions .datatable .height | string | no | "300px" |  Height of the Datatable. (in vh / px / %) |
 | dimensions .row .height | string | no | "60px" |  Height of each row of the Datatable. (in px) Minimum 60px. |
@@ -134,6 +135,13 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .additionalActions | array of object | no | [ ] |  If you want to add actions icon which trigger a function on a row. Click [here](#additional-actions-props) to have more information. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
+
+#### Override text
+text is an object construct with these keys :
+
+| Property | Type | Required? | Description |
+|:---|:---:|:---:|:---|
+| noRow | string | no | Text when there is no row. |
 
 #### Columns Props
 Columns is an array of object construct with these keys :
