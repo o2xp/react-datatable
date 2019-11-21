@@ -95,7 +95,7 @@ export class BodyCell extends Component {
 
     return (
       <div
-        className={`Table-Cell ${column.id}`}
+        className={`Table-Cell Table-Cell-${column.id}`}
         onClick={() => onClick(cellVal)}
         onKeyDown={this.handleKeyDown}
         role="presentation"
