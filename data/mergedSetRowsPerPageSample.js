@@ -22,6 +22,7 @@ import {
 
 const mergedSetRowsPerPageSample = {
   title,
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {

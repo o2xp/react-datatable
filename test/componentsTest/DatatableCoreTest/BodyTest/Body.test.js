@@ -125,20 +125,13 @@ describe("Body component", () => {
         </ScrollSync>
       </Provider>
     );
-    it("not dispatch action if scrollLeft = 0", () => {
-      wrapper
-        .find("Body")
-        .instance()
-        .handleScroll(0);
-      expect(store.getActions().length).toEqual(0);
-    });
     describe("dispatch action of", () => {
       it("type SET_IS_SCROLLING", () => {
         wrapper
           .find("Body")
           .instance()
           .handleScroll(456);
-        const action = store.getActions()[0];
+        const action = store.getActions()[4];
         expect(action.type).toEqual("SET_IS_SCROLLING");
       });
 
@@ -147,7 +140,7 @@ describe("Body component", () => {
           .find("Body")
           .instance()
           .handleScroll(456);
-        const action = store.getActions()[0];
+        const action = store.getActions()[5];
         expect(action.payload).toEqual(true);
       });
     });

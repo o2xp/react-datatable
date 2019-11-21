@@ -22,6 +22,7 @@ import {
 
 const mergedSimpleOptionsSampleWidthResize = {
   title,
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {

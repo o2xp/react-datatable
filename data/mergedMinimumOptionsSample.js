@@ -20,6 +20,7 @@ import {
 
 const mergedMinimumOptionsSample = {
   title: "",
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {

@@ -22,6 +22,7 @@ import {
 
 const mergedSimpleOptionsSample = {
   title,
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {
