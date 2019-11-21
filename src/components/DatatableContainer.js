@@ -14,7 +14,8 @@ import {
   featuresPropType,
   titlePropType,
   isRefreshingPropType,
-  columnSizeMultiplierPropType
+  columnSizeMultiplierPropType,
+  overrideTextPropType
 } from "../proptypes";
 
 class DatatableContainer extends Component {
@@ -27,7 +28,8 @@ class DatatableContainer extends Component {
       features,
       title,
       totalWidthNumber,
-      isRefreshing
+      isRefreshing,
+      noRowText
     } = this.props;
 
     const {
@@ -73,7 +75,7 @@ class DatatableContainer extends Component {
                       id="no-rows"
                       style={{ height: height - 15, width: width - 15 }}
                     >
-                      There is no data yet, try to refresh <span> .</span>
+                      {noRowText} <span> .</span>
                       <span>.</span>
                       <span>.</span>
                     </div>
@@ -124,7 +126,8 @@ DatatableContainer.propTypes = {
   totalWidthNumber: widthNumberPropType,
   features: featuresPropType,
   title: titlePropType,
-  columnSizeMultiplier: columnSizeMultiplierPropType
+  columnSizeMultiplier: columnSizeMultiplierPropType,
+  noRowText: overrideTextPropType
 };
 
 const mapStateToProps = state => {
@@ -135,6 +138,7 @@ const mapStateToProps = state => {
     features: state.datatableReducer.features,
     title: state.datatableReducer.title,
     isRefreshing: state.datatableReducer.isRefreshing,
+    noRowText: state.datatableReducer.text.noRow,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier: state.datatableReducer.dimensions.columnSizeMultiplier

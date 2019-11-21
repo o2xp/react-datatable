@@ -15,6 +15,9 @@ const optionsFuse = {
 const defaultState = {
   title: "",
   tableRef: null,
+  text: {
+    noRow: "There is no data yet, try to refresh"
+  },
   dimensions: {
     datatable: {
       width: "100%",
