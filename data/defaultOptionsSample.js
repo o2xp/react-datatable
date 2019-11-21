@@ -1,5 +1,6 @@
 const defaultOptionsSample = {
   title: "",
+  tableRef: null,
   dimensions: {
     datatable: {
       width: "100%",

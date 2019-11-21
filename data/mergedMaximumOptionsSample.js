@@ -22,6 +22,7 @@ import {
 
 const mergedMaximumOptionsSample = {
   title: "My super datatable",
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {

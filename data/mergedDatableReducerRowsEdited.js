@@ -21,6 +21,7 @@ import {
 
 const mergedDatableReducerRowsEdited = {
   title,
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {

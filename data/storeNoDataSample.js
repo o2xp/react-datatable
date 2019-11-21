@@ -16,6 +16,7 @@ import {
 const storeNoDataSample = {
   datatableReducer: {
     title,
+    tableRef: null,
     dimensions,
     keyColumn,
     font,

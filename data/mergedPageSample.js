@@ -18,6 +18,7 @@ import {
 
 const mergedPageSample = {
   title,
+  tableRef: null,
   dimensions: {
     ...dimensions,
     datatable: {
