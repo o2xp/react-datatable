@@ -121,7 +121,7 @@ export class BodyRow extends Component {
           }}
         >
           <div
-            className={`Table-Row ${row[keyColumn]}`}
+            className={`Table-Row Table-Row-${row[keyColumn]}`}
             style={{
               height: style.height,
               backgroundColor: style.backgroundColor
