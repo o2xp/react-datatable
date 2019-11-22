@@ -160,8 +160,3 @@ export const duplicateRow = payload => ({
   type: "DUPLICATE_ROW",
   payload
 });
-
-export const setTableRef = payload => ({
-  type: "SET_TABLE_REF",
-  payload
-});

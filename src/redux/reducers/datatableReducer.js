@@ -1127,10 +1127,6 @@ const duplicateRow = (state, payload) => {
   return { ...newState, pagination: newPagination };
 };
 
-const setTableRef = (state, payload) => {
-  return { ...state, tableRef: payload };
-};
-
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -1187,8 +1183,6 @@ const datatableReducer = (state = defaultState, action) => {
       return orderByColumns(state, payload);
     case "DUPLICATE_ROW":
       return duplicateRow(state, payload);
-    case "SET_TABLE_REF":
-      return setTableRef(state, payload);
     default:
       return state;
   }
