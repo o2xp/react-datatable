@@ -22,7 +22,7 @@ import {
 
 const mergedSetRowsPerPageSample = {
   title,
-  tableRef: null,
+   
   text: {
     noRow: "There is no data yet, try to refresh"
   },
