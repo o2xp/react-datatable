@@ -20,7 +20,7 @@ const storeNoRowsDataSample = {
     text: {
       noRow: "There is no data yet, try to refresh"
     },
-    tableRef: null,
+     
     dimensions,
     keyColumn,
     font,
