@@ -1,6 +1,7 @@
 import deepmerge from "deepmerge";
 import arrayMove from "array-move";
 import { chunk, cloneDeep, orderBy as orderByFunction } from "lodash";
+import { tableRef } from "../../components/DatatableCore/Body/Body";
 
 const Fuse = require("fuse.js");
 
@@ -14,7 +15,7 @@ const optionsFuse = {
 };
 const defaultState = {
   title: "",
-  tableRef: null,
+
   text: {
     noRow: "There is no data yet, try to refresh"
   },
@@ -262,7 +263,7 @@ const setPagination = ({
   newPageSelected = null,
   newRowsPerPageSelected = null
 }) => {
-  const { searchTerm, orderBy, tableRef } = state;
+  const { searchTerm, orderBy } = state;
   let rowsToUse = state.data.rows;
   if (searchTerm.length) {
     const fuse = new Fuse(state.data.rows, {
@@ -1126,10 +1127,6 @@ const duplicateRow = (state, payload) => {
   return { ...newState, pagination: newPagination };
 };
 
-const setTableRef = (state, payload) => {
-  return { ...state, tableRef: payload };
-};
-
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
 
@@ -1186,8 +1183,6 @@ const datatableReducer = (state = defaultState, action) => {
       return orderByColumns(state, payload);
     case "DUPLICATE_ROW":
       return duplicateRow(state, payload);
-    case "SET_TABLE_REF":
-      return setTableRef(state, payload);
     default:
       return state;
   }

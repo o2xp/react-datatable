@@ -131,7 +131,7 @@ describe("Body component", () => {
           .find("Body")
           .instance()
           .handleScroll(456);
-        const action = store.getActions()[4];
+        const action = store.getActions()[0];
         expect(action.type).toEqual("SET_IS_SCROLLING");
       });
 
@@ -140,7 +140,7 @@ describe("Body component", () => {
           .find("Body")
           .instance()
           .handleScroll(456);
-        const action = store.getActions()[5];
+        const action = store.getActions()[1];
         expect(action.payload).toEqual(true);
       });
     });

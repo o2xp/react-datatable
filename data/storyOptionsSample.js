@@ -9,7 +9,7 @@ import rows from "./rows";
 
 const storyOptionsSample = {
   title,
-  tableRef: null,
+   
   dimensions: {
     datatable: {
       width: "100%",

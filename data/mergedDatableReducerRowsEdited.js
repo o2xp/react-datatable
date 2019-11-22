@@ -24,7 +24,7 @@ const mergedDatableReducerRowsEdited = {
   text: {
     noRow: "There is no data yet, try to refresh"
   },
-  tableRef: null,
+   
   dimensions: {
     ...dimensions,
     datatable: {

@@ -29,7 +29,6 @@ export const addAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const saveAllRowsEditedPropType = PropTypes.func.isRequired;
 export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const duplicateRowPropType = PropTypes.func.isRequired;
-export const setTableRefPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
