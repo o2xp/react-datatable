@@ -89,7 +89,7 @@ export class GlobalEdit extends Component {
                 <IconButton
                   className={
                     saveDisabled
-                      ? `disabled-icon`
+                      ? `save-icon disabled-icon `
                       : `save-icon ${classes.validIcon}`
                   }
                   onClick={() => this.save()}
