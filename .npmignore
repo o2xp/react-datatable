@@ -8,3 +8,4 @@ storybook-static/
 __mocks__/
 examples/
 data/
+coverage/
