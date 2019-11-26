@@ -1,24 +1,23 @@
 const path = require("path");
-const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
-  entry: path.resolve(__dirname, "./src/index.js"),
+  entry: path.resolve(__dirname, "src/index.js"),
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, "./"),
     filename: "index.js",
+    library: "",
     libraryTarget: "commonjs"
   },
-  mode: "development",
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
-          }
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/react"]
         }
       },
       {
@@ -26,9 +25,5 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  },
-  resolve: {
-    alias: { react: path.resolve(__dirname, "./node_modules/react") },
-    extensions: ["*", ".js", ".jsx"]
   }
 };
