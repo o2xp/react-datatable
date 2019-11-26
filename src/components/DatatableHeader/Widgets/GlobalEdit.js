@@ -84,17 +84,14 @@ export class GlobalEdit extends Component {
                 <ClearIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip
-              title="Save row"
-              classes={{
-                popper: saveDisabled
-                  ? classes.disabledButtonPopper
-                  : classes.enabledButtonPopper
-              }}
-            >
+            <Tooltip title={saveDisabled ? "" : "Save row"}>
               <span>
                 <IconButton
-                  className={`save-icon ${classes.validIcon}`}
+                  className={
+                    saveDisabled
+                      ? `save-icon disabled-icon `
+                      : `save-icon ${classes.validIcon}`
+                  }
                   onClick={() => this.save()}
                   disabled={saveDisabled}
                 >
