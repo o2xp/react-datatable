@@ -42,7 +42,8 @@ import {
   addToDeleteRowPropType,
   additionalActionsPropType,
   canDuplicatePropType,
-  duplicateRowPropType
+  duplicateRowPropType,
+  textPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -85,7 +86,14 @@ export class BodyActionsCell extends Component {
       canEditRow,
       keyColumn,
       additionalActions,
-      duplicateRow
+      duplicateRow,
+      editText,
+      saveText,
+      clearText,
+      duplicateText,
+      deleteText,
+      confirmDeleteText,
+      cancelDeleteText
     } = this.props;
 
     const { deleting } = this.state;
@@ -137,7 +145,7 @@ export class BodyActionsCell extends Component {
           ))}
 
           {canDuplicate && (
-            <Tooltip title="Duplicate">
+            <Tooltip title={duplicateText}>
               <span>
                 <IconButton
                   className={
@@ -155,7 +163,7 @@ export class BodyActionsCell extends Component {
           )}
 
           {canDelete && (!editing || canGlobalEdit) && !deleting && (
-            <Tooltip title="Confirm delete">
+            <Tooltip title={deleteText}>
               <span>
                 <IconButton
                   className={`delete ${classes.defaultIcon}`}
@@ -170,7 +178,7 @@ export class BodyActionsCell extends Component {
 
           {deleting && (
             <Fragment>
-              <Tooltip title="Cancel delete">
+              <Tooltip title={cancelDeleteText}>
                 <IconButton
                   className={`cancel-delete ${classes.defaultIcon}`}
                   onClick={() => this.setState({ deleting: false })}
@@ -178,7 +186,7 @@ export class BodyActionsCell extends Component {
                   <ClearIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Confirm delete">
+              <Tooltip title={confirmDeleteText}>
                 <IconButton
                   className={`confirm-delete ${classes.errorIcon}`}
                   onClick={() => {
@@ -193,7 +201,7 @@ export class BodyActionsCell extends Component {
           )}
 
           {canEdit && editableRow && !editing && !deleting && (
-            <Tooltip title="Edit row">
+            <Tooltip title={editText}>
               <IconButton
                 className="edit"
                 color="primary"
@@ -207,7 +215,7 @@ export class BodyActionsCell extends Component {
 
           {editing && !deleting && !canGlobalEdit && (
             <Fragment>
-              <Tooltip title="Clear row">
+              <Tooltip title={clearText}>
                 <IconButton
                   className={`revert ${classes.errorIcon}`}
                   onClick={() => revertRowEdited(row)}
@@ -216,7 +224,7 @@ export class BodyActionsCell extends Component {
                 </IconButton>
               </Tooltip>
               <Tooltip
-                title="Save row"
+                title={saveText}
                 classes={{
                   popper: saveDisabled
                     ? classes.disabledButtonPopper
@@ -264,7 +272,14 @@ const mapStateToProps = state => {
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canDelete: state.datatableReducer.features.canDelete,
     canSelectRow: state.datatableReducer.features.canSelectRow,
-    canDuplicate: state.datatableReducer.features.canDuplicate
+    canDuplicate: state.datatableReducer.features.canDuplicate,
+    editText: state.textReducer.edit,
+    saveText: state.textReducer.save,
+    clearText: state.textReducer.clear,
+    duplicateText: state.textReducer.duplicate,
+    deleteText: state.textReducer.delete,
+    confirmDeleteText: state.textReducer.confirmDelete,
+    cancelDeleteText: state.textReducer.cancelDelete
   };
 };
 
@@ -291,7 +306,14 @@ BodyActionsCell.propTypes = {
   canGlobalEdit: canGlobalEditPropType.isRequired,
   additionalActions: additionalActionsPropType.isRequired,
   canDuplicate: canDuplicatePropType.isRequired,
-  duplicateRow: duplicateRowPropType
+  duplicateRow: duplicateRowPropType,
+  editText: textPropType,
+  saveText: textPropType,
+  clearText: textPropType,
+  duplicateText: textPropType,
+  deleteText: textPropType,
+  confirmDeleteText: textPropType,
+  cancelDeleteText: textPropType
 };
 
 export default compose(

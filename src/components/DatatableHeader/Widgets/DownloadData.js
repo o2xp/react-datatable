@@ -24,7 +24,8 @@ import {
   rowsCurrentPagePropType,
   rowsSelectedPropType,
   isRefreshingPropType,
-  setRowsSelectedPropType
+  setRowsSelectedPropType,
+  textPropType
 } from "../../../proptypes";
 import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
 import Transition from "./Transition";
@@ -101,14 +102,24 @@ export class DownloadData extends Component {
   };
 
   render() {
-    const { rowsSelected, rows, isRefreshing } = this.props;
+    const {
+      rowsSelected,
+      rows,
+      isRefreshing,
+      downloadText,
+      downloadTitleText,
+      downloadDescriptionText,
+      downloadSelectedRowsText,
+      downloadCurrentRowsText,
+      downloadAllRowsText
+    } = this.props;
     const { dialogOpen, fileType, fileName } = this.state;
     const disabled = rows.length === 0 || isRefreshing;
     return (
       <Fragment>
         <Tooltip
           TransitionComponent={Zoom}
-          title={disabled ? "No data to download" : "Download data"}
+          title={disabled ? "" : downloadText}
         >
           <span>
             <IconButton
@@ -133,7 +144,7 @@ export class DownloadData extends Component {
           maxWidth="sm"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            Download Data
+            {downloadTitleText}
             <IconButton
               aria-label="Close"
               className="close-icon"
@@ -144,7 +155,7 @@ export class DownloadData extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Data will be exported in {fileType} file
+              {downloadDescriptionText} {fileType}
             </DialogContentText>
             <br />
             <Input
@@ -174,7 +185,7 @@ export class DownloadData extends Component {
               color="primary"
               disabled={rowsSelected.length === 0}
             >
-              Rows selected
+              {downloadSelectedRowsText}
             </Button>
             <Button
               className="rows-current-page"
@@ -183,7 +194,7 @@ export class DownloadData extends Component {
               size="small"
               color="primary"
             >
-              Rows of current page
+              {downloadCurrentRowsText}
             </Button>
             <Button
               className="all-rows"
@@ -192,7 +203,7 @@ export class DownloadData extends Component {
               size="small"
               color="primary"
             >
-              All rows
+              {downloadAllRowsText}
             </Button>
           </DialogActions>
         </Dialog>
@@ -207,7 +218,13 @@ DownloadData.propTypes = {
   rowsCurrentPage: rowsCurrentPagePropType.isRequired,
   rowsSelected: rowsSelectedPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
-  setRowsSelected: setRowsSelectedPropType
+  setRowsSelected: setRowsSelectedPropType,
+  downloadText: textPropType,
+  downloadTitleText: textPropType,
+  downloadDescriptionText: textPropType,
+  downloadSelectedRowsText: textPropType,
+  downloadCurrentRowsText: textPropType,
+  downloadAllRowsText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -222,7 +239,13 @@ const mapStateToProps = state => {
     isRefreshing: state.datatableReducer.isRefreshing,
     columns: state.datatableReducer.data.columns,
     rows: state.datatableReducer.data.rows,
-    rowsCurrentPage: state.datatableReducer.pagination.rowsCurrentPage
+    rowsCurrentPage: state.datatableReducer.pagination.rowsCurrentPage,
+    downloadText: state.textReducer.download,
+    downloadTitleText: state.textReducer.downloadTitle,
+    downloadDescriptionText: state.textReducer.downloadDescription,
+    downloadSelectedRowsText: state.textReducer.downloadSelectedRows,
+    downloadCurrentRowsText: state.textReducer.downloadCurrentRows,
+    downloadAllRowsText: state.textReducer.downloadAllRows
   };
 };
 

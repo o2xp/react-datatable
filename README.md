@@ -104,6 +104,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | CustomTableHeaderRow | function | no | Function that take { columnsOrder, columnSizeMultiplier } and return a react html element. See [**header row**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyRow.md) example. |
 | CustomTableHeaderCell | function | no | Function that take { column } and return a react html element. See [**header cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/bodyCell.md) example. |
 | customDataTypes | array | no |  object that return an array of object with datatypes and react html element. See [**datatypes cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/datatypes.md) example. |
+| text | object | no |  An object with text to override. See [**text override**](#text-override). |
 
 #### Options Properties
 | Property | Type | Required? | Default | Description |
@@ -192,6 +193,44 @@ Additional selection icons is an array of object construct with these keys :
 | title | string | yes | Description of the button. The text will be displayed on hovering the icon |
 | icon | Component | yes | Use @material-ui/icons to provide an icon to display. |
 | onClick | function | yes | A function that takes a parameter (the selected rows). . The function will be triggered on click.|
+
+#### Text override
+
+| Property | Type | Required? | Default value |
+|:---|:---:|:---:|:---|
+| noRow | string | no | "There is no data yet, try to refresh" |
+| search | string | no | "Toggle" |
+| searchPlaceholder | string | no | "Search.." |
+| edit | string | no | "Edit" |
+| clear | string | no | "Clear" |
+| save | string | no | "Save" |
+| delete | string | no | "Delete" |
+| confirmDelete | string | no | "Confirm delete" |
+| cancelDelete | string | no | "Cancel delete" |
+| download | string | no | "Download data" |
+| downloadTitle | string | no | "Download Data" |
+| downloadDescription | string | no | "Data will be exported in" |
+| downloadSelectedRows | string | no | "Selected rows" |
+| downloadCurrentRows | string | no | "Rows of current page" |
+| downloadAllRows | string | no | "All rows" |
+| display | string | no | "Display columns" |
+| refresh | string | no | "Refresh" |
+| configuration | string | no | "Configuration" |
+| configurationTitle | string | no | "User Configuration" |
+| configurationCopy | string | no | "Save cell's content to clipboard on click" |
+| configurationColumn | string | no | "Do you want to save the configuration of the columns and copy to clipboard feature ?" |
+| configurationReset | string | no | "Reset" |
+| configurationSave | string | no | "Save" |
+| create | string | no | "Create" |
+| createTitle | string | no | "Create a new row" |
+| createCancel | string | no | "Cancel" |
+| createSubmit | string | no | "Create" |
+| duplicate | string | no | "Duplicate" |
+| print | string | no | "Print" |
+| orderBy | string | no | "Order by" |
+| drag | string | no | "Drag" |
+| paginationRows | string | no | "Rows" |
+| paginationPage | string | no | "Page" |
 
 ## Overriding
 

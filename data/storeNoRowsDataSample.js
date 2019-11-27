@@ -13,6 +13,7 @@ import {
   searchTerm,
   columns
 } from "./optionsObjectSample";
+import textReducer from "./textReducer";
 
 const storeNoRowsDataSample = {
   datatableReducer: {
@@ -20,7 +21,7 @@ const storeNoRowsDataSample = {
     text: {
       noRow: "There is no data yet, try to refresh"
     },
-     
+
     dimensions,
     keyColumn,
     font,
@@ -50,7 +51,8 @@ const storeNoRowsDataSample = {
     CustomTableHeaderRow: null,
     customDataTypes: null
   },
-  notifierReducer: { notifications: [] }
+  notifierReducer: { notifications: [] },
+  textReducer
 };
 
 export default storeNoRowsDataSample;

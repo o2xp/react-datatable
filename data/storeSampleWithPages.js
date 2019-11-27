@@ -4,6 +4,7 @@ import customTableBodyRowSample from "./customTableBodyRowSample";
 import customTableHeaderCellSample from "./customTableHeaderCellSample";
 import customTableHeaderRowSample from "./customTableHeaderRowSample";
 import customDataTypesSample from "./customDataTypesSample";
+import textReducer from "./textReducer";
 
 const storeSampleWithPages = {
   datatableReducer: mergedPageSample,
@@ -14,7 +15,8 @@ const storeSampleWithPages = {
     CustomTableHeaderRow: customTableHeaderRowSample,
     customDataTypes: customDataTypesSample
   },
-  notifierReducer: { notifications: [] }
+  notifierReducer: { notifications: [] },
+  textReducer
 };
 
 export default storeSampleWithPages;

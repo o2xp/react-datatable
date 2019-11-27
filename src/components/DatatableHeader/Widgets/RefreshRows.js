@@ -18,7 +18,8 @@ import {
   searchTermPropType,
   rowsSelectedPropType,
   rowsEditedPropType,
-  isRefreshingPropType
+  isRefreshingPropType,
+  textPropType
 } from "../../../proptypes";
 import Transition from "./Transition";
 
@@ -65,7 +66,7 @@ export class RefreshRows extends Component {
   };
 
   render() {
-    const { isRefreshing } = this.props;
+    const { isRefreshing, refreshText } = this.props;
     const {
       dialogOpen,
       searchTermMessage,
@@ -74,10 +75,7 @@ export class RefreshRows extends Component {
     } = this.state;
     return (
       <Fragment>
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={isRefreshing ? "Refreshing" : "Refresh"}
-        >
+        <Tooltip TransitionComponent={Zoom} title={refreshText}>
           <span>
             <IconButton
               disabled={isRefreshing}
@@ -157,7 +155,8 @@ RefreshRows.propTypes = {
   searchTerm: searchTermPropType.isRequired,
   rowsSelected: rowsSelectedPropType.isRequired,
   rowsEdited: rowsEditedPropType.isRequired,
-  isRefreshing: isRefreshingPropType.isRequired
+  isRefreshing: isRefreshingPropType.isRequired,
+  refreshText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -172,7 +171,8 @@ const mapStateToProps = state => {
     rowsSelected: state.datatableReducer.rowsSelected,
     rowsEdited: state.datatableReducer.rowsEdited,
     isRefreshing: state.datatableReducer.isRefreshing,
-    searchTerm: state.datatableReducer.searchTerm
+    searchTerm: state.datatableReducer.searchTerm,
+    refreshText: state.textReducer.refresh
   };
 };
 

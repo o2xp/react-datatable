@@ -1,8 +1,5 @@
 const defaultOptionsSample = {
   title: "",
-  text: {
-    noRow: "There is no data yet, try to refresh"
-  },
   dimensions: {
     datatable: {
       width: "100%",

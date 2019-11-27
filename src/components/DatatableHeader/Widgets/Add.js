@@ -25,7 +25,8 @@ import { addNewRow as addNewRowAction } from "../../../redux/actions/datatableAc
 import {
   addNewRowPropType,
   columnsPropType,
-  editingPropType
+  editingPropType,
+  textPropType
 } from "../../../proptypes";
 
 export class Add extends Component {
@@ -165,11 +166,17 @@ export class Add extends Component {
 
   render() {
     const { modalOpen, buttonDisabled } = this.state;
-    const { editing } = this.props;
+    const {
+      editing,
+      createText,
+      createTitleText,
+      createCancelText,
+      createSubmitText
+    } = this.props;
 
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title="Create">
+        <Tooltip TransitionComponent={Zoom} title={createText}>
           <span>
             <IconButton
               disabled={!editing}
@@ -183,7 +190,7 @@ export class Add extends Component {
           </span>
         </Tooltip>
         <Dialog open={modalOpen} onClose={() => this.handleClose()}>
-          <DialogTitle>Create a new row</DialogTitle>
+          <DialogTitle>{createTitleText}</DialogTitle>
           <DialogContent>
             <Grid container spacing={8}>
               {this.buildForm()}
@@ -195,7 +202,7 @@ export class Add extends Component {
               color="secondary"
               className="cancel"
             >
-              Cancel
+              {createCancelText}
             </Button>
             <Button
               className="create"
@@ -205,7 +212,7 @@ export class Add extends Component {
               autoFocus
               variant="contained"
             >
-              Create
+              {createSubmitText}
             </Button>
           </DialogActions>
         </Dialog>
@@ -216,7 +223,11 @@ export class Add extends Component {
 
 const mapStateToProps = state => {
   return {
-    columns: state.datatableReducer.data.columns
+    columns: state.datatableReducer.data.columns,
+    createText: state.textReducer.create,
+    createTitleText: state.textReducer.createTitle,
+    createCancelText: state.textReducer.createCancel,
+    createSubmitText: state.textReducer.createSubmit
   };
 };
 
@@ -229,7 +240,11 @@ const mapDispatchToProps = dispatch => {
 Add.propTypes = {
   addNewRow: addNewRowPropType,
   columns: columnsPropType,
-  editing: editingPropType
+  editing: editingPropType,
+  createText: textPropType,
+  createTitleText: textPropType,
+  createCancelText: textPropType,
+  createSubmitText: textPropType
 };
 
 export default connect(

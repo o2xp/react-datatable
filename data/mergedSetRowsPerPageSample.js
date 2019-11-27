@@ -22,10 +22,6 @@ import {
 
 const mergedSetRowsPerPageSample = {
   title,
-   
-  text: {
-    noRow: "There is no data yet, try to refresh"
-  },
   dimensions: {
     ...dimensions,
     datatable: {
