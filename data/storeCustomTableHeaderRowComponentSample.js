@@ -1,5 +1,6 @@
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
 import customTableHeaderRowSample from "./customTableHeaderRowSample";
+import textReducer from "./textReducer";
 
 const storeCustomTableHeaderRowComponentSample = {
   datatableReducer: mergedSimpleOptionsSample,
@@ -10,7 +11,8 @@ const storeCustomTableHeaderRowComponentSample = {
     CustomTableHeaderRow: customTableHeaderRowSample,
     customDataTypes: []
   },
-  notifierReducer: { notifications: [] }
+  notifierReducer: { notifications: [] },
+  textReducer
 };
 
 export default storeCustomTableHeaderRowComponentSample;

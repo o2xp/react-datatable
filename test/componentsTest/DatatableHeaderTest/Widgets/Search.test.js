@@ -47,6 +47,8 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
+          searchText='Toggle'
+          searchPlaceholderText='Search..'
         />
       );
       const button = wrapper.find("button.search-icon");
@@ -63,6 +65,8 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
+          searchText='Toggle'
+          searchPlaceholderText='Search..'
         />
       );
       const button = wrapper.find("button.search-icon");
@@ -81,6 +85,8 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
+          searchText='Toggle'
+          searchPlaceholderText='Search..'
         />
       );
       const button = wrapper.find("button.search-icon");
@@ -100,6 +106,8 @@ describe("Search component", () => {
         rowsSelected={rowsSelected}
         searchTerm={searchTerm}
         rows={rows}
+        searchText='Toggle'
+        searchPlaceholderText='Search..'
       />
     );
     const button = wrapper.find("button.search-icon");
@@ -124,6 +132,8 @@ describe("Search component", () => {
         rowsSelected={rowsSelected}
         searchTerm={searchTerm}
         rows={rows}
+        searchText='Toggle'
+        searchPlaceholderText='Search..'
       />
     );
 

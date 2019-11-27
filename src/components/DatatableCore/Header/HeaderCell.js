@@ -17,7 +17,8 @@ import {
   indexPropType,
   orderByColumnsPropType,
   orderByPropType,
-  canOrderColumnsPropType
+  canOrderColumnsPropType,
+  textPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
 
@@ -34,7 +35,7 @@ export class HeaderCell extends Component {
   };
 
   buildButton = column => {
-    const { orderByColumns, orderBy } = this.props;
+    const { orderByColumns, orderBy, orderByText } = this.props;
     const { keys, order } = orderBy;
     const index = keys.indexOf(column.id);
     let orderElement;
@@ -43,7 +44,7 @@ export class HeaderCell extends Component {
     }
     return (
       <div className="cell-header">
-        <Tooltip TransitionComponent={Zoom} title="Order by">
+        <Tooltip TransitionComponent={Zoom} title={orderByText}>
           <span>
             <button
               type="button"
@@ -94,10 +95,11 @@ export class HeaderCell extends Component {
   };
 
   render() {
-    const { index } = this.props;
+    const { index, dragText } = this.props;
     const { childButtonHovered } = this.state;
     return (
       <SortableItem
+        dragText={dragText}
         index={index}
         value={this.buildHeaderCell()}
         childButtonHovered={childButtonHovered}
@@ -106,19 +108,24 @@ export class HeaderCell extends Component {
   }
 }
 
-const SortableItem = sortableElement(({ value, childButtonHovered }) => (
-  <Tooltip TransitionComponent={Zoom} title={childButtonHovered ? "" : "Drag"}>
-    <div
-      className={
-        childButtonHovered
-          ? "Table-Header-Cell-Child-Hovered"
-          : "Table-Header-Cell"
-      }
+const SortableItem = sortableElement(
+  ({ value, childButtonHovered, dragText }) => (
+    <Tooltip
+      TransitionComponent={Zoom}
+      title={childButtonHovered ? "" : dragText}
     >
-      {value}
-    </div>
-  </Tooltip>
-));
+      <div
+        className={
+          childButtonHovered
+            ? "Table-Header-Cell-Child-Hovered"
+            : "Table-Header-Cell"
+        }
+      >
+        {value}
+      </div>
+    </Tooltip>
+  )
+);
 
 HeaderCell.propTypes = {
   column: columnPropType.isRequired,
@@ -126,7 +133,9 @@ HeaderCell.propTypes = {
   index: indexPropType.isRequired,
   orderBy: orderByPropType.isRequired,
   canOrderColumns: canOrderColumnsPropType.isRequired,
-  orderByColumns: orderByColumnsPropType
+  orderByColumns: orderByColumnsPropType,
+  orderByText: textPropType,
+  dragText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -138,7 +147,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
-    orderBy: state.datatableReducer.orderBy
+    orderBy: state.datatableReducer.orderBy,
+    orderByText: state.textReducer.orderBy,
+    dragText: state.textReducer.drag
   };
 };
 

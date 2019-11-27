@@ -20,10 +20,6 @@ import {
 
 const mergedMinimumOptionsSample = {
   title: "",
-   
-  text: {
-    noRow: "There is no data yet, try to refresh"
-  },
   dimensions: {
     ...dimensions,
     datatable: {

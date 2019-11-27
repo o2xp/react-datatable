@@ -19,7 +19,8 @@ import {
 import {
   columnsOrderPropType,
   copyToClipboardPropType,
-  setUserConfigurationPropType
+  setUserConfigurationPropType,
+  textPropType
 } from "../../../proptypes";
 import { setUserConfiguration as setUserConfigurationAction } from "../../../redux/actions/datatableActions";
 import Transition from "./Transition";
@@ -55,14 +56,23 @@ export class UserConfiguration extends Component {
 
   render() {
     const { columnsOrderState, copyToClipboardState, dialogOpen } = this.state;
-    const { columnsOrder, copyToClipboard } = this.props;
+    const {
+      columnsOrder,
+      copyToClipboard,
+      configurationText,
+      configurationTitleText,
+      configurationCopyText,
+      configurationColumnText,
+      configurationResetText,
+      configurationSaveText
+    } = this.props;
     const disabled =
       copyToClipboardState === copyToClipboard &&
       equal(columnsOrderState, columnsOrder);
 
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title="Configuration">
+        <Tooltip TransitionComponent={Zoom} title={configurationText}>
           <span>
             <IconButton
               className="user-configuration-icon"
@@ -81,7 +91,7 @@ export class UserConfiguration extends Component {
           maxWidth="sm"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            User configuration
+            {configurationTitleText}
             <IconButton
               aria-label="Close"
               className="close-icon"
@@ -91,7 +101,7 @@ export class UserConfiguration extends Component {
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            Save cell's content to clipboard on click
+            {configurationCopyText}
             <Switch
               className="switch-copy-icon"
               checked={copyToClipboardState}
@@ -101,8 +111,7 @@ export class UserConfiguration extends Component {
               color="primary"
             />
             <hr />
-            Do you want to save the configuration of the columns and copy to
-            clipboard feature ?
+            {configurationColumnText}
           </DialogContent>
           <DialogActions>
             <Button
@@ -118,7 +127,7 @@ export class UserConfiguration extends Component {
               size="small"
               color="secondary"
             >
-              Reset
+              {configurationResetText}
             </Button>
             <Button
               disabled={disabled}
@@ -134,7 +143,7 @@ export class UserConfiguration extends Component {
               size="small"
               color="primary"
             >
-              Save
+              {configurationSaveText}
             </Button>
           </DialogActions>
         </Dialog>
@@ -146,7 +155,13 @@ export class UserConfiguration extends Component {
 UserConfiguration.propTypes = {
   columnsOrder: columnsOrderPropType.isRequired,
   copyToClipboard: copyToClipboardPropType.isRequired,
-  setUserConfiguration: setUserConfigurationPropType
+  setUserConfiguration: setUserConfigurationPropType,
+  configurationText: textPropType,
+  configurationTitleText: textPropType,
+  configurationCopyText: textPropType,
+  configurationColumnText: textPropType,
+  configurationResetText: textPropType,
+  configurationSaveText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -163,7 +178,13 @@ const mapStateToProps = state => {
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     copyToClipboard:
-      state.datatableReducer.features.userConfiguration.copyToClipboard
+      state.datatableReducer.features.userConfiguration.copyToClipboard,
+    configurationText: state.textReducer.configuration,
+    configurationTitleText: state.textReducer.configurationTitle,
+    configurationCopyText: state.textReducer.configurationCopy,
+    configurationColumnText: state.textReducer.configurationColumn,
+    configurationResetText: state.textReducer.configurationReset,
+    configurationSaveText: state.textReducer.configuration
   };
 };
 

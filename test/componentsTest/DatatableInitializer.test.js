@@ -11,6 +11,7 @@ import { storeSample, simpleOptionsSample } from "../../data/samples";
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const refreshRows = jest.fn();
+const initText = jest.fn();
 
 describe("Datatable initializer component", () => {
   it("connected should render without errors", () => {
@@ -75,7 +76,7 @@ describe("Datatable initializer component", () => {
         expect(action.type).toEqual("INITIALIZE_CUSTOM_COMPONENTS");
       });
       it("UPDATE_COMPONENT_SIZE", () => {
-        const action = store.getActions()[2];
+        const action = store.getActions()[3];
         expect(action.type).toEqual("UPDATE_COMPONENT_SIZE");
       });
     });
@@ -92,6 +93,7 @@ describe("Datatable initializer component", () => {
           initializeOptions={initializeOptions}
           initializeCustomComponents={initializeCustomComponents}
           updateComponentSize={updateComponentSize}
+          initText={initText}
         />
       );
 
@@ -111,6 +113,7 @@ describe("Datatable initializer component", () => {
           initializeOptions={initializeOptions}
           initializeCustomComponents={initializeCustomComponents}
           updateComponentSize={updateComponentSize}
+          initText={initText}
         />
       );
 

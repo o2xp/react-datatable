@@ -64,6 +64,9 @@ describe("GlobalEdit component", () => {
         rowsGlobalEdited={[]}
         rowsDeleted={[]}
         classes={{ customVariant }}
+        editText='Edit'
+        clearText='Clear'
+        saveText='Save'
       />
     );
     expect(wrapper.state("editing")).toBeFalsy();
@@ -89,6 +92,9 @@ describe("GlobalEdit component", () => {
         rowsGlobalEdited={[]}
         rowsDeleted={[]}
         classes={{ customVariant }}
+        editText='Edit'
+        clearText='Clear'
+        saveText='Save'
       />
     );
     expect(wrapper.state("editing")).toBeFalsy();
@@ -117,6 +123,9 @@ describe("GlobalEdit component", () => {
         rowsGlobalEdited={[rowAdded]}
         rowsDeleted={[]}
         classes={{ customVariant }}
+        editText='Edit'
+        clearText='Clear'
+        saveText='Save'
       />
     );
     expect(wrapper.state("editing")).toBeFalsy();
@@ -144,6 +153,9 @@ describe("GlobalEdit component", () => {
         rowsGlobalEdited={[rowAddedError]}
         rowsDeleted={[]}
         classes={{ customVariant }}
+        editText='Edit'
+        clearText='Clear'
+        saveText='Save'
       />
     );
     expect(wrapper.state("editing")).toBeFalsy();

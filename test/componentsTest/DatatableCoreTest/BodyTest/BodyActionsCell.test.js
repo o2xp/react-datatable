@@ -67,7 +67,7 @@ describe("BodyActionsCell component", () => {
       const wrapper = shallow(
         <BodyActionsCellPureComponent
           isScrolling={false}
-          keyColumn="id"
+          keyColumn='id'
           canEdit
           canDelete
           canSelectRow
@@ -88,6 +88,13 @@ describe("BodyActionsCell component", () => {
           canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
+          editText='Edit'
+          saveText='Save'
+          clearText='Undo'
+          duplicateText='Duplicate'
+          deleteText='Delete'
+          confirmDeleteText='Confirm delete'
+          cancelDeleteText='Cancel delete'
         />
       );
       expect(wrapper.find(".Table-Cell.action")).toHaveLength(1);
@@ -97,7 +104,7 @@ describe("BodyActionsCell component", () => {
       const wrapper = shallow(
         <BodyActionsCellPureComponent
           isScrolling
-          keyColumn="id"
+          keyColumn='id'
           canEdit
           canDelete
           canSelectRow
@@ -118,6 +125,13 @@ describe("BodyActionsCell component", () => {
           canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
+          editText='Edit'
+          saveText='Save'
+          clearText='Undo'
+          duplicateText='Duplicate'
+          deleteText='Delete'
+          confirmDeleteText='Confirm delete'
+          cancelDeleteText='Cancel delete'
         />
       );
       expect(wrapper.find(".Table-Cell.action.scrolling-shadow")).toHaveLength(
@@ -130,7 +144,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
-            keyColumn="id"
+            keyColumn='id'
             canEdit={false}
             canDelete
             canSelectRow
@@ -151,6 +165,13 @@ describe("BodyActionsCell component", () => {
             canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
+            editText='Edit'
+            saveText='Save'
+            clearText='Undo'
+            duplicateText='Duplicate'
+            deleteText='Delete'
+            confirmDeleteText='Confirm delete'
+            cancelDeleteText='Cancel delete'
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(0);
@@ -162,7 +183,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
-            keyColumn="id"
+            keyColumn='id'
             canEdit
             canDelete={false}
             canSelectRow
@@ -183,6 +204,13 @@ describe("BodyActionsCell component", () => {
             canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
+            editText='Edit'
+            saveText='Save'
+            clearText='Undo'
+            duplicateText='Duplicate'
+            deleteText='Delete'
+            confirmDeleteText='Confirm delete'
+            cancelDeleteText='Cancel delete'
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -194,7 +222,7 @@ describe("BodyActionsCell component", () => {
         const wrapper = mount(
           <BodyActionsCellPureComponent
             isScrolling
-            keyColumn="id"
+            keyColumn='id'
             canEdit
             canDelete
             canSelectRow={false}
@@ -215,6 +243,13 @@ describe("BodyActionsCell component", () => {
             canDuplicate={false}
             classes={{ customVariant }}
             additionalActions={[]}
+            editText='Edit'
+            saveText='Save'
+            clearText='Undo'
+            duplicateText='Duplicate'
+            deleteText='Delete'
+            confirmDeleteText='Confirm delete'
+            cancelDeleteText='Cancel delete'
           />
         );
         expect(wrapper.find("button.edit")).toHaveLength(1);
@@ -228,7 +263,7 @@ describe("BodyActionsCell component", () => {
     const pure = mount(
       <BodyActionsCellPureComponent
         isScrolling={false}
-        keyColumn="id"
+        keyColumn='id'
         canEdit
         canDelete
         canSelectRow
@@ -248,6 +283,13 @@ describe("BodyActionsCell component", () => {
         checked={false}
         canDuplicate={false}
         classes={{ customVariant }}
+        editText='Edit'
+        saveText='Save'
+        clearText='Undo'
+        duplicateText='Duplicate'
+        deleteText='Delete'
+        confirmDeleteText='Confirm delete'
+        cancelDeleteText='Cancel delete'
         additionalActions={[
           {
             title: "Coffee",
@@ -381,7 +423,7 @@ describe("BodyActionsCell component", () => {
       const pure = mount(
         <BodyActionsCellPureComponent
           isScrolling={false}
-          keyColumn="id"
+          keyColumn='id'
           canEdit
           canDelete
           canSelectRow
@@ -402,6 +444,13 @@ describe("BodyActionsCell component", () => {
           canDuplicate={false}
           classes={{ customVariant }}
           additionalActions={[]}
+          editText='Edit'
+          saveText='Save'
+          clearText='Undo'
+          duplicateText='Duplicate'
+          deleteText='Delete'
+          confirmDeleteText='Confirm delete'
+          cancelDeleteText='Cancel delete'
         />
       );
 
