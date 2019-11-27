@@ -15,7 +15,6 @@ class Datatable extends Component {
   }
 
   render() {
-    console.log(this.props)
     const {
       options = {},
       forceRerender = false,

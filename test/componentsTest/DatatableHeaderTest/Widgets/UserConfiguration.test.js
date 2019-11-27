@@ -46,6 +46,12 @@ describe("ColumnsDisplayer component", () => {
         columnsOrder={columnsOrder}
         copyToClipboard={copyToClipboard}
         setUserConfiguration={setUserConfiguration}
+        configurationText=''
+        configurationTitleText=''
+        configurationCopyText=''
+        configurationColumnText=''
+        configurationResetText=''
+        configurationSaveText=''
       />
     );
 
@@ -75,6 +81,12 @@ describe("ColumnsDisplayer component", () => {
         columnsOrder={columnsOrder}
         copyToClipboard
         setUserConfiguration={setUserConfiguration}
+        configurationText=''
+        configurationTitleText=''
+        configurationCopyText=''
+        configurationColumnText=''
+        configurationResetText=''
+        configurationSaveText=''
       />
     );
 
@@ -96,6 +108,12 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
+          configurationText=''
+          configurationTitleText=''
+          configurationCopyText=''
+          configurationColumnText=''
+          configurationResetText=''
+          configurationSaveText=''
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
@@ -121,6 +139,12 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
+          configurationText=''
+          configurationTitleText=''
+          configurationCopyText=''
+          configurationColumnText=''
+          configurationResetText=''
+          configurationSaveText=''
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
@@ -146,6 +170,12 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
+          configurationText=''
+          configurationTitleText=''
+          configurationCopyText=''
+          configurationColumnText=''
+          configurationResetText=''
+          configurationSaveText=''
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
@@ -172,6 +202,12 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
+          configurationText=''
+          configurationTitleText=''
+          configurationCopyText=''
+          configurationColumnText=''
+          configurationResetText=''
+          configurationSaveText=''
         />
       );
       const spy = jest.spyOn(wrapper.instance(), "toggleDialog");
