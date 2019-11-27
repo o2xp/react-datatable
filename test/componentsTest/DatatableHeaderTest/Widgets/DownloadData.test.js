@@ -52,6 +52,12 @@ describe("DownloadData component", () => {
         columns={columns}
         rowsCurrentPage={rowsCurrentPage}
         isRefreshing={false}
+        downloadText=''
+        downloadTitleText=''
+        downloadDescriptionText=''
+        downloadSelectedRowsText=''
+        downloadCurrentRowsText=''
+        downloadAllRowsText=''
       />
     );
 
@@ -63,6 +69,12 @@ describe("DownloadData component", () => {
         columns={columns}
         rowsCurrentPage={rowsCurrentPage}
         isRefreshing={false}
+        downloadText=''
+        downloadTitleText=''
+        downloadDescriptionText=''
+        downloadSelectedRowsText=''
+        downloadCurrentRowsText=''
+        downloadAllRowsText=''
       />
     );
 

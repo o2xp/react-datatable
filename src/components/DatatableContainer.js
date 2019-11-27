@@ -138,7 +138,7 @@ const mapStateToProps = state => {
     features: state.datatableReducer.features,
     title: state.datatableReducer.title,
     isRefreshing: state.datatableReducer.isRefreshing,
-    noRowText: state.datatableReducer.text.noRow,
+    noRowText: state.textReducer.noRow,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier: state.datatableReducer.dimensions.columnSizeMultiplier

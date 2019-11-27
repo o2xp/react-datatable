@@ -10,7 +10,8 @@ import {
   widthNumberPropType,
   rowsPerPagePropType,
   setPagePagePropType,
-  setRowsPerPagePropType
+  setRowsPerPagePropType,
+  textPropType
 } from "../../proptypes";
 import {
   setPage as setPageAction,
@@ -24,13 +25,15 @@ class DatatableFooter extends Component {
       rowsPerPage,
       pagination,
       setPage,
-      setRowsPerPage
+      setRowsPerPage,
+      paginationRowsText,
+      paginationPageText
     } = this.props;
 
     return (
       <div className="Footer" style={{ width }}>
         <div className="Footer-Element">
-          Rows :
+          {paginationRowsText} :
           <Select
             className="select-rowsPerPage"
             value={pagination.rowsPerPageSelected}
@@ -48,7 +51,7 @@ class DatatableFooter extends Component {
         </div>
 
         <div className="Footer-Element">
-          Page :
+          {paginationPageText} :
           <Select
             className="select-page"
             value={pagination.pageSelected}
@@ -96,7 +99,9 @@ DatatableFooter.propTypes = {
   width: widthNumberPropType.isRequired,
   rowsPerPage: rowsPerPagePropType.isRequired,
   setPage: setPagePagePropType,
-  setRowsPerPage: setRowsPerPagePropType
+  setRowsPerPage: setRowsPerPagePropType,
+  paginationRowsText: textPropType,
+  paginationPageText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -110,7 +115,9 @@ const mapStateToProps = state => {
   return {
     width: state.datatableReducer.dimensions.datatable.widthNumber,
     pagination: state.datatableReducer.pagination,
-    rowsPerPage: state.datatableReducer.features.rowsPerPage
+    rowsPerPage: state.datatableReducer.features.rowsPerPage,
+    paginationRowsText: state.textReducer.paginationRows,
+    paginationPageText: state.textReducer.paginationPage
   };
 };
 

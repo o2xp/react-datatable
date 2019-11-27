@@ -22,13 +22,16 @@ import {
   CustomTableHeaderRowPropType,
   CustomTableHeaderCellPropType,
   customDataTypesPropType,
-  customPropsPropType
+  customPropsPropType,
+  textPropsPropType,
+  initTextPropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
 import {
   initializeOptions as initializeOptionsAction,
   updateComponentSize as updateComponentSizeAction
 } from "../redux/actions/datatableActions";
+import initTextAction from "../redux/actions/textActions";
 import initializeCustomComponentsAction from "../redux/actions/customComponentsActions";
 
 export class DatatableInitializer extends Component {
@@ -45,6 +48,8 @@ export class DatatableInitializer extends Component {
       CustomTableHeaderCell,
       CustomTableHeaderRow,
       customDataTypes,
+      text,
+      initText,
       updateComponentSize,
       initializeOptions,
       initializeCustomComponents
@@ -65,6 +70,8 @@ export class DatatableInitializer extends Component {
       CustomTableHeaderRow,
       customDataTypes
     });
+
+    initText(text);
     updateComponentSize();
 
     const callBack = () => throttle(() => updateComponentSize(), 100);
@@ -136,6 +143,7 @@ const mapDispatchToProps = dispatch => {
   return {
     initializeOptions: state => dispatch(initializeOptionsAction(state)),
     updateComponentSize: () => dispatch(updateComponentSizeAction()),
+    initText: text => dispatch(initTextAction(text)),
     initializeCustomComponents: state =>
       dispatch(initializeCustomComponentsAction(state))
   };
@@ -155,7 +163,9 @@ DatatableInitializer.propTypes = {
   CustomTableBodyRow: CustomTableBodyRowPropType,
   CustomTableHeaderCell: CustomTableHeaderCellPropType,
   CustomTableHeaderRow: CustomTableHeaderRowPropType,
-  customDataTypes: customDataTypesPropType
+  customDataTypes: customDataTypesPropType,
+  text: textPropsPropType,
+  initText: initTextPropType
 };
 
 export default connect(

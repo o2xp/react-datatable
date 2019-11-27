@@ -29,6 +29,7 @@ export const addAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const saveAllRowsEditedPropType = PropTypes.func.isRequired;
 export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const duplicateRowPropType = PropTypes.func.isRequired;
+export const initTextPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
@@ -75,6 +76,9 @@ export const paginationPropType = PropTypes.shape({
   rowsPerPageSelected: rowsPerPageSelectedPropType,
   rowsCurrentPage: rowsCurrentPagePropType
 });
+
+export const textPropType = PropTypes.string.isRequired;
+export const textPropsPropType = PropTypes.object;
 
 // Options propTypes
 export const actionsPropType = PropTypes.func;

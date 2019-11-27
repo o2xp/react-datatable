@@ -47,9 +47,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing={false}
-        searchTerm=""
+        searchTerm=''
         rowsSelected={[]}
         rowsEdited={[]}
+        refreshText='Refresh'
       />
     );
 
@@ -68,9 +69,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing
-        searchTerm=""
+        searchTerm=''
         rowsSelected={[]}
         rowsEdited={[]}
+        refreshText='Refresh'
       />
     );
 
@@ -86,9 +88,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing={false}
-        searchTerm="hunt"
+        searchTerm='hunt'
         rowsSelected={[rows[0]]}
         rowsEdited={[rows[1]]}
+        refreshText='Refresh'
       />
     );
 

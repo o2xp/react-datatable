@@ -15,7 +15,8 @@ import { ViewColumn as ViewColumnIcon } from "@material-ui/icons";
 import {
   columnsOrderPropType,
   columnsPropType,
-  setColumnVisibiltyPropType
+  setColumnVisibiltyPropType,
+  textPropType
 } from "../../../proptypes";
 import { setColumnVisibilty as setColumnVisibiltyAction } from "../../../redux/actions/datatableActions";
 
@@ -55,14 +56,11 @@ export class ColumnsDisplayer extends Component {
   };
 
   render() {
-    const { columns } = this.props;
+    const { columns, displayText } = this.props;
     const { menuOpen } = this.state;
     return (
       <Fragment>
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={menuOpen ? "" : "Display columns"}
-        >
+        <Tooltip TransitionComponent={Zoom} title={menuOpen ? "" : displayText}>
           <span>
             <IconButton
               buttonRef={this.buttonRef}
@@ -113,7 +111,8 @@ export class ColumnsDisplayer extends Component {
 ColumnsDisplayer.propTypes = {
   columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
-  setColumnVisibilty: setColumnVisibiltyPropType
+  setColumnVisibilty: setColumnVisibiltyPropType,
+  displayText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -125,7 +124,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     columns: state.datatableReducer.data.columns,
-    columnsOrder: state.datatableReducer.features.userConfiguration.columnsOrder
+    columnsOrder:
+      state.datatableReducer.features.userConfiguration.columnsOrder,
+    displayText: state.textReducer.display
   };
 };
 

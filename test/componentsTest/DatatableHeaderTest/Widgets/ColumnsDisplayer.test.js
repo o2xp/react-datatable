@@ -57,6 +57,7 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
+        displayText='Display columns'
       />
     );
     const button = wrapper.find("button.display-columns-icon");
@@ -78,6 +79,7 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
+        displayText='Display columns'
       />
     );
     const button = wrapper.find("button.display-columns-icon");
@@ -95,6 +97,7 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
+        displayText='Display columns'
       />
     );
     const button = wrapper.find("button.display-columns-icon");

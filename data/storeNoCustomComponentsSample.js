@@ -1,4 +1,5 @@
 import mergedSimpleOptionsSample from "./mergedSimpleOptionsSample";
+import textReducer from "./textReducer";
 
 const storeNoCustomComponentsSample = {
   datatableReducer: mergedSimpleOptionsSample,
@@ -9,7 +10,8 @@ const storeNoCustomComponentsSample = {
     CustomTableHeaderRow: null,
     customDataTypes: []
   },
-  notifierReducer: { notifications: [] }
+  notifierReducer: { notifications: [] },
+  textReducer
 };
 
 export default storeNoCustomComponentsSample;

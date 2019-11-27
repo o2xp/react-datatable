@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import Print from "../../../../src/components/DatatableHeader/Widgets/Print";
+import { Print } from "../../../../src/components/DatatableHeader/Widgets/Print";
 
 describe("Print component", () => {
   afterAll(() => {
@@ -8,7 +8,7 @@ describe("Print component", () => {
   });
 
   it("click on icon should call function to print", () => {
-    const wrapper = mount(<Print />);
+    const wrapper = mount(<Print printText='print' />);
     window.print = jest.fn();
     const spy = jest.spyOn(wrapper.instance(), "print");
     const button = wrapper.find("button.print-icon");

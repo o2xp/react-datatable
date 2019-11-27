@@ -15,7 +15,6 @@ class Datatable extends Component {
   }
 
   render() {
-    console.log(this.props)
     const {
       options = {},
       forceRerender = false,
@@ -27,7 +26,8 @@ class Datatable extends Component {
       CustomTableBodyRow = null,
       CustomTableHeaderCell = null,
       CustomTableHeaderRow = null,
-      customDataTypes = []
+      customDataTypes = [],
+      text = {}
     } = this.props;
     
     return (
@@ -50,6 +50,7 @@ class Datatable extends Component {
                   CustomTableHeaderCell={CustomTableHeaderCell}
                   CustomTableHeaderRow={CustomTableHeaderRow}
                   customDataTypes={customDataTypes}
+                  text={text}
                 />
               </SnackbarProvider>
             </Provider>

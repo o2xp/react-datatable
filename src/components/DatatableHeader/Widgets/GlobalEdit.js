@@ -22,7 +22,8 @@ import {
   rowsGlobalEditedPropType,
   rowsDeletedPropType,
   canAddPropType,
-  classesPropType
+  classesPropType,
+  textPropType
 } from "../../../proptypes";
 
 export class GlobalEdit extends Component {
@@ -52,7 +53,15 @@ export class GlobalEdit extends Component {
   };
 
   render() {
-    const { rowsGlobalEdited, rowsDeleted, canAdd, classes } = this.props;
+    const {
+      rowsGlobalEdited,
+      rowsDeleted,
+      canAdd,
+      classes,
+      editText,
+      saveText,
+      clearText
+    } = this.props;
     const { editing } = this.state;
     let error = false;
     rowsGlobalEdited.forEach(row => {
@@ -66,7 +75,7 @@ export class GlobalEdit extends Component {
     return (
       <Fragment>
         {!editing && (
-          <Tooltip TransitionComponent={Zoom} title="Edit">
+          <Tooltip TransitionComponent={Zoom} title={editText}>
             <span>
               <IconButton className="edit-icon" onClick={() => this.edit()}>
                 <EditIcon color="primary" />
@@ -76,7 +85,7 @@ export class GlobalEdit extends Component {
         )}
         {editing && (
           <Fragment>
-            <Tooltip title="Clear row">
+            <Tooltip title={clearText}>
               <IconButton
                 className={`revert-icon ${classes.errorIcon}`}
                 onClick={() => this.revert()}
@@ -84,7 +93,7 @@ export class GlobalEdit extends Component {
                 <ClearIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={saveDisabled ? "" : "Save row"}>
+            <Tooltip title={saveDisabled ? "" : saveText}>
               <span>
                 <IconButton
                   className={
@@ -115,7 +124,10 @@ GlobalEdit.propTypes = {
   saveAllRowsEdited: saveAllRowsEditedPropType,
   revertAllRowsToEdited: revertAllRowsToEditedPropType,
   rowsGlobalEdited: rowsGlobalEditedPropType.isRequired,
-  classes: classesPropType.isRequired
+  classes: classesPropType.isRequired,
+  editText: textPropType,
+  clearText: textPropType,
+  saveText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -130,7 +142,10 @@ const mapStateToProps = state => {
   return {
     rowsGlobalEdited: state.datatableReducer.rowsGlobalEdited,
     rowsDeleted: state.datatableReducer.rowsDeleted,
-    canAdd: state.datatableReducer.features.canAdd
+    canAdd: state.datatableReducer.features.canAdd,
+    editText: state.textReducer.edit,
+    clearText: state.textReducer.clear,
+    saveText: state.textReducer.save
   };
 };
 

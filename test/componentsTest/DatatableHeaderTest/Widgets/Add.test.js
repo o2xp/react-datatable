@@ -100,8 +100,7 @@ describe("Add component", () => {
         <MuiPickersUtilsProvider
           utils={MomentUtils}
           locale={locale}
-          moment={moment}
-        >
+          moment={moment}>
           <Add />
         </MuiPickersUtilsProvider>
       </Provider>
@@ -115,8 +114,7 @@ describe("Add component", () => {
         <MuiPickersUtilsProvider
           utils={MomentUtils}
           locale={locale}
-          moment={moment}
-        >
+          moment={moment}>
           <Add editing />
         </MuiPickersUtilsProvider>
       </Provider>
@@ -137,9 +135,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}
-      >
-        <AddPureComponent editing addNewRow={addNewRow} columns={columns} />
+        moment={moment}>
+        <AddPureComponent
+          editing
+          addNewRow={addNewRow}
+          columns={columns}
+          createText=''
+          createTitleText=''
+          createCancelText=''
+          createSubmitText=''
+        />
       </MuiPickersUtilsProvider>
     );
 
@@ -176,9 +181,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}
-      >
-        <AddPureComponent editing addNewRow={addNewRow} columns={newColumns} />
+        moment={moment}>
+        <AddPureComponent
+          editing
+          addNewRow={addNewRow}
+          columns={newColumns}
+          createText=''
+          createTitleText=''
+          createCancelText=''
+          createSubmitText=''
+        />
       </MuiPickersUtilsProvider>
     );
 
@@ -210,9 +222,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}
-      >
-        <AddPureComponent editing addNewRow={addNewRow} columns={newColumns} />
+        moment={moment}>
+        <AddPureComponent
+          editing
+          addNewRow={addNewRow}
+          columns={newColumns}
+          createText=''
+          createTitleText=''
+          createCancelText=''
+          createSubmitText=''
+        />
       </MuiPickersUtilsProvider>
     );
 

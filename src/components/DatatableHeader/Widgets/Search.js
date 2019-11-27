@@ -6,7 +6,8 @@ import {
   searchPropType,
   searchTermPropType,
   rowsPropType,
-  isRefreshingPropType
+  isRefreshingPropType,
+  textPropType
 } from "../../../proptypes";
 import { search as searchAction } from "../../../redux/actions/datatableActions";
 
@@ -38,7 +39,13 @@ export class Search extends Component {
 
   render() {
     const { openSearch } = this.state;
-    const { searchTerm, rows, isRefreshing } = this.props;
+    const {
+      searchTerm,
+      rows,
+      isRefreshing,
+      searchText,
+      searchPlaceholderText
+    } = this.props;
     const disabled = rows.length === 0 || isRefreshing;
 
     return (
@@ -53,12 +60,9 @@ export class Search extends Component {
           onChange={this.searchUpdate}
           value={searchTerm}
           disabled={disabled}
-          placeholder="Search.."
+          placeholder={searchPlaceholderText}
         />
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={disabled ? "No data to filter" : "Toggle"}
-        >
+        <Tooltip TransitionComponent={Zoom} title={disabled ? "" : searchText}>
           <span>
             <IconButton
               className={disabled ? "disabled-icon search-icon" : "search-icon"}
@@ -78,7 +82,9 @@ Search.propTypes = {
   search: searchPropType,
   searchTerm: searchTermPropType.isRequired,
   rows: rowsPropType.isRequired,
-  isRefreshing: isRefreshingPropType.isRequired
+  isRefreshing: isRefreshingPropType.isRequired,
+  searchText: textPropType,
+  searchPlaceholderText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -92,7 +98,9 @@ const mapStateToProps = state => {
     rowsSelected: state.datatableReducer.rowsSelected,
     isRefreshing: state.datatableReducer.isRefreshing,
     rows: state.datatableReducer.data.rows,
-    searchTerm: state.datatableReducer.searchTerm
+    searchTerm: state.datatableReducer.searchTerm,
+    searchText: state.textReducer.search,
+    searchPlaceholderText: state.textReducer.searchPlaceholder
   };
 };
 
