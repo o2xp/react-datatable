@@ -64,6 +64,37 @@ export class BodyActionsCell extends Component {
     }
   };
 
+  buildAdditionalActions = ({ aa, editing, canGlobalEdit }) => {
+    const { row } = this.props;
+    const { isDisplayed, isDisabled } = aa;
+
+    if (isDisplayed == null || isDisplayed(row)) {
+      let disabled = editing && canGlobalEdit;
+      if (isDisabled && !disabled) {
+        disabled = isDisabled(row);
+      }
+
+      return (
+        <Tooltip title={aa.title} key={aa.title}>
+          <span>
+            <IconButton
+              className={
+                disabled
+                  ? `disabled-icon additional-action-icon`
+                  : `additional-action-icon`
+              }
+              onClick={() => aa.onClick(row)}
+              disabled={disabled}
+            >
+              {aa.icon}
+            </IconButton>
+          </span>
+        </Tooltip>
+      );
+    }
+    return <Fragment key={aa.title} />;
+  };
+
   render() {
     const {
       style,
@@ -126,23 +157,9 @@ export class BodyActionsCell extends Component {
             />
           )}
 
-          {additionalActions.map(aa => (
-            <Tooltip title={aa.title} key={aa.title}>
-              <span>
-                <IconButton
-                  className={
-                    !editing && canGlobalEdit
-                      ? `disabled-icon additional-action-icon`
-                      : `additional-action-icon`
-                  }
-                  onClick={() => aa.onClick(row)}
-                  disabled={!editing && canGlobalEdit}
-                >
-                  {aa.icon}
-                </IconButton>
-              </span>
-            </Tooltip>
-          ))}
+          {additionalActions.map(aa =>
+            this.buildAdditionalActions({ aa, editing, canGlobalEdit })
+          )}
 
           {canDuplicate && (
             <Tooltip title={duplicateText}>
