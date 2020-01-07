@@ -69,7 +69,7 @@ export class BodyActionsCell extends Component {
     const { isDisplayed, isDisabled } = aa;
 
     if (isDisplayed == null || isDisplayed(row)) {
-      let disabled = editing && canGlobalEdit;
+      let disabled = !editing && canGlobalEdit;
       if (isDisabled && !disabled) {
         disabled = isDisabled(row);
       }
