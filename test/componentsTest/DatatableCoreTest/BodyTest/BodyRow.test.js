@@ -105,8 +105,8 @@ describe("BodyRow component", () => {
       expect(rowWrapper.find("div.Table-Cell")).toHaveLength(8);
     });
 
-    it("with 7 cells input", () => {
-      expect(rowWrapper.find(BodyCell)).toHaveLength(7);
+    it("with 6 cells input", () => {
+      expect(rowWrapper.find(BodyCell)).toHaveLength(6);
     });
   });
 
