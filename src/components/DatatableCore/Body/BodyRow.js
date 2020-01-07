@@ -70,7 +70,7 @@ export class BodyRow extends Component {
       column.colSize.split("px")[0] * columnSizeMultiplier
     ).toString()}px`;
 
-    if ((val === null || val === undefined || val === "") && !editing) {
+    if ((val === null || val === undefined || val === "") && !isEditing) {
       return (
         <div className="Table-Cell" key={key}>
           <div style={{ width }}>
