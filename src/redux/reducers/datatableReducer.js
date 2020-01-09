@@ -496,7 +496,6 @@ const initializeOptions = (
     }
 
     colSize = `${colSize + newState.features.additionalActions.length * 50}px`;
-    colSize = "100px";
 
     newState.data.columns.unshift({
       id: "o2xpActions",
