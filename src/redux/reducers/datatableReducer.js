@@ -177,6 +177,8 @@ const updateRowSizeMultiplier = state => {
     widthTable -= 50;
   }
 
+  widthTable -= state.features.additionalActions.length * 50;
+
   if (canEdit) {
     widthTable -= 100;
   }
@@ -489,7 +491,7 @@ const initializeOptions = (
         colSize += 100;
         break;
       default:
-        colSize += 50;
+        colSize += 0;
         break;
     }
 
