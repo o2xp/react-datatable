@@ -34,6 +34,36 @@ describe("datatableReducer reducer", () => {
       ).toBeTruthy();
     });
 
+    it("simple options new rows", () => {
+      datatableReducer(
+        {
+          ...mergedSimpleOptionsSample,
+          rowsEdited: [
+            {
+              hasBeenEdited: true,
+              idOfColumnErr: [],
+              id: "test",
+              name: "",
+              age: "",
+              adult: "",
+              birthDate: "",
+              eyeColor: "",
+              iban: ""
+            }
+          ]
+        },
+        {
+          type: "INITIALIZE_OPTIONS",
+          payload: {
+            optionsInit: cloneDeep({
+              ...simpleOptionsSample,
+              features: { ...simpleOptionsSample, isUpdatingRows: true }
+            })
+          }
+        }
+      );
+    });
+
     it("simple options without edit and delete", () => {
       const initializedOptions = datatableReducer(undefined, {
         type: "INITIALIZE_OPTIONS",

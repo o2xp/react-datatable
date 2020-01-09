@@ -74,6 +74,13 @@ export class BodyActionsCell extends Component {
         disabled = isDisabled(row);
       }
 
+      // if (row.clsMlatId.toString().startsWith("temp-id-")) {
+      //   console.log(disabled);
+      //   console.log(editing);
+      //   console.log(canGlobalEdit);
+      //   console.log("---");
+      // }
+
       return (
         <Tooltip title={aa.title} key={aa.title}>
           <span>
