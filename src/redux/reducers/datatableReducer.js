@@ -177,6 +177,8 @@ const updateRowSizeMultiplier = state => {
     widthTable -= 50;
   }
 
+  widthTable -= state.features.additionalActions.length * 50;
+
   if (canEdit) {
     widthTable -= 100;
   }
@@ -489,11 +491,12 @@ const initializeOptions = (
         colSize += 100;
         break;
       default:
-        colSize += 50;
+        colSize += 0;
         break;
     }
 
     colSize = `${colSize + newState.features.additionalActions.length * 50}px`;
+    colSize = "100px";
 
     newState.data.columns.unshift({
       id: "o2xpActions",
