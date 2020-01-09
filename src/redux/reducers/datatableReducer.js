@@ -1,6 +1,11 @@
 import deepmerge from "deepmerge";
 import arrayMove from "array-move";
-import { chunk, cloneDeep, orderBy as orderByFunction } from "lodash";
+import {
+  chunk,
+  cloneDeep,
+  orderBy as orderByFunction,
+  differenceBy
+} from "lodash";
 import { tableRef } from "../../components/DatatableCore/Body/Body";
 
 const Fuse = require("fuse.js");
@@ -332,6 +337,52 @@ const removeNullUndefined = obj => {
   return obj;
 };
 
+const updateRows = ({
+  rows,
+  oldRows,
+  rowsEdited,
+  newRows,
+  rowsDeleted,
+  rowsGlobalEdited,
+  keyColumn
+}) => {
+  const oldRowsId = oldRows.map(row => row[keyColumn]);
+  const toRemove = differenceBy(oldRows, rows, keyColumn);
+  const toRemoveId = toRemove.map(row => row[keyColumn]);
+
+  const newRowsAdded = newRows.filter(
+    row => !toRemoveId.includes(row[keyColumn])
+  );
+  const newRowsGlobalEdited = rowsGlobalEdited.filter(
+    row => !toRemoveId.includes(row[keyColumn])
+  );
+  // If rows has beend added then deleted no adding it to rowsDeleted
+  const newRowsAddedId = newRows.map(row => row[keyColumn]);
+  const newRowsDeleted = deepmerge(rowsDeleted, toRemove).filter(
+    row => !newRowsAddedId.includes(row[keyColumn])
+  );
+
+  const newRowsEdited = [];
+
+  // Add new rows
+  rows.forEach(row => {
+    // if row already exist, push existing
+    if (oldRowsId.includes(row[keyColumn])) {
+      newRowsEdited.push(
+        rowsEdited.find(rowEdited => rowEdited[keyColumn] === row[keyColumn])
+      );
+    } else {
+      // if not, push new
+      const newRow = { ...row, idOfColumnErr: [], hasBeenEdited: true };
+      newRowsAdded.push(newRow);
+      newRowsGlobalEdited.push(newRow);
+      newRowsEdited.push(newRow);
+    }
+  });
+
+  return { newRowsEdited, newRowsAdded, newRowsDeleted, newRowsGlobalEdited };
+};
+
 const initializeOptions = (
   state,
   {
@@ -342,13 +393,57 @@ const initializeOptions = (
     stripped = false
   }
 ) => {
-  const newState = deepmerge(
+  let newState = deepmerge(
     forceRerender ? defaultState : state,
     removeNullUndefined({ ...optionsInit }),
     {
       arrayMerge: overwriteMerge
     }
   );
+
+  const {
+    canEdit,
+    canDelete,
+    canSelectRow,
+    canDuplicate,
+    isUpdatingRows
+  } = newState.features;
+
+  if (isUpdatingRows) {
+    const { rows } = newState.data;
+    const { rows: oldRows } = state.data;
+    const {
+      rowsEdited,
+      newRows,
+      rowsDeleted,
+      keyColumn,
+      rowsGlobalEdited
+    } = newState;
+    if (newState.rowsEdited.length > 0) {
+      const {
+        newRowsEdited,
+        newRowsAdded,
+        newRowsDeleted,
+        newRowsGlobalEdited
+      } = updateRows({
+        rows,
+        oldRows,
+        rowsEdited,
+        newRows,
+        rowsDeleted,
+        rowsGlobalEdited,
+        keyColumn
+      });
+
+      newState = {
+        ...newState,
+        rowsEdited: newRowsEdited,
+        newRows: newRowsAdded,
+        rowsDeleted: newRowsDeleted,
+        rowsGlobalEdited: newRowsGlobalEdited
+      };
+    }
+  }
 
   newState.actions = actions;
   newState.refreshRows = refreshRows;
@@ -363,7 +458,6 @@ const initializeOptions = (
     );
   }
 
-  const { canEdit, canDelete, canSelectRow, canDuplicate } = newState.features;
   const actionsUser = [canEdit, canDelete, canSelectRow];
   const numberOfActions = actionsUser.filter(v => v).length;
 
