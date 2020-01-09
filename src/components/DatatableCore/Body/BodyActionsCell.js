@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Tooltip, IconButton, Checkbox, withStyles } from "@material-ui/core";
+import {
+  Tooltip,
+  IconButton,
+  Checkbox,
+  withStyles,
+  Zoom
+} from "@material-ui/core";
 import {
   Delete as DeleteIcon,
   Create as CreateIcon,
@@ -74,15 +80,8 @@ export class BodyActionsCell extends Component {
         disabled = isDisabled(row);
       }
 
-      // if (row.clsMlatId.toString().startsWith("temp-id-")) {
-      //   console.log(disabled);
-      //   console.log(editing);
-      //   console.log(canGlobalEdit);
-      //   console.log("---");
-      // }
-
       return (
-        <Tooltip title={aa.title} key={aa.title}>
+        <Tooltip title={aa.title} key={aa.title} TransitionComponent={Zoom}>
           <span>
             <IconButton
               className={
