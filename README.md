@@ -128,6 +128,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .canOrderColumns | boolean | false |  no | If the user can select the columns to display. |
 | features .canSelectRow | boolean | false |  no | If the user can select rows. |
 | features .canDuplicate | boolean | false |  no | If the user can duplicate row. |
+| features .isUpdatingRows | boolean | false |  no | If you are updating rows on your side. |
 | features .canSaveUserConfiguration | boolean | no | false |  If the user can save his columns configuration. (order and which one is displayed) |
 | features .userConfiguration .columnsOrder | array of strings | no | [ ] |  An array of strings where the strings are the column identifier. Datatable will be rendered only with the columns present in the array. |
 | features .userConfiguration .copyToClipboard | boolean | no | false |  If true, when the user click on cell it will copy the value in the clipboard. |
