@@ -72,7 +72,7 @@ export class BodyActionsCell extends Component {
 
   buildAdditionalActions = ({ aa, editing, canGlobalEdit }) => {
     const { row } = this.props;
-    const { isDisplayed, isDisabled } = aa;
+    const { isDisplayed, isDisabled, title } = aa;
 
     if (isDisplayed == null || isDisplayed(row)) {
       let disabled = !editing && canGlobalEdit;
@@ -81,13 +81,16 @@ export class BodyActionsCell extends Component {
       }
 
       return (
-        <Tooltip title={aa.title} key={aa.title} TransitionComponent={Zoom}>
+        <Tooltip title={title} key={title} TransitionComponent={Zoom}>
           <span>
             <IconButton
               className={
                 disabled
-                  ? `disabled-icon additional-action-icon`
-                  : `additional-action-icon`
+                  ? `disabled-icon additional-action-icon-${title.replace(
+                      / /g,
+                      "-"
+                    )}`
+                  : `additional-action-icon-${title.replace(/ /g, "-")}`
               }
               onClick={() => aa.onClick(row)}
               disabled={disabled}
