@@ -21,7 +21,6 @@ export const setValue = ({
   type,
   valueVerification
 }) => {
-  console.log(value);
   let cellVal = value;
   if (cellVal !== null) {
     cellVal = date ? moment(date).format(dateFormat) : cellVal;
@@ -34,8 +33,6 @@ export const setValue = ({
     tooltipOpen: false,
     message: ""
   };
-
-  console.log(cellVal);
 
   if (valueVerification) {
     newState = checkValue({ cellVal, valueVerification });
