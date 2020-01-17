@@ -100,7 +100,8 @@ describe("Add component", () => {
         <MuiPickersUtilsProvider
           utils={MomentUtils}
           locale={locale}
-          moment={moment}>
+          moment={moment}
+        >
           <Add />
         </MuiPickersUtilsProvider>
       </Provider>
@@ -114,7 +115,8 @@ describe("Add component", () => {
         <MuiPickersUtilsProvider
           utils={MomentUtils}
           locale={locale}
-          moment={moment}>
+          moment={moment}
+        >
           <Add editing />
         </MuiPickersUtilsProvider>
       </Provider>
@@ -135,15 +137,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}>
+        moment={moment}
+      >
         <AddPureComponent
           editing
           addNewRow={addNewRow}
           columns={columns}
-          createText=''
-          createTitleText=''
-          createCancelText=''
-          createSubmitText=''
+          createText=""
+          createTitleText=""
+          createCancelText=""
+          createSubmitText=""
         />
       </MuiPickersUtilsProvider>
     );
@@ -181,15 +184,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}>
+        moment={moment}
+      >
         <AddPureComponent
           editing
           addNewRow={addNewRow}
           columns={newColumns}
-          createText=''
-          createTitleText=''
-          createCancelText=''
-          createSubmitText=''
+          createText=""
+          createTitleText=""
+          createCancelText=""
+          createSubmitText=""
         />
       </MuiPickersUtilsProvider>
     );
@@ -222,15 +226,16 @@ describe("Add component", () => {
       <MuiPickersUtilsProvider
         utils={MomentUtils}
         locale={locale}
-        moment={moment}>
+        moment={moment}
+      >
         <AddPureComponent
           editing
           addNewRow={addNewRow}
           columns={newColumns}
-          createText=''
-          createTitleText=''
-          createCancelText=''
-          createSubmitText=''
+          createText=""
+          createTitleText=""
+          createCancelText=""
+          createSubmitText=""
         />
       </MuiPickersUtilsProvider>
     );
@@ -244,13 +249,13 @@ describe("Add component", () => {
     wrapper
       .find("div.new-row-age")
       .find("input")
-      .simulate("change", { target: { value: 75 } });
+      .simulate("change", { target: { value: "75" } });
     expect(wrapper.find("Add").state("newRow")).toEqual({ age: 75 });
 
     wrapper
       .find("div.new-row-age")
       .find("input")
-      .simulate("change", { target: { value: 150 } });
+      .simulate("change", { target: { value: "150" } });
 
     expect(wrapper.find("Add").state()).toEqual({
       buttonDisabled: true,
@@ -263,7 +268,7 @@ describe("Add component", () => {
     wrapper
       .find("div.new-row-age")
       .find("input")
-      .simulate("change", { target: { value: 90 } });
+      .simulate("change", { target: { value: "90" } });
 
     expect(wrapper.find("Add").state()).toEqual({
       buttonDisabled: false,

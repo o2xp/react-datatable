@@ -99,9 +99,9 @@ describe("Select wrapper", () => {
       const spy = jest.spyOn(wrapper.instance(), "onValueChange");
       wrapper.instance().forceUpdate();
 
-      wrapper.find("input").simulate("change", { target: { value: 50 } });
+      wrapper.find("input").simulate("change", { target: { value: "50" } });
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(50);
+      expect(spy).toHaveBeenCalledWith("50");
     });
 
     it("with good value", () => {
@@ -116,7 +116,7 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().onValueChange(75);
+      wrapper.instance().onValueChange("75");
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "",
@@ -136,7 +136,7 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().onValueChange(150);
+      wrapper.instance().onValueChange("150");
       expect(wrapper.state()).toEqual({
         tooltipOpen: true,
         message: "Value is too big",
