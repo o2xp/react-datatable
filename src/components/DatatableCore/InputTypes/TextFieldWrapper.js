@@ -50,6 +50,7 @@ export class TextFieldWrapper extends Component {
       ...this.props,
       value: newValue
     });
+
     if (!equal(this.state, newState)) {
       this.setState(newState);
     }
