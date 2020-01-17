@@ -45,9 +45,10 @@ export class TextFieldWrapper extends Component {
   }
 
   onValueChange = value => {
+    const newValue = value.length > 0 ? value : null;
     const newState = setValue({
       ...this.props,
-      value
+      newValue
     });
     if (!equal(this.state, newState)) {
       this.setState(newState);
