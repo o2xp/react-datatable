@@ -21,19 +21,26 @@ export const setValue = ({
   type,
   valueVerification
 }) => {
-  let cellVal = "";
-  cellVal = date ? moment(date).format(dateFormat) : cellVal;
-  cellVal = value || cellVal;
-  cellVal = type === "number" ? parseInt(cellVal) : cellVal;
+  console.log(value);
+  let cellVal = value;
+  if (cellVal !== null) {
+    cellVal = date ? moment(date).format(dateFormat) : cellVal;
+    cellVal = value || cellVal;
+    cellVal = type === "number" ? parseInt(cellVal) : cellVal;
+  }
 
   let newState = {
     error: false,
     tooltipOpen: false,
     message: ""
   };
+
+  console.log(cellVal);
+
   if (valueVerification) {
     newState = checkValue({ cellVal, valueVerification });
   }
+
   const { error } = newState;
   setRowEdited({
     rowId,
