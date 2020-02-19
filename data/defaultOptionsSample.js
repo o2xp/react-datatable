@@ -37,10 +37,7 @@ const defaultOptionsSample = {
   isRefreshing: false,
   stripped: false,
   searchTerm: "",
-  orderBy: {
-    keys: [],
-    order: []
-  },
+  orderBy: [],
   pagination: {
     pageSelected: 1,
     pageTotal: 1,

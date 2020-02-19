@@ -63,10 +63,7 @@ const defaultState = {
   isRefreshing: false,
   stripped: false,
   searchTerm: "",
-  orderBy: {
-    keys: [],
-    order: []
-  },
+  orderBy: [],
   features: {
     canEdit: false,
     canEditRow: null,
@@ -144,7 +141,7 @@ const updateRowSizeMultiplier = state => {
   const widthColDisplayed = colDisplayed.map(col => {
     const column = col;
     if (column.colSize && col.id !== "o2xpActions") {
-      return Number(column.colSize.split("px")[0]);
+      return Number(column.colSize.split("px")[0]) + 35;
     }
     if (col.id !== "o2xpActions") {
       column.colSize = "100px";
@@ -224,6 +221,7 @@ const totalWidth = state => {
   const widthColDisplayed = colDisplayed.map(
     col => Number(col.colSize.split("px")[0]) + 50
   );
+
   let totalWidthColDisplayed = widthColDisplayed.reduce((a, b) => {
     return a + b;
   });
@@ -267,6 +265,7 @@ const setPagination = ({
   newRowsPerPageSelected = null
 }) => {
   const { searchTerm, orderBy } = state;
+
   let rowsToUse = state.data.rows;
   if (searchTerm.length) {
     const fuse = new Fuse(state.data.rows, {
@@ -276,9 +275,12 @@ const setPagination = ({
     rowsToUse = fuse.search(searchTerm);
   }
 
-  const { keys, order } = orderBy;
-  if (keys.length) {
-    rowsToUse = orderByFunction(rowsToUse, keys, order);
+  if (orderBy) {
+    rowsToUse = orderByFunction(
+      rowsToUse,
+      orderBy.map(el => el.id),
+      orderBy.map(el => el.value)
+    );
   }
 
   const rowsPerPageSelected =
@@ -1156,23 +1158,21 @@ const refreshRowsError = state => {
 
 const orderByColumns = (state, payload) => {
   const { orderBy } = state;
-  const { keys, order } = orderBy;
-  const index = keys.indexOf(payload);
-
+  const index = orderBy.findIndex(el => el.id === payload);
+  let newOrderBy = [...orderBy];
   if (index === -1) {
-    keys.push(payload);
-    order.push("asc");
-  } else if (order[index] === "desc") {
-    keys.splice(index, 1);
-    order.splice(index, 1);
+    newOrderBy = [...newOrderBy, { id: payload, value: "asc" }];
+  } else if (newOrderBy[index].value === "desc") {
+    newOrderBy = newOrderBy.filter(el => el.id !== payload);
   } else {
-    order[index] = "desc";
+    newOrderBy[index].value = "desc";
   }
 
   const newState = {
     ...state,
-    orderBy: { keys, order }
+    orderBy: newOrderBy
   };
+
   return {
     ...newState,
     pagination: setPagination({

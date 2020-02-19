@@ -88,7 +88,7 @@ describe("datatableReducer reducer", () => {
         }
       });
       mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "0px";
-      
+
       expect(
         equal(initializedOptions, mergedSimpleOptionsSampleExpect)
       ).toBeTruthy();
@@ -223,7 +223,7 @@ describe("datatableReducer reducer", () => {
       const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
-
+      
       expect(
         equal(state, cloneDeep(mergedSimpleOptionsSampleWidthHeightResize))
       ).toBeTruthy();
@@ -1779,10 +1779,7 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
-        orderBy: {
-          keys: ["age"],
-          order: ["asc"]
-        },
+        orderBy: [{ id: "age", value: "asc" }],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: orderByFunction(
@@ -1800,10 +1797,12 @@ describe("datatableReducer reducer", () => {
       const result = datatableReducer(
         {
           ...mergedSimpleOptionsSample,
-          orderBy: {
-            keys: ["age"],
-            order: ["asc"]
-          }
+          orderBy: [
+            {
+              id: "age",
+              value: "asc"
+            }
+          ]
         },
         {
           type: "ORDER_BY_COLUMNS",
@@ -1813,10 +1812,12 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
-        orderBy: {
-          keys: ["age"],
-          order: ["desc"]
-        },
+        orderBy: [
+          {
+            id: "age",
+            value: "desc"
+          }
+        ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: orderByFunction(
@@ -1834,10 +1835,12 @@ describe("datatableReducer reducer", () => {
       let result = datatableReducer(
         {
           ...mergedSimpleOptionsSample,
-          orderBy: {
-            keys: ["age"],
-            order: ["asc"]
-          }
+          orderBy: [
+            {
+              id: "age",
+              value: "asc"
+            }
+          ]
         },
         {
           type: "ORDER_BY_COLUMNS",
@@ -1852,10 +1855,16 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
-        orderBy: {
-          keys: ["age", "name"],
-          order: ["desc", "asc"]
-        },
+        orderBy: [
+          {
+            id: "age",
+            value: "desc"
+          },
+          {
+            id: "name",
+            value: "asc"
+          }
+        ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: orderByFunction(
@@ -1873,10 +1882,12 @@ describe("datatableReducer reducer", () => {
       let result = datatableReducer(
         {
           ...mergedSimpleOptionsSample,
-          orderBy: {
-            keys: ["age"],
-            order: ["desc"]
-          }
+          orderBy: [
+            {
+              id: "age",
+              value: "desc"
+            }
+          ]
         },
         {
           type: "ORDER_BY_COLUMNS",
@@ -1891,10 +1902,12 @@ describe("datatableReducer reducer", () => {
 
       const resultExpected = {
         ...mergedSimpleOptionsSample,
-        orderBy: {
-          keys: ["name"],
-          order: ["asc"]
-        },
+        orderBy: [
+          {
+            id: "name",
+            value: "asc"
+          }
+        ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
           rowsCurrentPage: orderByFunction(

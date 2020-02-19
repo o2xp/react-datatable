@@ -145,10 +145,7 @@ export const refreshRows = null;
 export const isRefreshing = false;
 export const stripped = false;
 export const searchTerm = "";
-export const orderBy = {
-  keys: [],
-  order: []
-};
+export const orderBy = [];
 export const data = {
   columns,
   rows

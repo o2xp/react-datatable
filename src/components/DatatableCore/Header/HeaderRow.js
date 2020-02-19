@@ -24,7 +24,8 @@ export class HeaderRow extends Component {
     } = this.props;
     const column = columns.find(col => col.id === columnId);
     const width = `${(
-      column.colSize.split("px")[0] * columnSizeMultiplier
+      (Number(column.colSize.split("px")[0]) + 35) *
+      columnSizeMultiplier
     ).toString()}px`;
     const key = `column-${columnId}`;
 
