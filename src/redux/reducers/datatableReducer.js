@@ -1078,6 +1078,7 @@ const setColumnVisibilty = (state, payload) => {
 
   const newState = {
     ...state,
+    orderBy: state.orderBy.filter(el => el.id !== payload.id),
     features: {
       ...state.features,
       userConfiguration: {
@@ -1089,6 +1090,9 @@ const setColumnVisibilty = (state, payload) => {
 
   return {
     ...newState,
+    pagination: setPagination({
+      state: newState
+    }),
     dimensions: {
       ...newState.dimensions,
       columnSizeMultiplier: updateRowSizeMultiplier(newState)
