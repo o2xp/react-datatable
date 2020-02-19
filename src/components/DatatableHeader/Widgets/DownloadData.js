@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { cloneDeep } from "lodash";
 import {
   IconButton,
   Tooltip,
@@ -14,6 +15,9 @@ import {
   MenuItem,
   Input
 } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 import {
   CloudDownload as CloudDownloadIcon,
   Close as CloseIcon
@@ -25,7 +29,9 @@ import {
   rowsSelectedPropType,
   isRefreshingPropType,
   setRowsSelectedPropType,
-  textPropType
+  textPropType,
+  keyColumnPropType,
+  columnsOrderPropType
 } from "../../../proptypes";
 import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
 import Transition from "./Transition";
@@ -38,7 +44,8 @@ export class DownloadData extends Component {
     this.state = {
       dialogOpen: false,
       fileType: "csv",
-      fileName: "my-data"
+      fileName: "my-data",
+      columnsDisplayed: false
     };
   }
 
@@ -48,9 +55,11 @@ export class DownloadData extends Component {
       columns,
       rowsCurrentPage,
       rowsSelected,
-      setRowsSelected
+      setRowsSelected,
+      columnsOrder,
+      keyColumn
     } = this.props;
-    const { fileType, fileName } = this.state;
+    const { fileType, fileName, columnsDisplayed } = this.state;
 
     let data = null;
     switch (type) {
@@ -66,17 +75,33 @@ export class DownloadData extends Component {
         break;
     }
 
+    const dataReturned = cloneDeep(data);
+
+    dataReturned.forEach(el => {
+      const newEl = el;
+      if (columnsDisplayed) {
+        Object.keys(newEl).forEach(key => {
+          if (key !== keyColumn && !columnsOrder.includes(key)) {
+            delete newEl[key];
+          }
+        });
+      } else {
+        delete newEl.editableId;
+      }
+      return newEl;
+    });
+
     const hiddenElement = document.createElement("a");
 
     if (fileType === "csv") {
       const json2csvParser = new Json2csvParser({ columns });
-      const csv = json2csvParser.parse(data);
+      const csv = json2csvParser.parse(dataReturned);
       hiddenElement.href = `data:text/csv;charset=utf-8,${encodeURI(csv)}`;
       hiddenElement.target = "_blank";
       hiddenElement.download = `${fileName}.csv`;
     } else {
       hiddenElement.href = `data:text/json;charset=utf-8,${encodeURIComponent(
-        JSON.stringify(data)
+        JSON.stringify(dataReturned)
       )}`;
       hiddenElement.target = "_blank";
       hiddenElement.download = `${fileName}.json`;
@@ -90,7 +115,7 @@ export class DownloadData extends Component {
   };
 
   toggleDialog = bool => {
-    this.setState({ dialogOpen: bool });
+    this.setState({ dialogOpen: bool, columnsDisplayed: false });
   };
 
   setFileName = e => {
@@ -113,7 +138,7 @@ export class DownloadData extends Component {
       downloadCurrentRowsText,
       downloadAllRowsText
     } = this.props;
-    const { dialogOpen, fileType, fileName } = this.state;
+    const { dialogOpen, fileType, fileName, columnsDisplayed } = this.state;
     const disabled = rows.length === 0 || isRefreshing;
     return (
       <Fragment>
@@ -159,6 +184,7 @@ export class DownloadData extends Component {
             </DialogContentText>
             <br />
             <Input
+              style={{ fontSize: "1rem", lineHeight: "1.1875em" }}
               inputProps={{ className: "input-fileName" }}
               label={fileName}
               value={fileName}
@@ -171,10 +197,26 @@ export class DownloadData extends Component {
               position="end"
               value={fileType}
               onChange={e => this.setFileType(e)}
+              style={{ fontSize: "1rem", lineHeight: "1.1875em" }}
             >
               <MenuItem value="csv">.csv</MenuItem>
               <MenuItem value="json">.json</MenuItem>
             </Select>
+            <br />
+            <FormControl>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={columnsDisplayed}
+                    onChange={() =>
+                      this.setState({ columnsDisplayed: !columnsDisplayed })
+                    }
+                    value="columnsDisplayed"
+                  />
+                }
+                label="Only columns displayed"
+              />
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button
@@ -218,6 +260,8 @@ DownloadData.propTypes = {
   rowsCurrentPage: rowsCurrentPagePropType.isRequired,
   rowsSelected: rowsSelectedPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
+  columnsOrder: columnsOrderPropType.isRequired,
+  keyColumn: keyColumnPropType.isRequired,
   setRowsSelected: setRowsSelectedPropType,
   downloadText: textPropType,
   downloadTitleText: textPropType,
@@ -235,7 +279,10 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    columnsOrder:
+      state.datatableReducer.features.userConfiguration.columnsOrder,
     rowsSelected: state.datatableReducer.rowsSelected,
+    keyColumn: state.datatableReducer.keyColumn,
     isRefreshing: state.datatableReducer.isRefreshing,
     columns: state.datatableReducer.data.columns,
     rows: state.datatableReducer.data.rows,

@@ -65,9 +65,9 @@ export class BodyRow extends Component {
         />
       );
     }
-
     const width = `${(
-      column.colSize.split("px")[0] * columnSizeMultiplier
+      (Number(column.colSize.split("px")[0]) + 35) *
+      columnSizeMultiplier
     ).toString()}px`;
 
     if ((val === null || val === undefined || val === "") && !isEditing) {

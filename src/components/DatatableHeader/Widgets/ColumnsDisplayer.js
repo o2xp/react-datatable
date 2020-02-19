@@ -75,7 +75,7 @@ export class ColumnsDisplayer extends Component {
         <Popper
           open={menuOpen}
           anchorEl={this.buttonRef.current}
-          style={{ zIndex: 9 }}
+          style={{ zIndex: 999 }}
           transition
           disablePortal
         >
@@ -87,7 +87,10 @@ export class ColumnsDisplayer extends Component {
                   placement === "bottom" ? "center top" : "center bottom"
               }}
             >
-              <Paper id="menu-list-grow">
+              <Paper
+                id="menu-list-grow"
+                style={{ maxHeight: "50vh", overflow: "auto" }}
+              >
                 <ClickAwayListener
                   onClickAway={e => {
                     this.closeMenu(e);

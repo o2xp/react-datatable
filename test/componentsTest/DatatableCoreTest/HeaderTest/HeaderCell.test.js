@@ -70,7 +70,7 @@ const columnDefault = {
   colSize: "250px"
 };
 
-const orderBy = { keys: [], order: [] };
+const orderBy = [];
 const orderByColumns = jest.fn();
 const onSortEnd = jest.fn();
 const SortableContainer = sortableContainer(({ children }) => {
@@ -101,8 +101,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -121,8 +121,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -141,8 +141,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -161,8 +161,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -181,8 +181,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -201,8 +201,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -221,8 +221,8 @@ describe("BodyCell component should create a cell of type", () => {
         orderBy={orderBy}
         orderByColumns={orderByColumns}
         canOrderColumns={false}
-        orderByText='Order by'
-        dragText='Drag'
+        orderByText="Order by"
+        dragText="Drag"
       />
     );
     expect(wrapper.instance().buildHeaderCell()).toEqual(
@@ -236,10 +236,11 @@ describe("BodyCell component should create a cell of type", () => {
     const wrapper = mount(
       <SortableContainer
         onSortEnd={onSortEnd}
-        axis='x'
-        lockAxis='x'
+        axis="x"
+        lockAxis="x"
         lockToContainerEdges
-        helperClass='Table-Header-Cell-Draging-o2xp'>
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
         <HeaderCellPureComponent
           column={columnDefault}
           width={columnDefault.colSize}
@@ -247,8 +248,8 @@ describe("BodyCell component should create a cell of type", () => {
           orderBy={orderBy}
           orderByColumns={orderByColumns}
           canOrderColumns
-          orderByText='Order by'
-          dragText='Drag'
+          orderByText="Order by"
+          dragText="Drag"
         />
       </SortableContainer>
     );
@@ -259,10 +260,11 @@ describe("BodyCell component should create a cell of type", () => {
     const wrapper = mount(
       <SortableContainer
         onSortEnd={onSortEnd}
-        axis='x'
-        lockAxis='x'
+        axis="x"
+        lockAxis="x"
         lockToContainerEdges
-        helperClass='Table-Header-Cell-Draging-o2xp'>
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
         <HeaderCellPureComponent
           column={columnDefault}
           width={columnDefault.colSize}
@@ -270,8 +272,8 @@ describe("BodyCell component should create a cell of type", () => {
           orderBy={orderBy}
           orderByColumns={orderByColumns}
           canOrderColumns
-          orderByText='Order by'
-          dragText='Drag'
+          orderByText="Order by"
+          dragText="Drag"
         />
       </SortableContainer>
     );
@@ -286,19 +288,20 @@ describe("BodyCell component should create a cell of type", () => {
     const wrapper = mount(
       <SortableContainer
         onSortEnd={onSortEnd}
-        axis='x'
-        lockAxis='x'
+        axis="x"
+        lockAxis="x"
         lockToContainerEdges
-        helperClass='Table-Header-Cell-Draging-o2xp'>
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
         <HeaderCellPureComponent
           column={columnDefault}
           width={columnDefault.colSize}
           index={0}
-          orderBy={{ keys: ["default"], order: ["desc"] }}
+          orderBy={[{ id: "default", value: "desc" }]}
           orderByColumns={orderByColumns}
           canOrderColumns
-          orderByText='Order by'
-          dragText='Drag'
+          orderByText="Order by"
+          dragText="Drag"
         />
       </SortableContainer>
     );
@@ -314,19 +317,20 @@ describe("BodyCell component should create a cell of type", () => {
     const wrapper = mount(
       <SortableContainer
         onSortEnd={onSortEnd}
-        axis='x'
-        lockAxis='x'
+        axis="x"
+        lockAxis="x"
         lockToContainerEdges
-        helperClass='Table-Header-Cell-Draging-o2xp'>
+        helperClass="Table-Header-Cell-Draging-o2xp"
+      >
         <HeaderCellPureComponent
           column={columnDefault}
           width={columnDefault.colSize}
           index={0}
-          orderBy={{ keys: ["default"], order: ["asc"] }}
+          orderBy={[{ id: "default", value: "asc" }]}
           orderByColumns={orderByColumns}
           canOrderColumns
-          orderByText='Order by'
-          dragText='Drag'
+          orderByText="Order by"
+          dragText="Drag"
         />
       </SortableContainer>
     );
@@ -339,10 +343,11 @@ describe("BodyCell component should create a cell of type", () => {
       <Provider store={store}>
         <SortableContainer
           onSortEnd={onSortEnd}
-          axis='x'
-          lockAxis='x'
+          axis="x"
+          lockAxis="x"
           lockToContainerEdges
-          helperClass='Table-Header-Cell-Draging-o2xp'>
+          helperClass="Table-Header-Cell-Draging-o2xp"
+        >
           <HeaderCell
             column={columnDefault}
             width={columnDefault.colSize}

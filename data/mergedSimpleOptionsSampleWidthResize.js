@@ -30,8 +30,9 @@ const mergedSimpleOptionsSampleWidthResize = {
       widthNumber: 1800,
       totalWidthNumber: 1288
     },
-    columnSizeMultiplier: 1228 / 960
+    columnSizeMultiplier: 1228 / 1205
   },
+
   pagination: {
     ...pagination,
     rowsCurrentPage: data.rows
