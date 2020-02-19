@@ -75,7 +75,7 @@ export class ColumnsDisplayer extends Component {
         <Popper
           open={menuOpen}
           anchorEl={this.buttonRef.current}
-          style={{ zIndex: 9 }}
+          style={{ zIndex: 999 }}
           transition
           disablePortal
         >

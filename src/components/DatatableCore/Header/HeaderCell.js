@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { sortableElement } from "react-sortable-hoc";
 import { Tooltip, Zoom } from "@material-ui/core";
 import { ArrowUpward as ArrowIcon } from "@material-ui/icons";
@@ -36,16 +36,17 @@ export class HeaderCell extends Component {
 
   buildButton = column => {
     const { orderByColumns, orderBy, orderByText } = this.props;
-    const { keys, order } = orderBy;
-    const index = keys.indexOf(column.id);
+    const index = orderBy.findIndex(el => el.id === column.id);
+
     let orderElement;
     if (index !== -1) {
-      orderElement = order[index];
+      orderElement = orderBy[index];
     }
+
     return (
       <div className="cell-header">
         <Tooltip TransitionComponent={Zoom} title={orderByText}>
-          <span>
+          <span style={{ display: "flex", alignItems: "center" }}>
             <button
               type="button"
               className="button-header"
@@ -59,16 +60,22 @@ export class HeaderCell extends Component {
             >
               {column.label}
             </button>
+            <div
+              style={{ display: "flex", alignItems: "center", width: "32px" }}
+            >
+              {orderElement && (
+                <>
+                  <ArrowIcon
+                    className={
+                      orderElement.value === "asc" ? "ascIcon" : "descIcon"
+                    }
+                  />
+                  {index + 1}
+                </>
+              )}
+            </div>
           </span>
         </Tooltip>
-        {orderElement && (
-          <Fragment>
-            <ArrowIcon
-              className={orderElement === "asc" ? "ascIcon" : "descIcon"}
-            />
-            {index + 1}
-          </Fragment>
-        )}
       </div>
     );
   };
