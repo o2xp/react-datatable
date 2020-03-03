@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable camelcase */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { difference } from "lodash";
@@ -22,7 +24,8 @@ export class HeaderActionsCell extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { rowsToUse, rowsSelected, keyColumn } = nextProps;
 
     const checked =
