@@ -45,19 +45,19 @@ export class DownloadData extends Component {
       dialogOpen: false,
       fileType: "csv",
       fileName: "my-data",
-      columnsDisplayed: false
+      columnsDisplayed: true
     };
   }
 
   download = type => {
     const {
-      rows,
       columns,
       rowsCurrentPage,
       rowsSelected,
       setRowsSelected,
       columnsOrder,
-      keyColumn
+      keyColumn,
+      rowsToUse
     } = this.props;
     const { fileType, fileName, columnsDisplayed } = this.state;
 
@@ -71,7 +71,7 @@ export class DownloadData extends Component {
         break;
       default:
       case "all":
-        data = rows;
+        data = rowsToUse;
         break;
     }
 
@@ -115,7 +115,7 @@ export class DownloadData extends Component {
   };
 
   toggleDialog = bool => {
-    this.setState({ dialogOpen: bool, columnsDisplayed: false });
+    this.setState({ dialogOpen: bool });
   };
 
   setFileName = e => {
@@ -258,6 +258,7 @@ DownloadData.propTypes = {
   rows: rowsPropType.isRequired,
   columns: columnsPropType.isRequired,
   rowsCurrentPage: rowsCurrentPagePropType.isRequired,
+  rowsToUse: rowsCurrentPagePropType.isRequired,
   rowsSelected: rowsSelectedPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
@@ -287,6 +288,7 @@ const mapStateToProps = state => {
     columns: state.datatableReducer.data.columns,
     rows: state.datatableReducer.data.rows,
     rowsCurrentPage: state.datatableReducer.pagination.rowsCurrentPage,
+    rowsToUse: state.datatableReducer.pagination.rowsToUse,
     downloadText: state.textReducer.download,
     downloadTitleText: state.textReducer.downloadTitle,
     downloadDescriptionText: state.textReducer.downloadDescription,
