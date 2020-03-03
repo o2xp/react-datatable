@@ -51,7 +51,8 @@ const defaultState = {
     pageSelected: 1,
     pageTotal: 1,
     rowsPerPageSelected: "",
-    rowsCurrentPage: []
+    rowsCurrentPage: [],
+    rowsToUse: []
   },
   newRows: [],
   rowsDeleted: [],
@@ -319,7 +320,8 @@ const setPagination = ({
     pageSelected,
     pageTotal,
     rowsPerPageSelected,
-    rowsCurrentPage
+    rowsCurrentPage,
+    rowsToUse
   };
 };
 

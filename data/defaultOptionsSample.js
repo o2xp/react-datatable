@@ -42,7 +42,8 @@ const defaultOptionsSample = {
     pageSelected: 1,
     pageTotal: 1,
     rowsPerPageSelected: "",
-    rowsCurrentPage: []
+    rowsCurrentPage: [],
+    rowsToUse: []
   },
   features: {
     canEdit: false,

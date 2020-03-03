@@ -52,7 +52,8 @@ const mergedMaximumOptionsSample = {
     pageSelected: 1,
     pageTotal: 4,
     rowsPerPageSelected: 50,
-    rowsCurrentPage: chunk(data.rows, 50)[0]
+    rowsCurrentPage: chunk(data.rows, 50)[0],
+    rowsToUse: data.rows
   },
   features: {
     canEdit: true,

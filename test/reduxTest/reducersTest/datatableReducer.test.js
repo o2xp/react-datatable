@@ -223,7 +223,7 @@ describe("datatableReducer reducer", () => {
       const state = datatableReducer(cloneDeep(mergedSimpleOptionsSample), {
         type: "UPDATE_COMPONENT_SIZE"
       });
-      
+
       expect(
         equal(state, cloneDeep(mergedSimpleOptionsSampleWidthHeightResize))
       ).toBeTruthy();
@@ -390,7 +390,8 @@ describe("datatableReducer reducer", () => {
         pageSelected: 1,
         pageTotal: 1,
         rowsPerPageSelected: "All",
-        rowsCurrentPage: mergedSetAllRowsPerPage.data.rows
+        rowsCurrentPage: mergedSetAllRowsPerPage.data.rows,
+        rowsToUse: mergedSetAllRowsPerPage.data.rows
       };
 
       expect(equal(rowsPerPage, mergedSetAllRowsPerPage)).toBeTruthy();
@@ -1044,7 +1045,10 @@ describe("datatableReducer reducer", () => {
       const mergedDatableReducerExpect = {
         ...mergedSimpleOptionsSample,
         data,
-        pagination
+        pagination: {
+          ...pagination,
+          rowsToUse: result.pagination.rowsToUse
+        }
       };
 
       expect(equal(result, cloneDeep(mergedDatableReducerExpect))).toBeTruthy();
@@ -1110,7 +1114,10 @@ describe("datatableReducer reducer", () => {
       const mergedDatableReducerExpect = {
         ...mergedSimpleOptionsSample,
         data,
-        pagination,
+        pagination: {
+          ...pagination,
+          rowsToUse: result.pagination.rowsToUse
+        },
         features: {
           ...mergedSimpleOptionsSample.features,
           canEdit: false,
@@ -1240,19 +1247,21 @@ describe("datatableReducer reducer", () => {
           rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
         }
       };
+
       const { pagination } = mergedDatableReducerExpect;
       const { rowsPerPageSelected, pageSelected } = pagination;
+      const newRows =
+        rowsPerPageSelected === "All"
+          ? mergedDatableReducerExpect.data.rows
+          : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+              pageSelected ? pageSelected - 1 : 0
+            ];
       mergedDatableReducerExpect = {
         ...mergedDatableReducerExpect,
         pagination: {
           ...pagination,
-          rowsCurrentPage:
-            rowsPerPageSelected === "All"
-              ? mergedDatableReducerExpect.data.rows
-              : chunk(
-                  mergedDatableReducerExpect.data.rows,
-                  rowsPerPageSelected
-                )[pageSelected ? pageSelected - 1 : 0]
+          rowsCurrentPage: newRows,
+          rowsToUse: newRows
         }
       };
 
@@ -1280,20 +1289,22 @@ describe("datatableReducer reducer", () => {
           rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
         }
       };
+
       const { pagination } = mergedDatableReducerExpect;
       const { rowsPerPageSelected, pageSelected } = pagination;
+      const newRows =
+        rowsPerPageSelected === "All"
+          ? mergedDatableReducerExpect.data.rows
+          : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+              pageSelected ? pageSelected - 1 : 0
+            ];
       mergedDatableReducerExpect = {
         ...mergedDatableReducerExpect,
         actions,
         pagination: {
           ...pagination,
-          rowsCurrentPage:
-            rowsPerPageSelected === "All"
-              ? mergedDatableReducerExpect.data.rows
-              : chunk(
-                  mergedDatableReducerExpect.data.rows,
-                  rowsPerPageSelected
-                )[pageSelected ? pageSelected - 1 : 0]
+          rowsCurrentPage: newRows,
+          rowsToUse: newRows
         }
       };
 
@@ -1327,18 +1338,21 @@ describe("datatableReducer reducer", () => {
         rows: [...data.rows.filter(r => r[keyColumn] !== row[keyColumn])]
       }
     };
+
     const { pagination } = mergedDatableReducerExpect;
     const { rowsPerPageSelected, pageSelected } = pagination;
+    const newRows =
+      rowsPerPageSelected === "All"
+        ? mergedDatableReducerExpect.data.rows
+        : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+            pageSelected ? pageSelected - 1 : 0
+          ];
     mergedDatableReducerExpect = {
       ...mergedDatableReducerExpect,
       pagination: {
         ...pagination,
-        rowsCurrentPage:
-          rowsPerPageSelected === "All"
-            ? mergedDatableReducerExpect.data.rows
-            : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
-                pageSelected ? pageSelected - 1 : 0
-              ]
+        rowsCurrentPage: newRows,
+        rowsToUse: newRows
       }
     };
 
@@ -1376,18 +1390,21 @@ describe("datatableReducer reducer", () => {
       data: { ...mergedSimpleOptionsSample.data, rows: [newRow, ...rows] },
       newRows: [newRow]
     };
+
     const { pagination } = mergedDatableReducerExpect;
     const { rowsPerPageSelected, pageSelected } = pagination;
+    const newRows =
+      rowsPerPageSelected === "All"
+        ? mergedDatableReducerExpect.data.rows
+        : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
+            pageSelected ? pageSelected - 1 : 0
+          ];
     mergedDatableReducerExpect = {
       ...mergedDatableReducerExpect,
       pagination: {
         ...pagination,
-        rowsCurrentPage:
-          rowsPerPageSelected === "All"
-            ? mergedDatableReducerExpect.data.rows
-            : chunk(mergedDatableReducerExpect.data.rows, rowsPerPageSelected)[
-                pageSelected ? pageSelected - 1 : 0
-              ]
+        rowsCurrentPage: newRows,
+        rowsToUse: newRows
       }
     };
 
@@ -1519,7 +1536,8 @@ describe("datatableReducer reducer", () => {
         searchTerm: "Hunt Valdez",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: [mergedSimpleOptionsSample.data.rows[0]]
+          rowsCurrentPage: [mergedSimpleOptionsSample.data.rows[0]],
+          rowsToUse: [mergedSimpleOptionsSample.data.rows[0]]
         }
       };
 
@@ -1538,7 +1556,8 @@ describe("datatableReducer reducer", () => {
         searchTerm: "hun",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: [rows[0], rows[134]]
+          rowsCurrentPage: [rows[0], rows[134]],
+          rowsToUse: [rows[0], rows[134]]
         }
       };
       expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
@@ -1555,7 +1574,8 @@ describe("datatableReducer reducer", () => {
         searchTerm: "kjqshkhqakeazjhkazhekzl",
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: []
+          rowsCurrentPage: [],
+          rowsToUse: []
         }
       };
 
@@ -1711,7 +1731,8 @@ describe("datatableReducer reducer", () => {
         },
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: rows
+          rowsCurrentPage: rows,
+          rowsToUse: rows
         }
       };
 
@@ -1743,6 +1764,8 @@ describe("datatableReducer reducer", () => {
         idOfColumnErr: []
       };
 
+      const r = insert(mergedSimpleOptionsSample.data.rows, 6, newRow);
+
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         rowsGlobalEdited: insert(
@@ -1757,11 +1780,8 @@ describe("datatableReducer reducer", () => {
         },
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: insert(
-            mergedSimpleOptionsSample.data.rows,
-            6,
-            newRow
-          )
+          rowsCurrentPage: r,
+          rowsToUse: r
         },
         newRows: [...mergedSimpleOptionsSample.newRows, newRow]
       };
@@ -1777,16 +1797,19 @@ describe("datatableReducer reducer", () => {
         payload: "age"
       });
 
+      const orderedRows = orderByFunction(
+        mergedSimpleOptionsSample.data.rows,
+        ["age"],
+        ["asc"]
+      );
+
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         orderBy: [{ id: "age", value: "asc" }],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: orderByFunction(
-            mergedSimpleOptionsSample.data.rows,
-            ["age"],
-            ["asc"]
-          )
+          rowsCurrentPage: orderedRows,
+          rowsToUse: orderedRows
         }
       };
 
@@ -1810,6 +1833,12 @@ describe("datatableReducer reducer", () => {
         }
       );
 
+      const orderedRows = orderByFunction(
+        mergedSimpleOptionsSample.data.rows,
+        ["age"],
+        ["desc"]
+      );
+
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         orderBy: [
@@ -1820,11 +1849,8 @@ describe("datatableReducer reducer", () => {
         ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: orderByFunction(
-            mergedSimpleOptionsSample.data.rows,
-            ["age"],
-            ["desc"]
-          )
+          rowsCurrentPage: orderedRows,
+          rowsToUse: orderedRows
         }
       };
 
@@ -1853,6 +1879,12 @@ describe("datatableReducer reducer", () => {
         payload: "name"
       });
 
+      const orderedRows = orderByFunction(
+        mergedSimpleOptionsSample.data.rows,
+        ["age", "name"],
+        ["desc", "asc"]
+      );
+
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         orderBy: [
@@ -1867,11 +1899,8 @@ describe("datatableReducer reducer", () => {
         ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: orderByFunction(
-            mergedSimpleOptionsSample.data.rows,
-            ["age", "name"],
-            ["desc", "asc"]
-          )
+          rowsCurrentPage: orderedRows,
+          rowsToUse: orderedRows
         }
       };
 
@@ -1900,6 +1929,11 @@ describe("datatableReducer reducer", () => {
         payload: "age"
       });
 
+      const orderedRows = orderByFunction(
+        mergedSimpleOptionsSample.data.rows,
+        ["name"],
+        ["asc"]
+      );
       const resultExpected = {
         ...mergedSimpleOptionsSample,
         orderBy: [
@@ -1910,11 +1944,8 @@ describe("datatableReducer reducer", () => {
         ],
         pagination: {
           ...mergedSimpleOptionsSample.pagination,
-          rowsCurrentPage: orderByFunction(
-            mergedSimpleOptionsSample.data.rows,
-            ["name"],
-            ["asc"]
-          )
+          rowsCurrentPage: orderedRows,
+          rowsToUse: orderedRows
         }
       };
 
