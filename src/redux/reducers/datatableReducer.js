@@ -1049,6 +1049,27 @@ const setRowsSelected = (state, payload) => {
   };
 };
 
+const setRowsGlobalSelected = (state, payload) => {
+  const { keyColumn, rowsSelected } = state;
+  const { rows, checked } = payload;
+  const ids = rows.map(row => row[keyColumn]);
+  const idsRowsSelected = rowsSelected.map(row => row[keyColumn]);
+  let newRowsSelected;
+  if (checked) {
+    newRowsSelected = [
+      ...rowsSelected,
+      ...rows.filter(row => !idsRowsSelected.includes(row[keyColumn]))
+    ];
+  } else {
+    newRowsSelected = rowsSelected.filter(row => !ids.includes(row[keyColumn]));
+  }
+
+  return {
+    ...state,
+    rowsSelected: newRowsSelected
+  };
+};
+
 const search = (state, payload) => {
   const newState = {
     ...state,
@@ -1265,6 +1286,8 @@ const datatableReducer = (state = defaultState, action) => {
       return selectRow(state, payload);
     case "SET_ROWS_SELECTED":
       return setRowsSelected(state, payload);
+    case "SET_ROWS_GLOBAL_SELECTED":
+      return setRowsGlobalSelected(state, payload);
     case "SEARCH":
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":
