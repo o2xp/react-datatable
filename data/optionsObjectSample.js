@@ -154,7 +154,8 @@ export const pagination = {
   pageSelected: 1,
   pageTotal: 1,
   rowsPerPageSelected: "All",
-  rowsCurrentPage: []
+  rowsCurrentPage: [],
+  rowsToUse: rows
 };
 export const rowsPerPage = {
   available: [10, 25, 50, 100, "All"],

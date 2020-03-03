@@ -33,7 +33,8 @@ const mergedSetRowsPerPageSample = {
     pageSelected: 1,
     pageTotal: 20,
     rowsPerPageSelected: 10,
-    rowsCurrentPage: chunk(data.rows, 10)[0]
+    rowsCurrentPage: chunk(data.rows, 10)[0],
+    rowsToUse: data.rows
   },
   keyColumn,
   refreshRows,
