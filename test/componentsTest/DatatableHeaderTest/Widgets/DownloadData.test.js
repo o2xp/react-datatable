@@ -18,6 +18,7 @@ const setRowsSelected = jest.fn();
 const { datatableReducer } = storeSample;
 const { columns, rows } = datatableReducer.data;
 const { rowsCurrentPage } = datatableReducer.pagination;
+const columnsOrder = columns.map(col => col.id);
 
 describe("DownloadData component", () => {
   it("connected should render without errors", () => {
@@ -49,7 +50,9 @@ describe("DownloadData component", () => {
         setRowsSelected={setRowsSelected}
         rowsSelected={[]}
         rows={rows}
+        rowsToUse={rows}
         columns={columns}
+        columnsOrder={columnsOrder}
         rowsCurrentPage={rowsCurrentPage}
         isRefreshing={false}
         downloadText=""
@@ -66,7 +69,9 @@ describe("DownloadData component", () => {
         setRowsSelected={setRowsSelected}
         rowsSelected={rowsSelected}
         rows={rows}
+        rowsToUse={rows}
         columns={columns}
+        columnsOrder={columnsOrder}
         rowsCurrentPage={rowsCurrentPage}
         isRefreshing={false}
         downloadText=""
