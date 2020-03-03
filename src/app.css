@@ -93,7 +93,7 @@
 
 #o2xp .Table-Cell {
   display: table-cell;
-  padding: 5px 25px;
+  padding: 0px 25px;
   text-align: left;
   vertical-align: middle;
   border-bottom: 1px solid rgba(224, 224, 244, 1);
@@ -111,7 +111,7 @@
 
 #o2xp .Table-Header-Cell {
   display: table-cell;
-  padding: 5px 25px;
+  padding: 0px 25px;
   text-align: left;
   vertical-align: middle;
   height: 50px;
