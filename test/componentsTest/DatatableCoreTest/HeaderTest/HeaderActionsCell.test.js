@@ -29,19 +29,45 @@ describe("HeaderActionsCell component", () => {
 
   describe("pure Component should render a div", () => {
     it("without .scrolling-shadow when no scrolling", () => {
+      const setRowsGlobalSelected = jest.fn();
       const wrapper = shallow(
-        <HeaderActionsCellPureComponent isScrolling={false} column={column} />
+        <HeaderActionsCellPureComponent
+          isScrolling={false}
+          column={column}
+          setRowsGlobalSelected={setRowsGlobalSelected}
+        />
       );
       expect(wrapper.find(".Table-Header-Cell.action")).toHaveLength(1);
     });
 
     it("with .scrolling-shadow when scrolling", () => {
+      const setRowsGlobalSelected = jest.fn();
       const wrapper = shallow(
-        <HeaderActionsCellPureComponent isScrolling column={column} />
+        <HeaderActionsCellPureComponent
+          isScrolling
+          column={column}
+          setRowsGlobalSelected={setRowsGlobalSelected}
+        />
       );
       expect(
         wrapper.find(".Table-Header-Cell.action.scrolling-shadow")
       ).toHaveLength(1);
+    });
+
+    it("click on checkbox", () => {
+      const setRowsGlobalSelected = jest.fn();
+      const wrapper = shallow(
+        <HeaderActionsCellPureComponent
+          canSelect
+          column={column}
+          setRowsGlobalSelected={setRowsGlobalSelected}
+          rows={[]}
+          rowsToUse={[]}
+        />
+      );
+      const checkbox = wrapper.find(".select-all");
+      checkbox.simulate("change", { target: { checked: true } });
+      expect(setRowsGlobalSelected).toHaveBeenCalled();
     });
   });
 });

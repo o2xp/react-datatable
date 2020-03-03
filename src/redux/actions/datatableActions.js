@@ -86,6 +86,11 @@ export const setRowsSelected = payload => ({
   payload
 });
 
+export const setRowsGlobalSelected = payload => ({
+  type: "SET_ROWS_GLOBAL_SELECTED",
+  payload
+});
+
 export const search = payload => ({
   type: "SEARCH",
   payload
