@@ -29,6 +29,8 @@ const textReducer = {
   createSubmit: "Create",
   duplicate: "Duplicate",
   print: "Print",
+  printTitle: "Print",
+  printDescription: "Choose what you want to print.",
   orderBy: "Order by",
   drag: "Drag",
   paginationRows: "Rows",
