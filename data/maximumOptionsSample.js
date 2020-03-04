@@ -16,7 +16,7 @@ const maximumOptionsSample = {
       height: "40vh"
     },
     row: {
-      height: "60px"
+      height: "48px"
     }
   },
   keyColumn,

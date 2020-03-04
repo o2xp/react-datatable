@@ -35,7 +35,7 @@ const defaultState = {
       heightNumber: 0
     },
     row: {
-      height: "60px",
+      height: "48px",
       heightNumber: 0
     },
     columnSizeMultiplier: 1,
@@ -51,7 +51,8 @@ const defaultState = {
     pageSelected: 1,
     pageTotal: 1,
     rowsPerPageSelected: "",
-    rowsCurrentPage: []
+    rowsCurrentPage: [],
+    rowsToUse: []
   },
   newRows: [],
   rowsDeleted: [],
@@ -319,7 +320,8 @@ const setPagination = ({
     pageSelected,
     pageTotal,
     rowsPerPageSelected,
-    rowsCurrentPage
+    rowsCurrentPage,
+    rowsToUse
   };
 };
 
@@ -454,7 +456,7 @@ const initializeOptions = (
   newState.stripped = stripped;
 
   const { height } = newState.dimensions.row;
-  newState.dimensions.row.height = height.split("px")[0] < 60 ? "60px" : height;
+  newState.dimensions.row.height = height.split("px")[0] < 48 ? "48px" : height;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
@@ -1047,6 +1049,27 @@ const setRowsSelected = (state, payload) => {
   };
 };
 
+const setRowsGlobalSelected = (state, payload) => {
+  const { keyColumn, rowsSelected } = state;
+  const { rows, checked } = payload;
+  const ids = rows.map(row => row[keyColumn]);
+  const idsRowsSelected = rowsSelected.map(row => row[keyColumn]);
+  let newRowsSelected;
+  if (checked) {
+    newRowsSelected = [
+      ...rowsSelected,
+      ...rows.filter(row => !idsRowsSelected.includes(row[keyColumn]))
+    ];
+  } else {
+    newRowsSelected = rowsSelected.filter(row => !ids.includes(row[keyColumn]));
+  }
+
+  return {
+    ...state,
+    rowsSelected: newRowsSelected
+  };
+};
+
 const search = (state, payload) => {
   const newState = {
     ...state,
@@ -1263,6 +1286,8 @@ const datatableReducer = (state = defaultState, action) => {
       return selectRow(state, payload);
     case "SET_ROWS_SELECTED":
       return setRowsSelected(state, payload);
+    case "SET_ROWS_GLOBAL_SELECTED":
+      return setRowsGlobalSelected(state, payload);
     case "SEARCH":
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":

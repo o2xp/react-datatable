@@ -13,11 +13,11 @@ export const header = {
   heightNumber: 60
 };
 export const body = {
-  heightNumber: 768 * 0.4 - 170
+  heightNumber: 798 * 0.4 - 170
 };
 export const row = {
-  height: "60px",
-  heightNumber: 60
+  height: "48px",
+  heightNumber: 48
 };
 export const columnSizeMultiplier = 1;
 export const isScrolling = false;
@@ -154,7 +154,8 @@ export const pagination = {
   pageSelected: 1,
   pageTotal: 1,
   rowsPerPageSelected: "All",
-  rowsCurrentPage: []
+  rowsCurrentPage: [],
+  rowsToUse: rows
 };
 export const rowsPerPage = {
   available: [10, 25, 50, 100, "All"],

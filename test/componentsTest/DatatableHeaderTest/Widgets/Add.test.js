@@ -36,7 +36,7 @@ const newColumns = [
   {
     id: "age",
     label: "age",
-    colSize: "60px",
+    colSize: "48px",
     dataType: "number",
     valueVerification: val => {
       let error;

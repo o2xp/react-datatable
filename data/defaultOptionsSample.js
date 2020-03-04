@@ -15,7 +15,7 @@ const defaultOptionsSample = {
       heightNumber: 0
     },
     row: {
-      height: "60px",
+      height: "48px",
       heightNumber: 0
     },
     columnSizeMultiplier: 1,
@@ -42,7 +42,8 @@ const defaultOptionsSample = {
     pageSelected: 1,
     pageTotal: 1,
     rowsPerPageSelected: "",
-    rowsCurrentPage: []
+    rowsCurrentPage: [],
+    rowsToUse: []
   },
   features: {
     canEdit: false,
