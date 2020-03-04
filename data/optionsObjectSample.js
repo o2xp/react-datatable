@@ -13,7 +13,7 @@ export const header = {
   heightNumber: 60
 };
 export const body = {
-  heightNumber: 798 * 0.4 - 170
+  heightNumber: 768 * 0.4 - 180
 };
 export const row = {
   height: "48px",

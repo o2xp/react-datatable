@@ -30,7 +30,7 @@ const mergedSimpleOptionsSampleHeightResize = {
       totalWidthNumber: 1288
     },
     body: {
-      heightNumber: 30
+      heightNumber: 20
     }
   },
   pagination: {

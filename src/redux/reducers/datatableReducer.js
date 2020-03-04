@@ -253,10 +253,8 @@ const calcComponentSize = state => {
     true
   );
   newState.dimensions.body.heightNumber =
-    heightNumber -
-    newState.dimensions.header.heightNumber -
-    50 -
-    newState.dimensions.row.heightNumber;
+    heightNumber - newState.dimensions.header.heightNumber - 50 - 70;
+
   return newState;
 };
 
@@ -456,7 +454,8 @@ const initializeOptions = (
   newState.stripped = stripped;
 
   const { height } = newState.dimensions.row;
-  newState.dimensions.row.height = height.split("px")[0] < 48 ? "48px" : height;
+  newState.dimensions.row.height =
+    height.split("px")[0] < 100 ? "48px" : height;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(
@@ -560,10 +559,7 @@ const initializeOptions = (
   );
 
   newState.dimensions.body.heightNumber =
-    heightNumber -
-    newState.dimensions.header.heightNumber -
-    50 -
-    newState.dimensions.row.heightNumber;
+    heightNumber - newState.dimensions.header.heightNumber - 50 - 70;
 
   return newState;
 };
