@@ -142,6 +142,7 @@ export class Print extends Component {
 
     filteredColumns = filteredColumns.filter(col => col.id !== "o2xpActions");
     printTab({ rows, columns: filteredColumns });
+    this.toggleDialog(false);
   };
 
   render() {
