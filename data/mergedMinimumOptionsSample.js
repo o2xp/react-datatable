@@ -30,7 +30,7 @@ const mergedMinimumOptionsSample = {
     },
     header: { height: "0px", heightNumber: 0 },
     body: {
-      heightNumber: 658
+      heightNumber: 648
     }
   },
   rowsEdited,

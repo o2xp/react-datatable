@@ -31,7 +31,7 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
       totalWidthNumber: 1288
     },
     body: {
-      heightNumber: 30
+      heightNumber: 20
     },
     columnSizeMultiplier: 1228 / 1205
   },
