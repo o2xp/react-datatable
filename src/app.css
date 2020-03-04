@@ -111,10 +111,10 @@
 
 #o2xp .Table-Header-Cell {
   display: table-cell;
-  padding: 0px 25px;
+  padding: 5px 25px;
   text-align: left;
   vertical-align: middle;
-  height: 50px;
+  height: 60px;
   overflow: hidden;
   color: rgba(0,0,0,0.54);
   background: white;
