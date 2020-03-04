@@ -13,11 +13,11 @@ export const header = {
   heightNumber: 60
 };
 export const body = {
-  heightNumber: 768 * 0.4 - 170
+  heightNumber: 798 * 0.4 - 170
 };
 export const row = {
-  height: "60px",
-  heightNumber: 60
+  height: "48px",
+  heightNumber: 48
 };
 export const columnSizeMultiplier = 1;
 export const isScrolling = false;
