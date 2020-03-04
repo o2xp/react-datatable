@@ -23,7 +23,7 @@ const options = {
       height: "40%"
     },
     row: {
-      height: "60px"
+      height: "48px"
     }
   },
   keyColumn: "id",

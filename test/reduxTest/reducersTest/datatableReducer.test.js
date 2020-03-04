@@ -129,7 +129,16 @@ describe("datatableReducer reducer", () => {
       });
 
       expect(
-        equal(initializedOptions, cloneDeep(mergedMinimumOptionsSample))
+        equal(
+          initializedOptions,
+          cloneDeep({
+            ...mergedMinimumOptionsSample,
+            dimensions: {
+              ...mergedMinimumOptionsSample.dimensions,
+              body: { heightNumber: 670 }
+            }
+          })
+        )
       ).toBeTruthy();
     });
 
@@ -212,7 +221,16 @@ describe("datatableReducer reducer", () => {
       });
 
       expect(
-        equal(state, cloneDeep(mergedSimpleOptionsSampleHeightResize))
+        equal(
+          state,
+          cloneDeep({
+            ...mergedSimpleOptionsSampleHeightResize,
+            dimensions: {
+              ...mergedSimpleOptionsSampleHeightResize.dimensions,
+              body: { heightNumber: 42 }
+            }
+          })
+        )
       ).toBeTruthy();
     });
 
@@ -225,7 +243,16 @@ describe("datatableReducer reducer", () => {
       });
 
       expect(
-        equal(state, cloneDeep(mergedSimpleOptionsSampleWidthHeightResize))
+        equal(
+          state,
+          cloneDeep({
+            ...mergedSimpleOptionsSampleWidthHeightResize,
+            dimensions: {
+              ...mergedSimpleOptionsSampleWidthHeightResize.dimensions,
+              body: { heightNumber: 42 }
+            }
+          })
+        )
       ).toBeTruthy();
     });
   });

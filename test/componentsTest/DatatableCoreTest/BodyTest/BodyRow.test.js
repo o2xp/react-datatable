@@ -37,7 +37,7 @@ const { columns } = storeNoCustomComponentsSample.datatableReducer.data;
 const {
   columnsOrder
 } = storeNoCustomComponentsSample.datatableReducer.features.userConfiguration;
-const style = { top: 0, height: "60px", position: "absolute" };
+const style = { top: 0, height: "48px", position: "absolute" };
 const {
   CustomTableBodyCell
 } = storeCustomTableBodyCellComponentSample.customComponentsReducer;
