@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { sortableElement } from "react-sortable-hoc";
-import { Tooltip, Zoom } from "@material-ui/core";
+import { Tooltip, Zoom, Grid } from "@material-ui/core";
 import { ArrowUpward as ArrowIcon } from "@material-ui/icons";
 import { connect } from "react-redux";
 import {
@@ -34,7 +34,7 @@ export class HeaderCell extends Component {
     this.setState({ childButtonHovered: bool });
   };
 
-  buildButton = column => {
+  buildButton = (column, width) => {
     const { orderByColumns, orderBy, orderByText } = this.props;
     const index = orderBy.findIndex(el => el.id === column.id);
 
@@ -44,9 +44,15 @@ export class HeaderCell extends Component {
     }
 
     return (
-      <div className="cell-header">
-        <Tooltip TransitionComponent={Zoom} title={orderByText}>
-          <span style={{ display: "flex", alignItems: "center" }}>
+      <Tooltip TransitionComponent={Zoom} title={orderByText}>
+        <Grid
+          className="cell-header"
+          container
+          style={{ width }}
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item xs={orderElement ? 8 : 12}>
             <button
               type="button"
               className="button-header"
@@ -60,29 +66,31 @@ export class HeaderCell extends Component {
             >
               {column.label}
             </button>
-            <div
-              style={{ display: "flex", alignItems: "center", width: "32px" }}
-            >
-              {orderElement && (
-                <>
-                  <ArrowIcon
-                    className={
-                      orderElement.value === "asc" ? "ascIcon" : "descIcon"
-                    }
-                  />
-                  {index + 1}
-                </>
-              )}
-            </div>
-          </span>
-        </Tooltip>
-      </div>
+          </Grid>
+          {orderElement && (
+            <Grid container item xs={4} justify="center" alignItems="center">
+              <Grid item xs={6}>
+                <ArrowIcon
+                  className={
+                    orderElement.value === "asc" ? "ascIcon" : "descIcon"
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                {index + 1}
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+      </Tooltip>
     );
   };
 
   buildHeaderCell = () => {
     const { width, column, canOrderColumns } = this.props;
-    const content = canOrderColumns ? this.buildButton(column) : column.label;
+    const content = canOrderColumns
+      ? this.buildButton(column, width)
+      : column.label;
     switch (column.dataType) {
       case "number":
         return <NumberWrapper style={{ width }}>{content}</NumberWrapper>;
