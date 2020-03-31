@@ -25,7 +25,7 @@ export const NumberType = properties => {
 };
 
 export const TextWrapper = styled.div`
-  text-align: left;
+  text-align: center;
 `;
 
 export const TextType = properties => {
