@@ -51,8 +51,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  min-width: 64px;
   min-height: 30px;
+  word-break: break-word;
 }
 
 #o2xp .button-header:hover {
