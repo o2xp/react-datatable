@@ -87,22 +87,22 @@ export class ColumnsDisplayer extends Component {
                   placement === "bottom" ? "center top" : "center bottom"
               }}
             >
-              <Paper
-                id="menu-list-grow"
-                style={{ maxHeight: "50vh", overflow: "auto" }}
+              <ClickAwayListener
+                onClickAway={e => {
+                  this.closeMenu(e);
+                }}
               >
-                <ClickAwayListener
-                  onClickAway={e => {
-                    this.closeMenu(e);
-                  }}
+                <Paper
+                  id="menu-list-grow"
+                  style={{ maxHeight: "50vh", overflow: "auto" }}
                 >
                   <MenuList>
                     {columns.map(column => {
                       return this.createMenuItem(column);
                     })}
                   </MenuList>
-                </ClickAwayListener>
-              </Paper>
+                </Paper>
+              </ClickAwayListener>
             </Zoom>
           )}
         </Popper>
