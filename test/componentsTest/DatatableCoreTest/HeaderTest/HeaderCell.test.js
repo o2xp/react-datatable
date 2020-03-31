@@ -253,7 +253,7 @@ describe("BodyCell component should create a cell of type", () => {
         />
       </SortableContainer>
     );
-    expect(wrapper.find(".cell-header").length).toEqual(1);
+    expect(wrapper.find(".cell-header").length).toEqual(3);
   });
 
   it("on mouse over should set state", () => {
@@ -358,6 +358,6 @@ describe("BodyCell component should create a cell of type", () => {
     );
     const button = wrapper.find("button.button-header");
     button.simulate("click");
-    expect(wrapper.find(".cell-header").length).toEqual(1);
+    expect(wrapper.find(".cell-header").length).toEqual(3);
   });
 });
