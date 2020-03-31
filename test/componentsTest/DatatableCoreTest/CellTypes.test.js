@@ -45,7 +45,7 @@ describe("Cell type", () => {
 
     it("text", () => {
       const tree = renderer.create(<TextWrapper />).toJSON();
-      expect(tree).toHaveStyleRule("text-align", "left");
+      expect(tree).toHaveStyleRule("text-align", "center");
     });
 
     it("boolean", () => {

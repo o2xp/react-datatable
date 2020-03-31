@@ -30,13 +30,10 @@ import {
   isRefreshingPropType,
   setRowsSelectedPropType,
   textPropType,
-  keyColumnPropType,
   columnsOrderPropType
 } from "../../../proptypes";
 import { setRowsSelected as setRowsSelectedAction } from "../../../redux/actions/datatableActions";
 import Transition from "./Transition";
-
-const Json2csvParser = require("json2csv").Parser;
 
 export class DownloadData extends Component {
   constructor(props) {
@@ -56,7 +53,6 @@ export class DownloadData extends Component {
       rowsSelected,
       setRowsSelected,
       columnsOrder,
-      keyColumn,
       rowsToUse
     } = this.props;
     const { fileType, fileName, columnsDisplayed } = this.state;
@@ -81,12 +77,16 @@ export class DownloadData extends Component {
       const newEl = el;
       if (columnsDisplayed) {
         Object.keys(newEl).forEach(key => {
-          if (key !== keyColumn && !columnsOrder.includes(key)) {
+          if (!columnsOrder.includes(key)) {
             delete newEl[key];
           }
         });
       } else {
-        delete newEl.editableId;
+        Object.keys(newEl).forEach(key => {
+          if (!columns.map(col => col.id).includes(key)) {
+            delete newEl[key];
+          }
+        });
       }
       return newEl;
     });
@@ -94,9 +94,32 @@ export class DownloadData extends Component {
     const hiddenElement = document.createElement("a");
 
     if (fileType === "csv") {
-      const json2csvParser = new Json2csvParser({ columns });
-      const csv = json2csvParser.parse(dataReturned);
-      hiddenElement.href = `data:text/csv;charset=utf-8,${encodeURI(csv)}`;
+      let cols = [];
+      if (columnsDisplayed) {
+        columnsOrder.forEach(col => {
+          cols.push(columns.find(c => c.id === col));
+        });
+      } else {
+        cols = columns.map(col => col);
+      }
+      cols = cols.filter(col => col.id !== "o2xpActions");
+
+      const dataOrdered = dataReturned.map(dr => {
+        const newObj = {};
+        cols.forEach(col => {
+          newObj[col.id] = dr[col.id];
+        });
+        return newObj;
+      });
+
+      cols = cols.map(col => col.label);
+
+      const newRows = [cols, ...dataOrdered.map(row => Object.values(row))];
+      const csvContent = newRows.map(e => e.join(",")).join("\n");
+
+      hiddenElement.href = `data:text/csv;charset=utf-8,${encodeURI(
+        csvContent
+      )}`;
       hiddenElement.target = "_blank";
       hiddenElement.download = `${fileName}.csv`;
     } else {
@@ -262,7 +285,6 @@ DownloadData.propTypes = {
   rowsSelected: rowsSelectedPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
   columnsOrder: columnsOrderPropType.isRequired,
-  keyColumn: keyColumnPropType.isRequired,
   setRowsSelected: setRowsSelectedPropType,
   downloadText: textPropType,
   downloadTitleText: textPropType,
@@ -283,7 +305,6 @@ const mapStateToProps = state => {
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
     rowsSelected: state.datatableReducer.rowsSelected,
-    keyColumn: state.datatableReducer.keyColumn,
     isRefreshing: state.datatableReducer.isRefreshing,
     columns: state.datatableReducer.data.columns,
     rows: state.datatableReducer.data.rows,
