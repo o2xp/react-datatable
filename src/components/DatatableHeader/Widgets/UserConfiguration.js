@@ -188,7 +188,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserConfiguration);
+export default connect(mapStateToProps, mapDispatchToProps)(UserConfiguration);

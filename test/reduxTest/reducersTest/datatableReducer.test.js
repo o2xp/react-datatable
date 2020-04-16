@@ -87,7 +87,7 @@ describe("datatableReducer reducer", () => {
           canDelete: false
         }
       });
-      mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "0px";
+      mergedSimpleOptionsSampleExpect.data.columns[0].colSize = "50px";
 
       expect(
         equal(initializedOptions, mergedSimpleOptionsSampleExpect)

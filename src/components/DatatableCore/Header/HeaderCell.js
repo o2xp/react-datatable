@@ -168,7 +168,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderCell);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderCell);
