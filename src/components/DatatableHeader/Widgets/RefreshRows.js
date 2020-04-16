@@ -176,7 +176,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RefreshRows);
+export default connect(mapStateToProps, mapDispatchToProps)(RefreshRows);

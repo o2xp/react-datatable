@@ -279,7 +279,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Print);
+export default connect(mapStateToProps, mapDispatchToProps)(Print);

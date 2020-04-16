@@ -247,7 +247,4 @@ Add.propTypes = {
   createSubmitText: textPropType
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Add);
+export default connect(mapStateToProps, mapDispatchToProps)(Add);
