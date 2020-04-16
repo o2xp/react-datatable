@@ -133,7 +133,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ColumnsDisplayer);
+export default connect(mapStateToProps, mapDispatchToProps)(ColumnsDisplayer);

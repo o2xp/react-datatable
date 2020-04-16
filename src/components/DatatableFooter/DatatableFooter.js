@@ -121,7 +121,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DatatableFooter);
+export default connect(mapStateToProps, mapDispatchToProps)(DatatableFooter);

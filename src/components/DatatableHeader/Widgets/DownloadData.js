@@ -319,7 +319,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DownloadData);
+export default connect(mapStateToProps, mapDispatchToProps)(DownloadData);

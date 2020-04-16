@@ -70,9 +70,11 @@ export class HeaderActionsCell extends Component {
               />
             </Grid>
           )}
-          <Grid item container alignItems="center" style={{ width: "auto" }}>
-            Actions
-          </Grid>
+          {!canSelect && (
+            <Grid item container alignItems="center" style={{ width: "auto" }}>
+              Actions
+            </Grid>
+          )}
         </Grid>
       </div>
     );
@@ -105,7 +107,4 @@ HeaderActionsCell.propTypes = {
   setRowsGlobalSelected: setRowsSelectedPropType
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderActionsCell);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionsCell);

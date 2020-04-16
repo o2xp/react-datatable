@@ -168,7 +168,4 @@ DatatableInitializer.propTypes = {
   initText: initTextPropType
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DatatableInitializer);
+export default connect(null, mapDispatchToProps)(DatatableInitializer);

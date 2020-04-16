@@ -128,7 +128,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderRow);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderRow);

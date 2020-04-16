@@ -493,13 +493,15 @@ const initializeOptions = (
       case "true false false":
         colSize += 100;
         break;
+      case "false false true":
+        colSize += 50;
+        break;
       default:
         colSize += 0;
         break;
     }
 
     colSize = `${colSize + newState.features.additionalActions.length * 50}px`;
-
     newState.data.columns.unshift({
       id: "o2xpActions",
       label: "Actions",

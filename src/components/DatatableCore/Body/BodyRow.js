@@ -181,7 +181,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BodyRow);
+export default connect(mapStateToProps, mapDispatchToProps)(BodyRow);

@@ -62,7 +62,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectionIcons);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectionIcons);

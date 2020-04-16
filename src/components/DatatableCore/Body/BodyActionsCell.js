@@ -344,8 +344,5 @@ BodyActionsCell.propTypes = {
 
 export default compose(
   withStyles(customVariant),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(BodyActionsCell);
