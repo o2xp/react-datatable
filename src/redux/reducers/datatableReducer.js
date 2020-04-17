@@ -35,7 +35,7 @@ const defaultState = {
       heightNumber: 0
     },
     row: {
-      height: "48px",
+      height: "33px",
       heightNumber: 0
     },
     columnSizeMultiplier: 1,
@@ -454,8 +454,7 @@ const initializeOptions = (
   newState.stripped = stripped;
 
   const { height } = newState.dimensions.row;
-  newState.dimensions.row.height =
-    height.split("px")[0] < 100 ? "48px" : height;
+  newState.dimensions.row.height = height.split("px")[0] < 33 ? "33px" : height;
 
   if (newState.features.userConfiguration.columnsOrder.length === 0) {
     newState.features.userConfiguration.columnsOrder = optionsInit.data.columns.map(

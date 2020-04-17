@@ -15,7 +15,7 @@ const defaultOptionsSample = {
       heightNumber: 0
     },
     row: {
-      height: "48px",
+      height: "33px",
       heightNumber: 0
     },
     columnSizeMultiplier: 1,
