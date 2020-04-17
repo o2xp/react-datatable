@@ -113,7 +113,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | text | object | no |  | Un object with key taking a string as value.  Click [here](#override-text) to have more information.|
 | dimensions .datatable .width | string | no | "100vw" |  Width of the the Datatable. (in vw / px / %) |
 | dimensions .datatable .height | string | no | "300px" |  Height of the Datatable. (in vh / px / %) |
-| dimensions .row .height | string | no | "48px" |  Height of each row of the Datatable. (in px) Minimum 48px. |
+| dimensions .row .height | string | no | "33px" |  Height of each row of the Datatable. (in px) Minimum 33px. |
 | keyColumn | string | yes | / |  Name of the column that has unique value and allows to identify a row. |
 | font | string | no | "Roboto" | Name of the font you are using. It allows the datatable to calculate the overlapping of cells. |
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |
@@ -138,12 +138,6 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
-#### Override text
-text is an object construct with these keys :
-
-| Property | Type | Required? | Description |
-|:---|:---:|:---:|:---|
-| noRow | string | no | Text when there is no row. |
 
 #### Columns Props
 Columns is an array of object construct with these keys :
@@ -199,7 +193,6 @@ Additional selection icons is an array of object construct with these keys :
 
 | Property | Type | Required? | Default value |
 |:---|:---:|:---:|:---|
-| noRow | string | no | "There is no data yet, try to refresh" |
 | search | string | no | "Toggle" |
 | searchPlaceholder | string | no | "Search.." |
 | edit | string | no | "Edit" |

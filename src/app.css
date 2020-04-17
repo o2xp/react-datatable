@@ -36,7 +36,7 @@
 #o2xp .Table {
   display: table;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 #o2xp .Table-Header {
@@ -225,4 +225,8 @@
 
 #no-rows span:nth-child(3) {
   animation-delay: .4s;
+}
+
+.Table-Cell [class|="MuiButtonBase"] {
+  padding: 0 12px!important;
 }

@@ -17,10 +17,6 @@ import textReducer from "./textReducer";
 const storeNoDataSample = {
   datatableReducer: {
     title,
-    text: {
-      noRow: "There is no data yet, try to refresh"
-    },
-
     dimensions,
     keyColumn,
     font,
