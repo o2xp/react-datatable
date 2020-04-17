@@ -16,8 +16,8 @@ export const body = {
   heightNumber: 768 * 0.4 - 180
 };
 export const row = {
-  height: "48px",
-  heightNumber: 48
+  height: "33px",
+  heightNumber: 33
 };
 export const columnSizeMultiplier = 1;
 export const isScrolling = false;
