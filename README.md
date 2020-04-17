@@ -138,12 +138,6 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
-#### Override text
-text is an object construct with these keys :
-
-| Property | Type | Required? | Description |
-|:---|:---:|:---:|:---|
-| noRow | string | no | Text when there is no row. |
 
 #### Columns Props
 Columns is an array of object construct with these keys :
@@ -199,7 +193,6 @@ Additional selection icons is an array of object construct with these keys :
 
 | Property | Type | Required? | Default value |
 |:---|:---:|:---:|:---|
-| noRow | string | no | "There is no data yet, try to refresh" |
 | search | string | no | "Toggle" |
 | searchPlaceholder | string | no | "Search.." |
 | edit | string | no | "Edit" |

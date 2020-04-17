@@ -14,8 +14,7 @@ import {
   featuresPropType,
   titlePropType,
   isRefreshingPropType,
-  columnSizeMultiplierPropType,
-  overrideTextPropType
+  columnSizeMultiplierPropType
 } from "../proptypes";
 
 class DatatableContainer extends Component {
@@ -28,8 +27,7 @@ class DatatableContainer extends Component {
       features,
       title,
       totalWidthNumber,
-      isRefreshing,
-      noRowText
+      isRefreshing
     } = this.props;
 
     const {
@@ -74,11 +72,7 @@ class DatatableContainer extends Component {
                     <div
                       id="no-rows"
                       style={{ height: height - 15, width: width - 15 }}
-                    >
-                      {noRowText} <span> .</span>
-                      <span>.</span>
-                      <span>.</span>
-                    </div>
+                    />
                     <ScrollSyncPane>
                       <div
                         style={{
@@ -126,8 +120,7 @@ DatatableContainer.propTypes = {
   totalWidthNumber: widthNumberPropType,
   features: featuresPropType,
   title: titlePropType,
-  columnSizeMultiplier: columnSizeMultiplierPropType,
-  noRowText: overrideTextPropType
+  columnSizeMultiplier: columnSizeMultiplierPropType
 };
 
 const mapStateToProps = state => {
@@ -138,7 +131,6 @@ const mapStateToProps = state => {
     features: state.datatableReducer.features,
     title: state.datatableReducer.title,
     isRefreshing: state.datatableReducer.isRefreshing,
-    noRowText: state.textReducer.noRow,
     totalWidthNumber:
       state.datatableReducer.dimensions.datatable.totalWidthNumber,
     columnSizeMultiplier: state.datatableReducer.dimensions.columnSizeMultiplier

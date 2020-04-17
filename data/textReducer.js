@@ -1,5 +1,4 @@
 const textReducer = {
-  noRow: "There is no data yet, try to refresh",
   search: "Toggle",
   searchPlaceholder: "Search..",
   edit: "Edit",
