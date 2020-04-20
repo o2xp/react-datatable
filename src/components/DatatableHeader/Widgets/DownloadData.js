@@ -107,7 +107,7 @@ export class DownloadData extends Component {
       const dataOrdered = dataReturned.map(dr => {
         const newObj = {};
         cols.forEach(col => {
-          newObj[col.id] = dr[col.id];
+          newObj[col.id] = dr[col.id] != null ? dr[col.id] : "";
         });
         return newObj;
       });
@@ -115,7 +115,7 @@ export class DownloadData extends Component {
       cols = cols.map(col => col.label);
 
       const newRows = [cols, ...dataOrdered.map(row => Object.values(row))];
-      const csvContent = newRows.map(e => e.join(",")).join("\n");
+      const csvContent = newRows.map(e => e.join(";")).join("\n");
 
       hiddenElement.href = `data:text/csv;charset=utf-8,${encodeURI(
         csvContent
