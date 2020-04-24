@@ -8,6 +8,9 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./redux/reducers/reducers";
 
+
+
+
 class Datatable extends Component {
   constructor(props) {
     super(props)
@@ -27,11 +30,13 @@ class Datatable extends Component {
       CustomTableHeaderCell = null,
       CustomTableHeaderRow = null,
       customDataTypes = [],
-      text = {}
+      text = {},
+      theme = {}
     } = this.props;
+
     
     return (
-      <Fragment>
+      <>
         {options.data &&
           options.data.columns &&
           options.data.columns.length > 0 &&
@@ -51,6 +56,7 @@ class Datatable extends Component {
                   CustomTableHeaderRow={CustomTableHeaderRow}
                   customDataTypes={customDataTypes}
                   text={text}
+                  theme={theme}
                 />
               </SnackbarProvider>
             </Provider>
@@ -73,7 +79,7 @@ class Datatable extends Component {
             @o2xp/react-datatable : You forgot to give data and keyColumn..
           </div>
         )}
-      </Fragment>
+      </>
     );
   }
 }
