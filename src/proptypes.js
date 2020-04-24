@@ -42,6 +42,7 @@ export const rowsDeletedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsGlobalEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const maskPropType = PropTypes.array;
+export const themePropType = PropTypes.object;
 
 export const cellValPropType = PropTypes.oneOfType([
   PropTypes.string,

@@ -24,7 +24,8 @@ import {
   customDataTypesPropType,
   customPropsPropType,
   textPropsPropType,
-  initTextPropType
+  initTextPropType,
+  themePropType
 } from "../proptypes";
 import DatatableContainer from "./DatatableContainer";
 import {
@@ -152,7 +153,7 @@ const mapDispatchToProps = dispatch => {
 
 DatatableInitializer.propTypes = {
   customProps: customPropsPropType,
-  theme: Object,
+  theme: themePropType,
   initializeOptions: initializeOptionsPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
   updateComponentSize: updateComponentSizePropType,
