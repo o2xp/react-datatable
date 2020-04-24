@@ -125,8 +125,9 @@ export class DatatableInitializer extends Component {
   }
 
   render() {
+    const { theme } = this.props;
     return (
-      <MuiThemeProvider theme={mainTheme}>
+      <MuiThemeProvider theme={mainTheme(theme)}>
         <MuiPickersUtilsProvider
           utils={MomentUtils}
           locale={locale}
@@ -151,6 +152,7 @@ const mapDispatchToProps = dispatch => {
 
 DatatableInitializer.propTypes = {
   customProps: customPropsPropType,
+  theme: Object,
   initializeOptions: initializeOptionsPropType,
   initializeCustomComponents: initializeCustomComponentsPropType,
   updateComponentSize: updateComponentSizePropType,
