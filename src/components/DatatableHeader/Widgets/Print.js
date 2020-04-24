@@ -141,7 +141,14 @@ export class Print extends Component {
     }
 
     filteredColumns = filteredColumns.filter(col => col.id !== "o2xpActions");
-    printTab({ rows, columns: filteredColumns });
+    const dataOrdered = rows.map(dr => {
+      const newObj = {};
+      filteredColumns.forEach(col => {
+        newObj[col.id] = dr[col.id] != null ? dr[col.id] : "";
+      });
+      return newObj;
+    });
+    printTab({ rows: dataOrdered, columns: filteredColumns });
     this.toggleDialog(false);
   };
 

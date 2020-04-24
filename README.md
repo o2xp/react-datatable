@@ -105,6 +105,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | CustomTableHeaderCell | function | no | Function that take { column } and return a react html element. See [**header cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/headerCell.md) example. |
 | customDataTypes | array | no |  object that return an array of object with datatypes and react html element. See [**datatypes cell**](https://github.com/o2xp/react-datatable/blob/develop/examples/override/datatypes.md) example. |
 | text | object | no |  An object with text to override. See [**text override**](#text-override). |
+| theme | object | no | See [**theming**](https://material-ui.com/customization/theming/). |
 
 #### Options Properties
 | Property | Type | Required? | Default | Description |
