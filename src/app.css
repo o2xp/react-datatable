@@ -227,6 +227,6 @@
   animation-delay: .4s;
 }
 
-.Table-Cell [class|="MuiButtonBase"] {
+.Table-Cell .select, .Table-Cell button {
   padding: 0 12px!important;
 }
