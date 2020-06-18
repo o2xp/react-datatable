@@ -41,7 +41,7 @@ export class BodyCell extends Component {
     );
     const textWidth = twidth(cellVal, {
       family: font,
-      size: 12.8
+      size: 13
     });
     const overlap = textWidth + 5 > Number(width.split("px")[0]);
     let cellContent;
