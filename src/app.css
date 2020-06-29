@@ -230,3 +230,9 @@
 .Table-Cell .select, .Table-Cell button {
   padding: 0 12px!important;
 }
+
+.table-input {
+  font-size: 0.8rem!important;
+  line-height: 0.8rem!important;
+  padding: 2px 0px 4px!important;
+}
