@@ -66,11 +66,13 @@ export class TextFieldWrapper extends Component {
   textMaskCustom = properties => {
     const { inputRef, ...other } = properties;
     const { mask } = this.props;
+
     return (
       <Fragment>
         {(!mask || mask.length === 0) && (
           <input
             {...other}
+            className={`${other.className} table-input`}
             ref={ref => {
               inputRef(ref ? ref.inputElement : null);
             }}
@@ -79,6 +81,7 @@ export class TextFieldWrapper extends Component {
         {mask && mask.length > 0 && (
           <MaskedInput
             {...other}
+            className={`${other.className} table-input`}
             ref={ref => {
               inputRef(ref ? ref.inputElement : null);
             }}
@@ -115,6 +118,7 @@ export class TextFieldWrapper extends Component {
             onBlur={() => this.setState({ tooltipOpen: false })}
             onChange={e => this.onValueChange(e.target.value)}
             type={type}
+            style={{ marginTop: 0 }}
             fullWidth
             inputComponent={this.textMaskCustom}
           />
