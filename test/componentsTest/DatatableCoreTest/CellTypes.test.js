@@ -90,28 +90,46 @@ describe("Cell type", () => {
     });
 
     it("date", () => {
-      const element = DateType({ cellVal: "1972-09-04T18:09:59" });
+      const element = DateType({
+        cellVal: "1972-09-04T18:09:59",
+        dateFormatIn: "YYYY-MM-DDTHH:mm:ss",
+        dateFormatOut: dateFormat
+      });
       expect(element).toEqual(
         <DateWrapper>
-          {moment("1972-09-04T18:09:59").format(dateFormat)}
+          {moment("1972-09-04T18:09:59", "YYYY-MM-DDTHH:mm:ss").format(
+            dateFormat
+          )}
         </DateWrapper>
       );
     });
 
     it("time", () => {
-      const element = TimeType({ cellVal: "1972-09-04T18:09:59" });
+      const element = TimeType({
+        cellVal: "1972-09-04T18:09:59",
+        dateFormatIn: "YYYY-MM-DDTHH:mm:ss",
+        dateFormatOut: timeFormat
+      });
       expect(element).toEqual(
         <TimeWrapper>
-          {moment("1972-09-04T18:09:59").format(timeFormat)}
+          {moment("1972-09-04T18:09:59", "YYYY-MM-DDTHH:mm:ss").format(
+            timeFormat
+          )}
         </TimeWrapper>
       );
     });
 
     it("dateTime", () => {
-      const element = DateTimeType({ cellVal: "1972-09-04T18:09:59" });
+      const element = DateTimeType({
+        cellVal: "1972-09-04T18:09:59",
+        dateFormatIn: "YYYY-MM-DDTHH:mm:ss",
+        dateFormatOut: dateTimeFormat
+      });
       expect(element).toEqual(
         <DateTimeWrapper>
-          {moment("1972-09-04T18:09:59").format(dateTimeFormat)}
+          {moment("1972-09-04T18:09:59", "YYYY-MM-DDTHH:mm:ss").format(
+            dateTimeFormat
+          )}
         </DateTimeWrapper>
       );
     });

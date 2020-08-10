@@ -27,7 +27,8 @@ const CreateInput = ({
   columnId,
   setRowEdited,
   values,
-  dateFormat,
+  dateFormatIn,
+  dateFormatOut,
   type,
   mask,
   inputType,
@@ -46,7 +47,8 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
-          dateFormat={dateFormat}
+          dateFormatIn={dateFormatIn}
+          dateFormatOut={dateFormatOut}
           setRowEdited={setRowEdited}
           label={label}
           required={required}
@@ -60,7 +62,8 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
-          dateFormat={dateFormat}
+          dateFormatIn={dateFormatIn}
+          dateFormatOut={dateFormatOut}
           setRowEdited={setRowEdited}
           label={label}
           required={required}
@@ -74,7 +77,8 @@ const CreateInput = ({
           valueVerification={valueVerification}
           rowId={rowId}
           columnId={columnId}
-          dateFormat={dateFormat}
+          dateFormatIn={dateFormatIn}
+          dateFormatOut={dateFormatOut}
           setRowEdited={setRowEdited}
           label={label}
           required={required}
@@ -86,7 +90,8 @@ const CreateInput = ({
         isNull,
         values,
         rowId,
-        dateFormat,
+        dateFormatIn,
+        dateFormatOut,
         columnId,
         setRowEdited,
         label,
@@ -131,7 +136,8 @@ CreateInput.propTypes = {
   columnId: columnIdPropType.isRequired,
   setRowEdited: setRowEditedPropType,
   values: valuesPropType.isRequired,
-  dateFormat: dateFormatPropType.isRequired,
+  dateFormatIn: dateFormatPropType.isRequired,
+  dateFormatOut: dateFormatPropType.isRequired,
   type: typePropType.isRequired,
   inputType: inputTypePropType.isRequired
 };
