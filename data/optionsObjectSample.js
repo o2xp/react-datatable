@@ -106,7 +106,8 @@ export const columns = [
     colSize: "180px",
     editable: true,
     dataType: "dateTime",
-    dateFormat: "YYYY-MM-DDTHH:mm",
+    dateFormatIn: "YYYY-MM-DDTHH:mm",
+    dateFormatOut: "YYYY-MM-DDTHH:mm",
     valueVerification: val => {
       if (new Date().getTime() < new Date(val).getTime()) {
         return {

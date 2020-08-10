@@ -19,7 +19,8 @@ const SelectWrapper = ({
   columnId,
   setRowEdited,
   values,
-  dateFormat,
+  dateFormatIn,
+  dateFormatOut,
   required
 }) => {
   return (
@@ -34,7 +35,9 @@ const SelectWrapper = ({
         {values.map(val => {
           return (
             <MenuItem key={`${rowId}-${val}`} value={val}>
-              {dateFormat ? moment(val).format(dateFormat) : val}
+              {dateFormatIn
+                ? moment(val, dateFormatIn).format(dateFormatOut)
+                : val}
             </MenuItem>
           );
         })}
@@ -51,7 +54,8 @@ SelectWrapper.propTypes = {
   columnId: columnIdPropType.isRequired,
   setRowEdited: setRowEditedPropType,
   values: valuesPropType.isRequired,
-  dateFormat: dateFormatPropType.isRequired
+  dateFormatIn: dateFormatPropType.isRequired,
+  dateFormatOut: dateFormatPropType.isRequired
 };
 
 export default SelectWrapper;

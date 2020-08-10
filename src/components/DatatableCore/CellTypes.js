@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Checkbox } from "@material-ui/core";
-import {
-  moment,
-  dateFormatUser,
-  timeFormatUser,
-  dateTimeFormatUser
-} from "../../moment.config";
+import moment from "moment";
 import CreateInput from "./InputTypes/CreateInput";
 
 export const NumberWrapper = styled.div`
@@ -57,7 +52,13 @@ export const DateWrapper = styled.div`
 `;
 
 export const DateType = properties => {
-  const { cellVal, editing, inputType = "datePicker" } = properties;
+  const {
+    cellVal,
+    editing,
+    inputType = "datePicker",
+    dateFormatIn,
+    dateFormatOut
+  } = properties;
   if (editing) {
     return CreateInput({
       ...properties,
@@ -65,7 +66,11 @@ export const DateType = properties => {
     });
   }
 
-  return <DateWrapper>{moment(cellVal).format(dateFormatUser)}</DateWrapper>;
+  return (
+    <DateWrapper>
+      {moment(cellVal, dateFormatIn).format(dateFormatOut)}
+    </DateWrapper>
+  );
 };
 
 export const TimeWrapper = styled.div`
@@ -73,14 +78,24 @@ export const TimeWrapper = styled.div`
 `;
 
 export const TimeType = properties => {
-  const { cellVal, editing, inputType = "timePicker" } = properties;
+  const {
+    cellVal,
+    editing,
+    inputType = "timePicker",
+    dateFormatIn,
+    dateFormatOut
+  } = properties;
   if (editing) {
     return CreateInput({
       ...properties,
       inputType
     });
   }
-  return <TimeWrapper>{moment(cellVal).format(timeFormatUser)}</TimeWrapper>;
+  return (
+    <TimeWrapper>
+      {moment(cellVal, dateFormatIn).format(dateFormatOut)}
+    </TimeWrapper>
+  );
 };
 
 export const DateTimeWrapper = styled.div`
@@ -88,7 +103,13 @@ export const DateTimeWrapper = styled.div`
 `;
 
 export const DateTimeType = properties => {
-  const { cellVal, editing, inputType = "dateTimePicker" } = properties;
+  const {
+    cellVal,
+    editing,
+    inputType = "dateTimePicker",
+    dateFormatIn,
+    dateFormatOut
+  } = properties;
   if (editing) {
     return CreateInput({
       ...properties,
@@ -97,7 +118,7 @@ export const DateTimeType = properties => {
   }
   return (
     <DateTimeWrapper>
-      {moment(cellVal).format(dateTimeFormatUser)}
+      {moment(cellVal, dateFormatIn).format(dateFormatOut)}
     </DateTimeWrapper>
   );
 };
