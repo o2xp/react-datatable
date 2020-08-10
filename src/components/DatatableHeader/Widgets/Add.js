@@ -100,7 +100,8 @@ export class Add extends Component {
           valueVerification,
           id,
           values = [],
-          dateFormat = "",
+          dateFormatIn = "",
+          dateFormatOut = "",
           dataType = "",
           mask,
           required,
@@ -117,7 +118,8 @@ export class Add extends Component {
           rowId: "",
           columnId: id,
           valueVerification,
-          dateFormat,
+          dateFormatIn,
+          dateFormatOut,
           mask,
           setRowEdited: props => this.test(props)
         };

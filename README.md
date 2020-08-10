@@ -151,7 +151,8 @@ Columns is an array of object construct with these keys :
 | editable | boolean | no | If the each value of row corresponding to the column is editable or not. |
 | dataType | string | no | Possible values: "number", "text", "boolean", "date", "time", "dateTime". For more type, see [override](#overriding) section. |
 | inputType | string | no | Possible values: "input", "boolean", "select", "datePicker", "timePicker", "dateTimePicker" |
-| dateFormat | string | yes (only if datatype === "date" \|\| "time" \|\| "dateTime") | Format of the date. |
+| dateFormatIn | string | yes (only if datatype === "date" \|\| "time" \|\| "dateTime") | Format of the date. |
+| dateFormatOut | string | yes (only if datatype === "date" \|\| "time" \|\| "dateTime") | Format you want to display of the date. |
 | values | array | yes (only if inputType === "select") | Possible values displayed in the select. |
 | valueVerification | function | no | If you want to verify value on save. You need to provide a function which take a parameter (the new value) and return and object in this format {error: boolean, message: string} |
 | mask | array of regex | no | Works only with inputType === input. To build regex see [**react-text-mask**](https://github.com/text-mask/text-mask/tree/master/react/#readme)|

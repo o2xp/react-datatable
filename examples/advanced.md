@@ -74,7 +74,8 @@ const options = {
         editable: true,
         dataType: "date",
         inputType: "datePicker",
-        dateFormat: "YYYY-MM-DDTHH:MM:ss"
+        dateFormatIn: "YYYY-MM-DDTHH:MM:ss"
+        dateFormatOut: "YYYY-MM-DDTHH:MM:ss"
       },
       {
         id: "color",
