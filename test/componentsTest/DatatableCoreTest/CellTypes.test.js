@@ -71,8 +71,8 @@ describe("Cell type", () => {
 
   describe("without editing should render", () => {
     it("number", () => {
-      const element = NumberType({ cellVal: 10000 });
-      expect(element).toEqual(<NumberWrapper>10000</NumberWrapper>);
+      const element = NumberType({ cellVal: 10000.525 });
+      expect(element).toEqual(<NumberWrapper>10,000.525</NumberWrapper>);
     });
 
     it("text", () => {

@@ -15,7 +15,11 @@ export const NumberType = properties => {
     return CreateInput({ ...properties, type });
   }
 
-  return <NumberWrapper>{cellVal.toString()}</NumberWrapper>;
+  return (
+    <NumberWrapper>
+      {cellVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+    </NumberWrapper>
+  );
 };
 
 export const TextWrapper = styled.div`
