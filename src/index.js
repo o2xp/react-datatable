@@ -34,6 +34,22 @@ class Datatable extends Component {
       theme = {}
     } = this.props;
 
+    if(options.data && !options.keyColumn){
+      console.log("@o2xp/react-datatable : You forgot to give keyColumn..");
+    }
+
+    if((!options.data ||
+      !options.data.columns ||
+      options.data.columns.length === 0) &&
+      options.keyColumn ) { 
+        console.log("@o2xp/react-datatable : You forgot to give data..");
+    }
+    
+    
+     if(!options.data && !options.keyColumn) { 
+      console.log("@o2xp/react-datatable : You forgot to give data and keyColumn..");
+    }
+  
     
     return (
       <>
@@ -61,24 +77,6 @@ class Datatable extends Component {
               </SnackbarProvider>
             </Provider>
           )}
-        {options.data && !options.keyColumn && (
-          <div id="no-keyColumn">
-            @o2xp/react-datatable : You forgot to give keyColumn..
-          </div>
-        )}
-        {(!options.data ||
-          !options.data.columns ||
-          options.data.columns.length === 0) &&
-          options.keyColumn && (
-            <div id="no-data">
-              @o2xp/react-datatable : You forgot to give data..
-            </div>
-          )}
-        {!options.data && !options.keyColumn && (
-          <div id="no-data-and-no-keyColumn">
-            @o2xp/react-datatable : You forgot to give data and keyColumn..
-          </div>
-        )}
       </>
     );
   }

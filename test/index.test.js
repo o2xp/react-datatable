@@ -8,8 +8,13 @@ import { storeSample, simpleOptionsSample } from "../data/samples";
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const refreshRows = jest.fn();
+const mockConsole = jest.fn();
 
 describe("Datatable component", () => {
+  beforeEach(() => {
+    console.log = mockConsole;
+  });
+
   it("should render DatatableInitializer", () => {
     const div = document.createElement("div");
     window.domNode = div;
@@ -50,9 +55,10 @@ describe("Datatable component", () => {
     );
 
     expect(wrapper2.find("DatatableInitializer")).toHaveLength(0);
-    expect(
-      wrapper2.find("div#no-data-and-no-keyColumn").hostNodes()
-    ).toHaveLength(1);
+    expect(mockConsole).toHaveBeenCalled();
+    expect(mockConsole).toHaveBeenCalledWith(
+      "@o2xp/react-datatable : You forgot to give data and keyColumn.."
+    );
   });
 
   it("with missing data should render div error", () => {
@@ -63,7 +69,10 @@ describe("Datatable component", () => {
     );
 
     expect(wrapper3.find("DatatableInitializer")).toHaveLength(0);
-    expect(wrapper3.find("div#no-data").hostNodes()).toHaveLength(1);
+    expect(mockConsole).toHaveBeenCalled();
+    expect(mockConsole).toHaveBeenCalledWith(
+      "@o2xp/react-datatable : You forgot to give data.."
+    );
   });
 
   it("with missing keyColumn should render div error", () => {
@@ -74,6 +83,9 @@ describe("Datatable component", () => {
     );
 
     expect(wrapper4.find("DatatableInitializer")).toHaveLength(0);
-    expect(wrapper4.find("div#no-keyColumn").hostNodes()).toHaveLength(1);
+    expect(mockConsole).toHaveBeenCalled();
+    expect(mockConsole).toHaveBeenCalledWith(
+      "@o2xp/react-datatable : You forgot to give data and keyColumn.."
+    );
   });
 });
