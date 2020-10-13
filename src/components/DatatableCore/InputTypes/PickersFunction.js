@@ -25,7 +25,7 @@ export const setValue = ({
   if (cellVal !== null) {
     cellVal = date ? moment(date).format(dateFormat) : cellVal;
     cellVal = value || cellVal;
-    cellVal = type === "number" ? parseInt(cellVal) : cellVal;
+    cellVal = type === "number" ? Number(cellVal) : cellVal;
   }
 
   let newState = {
