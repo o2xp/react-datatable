@@ -98,7 +98,6 @@ export class TextFieldWrapper extends Component {
     const { tooltipOpen, message, error } = this.state;
     const inputValue =
       type === "number" && !cellVal && cellVal !== 0 ? "" : cellVal;
-
     return (
       <Tooltip
         open={tooltipOpen}
