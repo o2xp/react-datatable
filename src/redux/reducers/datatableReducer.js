@@ -1024,18 +1024,24 @@ const deleteRow = (state, payload) => {
 };
 
 const selectRow = (state, payload) => {
-  const { keyColumn, rowsSelected } = state;
+  const { keyColumn, rowsSelected, actions } = state;
   const { checked, row } = payload;
-
+  let newRowsSelected;
   if (checked) {
-    return {
-      ...state,
-      rowsSelected: [...rowsSelected, row]
-    };
+    newRowsSelected = [...rowsSelected, row];
+  } else {
+    newRowsSelected = [
+      ...rowsSelected.filter(r => r[keyColumn] !== row[keyColumn])
+    ];
   }
+
+  if (actions) {
+    actions({ type: "select", payload: newRowsSelected });
+  }
+
   return {
     ...state,
-    rowsSelected: [...rowsSelected.filter(r => r[keyColumn] !== row[keyColumn])]
+    rowsSelected: newRowsSelected
   };
 };
 
@@ -1047,7 +1053,7 @@ const setRowsSelected = (state, payload) => {
 };
 
 const setRowsGlobalSelected = (state, payload) => {
-  const { keyColumn, rowsSelected } = state;
+  const { keyColumn, rowsSelected, actions } = state;
   const { rows, checked } = payload;
   const ids = rows.map(row => row[keyColumn]);
   const idsRowsSelected = rowsSelected.map(row => row[keyColumn]);
@@ -1059,6 +1065,10 @@ const setRowsGlobalSelected = (state, payload) => {
     ];
   } else {
     newRowsSelected = rowsSelected.filter(row => !ids.includes(row[keyColumn]));
+  }
+
+  if (actions) {
+    actions({ type: "select", payload: newRowsSelected });
   }
 
   return {
