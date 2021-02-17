@@ -1,4 +1,5 @@
 import { shallow, mount } from "enzyme";
+import { Select, Checkbox } from "@material-ui/core";
 import CreateInput from "../../../../src/components/DatatableCore/InputTypes/CreateInput";
 
 const setRowEdited = jest.fn();
@@ -28,12 +29,16 @@ describe("CreateInput should render a", () => {
     expect(wrapper.find("DateTimePickerWrapper")).toHaveLength(1);
   });
   it("Select", () => {
-    const wrapper = mount(CreateInput({ ...value, inputType: "select" }));
-    expect(wrapper.find("Select")).toHaveLength(1);
+    const wrapper = mount(
+      CreateInput({ ...value, cellVal: "John Doe", inputType: "select" })
+    );
+    expect(wrapper.find(Select)).toHaveLength(1);
   });
   it("Checkbox", () => {
-    const wrapper = mount(CreateInput({ ...value, inputType: "boolean" }));
-    expect(wrapper.find("Checkbox")).toHaveLength(1);
+    const wrapper = mount(
+      CreateInput({ ...value, cellVal: true, inputType: "boolean" })
+    );
+    expect(wrapper.find(Checkbox)).toHaveLength(1);
   });
   it("TextField", () => {
     const wrapper = shallow(CreateInput({ ...value, inputType: "input" }));

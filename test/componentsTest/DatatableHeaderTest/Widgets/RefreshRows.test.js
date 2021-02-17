@@ -3,6 +3,7 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
 import thunk from "redux-thunk";
+import { Dialog } from "@material-ui/core";
 import RefreshRows, {
   RefreshRows as RefreshRowsPureComponent
 } from "../../../../src/components/DatatableHeader/Widgets/RefreshRows";
@@ -47,10 +48,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing={false}
-        searchTerm=''
+        searchTerm=""
         rowsSelected={[]}
         rowsEdited={[]}
-        refreshText='Refresh'
+        refreshText="Refresh"
       />
     );
 
@@ -69,10 +70,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing
-        searchTerm=''
+        searchTerm=""
         rowsSelected={[]}
         rowsEdited={[]}
-        refreshText='Refresh'
+        refreshText="Refresh"
       />
     );
 
@@ -88,10 +89,10 @@ describe("RefreshRows component", () => {
         refreshRows={refreshRows}
         refreshRowsUser={refreshRowsUser}
         isRefreshing={false}
-        searchTerm='hunt'
+        searchTerm="hunt"
         rowsSelected={[rows[0]]}
         rowsEdited={[rows[1]]}
-        refreshText='Refresh'
+        refreshText="Refresh"
       />
     );
 
@@ -136,7 +137,7 @@ describe("RefreshRows component", () => {
         it("click away should close modal", () => {
           button.simulate("click");
           wrapper
-            .find("Dialog")
+            .find(Dialog)
             .props()
             .onClose();
           expect(wrapper.state("dialogOpen")).toBeFalsy();

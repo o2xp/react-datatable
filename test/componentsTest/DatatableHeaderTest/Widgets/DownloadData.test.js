@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { Dialog, Select } from "@material-ui/core";
 import DownloadData, {
   DownloadData as DownloadDataPureComponent
 } from "../../../../src/components/DatatableHeader/Widgets/DownloadData";
@@ -153,7 +154,7 @@ describe("DownloadData component", () => {
         buttonDialog.simulate("click");
         const spy = jest.spyOn(wrapper.instance(), "download");
         wrapper
-          .find("Select")
+          .find(Select)
           .props()
           .onChange({ target: { value: "json" } });
         const button = wrapper.find("button.all-rows");
@@ -189,7 +190,7 @@ describe("DownloadData component", () => {
       buttonDialog.simulate("click");
       const spy = jest.spyOn(wrapper.instance(), "setFileType");
       wrapper
-        .find("Select")
+        .find(Select)
         .props()
         .onChange({ target: { value: "json" } });
 
@@ -206,7 +207,7 @@ describe("DownloadData component", () => {
       buttonDialog.simulate("click");
       const spy = jest.spyOn(wrapper.instance(), "toggleDialog");
       wrapper
-        .find("Dialog")
+        .find(Dialog)
         .props()
         .onClose();
 

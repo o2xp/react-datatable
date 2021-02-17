@@ -9,7 +9,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { AccessTime as TimeIcon } from "@material-ui/icons";
-import { TimePicker } from "material-ui-pickers";
+import { TimePicker } from "@material-ui/pickers";
 import { checkValue, setValue } from "./PickersFunction";
 import { customVariant } from "../../MuiTheme";
 import { timeFormatUser } from "../../../moment.config";

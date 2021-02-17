@@ -1,4 +1,5 @@
 import { mount } from "enzyme";
+import { Select } from "@material-ui/core";
 import SelectWrapper from "../../../../src/components/DatatableCore/InputTypes/SelectWrapper";
 
 const setRowEdited = jest.fn();
@@ -24,13 +25,13 @@ const selectValueDateFormat = {
 describe("Select wrapper", () => {
   it("should render a Select", () => {
     const wrapper = mount(SelectWrapper(selectValue));
-    expect(wrapper.find("Select")).toHaveLength(1);
+    expect(wrapper.find(Select)).toHaveLength(1);
   });
 
   it("should call setRowEdited onChange", () => {
     const wrapper = mount(SelectWrapper(selectValue));
     wrapper
-      .find("Select")
+      .find(Select)
       .props()
       .onChange({ target: { value: "brown" } });
     const { rowId, columnId } = selectValue;
@@ -45,7 +46,7 @@ describe("Select wrapper", () => {
   it("should call setRowEdited onChange with formated date", () => {
     const wrapper = mount(SelectWrapper(selectValueDateFormat));
     wrapper
-      .find("Select")
+      .find(Select)
       .props()
       .onChange({ target: { value: "1944-12-08T04:35" } });
     const { rowId, columnId } = selectValueDateFormat;

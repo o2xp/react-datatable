@@ -4,7 +4,7 @@ import { throttle } from "lodash";
 import equal from "fast-deep-equal";
 import elementResizeEvent from "element-resize-event";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { moment, locale } from "../moment.config";
 import { mainTheme } from "./MuiTheme";

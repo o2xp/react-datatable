@@ -2,8 +2,9 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
+import { Dialog } from "@material-ui/core";
 import thunk from "redux-thunk";
-import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import Add, {
   Add as AddPureComponent
@@ -151,8 +152,6 @@ describe("Add component", () => {
       </MuiPickersUtilsProvider>
     );
 
-    expect(wrapper.state("modalOpen")).toBeFalsy();
-
     const addRowButton = wrapper.find("button.add-row-icon");
     addRowButton.simulate("click");
     expect(wrapper.find("Add").state("modalOpen")).toBeTruthy();
@@ -172,7 +171,7 @@ describe("Add component", () => {
 
     addRowButton.simulate("click");
     wrapper
-      .find("Dialog")
+      .find(Dialog)
       .first()
       .props()
       .onClose();
@@ -197,8 +196,6 @@ describe("Add component", () => {
         />
       </MuiPickersUtilsProvider>
     );
-
-    expect(wrapper.state("modalOpen")).toBeFalsy();
 
     const addRowButton = wrapper.find("button.add-row-icon");
     addRowButton.simulate("click");
@@ -239,8 +236,6 @@ describe("Add component", () => {
         />
       </MuiPickersUtilsProvider>
     );
-
-    expect(wrapper.state("modalOpen")).toBeFalsy();
 
     const addRowButton = wrapper.find("button.add-row-icon");
     addRowButton.simulate("click");

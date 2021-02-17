@@ -9,7 +9,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Event as CalendarIcon } from "@material-ui/icons";
-import { DatePicker } from "material-ui-pickers";
+import { DatePicker } from "@material-ui/pickers";
 import { checkValue, setValue } from "./PickersFunction";
 import { customVariant } from "../../MuiTheme";
 import { dateFormatUser } from "../../../moment.config";

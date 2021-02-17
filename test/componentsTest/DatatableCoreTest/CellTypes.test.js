@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import moment from "moment";
 import { Checkbox } from "@material-ui/core";
 import {
@@ -149,8 +149,8 @@ describe("Cell type", () => {
     });
 
     it("Checkbox on BooleanType", () => {
-      const wrapper = shallow(BooleanType({ ...properties, cellVal: true }));
-      expect(wrapper.find("Checkbox")).toHaveLength(1);
+      const wrapper = mount(BooleanType({ ...properties, cellVal: true }));
+      expect(wrapper.find(Checkbox)).toHaveLength(1);
     });
 
     it("DatePickerWrapper on DateType", () => {

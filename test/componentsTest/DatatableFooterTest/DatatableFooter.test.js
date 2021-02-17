@@ -69,16 +69,14 @@ describe("Datatable Footer component", () => {
 
     it(" select rowsPerPage should be enabled", () => {
       const selectRowsPerPage = datatableFooterWrapper
-        .find("Select.select-rowsPerPage")
+        .find(".select-rowsPerPage")
         .at(0);
       expect(selectRowsPerPage.exists()).toBeTruthy();
       expect(selectRowsPerPage.props().disabled).toBeFalsy();
     });
 
     it(" select page should be disabled", () => {
-      const selectPage = datatableFooterWrapper
-        .find("Select.select-page")
-        .at(0);
+      const selectPage = datatableFooterWrapper.find(".select-page").at(0);
       expect(selectPage.exists()).toBeTruthy();
       expect(selectPage.props().disabled).toBeTruthy();
     });
@@ -107,7 +105,7 @@ describe("Datatable Footer component", () => {
       );
 
       const selectRowsPerPage = datatableFooterWrapperPage1
-        .find("Select.select-rowsPerPage")
+        .find(".select-rowsPerPage")
         .at(0);
       it(" select page should be enabled", () => {
         expect(selectRowsPerPage.exists()).toBeTruthy();
@@ -129,7 +127,7 @@ describe("Datatable Footer component", () => {
 
       describe("select page", () => {
         const selectPage = datatableFooterWrapperPage1
-          .find("Select.select-page")
+          .find(".select-page")
           .at(0);
 
         it("should be enabled", () => {

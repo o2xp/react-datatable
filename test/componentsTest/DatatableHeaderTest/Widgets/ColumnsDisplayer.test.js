@@ -1,5 +1,6 @@
 import React from "react";
 import configureStore from "redux-mock-store";
+import { MenuItem } from "@material-ui/core";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
 import ColumnsDisplayer, {
@@ -44,7 +45,7 @@ describe("ColumnsDisplayer component", () => {
     const button = wrapper.find("button.display-columns-icon");
     button.simulate("click");
     wrapper
-      .find("MenuItem")
+      .find(MenuItem)
       .at(2)
       .simulate("click");
 
@@ -57,7 +58,7 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
-        displayText='Display columns'
+        displayText="Display columns"
       />
     );
     const button = wrapper.find("button.display-columns-icon");
@@ -79,7 +80,7 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
-        displayText='Display columns'
+        displayText="Display columns"
       />
     );
     const button = wrapper.find("button.display-columns-icon");
@@ -97,13 +98,13 @@ describe("ColumnsDisplayer component", () => {
         setColumnVisibilty={setColumnVisibilty}
         columns={columns}
         columnsOrder={columnsOrder}
-        displayText='Display columns'
+        displayText="Display columns"
       />
     );
     const button = wrapper.find("button.display-columns-icon");
     button.simulate("click");
     wrapper
-      .find("MenuItem")
+      .find(MenuItem)
       .at(2)
       .simulate("click");
 
