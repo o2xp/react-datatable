@@ -81,7 +81,7 @@ export class BodyActionsCell extends Component {
       }
 
       return (
-        <Tooltip title={title} key={title} TransitionComponent={Zoom}>
+        <Tooltip arrow title={title} key={title} TransitionComponent={Zoom}>
           <span>
             <IconButton
               className={
@@ -171,7 +171,7 @@ export class BodyActionsCell extends Component {
           )}
 
           {canDuplicate && (
-            <Tooltip title={duplicateText}>
+            <Tooltip arrow title={duplicateText}>
               <span>
                 <IconButton
                   className={
@@ -189,7 +189,7 @@ export class BodyActionsCell extends Component {
           )}
 
           {canDelete && (!editing || canGlobalEdit) && !deleting && (
-            <Tooltip title={deleteText}>
+            <Tooltip arrow title={deleteText}>
               <span>
                 <IconButton
                   className={`delete ${classes.defaultIcon}`}
@@ -204,7 +204,7 @@ export class BodyActionsCell extends Component {
 
           {deleting && (
             <Fragment>
-              <Tooltip title={cancelDeleteText}>
+              <Tooltip arrow title={cancelDeleteText}>
                 <IconButton
                   className={`cancel-delete ${classes.defaultIcon}`}
                   onClick={() => this.setState({ deleting: false })}
@@ -212,7 +212,7 @@ export class BodyActionsCell extends Component {
                   <ClearIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title={confirmDeleteText}>
+              <Tooltip arrow title={confirmDeleteText}>
                 <IconButton
                   className={`confirm-delete ${classes.errorIcon}`}
                   onClick={() => {
@@ -227,7 +227,7 @@ export class BodyActionsCell extends Component {
           )}
 
           {canEdit && editableRow && !editing && !deleting && (
-            <Tooltip title={editText}>
+            <Tooltip arrow title={editText}>
               <IconButton
                 className="edit"
                 color="primary"
@@ -241,7 +241,7 @@ export class BodyActionsCell extends Component {
 
           {editing && !deleting && !canGlobalEdit && (
             <Fragment>
-              <Tooltip title={clearText}>
+              <Tooltip arrow title={clearText}>
                 <IconButton
                   className={`revert ${classes.errorIcon}`}
                   onClick={() => revertRowEdited(row)}
@@ -250,6 +250,7 @@ export class BodyActionsCell extends Component {
                 </IconButton>
               </Tooltip>
               <Tooltip
+                arrow
                 title={saveText}
                 classes={{
                   popper: saveDisabled

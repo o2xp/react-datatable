@@ -103,6 +103,7 @@ export class BodyCell extends Component {
         role="presentation"
       >
         <Tooltip
+          arrow
           title={overlap && !editing ? cellVal : ""}
           TransitionComponent={Zoom}
           interactive

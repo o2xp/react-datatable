@@ -60,7 +60,11 @@ export class ColumnsDisplayer extends Component {
     const { menuOpen } = this.state;
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title={menuOpen ? "" : displayText}>
+        <Tooltip
+          arrow
+          TransitionComponent={Zoom}
+          title={menuOpen ? "" : displayText}
+        >
           <span>
             <IconButton
               buttonRef={this.buttonRef}

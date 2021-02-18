@@ -72,7 +72,7 @@ export class UserConfiguration extends Component {
 
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title={configurationText}>
+        <Tooltip arrow TransitionComponent={Zoom} title={configurationText}>
           <span>
             <IconButton
               className="user-configuration-icon"

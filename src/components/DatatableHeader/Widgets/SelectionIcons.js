@@ -16,6 +16,7 @@ class SelectionIcons extends Component {
       <Fragment>
         {selectionIcons.map((icon, i) => (
           <Tooltip
+            arrow
             key={icon.title}
             TransitionComponent={Zoom}
             title={disabled ? "0 row selected" : icon.title}

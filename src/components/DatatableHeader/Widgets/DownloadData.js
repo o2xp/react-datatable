@@ -166,6 +166,7 @@ export class DownloadData extends Component {
     return (
       <Fragment>
         <Tooltip
+          arrow
           TransitionComponent={Zoom}
           title={disabled ? "" : downloadText}
         >
