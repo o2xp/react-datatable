@@ -10,6 +10,7 @@ class AdditionalIcons extends Component {
       <Fragment>
         {additionalIcons.map((icon, i) => (
           <Tooltip
+            arrow
             key={icon.title}
             TransitionComponent={Zoom}
             title={icon.title}

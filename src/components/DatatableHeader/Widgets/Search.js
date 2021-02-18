@@ -62,7 +62,11 @@ export class Search extends Component {
           disabled={disabled}
           placeholder={searchPlaceholderText}
         />
-        <Tooltip TransitionComponent={Zoom} title={disabled ? "" : searchText}>
+        <Tooltip
+          arrow
+          TransitionComponent={Zoom}
+          title={disabled ? "" : searchText}
+        >
           <span>
             <IconButton
               className={disabled ? "disabled-icon search-icon" : "search-icon"}

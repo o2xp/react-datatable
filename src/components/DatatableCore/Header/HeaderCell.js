@@ -44,7 +44,7 @@ export class HeaderCell extends Component {
     }
 
     return (
-      <Tooltip TransitionComponent={Zoom} title={orderByText}>
+      <Tooltip arrow TransitionComponent={Zoom} title={orderByText}>
         <Grid
           className="cell-header"
           container
@@ -126,6 +126,7 @@ export class HeaderCell extends Component {
 const SortableItem = sortableElement(
   ({ value, childButtonHovered, dragText }) => (
     <Tooltip
+      arrow
       TransitionComponent={Zoom}
       title={childButtonHovered ? "" : dragText}
     >

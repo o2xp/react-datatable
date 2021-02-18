@@ -9,7 +9,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { AccessTime as TimeIcon } from "@material-ui/icons";
-import { TimePicker } from "material-ui-pickers";
+import { TimePicker } from "@material-ui/pickers";
 import { checkValue, setValue } from "./PickersFunction";
 import { customVariant } from "../../MuiTheme";
 import { timeFormatUser } from "../../../moment.config";
@@ -65,38 +65,41 @@ export class TimePickerWrapper extends Component {
     const { cellVal, classes, label, required } = this.props;
     const { tooltipOpen, message, error } = this.state;
     return (
-      <Tooltip
-        open={tooltipOpen}
-        classes={{
-          tooltip: classes.errorTooltip
-        }}
-        title={message}
-        TransitionComponent={Zoom}
-        interactive
-      >
-        <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
-          <TimePicker
-            required={required}
-            label={label}
-            clearable
-            error={error}
-            ampm={timeFormatUser[timeFormatUser.length - 1] === "A"}
-            onOpen={() => this.setState({ tooltipOpen: false })}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <TimeIcon />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            helperText={null}
-            value={cellVal === "" ? null : cellVal}
-            onChange={this.onDateChange}
-          />
-        </ClickAwayListener>
-      </Tooltip>
+      <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
+        <Tooltip
+          arrow
+          open={tooltipOpen}
+          classes={{
+            tooltip: classes.errorTooltip
+          }}
+          title={message}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div>
+            <TimePicker
+              required={required}
+              label={label}
+              clearable
+              error={error}
+              ampm={timeFormatUser[timeFormatUser.length - 1] === "A"}
+              onOpen={() => this.setState({ tooltipOpen: false })}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton>
+                      <TimeIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              helperText={null}
+              value={cellVal === "" ? null : cellVal}
+              onChange={this.onDateChange}
+            />
+          </div>
+        </Tooltip>
+      </ClickAwayListener>
     );
   }
 }

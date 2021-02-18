@@ -178,7 +178,7 @@ export class Add extends Component {
 
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title={createText}>
+        <Tooltip arrow TransitionComponent={Zoom} title={createText}>
           <span>
             <IconButton
               disabled={!editing}

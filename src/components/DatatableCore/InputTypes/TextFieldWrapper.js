@@ -100,6 +100,7 @@ export class TextFieldWrapper extends Component {
       type === "number" && !cellVal && cellVal !== 0 ? "" : cellVal;
     return (
       <Tooltip
+        arrow
         open={tooltipOpen}
         classes={{
           tooltip: classes.errorTooltip
