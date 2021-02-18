@@ -75,7 +75,7 @@ export class RefreshRows extends Component {
     } = this.state;
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title={refreshText}>
+        <Tooltip arrow TransitionComponent={Zoom} title={refreshText}>
           <span>
             <IconButton
               disabled={isRefreshing}

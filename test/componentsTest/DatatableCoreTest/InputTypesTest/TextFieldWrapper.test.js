@@ -1,5 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
+import { act } from "react-dom/test-utils";
+import { Input, Tooltip } from "@material-ui/core";
 import TextFieldWrapper, {
   TextFieldWrapper as TextFieldWrapperPureComponent
 } from "../../../../src/components/DatatableCore/InputTypes/TextFieldWrapper";
@@ -64,8 +66,8 @@ describe("Select wrapper", () => {
         ]}
       />
     );
-    expect(wrapper.find("Tooltip")).toHaveLength(1);
-    expect(wrapper.find("Input")).toHaveLength(1);
+    expect(wrapper.find(Tooltip)).toHaveLength(1);
+    expect(wrapper.find(Input)).toHaveLength(1);
   });
 
   it("should render a Tootltip and Input", () => {
@@ -79,8 +81,8 @@ describe("Select wrapper", () => {
         setRowEdited={setRowEdited}
       />
     );
-    expect(wrapper.find("Tooltip")).toHaveLength(1);
-    expect(wrapper.find("Input")).toHaveLength(1);
+    expect(wrapper.find(Tooltip)).toHaveLength(1);
+    expect(wrapper.find(Input)).toHaveLength(1);
   });
 
   describe("onValueChange", () => {
@@ -97,9 +99,10 @@ describe("Select wrapper", () => {
         />
       );
       const spy = jest.spyOn(wrapper.instance(), "onValueChange");
-      wrapper.instance().forceUpdate();
-
-      wrapper.find("input").simulate("change", { target: { value: "50" } });
+      act(() => {
+        wrapper.instance().forceUpdate();
+        wrapper.find("input").simulate("change", { target: { value: "50" } });
+      });
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith("50");
     });
@@ -116,7 +119,9 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().onValueChange("75");
+      act(() => {
+        wrapper.instance().onValueChange("75");
+      });
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "",
@@ -136,7 +141,9 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().onValueChange("150");
+      act(() => {
+        wrapper.instance().onValueChange("150");
+      });
       expect(wrapper.state()).toEqual({
         tooltipOpen: true,
         message: "Value is too big",
@@ -159,9 +166,11 @@ describe("Select wrapper", () => {
         />
       );
       const spy = jest.spyOn(wrapper.instance(), "toggleTooltip");
-      wrapper.instance().forceUpdate();
 
-      wrapper.find("input").simulate("focus");
+      act(() => {
+        wrapper.instance().forceUpdate();
+        wrapper.find("input").simulate("focus");
+      });
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(true);
     });
@@ -178,7 +187,9 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().toggleTooltip(true);
+      act(() => {
+        wrapper.instance().toggleTooltip(true);
+      });
       expect(wrapper.state()).toEqual({
         tooltipOpen: true,
         message: "Value is too big",
@@ -198,7 +209,10 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.instance().toggleTooltip(false);
+
+      act(() => {
+        wrapper.instance().toggleTooltip(false);
+      });
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "",
@@ -220,7 +234,9 @@ describe("Select wrapper", () => {
           classes={{ customVariant }}
         />
       );
-      wrapper.find("input").simulate("blur");
+      act(() => {
+        wrapper.find(Input).simulate("blur");
+      });
       expect(wrapper.state()).toEqual({
         tooltipOpen: false,
         message: "Value is too big",

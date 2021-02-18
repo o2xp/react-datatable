@@ -9,7 +9,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Event as CalendarIcon } from "@material-ui/icons";
-import { DatePicker } from "material-ui-pickers";
+import { DatePicker } from "@material-ui/pickers";
 import { checkValue, setValue } from "./PickersFunction";
 import { customVariant } from "../../MuiTheme";
 import { dateFormatUser } from "../../../moment.config";
@@ -66,38 +66,41 @@ export class DatePickerWrapper extends Component {
     const { tooltipOpen, message, error } = this.state;
 
     return (
-      <Tooltip
-        open={tooltipOpen}
-        classes={{
-          tooltip: classes.errorTooltip
-        }}
-        title={message}
-        TransitionComponent={Zoom}
-        interactive
-      >
-        <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
-          <DatePicker
-            required={required}
-            label={label}
-            clearable
-            error={error}
-            onOpen={() => this.setState({ tooltipOpen: false })}
-            format={dateFormatUser}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <CalendarIcon />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            helperText={null}
-            value={cellVal === "" ? null : cellVal}
-            onChange={this.onDateChange}
-          />
-        </ClickAwayListener>
-      </Tooltip>
+      <ClickAwayListener onClickAway={() => this.toggleTooltip(false)}>
+        <Tooltip
+          arrow
+          open={tooltipOpen}
+          classes={{
+            tooltip: classes.errorTooltip
+          }}
+          title={message}
+          TransitionComponent={Zoom}
+          interactive
+        >
+          <div>
+            <DatePicker
+              required={required}
+              label={label}
+              clearable
+              error={error}
+              onOpen={() => this.setState({ tooltipOpen: false })}
+              format={dateFormatUser}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton>
+                      <CalendarIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              helperText={null}
+              value={cellVal === "" ? null : cellVal}
+              onChange={this.onDateChange}
+            />
+          </div>
+        </Tooltip>
+      </ClickAwayListener>
     );
   }
 }

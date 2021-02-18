@@ -166,7 +166,7 @@ export class Print extends Component {
 
     return (
       <Fragment>
-        <Tooltip TransitionComponent={Zoom} title={printText}>
+        <Tooltip arrow TransitionComponent={Zoom} title={printText}>
           <span>
             <IconButton
               className="print-icon"

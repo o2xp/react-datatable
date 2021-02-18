@@ -1,4 +1,5 @@
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
+import { Checkbox } from "@material-ui/core";
 import BooleanWrapper from "../../../../src/components/DatatableCore/InputTypes/BooleanWrapper";
 
 const setRowEdited = jest.fn();
@@ -12,8 +13,8 @@ const booleanValue = {
 
 describe("Boolean wrapper", () => {
   it("should render a Checkbox", () => {
-    const wrapper = shallow(BooleanWrapper(booleanValue));
-    expect(wrapper.find("Checkbox")).toHaveLength(1);
+    const wrapper = mount(BooleanWrapper(booleanValue));
+    expect(wrapper.find(Checkbox)).toHaveLength(1);
   });
 
   it("should render a Checkbox that is checked", () => {

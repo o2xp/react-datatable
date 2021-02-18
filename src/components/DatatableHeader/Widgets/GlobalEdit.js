@@ -75,7 +75,7 @@ export class GlobalEdit extends Component {
     return (
       <Fragment>
         {!editing && (
-          <Tooltip TransitionComponent={Zoom} title={editText}>
+          <Tooltip arrow TransitionComponent={Zoom} title={editText}>
             <span>
               <IconButton className="edit-icon" onClick={() => this.edit()}>
                 <EditIcon color="primary" />
@@ -85,7 +85,7 @@ export class GlobalEdit extends Component {
         )}
         {editing && (
           <Fragment>
-            <Tooltip title={clearText}>
+            <Tooltip arrow title={clearText}>
               <IconButton
                 className={`revert-icon ${classes.errorIcon}`}
                 onClick={() => this.revert()}
@@ -93,7 +93,7 @@ export class GlobalEdit extends Component {
                 <ClearIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={saveDisabled ? "" : saveText}>
+            <Tooltip arrow title={saveDisabled ? "" : saveText}>
               <span>
                 <IconButton
                   className={

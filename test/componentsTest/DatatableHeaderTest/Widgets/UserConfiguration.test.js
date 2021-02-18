@@ -2,6 +2,7 @@ import React from "react";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { shallow, mount } from "enzyme";
+import { Dialog, Switch } from "@material-ui/core";
 import UserConfiguration, {
   UserConfiguration as UserConfigurationPureComponent
 } from "../../../../src/components/DatatableHeader/Widgets/UserConfiguration";
@@ -32,7 +33,7 @@ describe("ColumnsDisplayer component", () => {
     );
     const buttonDialog = wrapper.find("button.user-configuration-icon");
     buttonDialog.simulate("click");
-    const switchButton = wrapper.find("Switch");
+    const switchButton = wrapper.find(Switch);
     switchButton.props().onChange({ target: null });
     const reset = wrapper.find("button.reset-configuration");
     reset.simulate("click");
@@ -46,12 +47,12 @@ describe("ColumnsDisplayer component", () => {
         columnsOrder={columnsOrder}
         copyToClipboard={copyToClipboard}
         setUserConfiguration={setUserConfiguration}
-        configurationText=''
-        configurationTitleText=''
-        configurationCopyText=''
-        configurationColumnText=''
-        configurationResetText=''
-        configurationSaveText=''
+        configurationText=""
+        configurationTitleText=""
+        configurationCopyText=""
+        configurationColumnText=""
+        configurationResetText=""
+        configurationSaveText=""
       />
     );
 
@@ -81,18 +82,18 @@ describe("ColumnsDisplayer component", () => {
         columnsOrder={columnsOrder}
         copyToClipboard
         setUserConfiguration={setUserConfiguration}
-        configurationText=''
-        configurationTitleText=''
-        configurationCopyText=''
-        configurationColumnText=''
-        configurationResetText=''
-        configurationSaveText=''
+        configurationText=""
+        configurationTitleText=""
+        configurationCopyText=""
+        configurationColumnText=""
+        configurationResetText=""
+        configurationSaveText=""
       />
     );
 
     const buttonDialog = wrapper.find("button.user-configuration-icon");
     buttonDialog.simulate("click");
-    const switchButton = wrapper.find("Switch");
+    const switchButton = wrapper.find(Switch);
     switchButton.props().onChange({ target: null });
 
     it("set copyToClipboardState to false", () => {
@@ -108,17 +109,17 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
-          configurationText=''
-          configurationTitleText=''
-          configurationCopyText=''
-          configurationColumnText=''
-          configurationResetText=''
-          configurationSaveText=''
+          configurationText=""
+          configurationTitleText=""
+          configurationCopyText=""
+          configurationColumnText=""
+          configurationResetText=""
+          configurationSaveText=""
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
       buttonDialog.simulate("click");
-      const switchButton = wrapper.find("Switch");
+      const switchButton = wrapper.find(Switch);
       switchButton.props().onChange({ target: null });
       const reset = wrapper.find("button.reset-configuration");
       reset.simulate("click");
@@ -139,17 +140,17 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
-          configurationText=''
-          configurationTitleText=''
-          configurationCopyText=''
-          configurationColumnText=''
-          configurationResetText=''
-          configurationSaveText=''
+          configurationText=""
+          configurationTitleText=""
+          configurationCopyText=""
+          configurationColumnText=""
+          configurationResetText=""
+          configurationSaveText=""
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
       buttonDialog.simulate("click");
-      const switchButton = wrapper.find("Switch");
+      const switchButton = wrapper.find(Switch);
       switchButton.props().onChange({ target: null });
       const save = wrapper.find("button.save-configuration");
       save.simulate("click");
@@ -170,19 +171,19 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
-          configurationText=''
-          configurationTitleText=''
-          configurationCopyText=''
-          configurationColumnText=''
-          configurationResetText=''
-          configurationSaveText=''
+          configurationText=""
+          configurationTitleText=""
+          configurationCopyText=""
+          configurationColumnText=""
+          configurationResetText=""
+          configurationSaveText=""
         />
       );
       const buttonDialog = wrapper.find("button.user-configuration-icon");
       buttonDialog.simulate("click");
       const spy = jest.spyOn(wrapper.instance(), "toggleDialog");
       wrapper
-        .find("Dialog")
+        .find(Dialog)
         .props()
         .onClose();
 
@@ -202,12 +203,12 @@ describe("ColumnsDisplayer component", () => {
           columnsOrder={columnsOrder}
           copyToClipboard
           setUserConfiguration={setUserConfiguration}
-          configurationText=''
-          configurationTitleText=''
-          configurationCopyText=''
-          configurationColumnText=''
-          configurationResetText=''
-          configurationSaveText=''
+          configurationText=""
+          configurationTitleText=""
+          configurationCopyText=""
+          configurationColumnText=""
+          configurationResetText=""
+          configurationSaveText=""
         />
       );
       const spy = jest.spyOn(wrapper.instance(), "toggleDialog");

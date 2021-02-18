@@ -35,7 +35,12 @@ const CreateInput = ({
   required = false,
   label = ""
 }) => {
-  const val = cellVal || (type === "number" && cellVal === 0) ? cellVal : "";
+  const val =
+    cellVal ||
+    (type === "number" && cellVal === 0) ||
+    (inputType === "boolean" && !cellVal)
+      ? cellVal
+      : "";
   const isNull = cellVal == null;
 
   switch (inputType) {

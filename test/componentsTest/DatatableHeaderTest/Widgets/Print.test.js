@@ -1,6 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import configureStore from "redux-mock-store";
+import { Dialog } from "@material-ui/core";
 import { Provider } from "react-redux";
 import Print, {
   Print as PrintPureComponent
@@ -157,7 +158,7 @@ describe("Print component", () => {
       buttonDialog.simulate("click");
       const spy = jest.spyOn(wrapper.instance(), "toggleDialog");
       wrapper
-        .find("Dialog")
+        .find(Dialog)
         .props()
         .onClose();
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
-import { MuiPickersUtilsProvider, DateTimePicker } from "material-ui-pickers";
+import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
+import { Tooltip } from "@material-ui/core";
 import MomentUtils from "@date-io/moment";
 import DateTimePickerWrapper, {
   DateTimePickerWrapper as DateTimePickerWrapperPureComponent
@@ -51,7 +52,7 @@ describe("Select wrapper", () => {
           />
         </MuiPickersUtilsProvider>
       );
-      expect(wrapper.find("Tooltip")).toHaveLength(1);
+      expect(wrapper.find(Tooltip)).toHaveLength(1);
       expect(wrapper.find(DateTimePicker)).toHaveLength(1);
     });
 
@@ -71,7 +72,7 @@ describe("Select wrapper", () => {
           />
         </MuiPickersUtilsProvider>
       );
-      expect(wrapper.find("Tooltip")).toHaveLength(1);
+      expect(wrapper.find(Tooltip)).toHaveLength(1);
       expect(wrapper.find(DateTimePicker)).toHaveLength(1);
     });
   });
