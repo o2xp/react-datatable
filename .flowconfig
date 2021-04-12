@@ -1,0 +1,15 @@
+[ignore]
+./src/__tests__/
+./node_modules/
+
+[untyped]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

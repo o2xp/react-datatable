@@ -2,27 +2,28 @@
 
 :+1: First off, you are taking time to contribute to this prokect so a big THANK YOU :+1:
 
-
 # Table Of Contents
 
 1. [Code of Conduct](#1-code-of-conduct)
-    - 1.1 [Our Pledge](#11-our-pledge)
-    - 1.2 [Our Standarts](#12-our-standards)
-    - 1.3 [Our Responsabilities](#13-our-responsabilities)
-    - 1.4 [Scope](#14-scope)
-    - 1.5 [Enforcement](#15-enforcement)
-    - 1.6 [Attribution](#16-attribution)
+
+   - 1.1 [Our Pledge](#11-our-pledge)
+   - 1.2 [Our Standarts](#12-our-standards)
+   - 1.3 [Our Responsabilities](#13-our-responsabilities)
+   - 1.4 [Scope](#14-scope)
+   - 1.5 [Enforcement](#15-enforcement)
+   - 1.6 [Attribution](#16-attribution)
 
 2. [How Can I Contribute?](#2-how-can-i-contribute)
-    - 2.1 [Reporting Bugs](#21-reporting-bugs)
-    - 2.2 [Suggesting Enhancements](#22-suggesting-enhancements)
-    - 2.3 [Your First Code Contribution](#23-your-first-code-contribution)
-    - 2.4 [Pull Requests](#24-pull-requests)
+
+   - 2.1 [Reporting Bugs](#21-reporting-bugs)
+   - 2.2 [Suggesting Enhancements](#22-suggesting-enhancements)
+   - 2.3 [Your First Code Contribution](#23-your-first-code-contribution)
+   - 2.4 [Pull Requests](#24-pull-requests)
 
 3. [Styleguides](#3-styleguides)
-    - 3.1 [Git Styleguide](#31-git-styleguide)
-    - 3.2 [React Styleguide](#32-react-styleguide)
-  
+   - 3.1 [Git Styleguide](#31-git-styleguide)
+   - 3.2 [React Styleguide](#32-react-styleguide)
+
 ## 1. Code of Conduct
 
 ### 1.1 Our Pledge
@@ -33,19 +34,19 @@ In the interest of fostering an open and welcoming environment, we as contributo
 
 Examples of behavior that contributes to creating a positive environment include:
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+- Using welcoming and inclusive language
+- Being respectful of differing viewpoints and experiences
+- Gracefully accepting constructive criticism
+- Focusing on what is best for the community
+- Showing empathy towards other community members
 
 Examples of unacceptable behavior by participants include:
 
-* The use of sexualized language or imagery and unwelcome sexual attention or advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+- The use of sexualized language or imagery and unwelcome sexual attention or advances
+- Trolling, insulting/derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information, such as a physical or electronic address, without explicit permission
+- Other conduct which could reasonably be considered inappropriate in a professional setting
 
 ### 1.3 Our Responsabilities
 
@@ -71,6 +72,7 @@ This Code of Conduct is adapted from the [Contributor Covenant][homepage], versi
 [version]: https://contributor-covenant.org/version/1/4/
 
 ## 2. How Can I Contribute ?
+
 ### 2.1 Reporting Bugs
 
 Before creating a bug reports, please check if it doesn't exist in [this list](https://github.com/o2xp/react-datatable/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Abug+). When you are creating a bug report, please fill in [the bug report template](https://github.com/o2xp/react-datatable/blob/develop/.github/ISSUE_TEMPLATE/BUG_REPORT.md).
@@ -127,7 +129,8 @@ $ npm run build
 2. Follow the [styleguides](#styleguides)
 3. Submit your pull request !
 
-**Prerequisites:**  
+**Prerequisites:**
+
 - You have read the [CONTRIBUTING](https://github.com/o2xp/react-datatable/blob/develop/CONTRIBUTING.md) doc
 - Lint and unit tests pass locally with your changes
 - You have added tests that prove your fix is effective or that your feature works
@@ -136,9 +139,11 @@ $ npm run build
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
 
 ## 3. Styleguides
+
 ### 3.1 Git Styleguide
 
 Always be sure that what you are writing is easily understable :
+
 - To name a branch use this pattern : \<name of the feature\>-#\<number of the issue corresponding\> (eg search-filter-#3).
 - To name a commit use this pattern: "feat/fix/enhancement (\<what you did\>) #\<number of the issue corresponding\>" (eg "feat (search filter implementation) #3").
 
@@ -149,10 +154,13 @@ Always be sure that what you are writing is easily understable :
 In order to have a good quality of homogeneous code we are using some tools which are [Eslint](https://eslint.org/), [Prettier](https://prettier.io/) and [Husky](https://github.com/typicode/husky)
 
 #### Eslint
-Code linting is a type of static analysis that is frequently used to find problematic patterns or code that doesn’t adhere to certain style guidelines. JavaScript, being a dynamic and loosely-typed language, is especially prone to developer error. Without the benefit of a compilation process, JavaScript code is typically executed in order to find syntax or other errors. Linting tools like ESLint allow developers to discover problems with their JavaScript code without executing it. We are using the [Airbnb preset](https://github.com/airbnb/javascript).
+
+Code linting is a type of static analysis that is frequently used to find problematic patterns or code that doesnt adhere to certain style guidelines. JavaScript, being a dynamic and loosely-typed language, is especially prone to developer error. Without the benefit of a compilation process, JavaScript code is typically executed in order to find syntax or other errors. Linting tools like ESLint allow developers to discover problems with their JavaScript code without executing it. We are using the [Airbnb preset](https://github.com/airbnb/javascript).
 
 #### Prettier
-Prettier enforces a consistent code style (i.e. code formatting that won't affect the AST) across your entire codebase because it disregards the original styling* by parsing it away and re-printing the parsed AST with its own rules that take the maximum line length into account, wrapping code when necessary.
+
+Prettier enforces a consistent code style (i.e. code formatting that won't affect the AST) across your entire codebase because it disregards the original styling\* by parsing it away and re-printing the parsed AST with its own rules that take the maximum line length into account, wrapping code when necessary.
 
 #### Husky
+
 Husky is here to prevent bad commit and push. Before committing any changes, husky will launch eslint and prettier. If there is any error, your commit wont be effective, you need to correct your code and commit again.
