@@ -23,4 +23,4 @@ class O2xpDatatable extends Component {
   }
 }
 
-export { O2xpDatatable };
+export default O2xpDatatable;

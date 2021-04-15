@@ -1,44 +1,82 @@
 {
   "name": "@o2xp/react-datatable",
-  "description": "@o2xp/react-datatable is a kanban with smooth drag and drop",
+  "version": "2.0.0-beta.1",
+  "description": "@o2xp/react-datatable",
+  "main": "dist/main.js",
   "keywords": [
     "react",
-    "component",
-    "kanban",
-    "drag-and-drop",
-    "dnd",
-    "drag"
+    "component"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicolasDdn/datatable"
+    "url": "https://github.com/o2xp/react-datatable"
   },
-  "version": "1.0.0",
-  "dependencies": {
-    "@material-ui/core": "^4.10.1",
-    "@material-ui/icons": "^4.5.1",
-    "clsx": "^1.1.1",
-    "moment": "^2.29.1",
-    "react": "^16.8.6",
-    "react-scripts": "^3.4.3",
-    "react-scroll-sync": "^0.8.0",
-    "react-sortable-hoc": "^1.11.0",
-    "react-window": "^1.8.5",
-    "uuid": "^8.3.1"
-  },
+  "author": "Nicolas Dieudonné",
   "scripts": {
     "flow": "flow",
     "start": "react-scripts start",
-    "build": "webpack --mode production",
+    "build": "rollup -c",
     "test": "react-scripts test --coverage --watchAll=false --silent",
     "testDev": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.{js,jsx} --fix",
     "prettier": "prettier --write ./src/**/*.{js,jsx}",
     "version": "echo $npm_package_version",
-    "storybook": "start-storybook -p 3000",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.10.1",
+    "@material-ui/icons": "^4.5.1",
+    "clsx": "^1.1.1",
+    "moment": "^2.29.1",
+    "react-scroll-sync": "^0.8.0",
+    "react-sortable-hoc": "^1.11.0",
+    "react-window": "^1.8.5",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-flow": "^7.13.13",
+    "@babel/preset-react": "^7.10.4",
+    "@dump247/storybook-state": "^1.6.1",
+    "@rollup/plugin-babel": "^5.2.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.1.1",
+    "@storybook/react": "^5.3.18",
+    "babel": "^6.23.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "flow-bin": "^0.107.0",
+    "husky": "^2.7.0",
+    "jest-canvas-mock": "^2.1.0",
+    "lint-staged": "^9.2.0",
+    "postcss": "^8.2.4",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.38.4",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -68,32 +106,5 @@
       "!src/**/index.{js,jsx}",
       "!src/index.js"
     ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-flow": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "@dump247/storybook-state": "^1.6.1",
-    "@storybook/react": "^5.3.18",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-flowtype": "^4.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.2",
-    "flow-bin": "^0.107.0",
-    "husky": "^2.7.0",
-    "jest-canvas-mock": "^2.1.0",
-    "lint-staged": "^9.2.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-node-externals": "^2.5.2"
   }
 }
