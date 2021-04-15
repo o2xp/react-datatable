@@ -1,37 +1,69 @@
 {
   "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["react", "prettier"],
   "parser": "babel-eslint",
+  "plugins": [ "prettier",
+    "flowtype"
+  ],
   "rules": {
-    "react/prefer-stateless-function": 0,
-    "prefer-spread": 0,
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unused-prop-types": 0,
     "react/require-default-props": 0,
-    "import/no-extraneous-dependencies": 0,
-    "radix": 0,
-    "react/no-find-dom-node": 0,
     "import/no-named-as-default": 0,
-    "react/no-multi-comp": 0,
-    "react/no-unescaped-entities": 0,
+    "no-param-reassign": ["error", {"props": false}],
+    "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", "jsx"]
+        "extensions": [".js", ".jsx"]
       }
     ],
-    "prettier/prettier": "error",
-    "max-len": 0
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "flowtype/boolean-style": [
+      2,
+      "boolean"
+    ],
+    "flowtype/define-flow-type": 1,
+    "flowtype/delimiter-dangle": 0,
+    "flowtype/generic-spacing": [
+      2,
+      "never"
+    ],
+    "flowtype/no-mixed": 0,
+    "flowtype/no-types-missing-file-annotation": 2,
+    "flowtype/no-weak-types": 0,
+    "flowtype/require-parameter-type": 0,
+    "flowtype/require-readonly-react-props": 0,
+    "flowtype/require-return-type": 0,
+    "flowtype/require-valid-file-annotation": 0,
+    "flowtype/semi": 0,
+    "flowtype/space-after-type-colon": [
+      2,
+      "always"
+    ],
+    "flowtype/space-before-generic-bracket": [
+      2,
+      "never"
+    ],
+    "flowtype/space-before-type-colon": [
+      2,
+      "never"
+    ],
+    "flowtype/type-id-match": 0,
+    "flowtype/union-intersection-spacing": [
+      2,
+      "always"
+    ],
+    "flowtype/use-flow-type": 1
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
   },
   "env": {
     "browser": true,
     "es6": true,
     "jest": true
-  },
-  "settings": {
-    "import/ignore": "node_modules",
-    "import/resolver": {
-      "webpack": {
-        "config": "./config/webpack-common-config.js"
-      }
-    }
   }
 }

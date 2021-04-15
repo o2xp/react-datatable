@@ -1,0 +1,171 @@
+* {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.columnTitle{
+    color: black;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    font-size: 1rem;
+    height: 59px;
+    border-radius: 3px;
+}
+
+.columnTitle:hover{
+    background-color: rgb(194, 194, 194);
+    box-shadow: rgba(0, 0, 0, 0.375) 1px 1px 2px;
+}
+
+.columnTitle .title {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.SortableHelper {
+    background-color: rgb(150, 150, 150);
+    box-shadow: rgba(0, 0, 0, 0.675) 1px 1px 6px;
+    border-radius: 3px;
+}
+
+.sortingOrder {
+    margin-left: 5px;
+}
+
+.dragLine {
+    border: 2px solid rgba(0, 0, 0, 0.54);
+    border-radius: 3px;
+  }
+
+.MuiIconButton-root.orderButton {
+    border-radius: 2px;
+    margin-left: 5px;
+    padding: 2px;
+    color: rgba(0,0,0,0.7);
+}
+
+.MuiIconButton-root.orderButton:hover {
+    background-color: rgb(150, 150, 150);
+}
+  
+.dragLineBox{
+    padding: 0px 10px;
+    width: 60px;
+    align-self: center;
+}
+  
+.dragLineBox:hover{
+    cursor:grab;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+}
+
+.cell.bordered{
+    border-left:1px solid rgba(0,0,0,0.30);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row.stripped {
+    background-color:rgba(0, 0, 0, 0.08);
+}
+
+.row {
+    background-color:rgba(0, 0, 0, 0);
+}
+
+.row:hover {
+    background-color:rgba(0, 0, 0, 0.15);
+}
+
+.row.checked.stripped {
+    background-color: rgba(25, 118, 210, 0.10);
+}
+
+.row.checked {
+    background-color:rgba(25, 118, 210, 0.06);
+}
+
+.row.checked:hover {
+    background-color:rgba(25, 118, 210, 0.15);
+}
+
+.row.bordered{
+    border-bottom: 1px solid rgba(0,0,0,0.30);
+}
+
+.datatable {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.sortableContainer {
+    display: flex;
+}
+
+.headerButton {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px;
+    height:22px;
+}
+.headerButton:hover {
+    background-color: rgba(122, 122, 122, 0.45);
+    box-shadow: rgba(0, 0, 0, 0.575) 1px 1px 6px;
+
+}
+
+.header {
+    display: flex;
+    border-bottom: 1px rgba(0,0,0,0.30) solid;
+    overflow: hidden;
+}
+
+.checkboxContainer {
+    height: 25px;
+    width: 100%;
+}
+
+.rowCheckboxContainer{
+    width: 36px;
+    display: flex;
+}
+
+.header .actionsTitle {
+    height: 59px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.header .actionsTitle .checkAll {
+    padding: 7px;
+    height: 25px;
+}
+
+.rowCell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 5px;
+}
