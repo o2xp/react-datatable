@@ -58,6 +58,8 @@ export class ColumnsDisplayer extends Component {
   render() {
     const { columns, displayText } = this.props;
     const { menuOpen } = this.state;
+    const columnsUnlocked = columns.filter(col => !col.locked);
+
     return (
       <Fragment>
         <Tooltip
@@ -101,7 +103,7 @@ export class ColumnsDisplayer extends Component {
                   style={{ maxHeight: "50vh", overflow: "auto" }}
                 >
                   <MenuList>
-                    {columns.map(column => {
+                    {columnsUnlocked.map(column => {
                       return this.createMenuItem(column);
                     })}
                   </MenuList>

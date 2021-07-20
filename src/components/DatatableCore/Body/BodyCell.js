@@ -12,6 +12,9 @@ import {
   editingPropType,
   setRowEditedPropType,
   onClickPropType,
+  isScrollingPropType,
+  isLastLockedPropType,
+  stylePropType,
   fontPropType
 } from "../../../proptypes";
 import {
@@ -34,7 +37,10 @@ export class BodyCell extends Component {
       rowId,
       editing,
       setRowEdited,
-      onClick
+      onClick,
+      style,
+      isLastLocked,
+      isScrolling
     } = this.props;
     const customDatatype = customDataTypes.find(
       cd => cd.dataType === column.dataType
@@ -95,12 +101,26 @@ export class BodyCell extends Component {
       }
     }
 
+    let className = "";
+    switch (true) {
+      case isLastLocked && isScrolling:
+        className = `Table-Cell Table-Cell-${column.id}  scrolling-shadow`;
+        break;
+      case isLastLocked && !isScrolling:
+        className = `Table-Cell Table-Cell-${column.id} no-scrolling-shadow`;
+        break;
+      default:
+        className = `Table-Cell Table-Cell-${column.id} `;
+        break;
+    }
+
     return (
       <div
-        className={`Table-Cell Table-Cell-${column.id}`}
+        className={className}
         onClick={() => onClick(cellVal)}
         onKeyDown={this.handleKeyDown}
         role="presentation"
+        style={style}
       >
         <Tooltip
           arrow
@@ -126,6 +146,9 @@ BodyCell.propTypes = {
   width: widthPropType.isRequired,
   rowId: rowIdPropType.isRequired,
   editing: editingPropType.isRequired,
+  isScrolling: isScrollingPropType.isRequired,
+  isLastLocked: isLastLockedPropType.isRequired,
+  style: stylePropType.isRequired,
   setRowEdited: setRowEditedPropType,
   onClick: onClickPropType,
   font: fontPropType
@@ -134,6 +157,7 @@ BodyCell.propTypes = {
 const mapStateToProps = state => {
   return {
     customDataTypes: state.customComponentsReducer.customDataTypes,
+    isScrolling: state.datatableReducer.dimensions.isScrolling,
     font: state.datatableReducer.font
   };
 };

@@ -20,9 +20,17 @@ export class HeaderRow extends Component {
       columns,
       CustomTableHeaderCell,
       columnSizeMultiplier,
-      customProps
+      customProps,
+      columnsOrder
     } = this.props;
+    const columnOrderIndex = columnsOrder.findIndex(col => col === columnId);
     const column = columns.find(col => col.id === columnId);
+    let indexLastLocked = columns.filter(col => col.locked).length - 1;
+    if (columnsOrder.find(col => col === "o2xpActions")) {
+      indexLastLocked += 1;
+    }
+    const isLastLocked = indexLastLocked === columnOrderIndex;
+
     const width = `${(
       (Number(column.colSize.split("px")[0]) + 35) *
       columnSizeMultiplier
@@ -31,6 +39,36 @@ export class HeaderRow extends Component {
 
     if (columnId === "o2xpActions") {
       return <HeaderActionsCell key={key} column={column} />;
+    }
+
+    if (column.locked) {
+      let totalLeft = 0;
+      for (let i = 0; i <= columnOrderIndex - 1; i += 1) {
+        totalLeft +=
+          Number(
+            columns
+              .find(col => col.id === columnsOrder[i])
+              .colSize.split("px")[0]
+          ) + 50;
+      }
+      const left = `${totalLeft.toString()}px`;
+
+      return (
+        <HeaderCell
+          column={column}
+          width={column.colSize}
+          key={key}
+          index={index}
+          locked
+          isLastLocked={isLastLocked}
+          style={{
+            position: "sticky",
+            left,
+            zIndex: 9,
+            backgroundColor: "white"
+          }}
+        />
+      );
     }
 
     if (CustomTableHeaderCell !== null) {

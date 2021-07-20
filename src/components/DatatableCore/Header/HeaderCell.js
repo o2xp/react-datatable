@@ -18,7 +18,10 @@ import {
   orderByColumnsPropType,
   orderByPropType,
   canOrderColumnsPropType,
-  textPropType
+  textPropType,
+  stylePropType,
+  isLastLockedPropType,
+  isScrollingPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
 
@@ -110,21 +113,57 @@ export class HeaderCell extends Component {
   };
 
   render() {
-    const { index, dragText } = this.props;
+    const {
+      index,
+      dragText,
+      style,
+      locked,
+      isLastLocked,
+      isScrolling
+    } = this.props;
     const { childButtonHovered } = this.state;
+
+    let className = "";
+    switch (true) {
+      case isLastLocked && isScrolling:
+        className = `scrolling-shadow`;
+        break;
+      case isLastLocked && !isScrolling:
+        className = ` no-scrolling-shadow`;
+        break;
+      default:
+        className = ``;
+        break;
+    }
+
     return (
-      <SortableItem
-        dragText={dragText}
-        index={index}
-        value={this.buildHeaderCell()}
-        childButtonHovered={childButtonHovered}
-      />
+      <>
+        {locked ? (
+          <div
+            style={style}
+            className={
+              childButtonHovered
+                ? `Table-Header-Cell-Child-Hovered ${className}`
+                : `Table-Header-Cell ${className}`
+            }
+          >
+            {this.buildHeaderCell()}
+          </div>
+        ) : (
+          <SortableItem
+            dragText={dragText}
+            index={index}
+            value={this.buildHeaderCell()}
+            childButtonHovered={childButtonHovered}
+          />
+        )}
+      </>
     );
   }
 }
 
 const SortableItem = sortableElement(
-  ({ value, childButtonHovered, dragText }) => (
+  ({ value, childButtonHovered, dragText, style }) => (
     <Tooltip
       arrow
       TransitionComponent={Zoom}
@@ -136,6 +175,7 @@ const SortableItem = sortableElement(
             ? "Table-Header-Cell-Child-Hovered"
             : "Table-Header-Cell"
         }
+        style={style}
       >
         {value}
       </div>
@@ -149,6 +189,10 @@ HeaderCell.propTypes = {
   index: indexPropType.isRequired,
   orderBy: orderByPropType.isRequired,
   canOrderColumns: canOrderColumnsPropType.isRequired,
+  style: stylePropType.isRequired,
+  isScrolling: isScrollingPropType.isRequired,
+  isLastLocked: isLastLockedPropType.isRequired,
+  locked: isLastLockedPropType.isRequired,
   orderByColumns: orderByColumnsPropType,
   orderByText: textPropType,
   dragText: textPropType
@@ -165,7 +209,8 @@ const mapStateToProps = state => {
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
     orderBy: state.datatableReducer.orderBy,
     orderByText: state.textReducer.orderBy,
-    dragText: state.textReducer.drag
+    dragText: state.textReducer.drag,
+    isScrolling: state.datatableReducer.dimensions.isScrolling
   };
 };
 

@@ -84,7 +84,12 @@ describe("Cell type", () => {
       const element = BooleanType({ cellVal: false });
       expect(element).toEqual(
         <BooleanWrapper>
-          <Checkbox checked={false} color="primary" disabled />
+          <Checkbox
+            checked={false}
+            color="primary"
+            disabled
+            style={{ padding: 0 }}
+          />
         </BooleanWrapper>
       );
     });

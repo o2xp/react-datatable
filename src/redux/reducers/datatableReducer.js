@@ -462,6 +462,20 @@ const initializeOptions = (
     );
   }
 
+  const colsLocked = optionsInit.data.columns
+    .filter(col => col.locked)
+    .reverse();
+
+  if (colsLocked.length > 0) {
+    colsLocked.forEach(({ id }) => {
+      const index = newState.features.userConfiguration.columnsOrder.findIndex(
+        col => col === id
+      );
+      newState.features.userConfiguration.columnsOrder.splice(index, 1);
+      newState.features.userConfiguration.columnsOrder.unshift(id);
+    });
+  }
+
   const actionsUser = [canEdit, canDelete, canSelectRow];
   const numberOfActions = actionsUser.filter(v => v).length;
 
@@ -1103,6 +1117,27 @@ const setColumnVisibilty = (state, payload) => {
     newColumnsOrder = columnsOrder.filter(col => col !== payload.id);
   } else {
     columnsOrder.splice(index, 0, payload.id);
+
+    const colsLocked = columns.filter(col => col.locked);
+    if (colsLocked.length > 0) {
+      colsLocked.forEach(({ id }) => {
+        const i = state.features.userConfiguration.columnsOrder.findIndex(
+          col => col === id
+        );
+        columnsOrder.splice(i, 1);
+        columnsOrder.unshift(id);
+
+        const o2xpActionsIndex = columnsOrder.findIndex(
+          col => col === "o2xpActions"
+        );
+
+        if (o2xpActionsIndex >= 0) {
+          columnsOrder.splice(o2xpActionsIndex, 1);
+          columnsOrder.unshift("o2xpActions");
+        }
+      });
+    }
+
     newColumnsOrder = cloneDeep(columnsOrder);
   }
 
