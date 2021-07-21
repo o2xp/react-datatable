@@ -52,7 +52,7 @@ export class HeaderCell extends Component {
           className="cell-header"
           container
           style={{ width }}
-          justify="center"
+          justifyContent="center"
           alignItems="center"
         >
           <Grid item xs={orderElement ? 8 : 12}>
@@ -71,7 +71,13 @@ export class HeaderCell extends Component {
             </button>
           </Grid>
           {orderElement && (
-            <Grid container item xs={4} justify="center" alignItems="center">
+            <Grid
+              container
+              item
+              xs={4}
+              justifyContent="center"
+              alignItems="center"
+            >
               <Grid item xs={6}>
                 <ArrowIcon
                   className={
@@ -189,10 +195,10 @@ HeaderCell.propTypes = {
   index: indexPropType.isRequired,
   orderBy: orderByPropType.isRequired,
   canOrderColumns: canOrderColumnsPropType.isRequired,
-  style: stylePropType.isRequired,
+  style: stylePropType,
   isScrolling: isScrollingPropType.isRequired,
-  isLastLocked: isLastLockedPropType.isRequired,
-  locked: isLastLockedPropType.isRequired,
+  isLastLocked: isLastLockedPropType,
+  locked: isLastLockedPropType,
   orderByColumns: orderByColumnsPropType,
   orderByText: textPropType,
   dragText: textPropType

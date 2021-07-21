@@ -147,8 +147,8 @@ BodyCell.propTypes = {
   rowId: rowIdPropType.isRequired,
   editing: editingPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,
-  isLastLocked: isLastLockedPropType.isRequired,
-  style: stylePropType.isRequired,
+  isLastLocked: isLastLockedPropType,
+  style: stylePropType,
   setRowEdited: setRowEditedPropType,
   onClick: onClickPropType,
   font: fontPropType
