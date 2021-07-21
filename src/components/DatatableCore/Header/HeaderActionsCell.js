@@ -13,6 +13,7 @@ import {
   rowsPropType,
   rowsSelectedPropType,
   keyColumnPropType,
+  isLastLockedPropType,
   setRowsSelectedPropType
 } from "../../../proptypes";
 
@@ -47,17 +48,24 @@ export class HeaderActionsCell extends Component {
   };
 
   render() {
-    const { canSelect, column, isScrolling } = this.props;
+    const { canSelect, column, isScrolling, isLastLocked } = this.props;
     const { checked } = this.state;
 
+    let className = "";
+    switch (true) {
+      case isLastLocked && isScrolling:
+        className = "Table-Header-Cell action scrolling-shadow";
+        break;
+      case isLastLocked && !isScrolling:
+        className = "Table-Header-Cell action no-scrolling-shadow";
+        break;
+      default:
+        className = `Table-Header-Cell action`;
+        break;
+    }
+
     return (
-      <div
-        className={
-          isScrolling
-            ? "Table-Header-Cell action scrolling-shadow"
-            : "Table-Header-Cell action"
-        }
-      >
+      <div className={className}>
         <Grid container style={{ width: column.colSize }}>
           {canSelect && (
             <Grid item>
@@ -101,6 +109,7 @@ HeaderActionsCell.propTypes = {
   column: columnPropType.isRequired,
   isScrolling: isScrollingPropType,
   canSelect: canSelectRowPropType,
+  isLastLocked: isLastLockedPropType,
   rowsToUse: rowsPropType,
   rowsSelected: rowsSelectedPropType,
   keyColumn: keyColumnPropType,

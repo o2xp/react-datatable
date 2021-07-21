@@ -49,7 +49,8 @@ import {
   additionalActionsPropType,
   canDuplicatePropType,
   duplicateRowPropType,
-  textPropType
+  textPropType,
+  isLastLockedPropType
 } from "../../../proptypes";
 import { customVariant } from "../../MuiTheme";
 
@@ -133,7 +134,8 @@ export class BodyActionsCell extends Component {
       duplicateText,
       deleteText,
       confirmDeleteText,
-      cancelDeleteText
+      cancelDeleteText,
+      isLastLocked
     } = this.props;
 
     const { deleting } = this.state;
@@ -145,13 +147,22 @@ export class BodyActionsCell extends Component {
 
     const editableRow = canEditRow ? canEditRow(row) : true;
 
+    let className = "";
+    switch (true) {
+      case isLastLocked && isScrolling:
+        className = `Table-Cell action  scrolling-shadow`;
+        break;
+      case isLastLocked && !isScrolling:
+        className = `Table-Cell action no-scrolling-shadow`;
+        break;
+      default:
+        className = `Table-Cell action`;
+        break;
+    }
+
     return (
       <div
-        className={
-          isScrolling
-            ? "Table-Cell action scrolling-shadow"
-            : "Table-Cell action"
-        }
+        className={className}
         style={{
           backgroundColor: style.backgroundColor
         }}
@@ -317,6 +328,7 @@ BodyActionsCell.propTypes = {
   editing: editingPropType.isRequired,
   classes: classesPropType.isRequired,
   isScrolling: isScrollingPropType.isRequired,
+  isLastLocked: isLastLockedPropType.isRequired,
   style: stylePropType.isRequired,
   canEdit: canEditPropType.isRequired,
   canEditRow: canEditRowPropType,

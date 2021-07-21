@@ -45,6 +45,7 @@ describe("HeaderActionsCell component", () => {
       const wrapper = shallow(
         <HeaderActionsCellPureComponent
           isScrolling
+          isLastLocked
           column={column}
           setRowsGlobalSelected={setRowsGlobalSelected}
         />

@@ -37,6 +37,7 @@ export class BodyRow extends Component {
   bodyCellBuilder = (val, columnId, cellIndex, row, editing) => {
     const {
       columns,
+      columnsOrder,
       CustomTableBodyCell,
       columnSizeMultiplier,
       rowsSelected,
@@ -44,7 +45,13 @@ export class BodyRow extends Component {
       style,
       customProps
     } = this.props;
+    const columnOrderIndex = columnsOrder.findIndex(col => col === columnId);
     const column = columns.find(col => col.id === columnId);
+    let indexLastLocked = columns.filter(col => col.locked).length - 1;
+    if (columnsOrder.find(col => col === "o2xpActions")) {
+      indexLastLocked += 1;
+    }
+    const isLastLocked = indexLastLocked === columnOrderIndex;
     const rowId = row[keyColumn];
     const key = `row-${row[keyColumn]}-cell-${columnId}`;
     let isEditing = editing && column.editable;
@@ -57,6 +64,7 @@ export class BodyRow extends Component {
       return (
         <BodyActionsCell
           style={style}
+          isLastLocked={isLastLocked}
           key={key}
           column={column}
           row={row}
@@ -65,10 +73,42 @@ export class BodyRow extends Component {
         />
       );
     }
+
     const width = `${(
       (Number(column.colSize.split("px")[0]) + 35) *
       columnSizeMultiplier
     ).toString()}px`;
+
+    if (column.locked) {
+      let totalLeft = 0;
+      for (let i = 0; i <= columnOrderIndex - 1; i += 1) {
+        totalLeft +=
+          Number(
+            columns
+              .find(col => col.id === columnsOrder[i])
+              .colSize.split("px")[0]
+          ) + 50;
+      }
+      const left = `${totalLeft.toString()}px`;
+      return (
+        <BodyCell
+          isLastLocked={isLastLocked}
+          cellVal={val}
+          editing={isEditing}
+          width={column.colSize}
+          column={column}
+          rowId={rowId}
+          key={key}
+          style={{
+            position: "sticky",
+            left,
+            zIndex: 9,
+            backgroundColor: style.backgroundColor
+          }}
+          onClick={() => (isEditing ? null : this.copyToClipboardFunction(val))}
+        />
+      );
+    }
 
     if ((val === null || val === undefined || val === "") && !isEditing) {
       return (

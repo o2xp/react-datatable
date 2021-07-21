@@ -46,7 +46,12 @@ export const BooleanType = properties => {
   }
   return (
     <BooleanWrapper>
-      <Checkbox checked={cellVal} color="primary" disabled />
+      <Checkbox
+        checked={cellVal}
+        color="primary"
+        disabled
+        style={{ padding: 0 }}
+      />
     </BooleanWrapper>
   );
 };

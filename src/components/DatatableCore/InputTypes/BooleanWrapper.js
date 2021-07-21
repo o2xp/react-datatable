@@ -20,6 +20,7 @@ const BooleanWrapper = ({
       required={required}
       checked={cellVal}
       color="primary"
+      style={{ padding: 0 }}
       onChange={(e, checked) =>
         setRowEdited({ rowId, columnId, newValue: checked })
       }

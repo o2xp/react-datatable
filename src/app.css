@@ -103,6 +103,10 @@
   border-right: solid 2px lightgrey;
 }
 
+#o2xp .no-scrolling-shadow {
+  border-right: solid 2px transparent;
+}
+
 #o2xp .Table-Cell > div > div{
   overflow: hidden;
   white-space: nowrap;

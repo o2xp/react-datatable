@@ -104,6 +104,7 @@ describe("BodyActionsCell component", () => {
       const wrapper = shallow(
         <BodyActionsCellPureComponent
           isScrolling
+          isLastLocked
           keyColumn="id"
           canEdit
           canDelete

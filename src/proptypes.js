@@ -31,6 +31,7 @@ export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const duplicateRowPropType = PropTypes.func.isRequired;
 export const initTextPropType = PropTypes.func.isRequired;
 export const isScrollingPropType = PropTypes.bool;
+export const isLastLockedPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
 export const checkedPropType = PropTypes.bool;
 export const orderByPropType = PropTypes.arrayOf(PropTypes.object);
