@@ -8,6 +8,7 @@ import {
   Paper,
   ClickAwayListener,
   MenuList,
+  Button,
   Checkbox,
   MenuItem
 } from "@material-ui/core";
@@ -16,27 +17,52 @@ import {
   columnsOrderPropType,
   columnsPropType,
   setColumnVisibiltyPropType,
+  columnsPresetsPropType,
+  setMultipleColumnsVisibilityPropType,
   textPropType
 } from "../../../proptypes";
-import { setColumnVisibilty as setColumnVisibiltyAction } from "../../../redux/actions/datatableActions";
+import {
+  setColumnVisibilty as setColumnVisibiltyAction,
+  setMultipleColumnsVisibility as setMultipleColumnsVisibilityAction
+} from "../../../redux/actions/datatableActions";
 
 export class ColumnsDisplayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false
+      menuOpen: false,
+      columnsDisplay: false,
+      presetsDisplay: false
     };
     this.buttonRef = React.createRef();
   }
 
   toggleMenu = () => {
     const { menuOpen } = this.state;
-    this.setState({ menuOpen: !menuOpen });
+    this.setState({
+      menuOpen: !menuOpen,
+      columnsDisplay: false,
+      presetsDisplay: false
+    });
+  };
+
+  toggleColumnsToDisplay = () => {
+    const { columnsDisplay } = this.state;
+    this.setState({ columnsDisplay: !columnsDisplay });
+  };
+
+  togglePresetsToDisplay = () => {
+    const { presetsDisplay } = this.state;
+    this.setState({ presetsDisplay: !presetsDisplay });
   };
 
   closeMenu = e => {
     if (!this.buttonRef.current || !this.buttonRef.current.contains(e.target)) {
-      this.setState({ menuOpen: false });
+      this.setState({
+        menuOpen: false,
+        columnsDisplay: false,
+        presetsDisplay: false
+      });
     }
   };
 
@@ -55,9 +81,26 @@ export class ColumnsDisplayer extends Component {
     return null;
   };
 
+  createPresetsItem = preset => {
+    const { setMultipleColumnsVisibility } = this.props;
+    /* let allColumns = cloneDeep(preset.columnsToHide);
+      allColumns.unshift("o2xpActions");
+      const visible = columnsOrder.every(columnOrder => allColumns.includes(columnOrder)); */
+
+    return (
+      <MenuItem
+        key={preset.presetName}
+        onClick={() => setMultipleColumnsVisibility(preset)}
+      >
+        <Checkbox checked={preset.isActive} color="primary" />
+        {preset.presetName}
+      </MenuItem>
+    );
+  };
+
   render() {
-    const { columns, displayText } = this.props;
-    const { menuOpen } = this.state;
+    const { columns, columnsPresetsToDisplay, displayText } = this.props;
+    const { menuOpen, columnsDisplay, presetsDisplay } = this.state;
     const columnsUnlocked = columns.filter(col => !col.locked);
 
     return (
@@ -78,6 +121,32 @@ export class ColumnsDisplayer extends Component {
           </span>
         </Tooltip>
 
+        {/* ({ TransitionProps, placement }) => (
+          <Zoom
+          {...TransitionProps}
+          style={{
+            transformOrigin:
+            placement === "bottom" ? "center top" : "center bottom"
+          }}
+          >
+          <ClickAwayListener
+          onClickAway={e => {
+            this.closeMenu(e);
+          }}
+          >
+          <Paper
+          id="menu-list-grow"
+          style={{ maxHeight: "50vh", overflow: "auto" }}
+          >
+          <MenuList>
+          {columnsUnlocked.map(column => {
+            return this.createMenuItem(column);
+          })}
+          </MenuList>
+          </Paper>
+          </ClickAwayListener>
+          </Zoom>
+        ) */}
         <Popper
           open={menuOpen}
           anchorEl={this.buttonRef.current}
@@ -85,32 +154,75 @@ export class ColumnsDisplayer extends Component {
           transition
           disablePortal
         >
-          {({ TransitionProps, placement }) => (
-            <Zoom
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom"
+          <Zoom>
+            <ClickAwayListener
+              onClickAway={e => {
+                this.closeMenu(e);
               }}
             >
-              <ClickAwayListener
-                onClickAway={e => {
-                  this.closeMenu(e);
+              <Paper
+                style={{
+                  padding: "10px 10px 10px",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly"
                 }}
               >
-                <Paper
-                  id="menu-list-grow"
-                  style={{ maxHeight: "50vh", overflow: "auto" }}
-                >
-                  <MenuList>
-                    {columnsUnlocked.map(column => {
-                      return this.createMenuItem(column);
-                    })}
-                  </MenuList>
-                </Paper>
-              </ClickAwayListener>
-            </Zoom>
-          )}
+                {/* TODO: put the plain text into the textReducer.js and then use those variables */ menuOpen &&
+                  !columnsDisplay &&
+                  !presetsDisplay && (
+                    <div>
+                      <Button
+                        className="display-column"
+                        onClick={() => this.toggleColumnsToDisplay()}
+                        size="small"
+                        variant="outlined"
+                      >
+                        Display by columns
+                      </Button>
+                      <span style={{ padding: "0 5px", color: "gray" }}>|</span>
+                      <Button
+                        className="display-column-preset"
+                        onClick={() => this.togglePresetsToDisplay()}
+                        size="small"
+                        variant="outlined"
+                      >
+                        Display by presets
+                      </Button>
+                    </div>
+                  )}
+
+                {columnsDisplay && (
+                  <Paper
+                    id="menu-list-grow"
+                    style={{ maxHeight: "50vh", overflow: "auto" }}
+                  >
+                    <MenuList>
+                      {columnsUnlocked.map(column => {
+                        return this.createMenuItem(column);
+                      })}
+                    </MenuList>
+                  </Paper>
+                )}
+
+                {presetsDisplay && (
+                  <Paper
+                    id="menu-list-grow-preset"
+                    style={{ maxHeight: "50vh", overflow: "auto" }}
+                  >
+                    <MenuList>
+                      {columnsPresetsToDisplay.length > 0
+                        ? columnsPresetsToDisplay.map(preset => {
+                            return this.createPresetsItem(preset);
+                          })
+                        : "There are no presets defined."}
+                    </MenuList>
+                  </Paper>
+                )}
+              </Paper>
+            </ClickAwayListener>
+          </Zoom>
+          )
         </Popper>
       </Fragment>
     );
@@ -120,13 +232,17 @@ export class ColumnsDisplayer extends Component {
 ColumnsDisplayer.propTypes = {
   columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
+  columnsPresetsToDisplay: columnsPresetsPropType,
   setColumnVisibilty: setColumnVisibiltyPropType,
+  setMultipleColumnsVisibility: setMultipleColumnsVisibilityPropType,
   displayText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setColumnVisibilty: column => dispatch(setColumnVisibiltyAction(column))
+    setColumnVisibilty: column => dispatch(setColumnVisibiltyAction(column)),
+    setMultipleColumnsVisibility: columns =>
+      dispatch(setMultipleColumnsVisibilityAction(columns))
   };
 };
 
@@ -135,6 +251,8 @@ const mapStateToProps = state => {
     columns: state.datatableReducer.data.columns,
     columnsOrder:
       state.datatableReducer.features.userConfiguration.columnsOrder,
+    columnsPresetsToDisplay:
+      state.datatableReducer.features.columnsPresetsToDisplay,
     displayText: state.textReducer.display
   };
 };

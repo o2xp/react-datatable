@@ -31,6 +31,12 @@ const storyOptionsSample = {
     canOrderColumns: true,
     canSelectRow: true,
     canSaveUserConfiguration: true,
+    columnsPresetsToDisplay: [
+      { presetName:"Show blue columns", columnsToShow:["id","name","age"], isActive:false },
+      { presetName:"Show one columns", columnsToShow:["age"],  isActive:false },
+      { presetName:"Show something ", columnsToShow:[ "id","name","age","adult","birthDate","eyeColor","iban" ] , isActive:false },
+      { presetName:"Show nothing ", columnsToShow:[],  isActive:false }
+    ],
     userConfiguration: {
       columnsOrder: [
         "id",

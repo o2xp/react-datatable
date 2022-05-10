@@ -79,6 +79,7 @@ const defaultState = {
     canOrderColumns: false,
     canSelectRow: false,
     canSaveUserConfiguration: false,
+    columnsPresetsToDisplay: [],
     editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],
@@ -1165,6 +1166,64 @@ const setColumnVisibilty = (state, payload) => {
   };
 };
 
+const setMultipleColumnsVisibility = (state, payload) => {
+  if (payload.columnsToShow.length > 0) {
+    const { columns } = state.data;
+    const { columnsOrder } = state.features.userConfiguration;
+
+    let newState = "";
+    let newColumnsOrder = [];
+
+    payload.isActive = !payload.isActive;
+
+    if (payload.isActive) {
+      const columnToKeep = columnsOrder.find(
+        column => column === "o2xpActions"
+      );
+      newColumnsOrder.push(columnToKeep);
+      for (let id = 0; id < payload.columnsToShow.length; id += 1) {
+        if (columnsOrder.includes(payload.columnsToShow[id])) {
+          const columnToAdd = columnsOrder.find(
+            column => column === payload.columnsToShow[id]
+          );
+          newColumnsOrder.push(columnToAdd);
+        } else {
+          const col = columns.find(
+            column => column.id === payload.columnsToShow[id]
+          );
+          newColumnsOrder.push(col.id);
+        }
+      }
+    } else {
+      const columnNames = columns.map(value => value.id);
+      newColumnsOrder = cloneDeep(columnNames);
+    }
+
+    newState = {
+      ...state,
+      features: {
+        ...state.features,
+        userConfiguration: {
+          ...state.features.userConfiguration,
+          columnsOrder: newColumnsOrder
+        }
+      }
+    };
+
+    return {
+      ...newState,
+      pagination: setPagination({
+        state: newState
+      }),
+      dimensions: {
+        ...newState.dimensions,
+        columnSizeMultiplier: updateRowSizeMultiplier(newState)
+      }
+    };
+  }
+  return state;
+};
+
 const setUserConfiguration = (state, payload) => {
   const { columnsOrder, copyToClipboard, action } = payload;
   const { actions } = state;
@@ -1334,6 +1393,8 @@ const datatableReducer = (state = defaultState, action) => {
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
+    case "SET_MULTIPLE_COLUMNS_VISIBILITY":
+      return setMultipleColumnsVisibility(state, payload);
     case "SET_USER_CONFIGURATION":
       return setUserConfiguration(state, payload);
     case "REFRESH_ROWS_STARTED":

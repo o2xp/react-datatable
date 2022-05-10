@@ -18,6 +18,7 @@ export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
+export const setMultipleColumnsVisibilityPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const setUserConfigurationPropType = PropTypes.func.isRequired;
@@ -120,6 +121,7 @@ export const canSelectRowPropType = PropTypes.bool;
 export const canSaveUserConfigurationPropType = PropTypes.bool;
 export const canDuplicatePropType = PropTypes.bool;
 export const columnsOrderPropType = PropTypes.arrayOf(PropTypes.string);
+export const columnsPresetsPropType = PropTypes.arrayOf(PropTypes.object);
 export const copyToClipboardPropType = PropTypes.bool;
 export const availablePropType = PropTypes.arrayOf(
   PropTypes.oneOfType([PropTypes.string, PropTypes.number])

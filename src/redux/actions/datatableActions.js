@@ -101,6 +101,11 @@ export const setColumnVisibilty = payload => ({
   payload
 });
 
+export const setMultipleColumnsVisibility = payload => ({
+  type: "SET_MULTIPLE_COLUMNS_VISIBILITY",
+  payload
+});
+
 export const setUserConfiguration = payload => ({
   type: "SET_USER_CONFIGURATION",
   payload
