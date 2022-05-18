@@ -75,6 +75,7 @@ const defaultState = {
     canDelete: false,
     canDuplicate: false,
     canSearch: false,
+    canCreatePreset: false,
     canRefreshRows: false,
     canOrderColumns: false,
     canSelectRow: false,
@@ -537,6 +538,7 @@ const initializeOptions = (
     canPrint,
     canDownload,
     canSearch,
+    canCreatePreset,
     canRefreshRows,
     canOrderColumns,
     canSaveUserConfiguration,
@@ -548,6 +550,7 @@ const initializeOptions = (
     canPrint ||
     canDownload ||
     canSearch ||
+    canCreatePreset ||
     canRefreshRows ||
     canOrderColumns ||
     canSaveUserConfiguration ||

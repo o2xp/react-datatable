@@ -30,6 +30,7 @@ const storyOptionsSample = {
     canRefreshRows: true,
     canOrderColumns: true,
     canSelectRow: true,
+    canCreatePreset: true,
     canSaveUserConfiguration: true,
     columnsPresetsToDisplay: [
       { presetName:"Show blue columns", columnsToShow:["id","name","age"], isActive:false },
