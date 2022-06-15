@@ -33,10 +33,10 @@ const storyOptionsSample = {
     canCreatePreset: true,
     canSaveUserConfiguration: true,
     columnsPresetsToDisplay: [
-      { presetName:"Show blue columns", columnsToShow:["id","name","age"], isActive:false },
-      { presetName:"Show one columns", columnsToShow:["age"],  isActive:false },
-      { presetName:"Show something ", columnsToShow:[ "id","name","age","adult","birthDate","eyeColor","iban" ] , isActive:false },
-      { presetName:"Show nothing ", columnsToShow:[],  isActive:false }
+      { presetName:"Show blue columns", columnsToShow:["id","name","age"], isActive:false, type:"predefinedPreset" },
+      { presetName:"Show one columns", columnsToShow:["age"],  isActive:false, type:"predefinedPreset" },
+      { presetName:"Show something ", columnsToShow:["id","name","age","adult","birthDate","eyeColor","iban" ] , isActive:false, type:"predefinedPreset" },
+      { presetName:"Show nothing ", columnsToShow:[],  isActive:false, type:"predefinedPreset" }
     ],
     userConfiguration: {
       columnsOrder: [

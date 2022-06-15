@@ -56,7 +56,6 @@ class DatatableHeader extends Component {
     const hasAdditionalIcons = additionalIcons.length > 0;
     return (
       <div className="Header" style={{ width, height }}>
-        {console.log(canCreatePreset)}
         <div className="title">{title}</div>
         {canSearch && <Search />}
         {canDownload && <DownloadData />}

@@ -14,16 +14,16 @@ import {
 } from "@material-ui/core";
 import { ViewColumn as ViewColumnIcon } from "@material-ui/icons";
 import {
-  columnsOrderPropType,
   columnsPropType,
   setColumnVisibiltyPropType,
   columnsPresetsPropType,
-  setMultipleColumnsVisibilityPropType,
-  textPropType
+  handlePresetDisplayPropType,
+  textPropType,
+  columnsOrderPropType
 } from "../../../proptypes";
 import {
   setColumnVisibilty as setColumnVisibiltyAction,
-  setMultipleColumnsVisibility as setMultipleColumnsVisibilityAction
+  handlePresetDisplay as handlePresetDisplayAction
 } from "../../../redux/actions/datatableActions";
 
 export class ColumnsDisplayer extends Component {
@@ -66,7 +66,26 @@ export class ColumnsDisplayer extends Component {
     }
   };
 
-  createMenuItem = column => {
+  createPresetMenuItems = () => {
+    const localPresets = JSON.parse(localStorage.getItem("presetList"));
+    const { handlePresetDisplay, columnsPresetsToDisplay } = this.props;
+
+    const allPresets = columnsPresetsToDisplay.concat(localPresets);
+
+    return allPresets.map(preset => {
+      return (
+        <MenuItem
+          key={preset.presetName}
+          onClick={() => handlePresetDisplay(preset)}
+        >
+          <Checkbox checked={preset.isActive} color="primary" />
+          {preset.presetName}
+        </MenuItem>
+      );
+    });
+  };
+
+  createColumnsMenuItem = column => {
     const { columnsOrder } = this.props;
     const { setColumnVisibilty } = this.props;
     const visible = columnsOrder.includes(column.id);
@@ -81,28 +100,10 @@ export class ColumnsDisplayer extends Component {
     return null;
   };
 
-  createPresetsItem = preset => {
-    const { setMultipleColumnsVisibility } = this.props;
-    /* let allColumns = cloneDeep(preset.columnsToHide);
-      allColumns.unshift("o2xpActions");
-      const visible = columnsOrder.every(columnOrder => allColumns.includes(columnOrder)); */
-
-    return (
-      <MenuItem
-        key={preset.presetName}
-        onClick={() => setMultipleColumnsVisibility(preset)}
-      >
-        <Checkbox checked={preset.isActive} color="primary" />
-        {preset.presetName}
-      </MenuItem>
-    );
-  };
-
   render() {
-    const { columns, columnsPresetsToDisplay, displayText } = this.props;
+    const { columns, displayText } = this.props;
     const { menuOpen, columnsDisplay, presetsDisplay } = this.state;
     const columnsUnlocked = columns.filter(col => !col.locked);
-
     return (
       <Fragment>
         <Tooltip
@@ -121,32 +122,6 @@ export class ColumnsDisplayer extends Component {
           </span>
         </Tooltip>
 
-        {/* ({ TransitionProps, placement }) => (
-          <Zoom
-          {...TransitionProps}
-          style={{
-            transformOrigin:
-            placement === "bottom" ? "center top" : "center bottom"
-          }}
-          >
-          <ClickAwayListener
-          onClickAway={e => {
-            this.closeMenu(e);
-          }}
-          >
-          <Paper
-          id="menu-list-grow"
-          style={{ maxHeight: "50vh", overflow: "auto" }}
-          >
-          <MenuList>
-          {columnsUnlocked.map(column => {
-            return this.createMenuItem(column);
-          })}
-          </MenuList>
-          </Paper>
-          </ClickAwayListener>
-          </Zoom>
-        ) */}
         <Popper
           open={menuOpen}
           anchorEl={this.buttonRef.current}
@@ -168,29 +143,27 @@ export class ColumnsDisplayer extends Component {
                   justifyContent: "space-evenly"
                 }}
               >
-                {/* TODO: put the plain text into the textReducer.js and then use those variables */ menuOpen &&
-                  !columnsDisplay &&
-                  !presetsDisplay && (
-                    <div>
-                      <Button
-                        className="display-column"
-                        onClick={() => this.toggleColumnsToDisplay()}
-                        size="small"
-                        variant="outlined"
-                      >
-                        Display by columns
-                      </Button>
-                      <span style={{ padding: "0 5px", color: "gray" }}>|</span>
-                      <Button
-                        className="display-column-preset"
-                        onClick={() => this.togglePresetsToDisplay()}
-                        size="small"
-                        variant="outlined"
-                      >
-                        Display by presets
-                      </Button>
-                    </div>
-                  )}
+                {menuOpen && !columnsDisplay && !presetsDisplay && (
+                  <div>
+                    <Button
+                      className="display-column"
+                      onClick={() => this.toggleColumnsToDisplay()}
+                      size="small"
+                      variant="outlined"
+                    >
+                      Display by columns
+                    </Button>
+                    <span style={{ padding: "0 5px", color: "gray" }}>|</span>
+                    <Button
+                      className="display-column-preset"
+                      onClick={() => this.togglePresetsToDisplay()}
+                      size="small"
+                      variant="outlined"
+                    >
+                      Display by presets
+                    </Button>
+                  </div>
+                )}
 
                 {columnsDisplay && (
                   <Paper
@@ -199,7 +172,7 @@ export class ColumnsDisplayer extends Component {
                   >
                     <MenuList>
                       {columnsUnlocked.map(column => {
-                        return this.createMenuItem(column);
+                        return this.createColumnsMenuItem(column);
                       })}
                     </MenuList>
                   </Paper>
@@ -210,19 +183,12 @@ export class ColumnsDisplayer extends Component {
                     id="menu-list-grow-preset"
                     style={{ maxHeight: "50vh", overflow: "auto" }}
                   >
-                    <MenuList>
-                      {columnsPresetsToDisplay.length > 0
-                        ? columnsPresetsToDisplay.map(preset => {
-                            return this.createPresetsItem(preset);
-                          })
-                        : "There are no presets defined."}
-                    </MenuList>
+                    <MenuList>{this.createPresetMenuItems()}</MenuList>
                   </Paper>
                 )}
               </Paper>
             </ClickAwayListener>
           </Zoom>
-          )
         </Popper>
       </Fragment>
     );
@@ -230,19 +196,18 @@ export class ColumnsDisplayer extends Component {
 }
 
 ColumnsDisplayer.propTypes = {
-  columnsOrder: columnsOrderPropType.isRequired,
   columns: columnsPropType.isRequired,
   columnsPresetsToDisplay: columnsPresetsPropType,
+  columnsOrder: columnsOrderPropType,
   setColumnVisibilty: setColumnVisibiltyPropType,
-  setMultipleColumnsVisibility: setMultipleColumnsVisibilityPropType,
+  handlePresetDisplay: handlePresetDisplayPropType,
   displayText: textPropType
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setColumnVisibilty: column => dispatch(setColumnVisibiltyAction(column)),
-    setMultipleColumnsVisibility: columns =>
-      dispatch(setMultipleColumnsVisibilityAction(columns))
+    handlePresetDisplay: preset => dispatch(handlePresetDisplayAction(preset))
   };
 };
 

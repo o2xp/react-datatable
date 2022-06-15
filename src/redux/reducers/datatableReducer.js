@@ -1169,58 +1169,119 @@ const setColumnVisibilty = (state, payload) => {
   };
 };
 
-const setMultipleColumnsVisibility = (state, payload) => {
-  if (payload.columnsToShow.length > 0) {
-    const { columns } = state.data;
-    const { columnsOrder } = state.features.userConfiguration;
+// TODO: make the function more readable
+// FIXME:
+const handlePresetDisplay = (state, payload) => {
+  const selectedPreset = payload;
+  const allColumnsNames = state.data.columns.map(column => column.id);
+  const columnsCurrentlyDisplayed =
+    state.features.userConfiguration.columnsOrder;
 
-    let newState = "";
-    let newColumnsOrder = [];
+  const predefinedPresets = state.features.columnsPresetsToDisplay;
+  const localPresets = JSON.parse(localStorage.getItem("presetList"));
+  const allPresets = predefinedPresets.concat(localPresets);
 
+  if (selectedPreset.type === "predefinedPreset") {
     payload.isActive = !payload.isActive;
+  } else {
+    // Reverses isActive state of the selectedState in the localStorage and of selectedPreset
+    const presetIndex = localPresets.findIndex(
+      preset => preset.presetName === selectedPreset.presetName
+    );
+    localPresets[presetIndex].isActive = !localPresets[presetIndex].isActive;
+    localStorage.setItem("presetList", JSON.stringify(localPresets));
+    selectedPreset.isActive = !selectedPreset.isActive;
+  }
 
-    if (payload.isActive) {
-      const columnToKeep = columnsOrder.find(
-        column => column === "o2xpActions"
-      );
-      newColumnsOrder.push(columnToKeep);
-      for (let id = 0; id < payload.columnsToShow.length; id += 1) {
-        if (columnsOrder.includes(payload.columnsToShow[id])) {
-          const columnToAdd = columnsOrder.find(
-            column => column === payload.columnsToShow[id]
-          );
-          newColumnsOrder.push(columnToAdd);
-        } else {
-          const col = columns.find(
-            column => column.id === payload.columnsToShow[id]
-          );
-          newColumnsOrder.push(col.id);
-        }
-      }
-    } else {
-      const columnNames = columns.map(value => value.id);
-      newColumnsOrder = cloneDeep(columnNames);
+  // TODO: mettre dans le localstorage
+  const activePresets = [];
+  allPresets.forEach(preset => {
+    if (preset.isActive) {
+      activePresets.push(preset);
     }
+  });
 
-    newState = {
+  // If the selected preset is the only one active, show only its columns
+  if (selectedPreset.isActive && activePresets.length === 1) {
+    return {
       ...state,
       features: {
         ...state.features,
         userConfiguration: {
           ...state.features.userConfiguration,
-          columnsOrder: newColumnsOrder
+          columnsOrder: selectedPreset.columnsToShow
         }
       }
     };
+  }
+
+  // If there is no more preset selected display all columns again
+  if (!selectedPreset.isActive && activePresets.length === 0) {
+    return {
+      ...state,
+      features: {
+        ...state.features,
+        userConfiguration: {
+          ...state.features.userConfiguration,
+          columnsOrder: allColumnsNames
+        }
+      }
+    };
+  }
+
+  // If more than 2 preset are selected and you add one more, merge their columns (without duplicates) and display them
+  if (selectedPreset.isActive && activePresets.length >= 2) {
+    let columnsToDisplay = [];
+    activePresets.forEach(() => {
+      columnsToDisplay = [
+        ...new Set([
+          ...columnsCurrentlyDisplayed,
+          ...selectedPreset.columnsToShow
+        ])
+      ];
+    });
+    return {
+      ...state,
+      features: {
+        ...state.features,
+        userConfiguration: {
+          ...state.features.userConfiguration,
+          columnsOrder: columnsToDisplay
+        }
+      }
+    };
+  }
+
+  // If there is more than 2 preset selected and you remove one, remove the columns used by the selected preset and unused by the other ones
+  if (!selectedPreset.isActive && activePresets.length >= 1) {
+    let columnsToDisplay = columnsCurrentlyDisplayed;
+
+    const activePresetsAllColumns = [];
+    activePresets.forEach(activePreset => {
+      activePreset.columnsToShow.forEach(col => {
+        activePresetsAllColumns.push(col);
+      });
+    });
+
+    const selectedPresetUniqueColumns = [];
+    selectedPreset.columnsToShow.forEach(col => {
+      if (!activePresetsAllColumns.includes(col)) {
+        selectedPresetUniqueColumns.push(col);
+      }
+    });
+
+    selectedPresetUniqueColumns.forEach(col => {
+      columnsToDisplay = columnsToDisplay.filter(column => column !== col);
+    });
 
     return {
-      ...newState,
-      pagination: setPagination({
-        state: newState
-      }),
-      dimensions: {
-        ...newState.dimensions,
-        columnSizeMultiplier: updateRowSizeMultiplier(newState)
+      ...state,
+      features: {
+        ...state.features,
+        userConfiguration: {
+          ...state.features.userConfiguration,
+          columnsOrder: columnsToDisplay
+        }
       }
     };
   }
@@ -1396,8 +1457,8 @@ const datatableReducer = (state = defaultState, action) => {
       return search(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
-    case "SET_MULTIPLE_COLUMNS_VISIBILITY":
-      return setMultipleColumnsVisibility(state, payload);
+    case "HANDLE_PRESET_DISPLAY":
+      return handlePresetDisplay(state, payload);
     case "SET_USER_CONFIGURATION":
       return setUserConfiguration(state, payload);
     case "REFRESH_ROWS_STARTED":

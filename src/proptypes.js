@@ -19,6 +19,7 @@ export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
 export const setMultipleColumnsVisibilityPropType = PropTypes.func.isRequired;
+export const handlePresetDisplayPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const setUserConfigurationPropType = PropTypes.func.isRequired;

@@ -101,8 +101,8 @@ export const setColumnVisibilty = payload => ({
   payload
 });
 
-export const setMultipleColumnsVisibility = payload => ({
-  type: "SET_MULTIPLE_COLUMNS_VISIBILITY",
+export const handlePresetDisplay = payload => ({
+  type: "HANDLE_PRESET_DISPLAY",
   payload
 });
 

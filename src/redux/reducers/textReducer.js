@@ -38,7 +38,9 @@ const defaultState = {
   createPresetTitle: "Create New Preset",
   createPresetDescription: "Select the columns to save in the preset",
   createPresetTooltipText: "Create a new preset",
-  createPresetNamingPlaceholder: "Preset name"
+  createPresetNamingPlaceholder: "Preset name",
+  createPresetCancelBtn: "Cancel",
+  createPresetCreateBtn: "Create"
 };
 
 const initText = (state, payload) => ({ ...state, ...payload });
