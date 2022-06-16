@@ -34,23 +34,23 @@ class Datatable extends Component {
       theme = {}
     } = this.props;
 
-    if(options.data && !options.keyColumn){
+    if (options.data && !options.keyColumn) {
       console.log("@o2xp/react-datatable : You forgot to give keyColumn..");
     }
 
-    if((!options.data ||
+    if ((!options.data ||
       !options.data.columns ||
       options.data.columns.length === 0) &&
-      options.keyColumn ) { 
-        console.log("@o2xp/react-datatable : You forgot to give data..");
+      options.keyColumn) {
+      console.log("@o2xp/react-datatable : You forgot to give data..");
     }
-    
-    
-     if(!options.data && !options.keyColumn) { 
+
+
+    if (!options.data && !options.keyColumn) {
       console.log("@o2xp/react-datatable : You forgot to give data and keyColumn..");
     }
-  
-    
+
+
     return (
       <>
         {options.data &&

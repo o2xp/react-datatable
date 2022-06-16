@@ -6,10 +6,8 @@ import {
 } from "@material-ui/icons";
 import { title, keyColumn, data } from "./optionsObjectSample";
 import rows from "./rows";
-
 const storyOptionsSample = {
   title,
-
   dimensions: {
     datatable: {
       width: "100%",
@@ -30,7 +28,14 @@ const storyOptionsSample = {
     canRefreshRows: true,
     canOrderColumns: true,
     canSelectRow: true,
+    canCreatePreset: true,
     canSaveUserConfiguration: true,
+    columnsPresetsToDisplay: [
+      { presetName:"Show blue columns", columnsToShow:["id","name","age"], isActive:false, type:"predefinedPreset" },
+      { presetName:"Show one columns", columnsToShow:["age"],  isActive:false, type:"predefinedPreset" },
+      { presetName:"Show something ", columnsToShow:["id","name","age","adult","birthDate","eyeColor","iban" ] , isActive:false, type:"predefinedPreset" },
+      { presetName:"Show nothing ", columnsToShow:[],  isActive:false, type:"predefinedPreset" }
+    ],
     userConfiguration: {
       columnsOrder: [
         "id",
@@ -71,5 +76,4 @@ const storyOptionsSample = {
     ]
   }
 };
-
 export default storyOptionsSample;
