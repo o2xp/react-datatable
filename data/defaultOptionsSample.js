@@ -34,6 +34,7 @@ const defaultOptionsSample = {
   rowsDeleted: [],
   actions: null,
   refreshRows: null,
+  areSearchFieldsDisplayed: false,
   isRefreshing: false,
   stripped: false,
   searchTerm: "",

@@ -18,7 +18,10 @@ export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
-export const searchPropType = PropTypes.func.isRequired;
+// todo: remove
+// export const searchPropType = PropTypes.func.isRequired;
+export const toggleSearchFieldsDisplayPropType = PropTypes.func.isRequired;
+export const searchInColumnPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const setUserConfigurationPropType = PropTypes.func.isRequired;
 export const enqueueSnackbarPropType = PropTypes.func.isRequired;
@@ -30,6 +33,7 @@ export const saveAllRowsEditedPropType = PropTypes.func.isRequired;
 export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const duplicateRowPropType = PropTypes.func.isRequired;
 export const initTextPropType = PropTypes.func.isRequired;
+export const areSearchFieldsDisplayedPropType = PropTypes.bool;
 export const isScrollingPropType = PropTypes.bool;
 export const isLastLockedPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
@@ -224,6 +228,7 @@ export const featuresPropType = PropTypes.shape({
   canAdd: canAddPropType,
   canPrint: canPrintPropType,
   canDownload: canDownloadPropType,
+  // todo: rename all of the canSearch
   canSearch: canSearchPropType,
   canRefreshRows: canRefreshRowsPropType,
   canOrderColumns: canOrderColumnsPropType,

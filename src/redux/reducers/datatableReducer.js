@@ -63,6 +63,7 @@ const defaultState = {
   refreshRows: null,
   isRefreshing: false,
   stripped: false,
+  areSearchFieldsDisplayed: false,
   searchTerm: "",
   orderBy: [],
   features: {
@@ -258,6 +259,13 @@ const calcComponentSize = state => {
   return newState;
 };
 
+const toggleSearchFieldsDisplay = state => {
+  return {
+    ...state,
+    areSearchFieldsDisplayed: !state.areSearchFieldsDisplayed
+  };
+};
+
 const setPagination = ({
   state,
   newPageSelected = null,
@@ -266,6 +274,8 @@ const setPagination = ({
   const { searchTerm, orderBy } = state;
 
   let rowsToUse = state.data.rows;
+
+  // TODO: modif
   if (searchTerm.length) {
     const fuse = new Fuse(state.data.rows, {
       ...optionsFuse,
@@ -1091,16 +1101,22 @@ const setRowsGlobalSelected = (state, payload) => {
   };
 };
 
-const search = (state, payload) => {
-  const newState = {
-    ...state,
-    searchTerm: payload
-  };
+// Todo: delete all search() and searchTerm
+// const search = (state, payload) => {
+//   const newState = {
+//     ...state,
+//     searchTerm: payload
+//   };
 
-  return {
-    ...newState,
-    pagination: setPagination({ state: newState })
-  };
+//   return {
+//     ...newState,
+//     pagination: setPagination({ state: newState })
+//   };
+// };
+
+// todo: edit
+const searchInColumn = (state, payload) => {
+  console.log(state, payload);
 };
 
 const setColumnVisibilty = (state, payload) => {
@@ -1290,7 +1306,7 @@ const duplicateRow = (state, payload) => {
 
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
-
+  console.log(state);
   switch (type) {
     case "INITIALIZE_OPTIONS":
       return initializeOptions(state, payload);
@@ -1330,8 +1346,13 @@ const datatableReducer = (state = defaultState, action) => {
       return setRowsSelected(state, payload);
     case "SET_ROWS_GLOBAL_SELECTED":
       return setRowsGlobalSelected(state, payload);
-    case "SEARCH":
-      return search(state, payload);
+    // todo: remove
+    // case "SEARCH":
+    //   return search(state, payload);
+    case "TOGGLE_SEARCHFIELDS_DISPLAY":
+      return toggleSearchFieldsDisplay(state);
+    case "SEARCH_IN_COLUMN":
+      return searchInColumn(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
     case "SET_USER_CONFIGURATION":

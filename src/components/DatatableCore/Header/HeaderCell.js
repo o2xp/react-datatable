@@ -21,9 +21,11 @@ import {
   textPropType,
   stylePropType,
   isLastLockedPropType,
-  isScrollingPropType
+  isScrollingPropType,
+  areSearchFieldsDisplayedPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
+import { HeaderSearchBar } from "./HeaderSearchBar";
 
 export class HeaderCell extends Component {
   constructor(props) {
@@ -96,26 +98,54 @@ export class HeaderCell extends Component {
   };
 
   buildHeaderCell = () => {
-    const { width, column, canOrderColumns } = this.props;
+    const {
+      width,
+      column,
+      canOrderColumns,
+      areSearchFieldsDisplayed
+    } = this.props;
     const content = canOrderColumns
       ? this.buildButton(column, width)
       : column.label;
+
+    let wrapperType;
     switch (column.dataType) {
       case "number":
-        return <NumberWrapper style={{ width }}>{content}</NumberWrapper>;
+        wrapperType = (
+          <NumberWrapper style={{ width }}>{content}</NumberWrapper>
+        );
+        break;
       case "text":
-        return <TextWrapper style={{ width }}>{content}</TextWrapper>;
+        wrapperType = <TextWrapper style={{ width }}>{content}</TextWrapper>;
+        break;
       case "boolean":
-        return <BooleanWrapper style={{ width }}>{content}</BooleanWrapper>;
+        wrapperType = (
+          <BooleanWrapper style={{ width }}>{content}</BooleanWrapper>
+        );
+        break;
       case "date":
-        return <DateWrapper style={{ width }}>{content}</DateWrapper>;
+        wrapperType = <DateWrapper style={{ width }}>{content}</DateWrapper>;
+        break;
       case "time":
-        return <TimeWrapper style={{ width }}>{content}</TimeWrapper>;
+        wrapperType = <TimeWrapper style={{ width }}>{content}</TimeWrapper>;
+        break;
       case "dateTime":
-        return <DateTimeWrapper style={{ width }}>{content}</DateTimeWrapper>;
+        wrapperType = (
+          <DateTimeWrapper style={{ width }}>{content}</DateTimeWrapper>
+        );
+        break;
       default:
-        return <TextWrapper style={{ width }}>{content}</TextWrapper>;
+        wrapperType = <TextWrapper style={{ width }}>{content}</TextWrapper>;
+        break;
     }
+
+    // TODO: déplacer les searchbars ici
+    return (
+      <>
+        {wrapperType}
+        {areSearchFieldsDisplayed ? <HeaderSearchBar column={column} /> : null}
+      </>
+    );
   };
 
   render() {
@@ -201,7 +231,8 @@ HeaderCell.propTypes = {
   locked: isLastLockedPropType,
   orderByColumns: orderByColumnsPropType,
   orderByText: textPropType,
-  dragText: textPropType
+  dragText: textPropType,
+  areSearchFieldsDisplayed: areSearchFieldsDisplayedPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -213,6 +244,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
+    areSearchFieldsDisplayed: state.datatableReducer.areSearchFieldsDisplayed,
     orderBy: state.datatableReducer.orderBy,
     orderByText: state.textReducer.orderBy,
     dragText: state.textReducer.drag,
