@@ -116,6 +116,7 @@ export const canEditPropType = PropTypes.bool;
 export const canGlobalEditPropType = PropTypes.bool;
 export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
+// todo:
 export const canSearchPropType = PropTypes.bool;
 export const canAddPropType = PropTypes.bool;
 export const canRefreshRowsPropType = PropTypes.bool;
