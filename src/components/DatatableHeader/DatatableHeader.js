@@ -9,6 +9,7 @@ import {
   canOrderColumnsPropType,
   canDownloadPropType,
   canSearchPropType,
+  canCreatePresetPropType,
   canPrintPropType,
   canRefreshRowsPropType,
   canSaveUserConfigurationPropType,
@@ -23,6 +24,7 @@ import Print from "./Widgets/Print";
 import UserConfiguration from "./Widgets/UserConfiguration";
 import RefreshRows from "./Widgets/RefreshRows";
 import GlobalEdit from "./Widgets/GlobalEdit";
+import CreatePreset from "./Widgets/CreatePreset";
 
 class DatatableHeader extends Component {
   render() {
@@ -38,13 +40,15 @@ class DatatableHeader extends Component {
       canSearch,
       canPrint,
       canRefreshRows,
-      canSaveUserConfiguration
+      canSaveUserConfiguration,
+      canCreatePreset
     } = this.props;
     const hasBaseIcons =
       canSearch ||
       canDownload ||
       canGlobalEdit ||
       canOrderColumns ||
+      canCreatePreset ||
       canPrint ||
       canRefreshRows ||
       canSaveUserConfiguration;
@@ -56,6 +60,7 @@ class DatatableHeader extends Component {
         {canSearch && <Search />}
         {canDownload && <DownloadData />}
         {canOrderColumns && <ColumnsDisplayer />}
+        {canCreatePreset && <CreatePreset />}
         {canPrint && <Print />}
         {canRefreshRows && <RefreshRows />}
         {canSaveUserConfiguration && <UserConfiguration />}
@@ -104,7 +109,8 @@ DatatableHeader.propTypes = {
   canPrint: canPrintPropType.isRequired,
   canRefreshRows: canRefreshRowsPropType.isRequired,
   canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired,
-  canGlobalEdit: canGlobalEditPropType.isRequired
+  canGlobalEdit: canGlobalEditPropType.isRequired,
+  canCreatePreset: canCreatePresetPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -117,6 +123,7 @@ const mapStateToProps = state => {
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
     canDownload: state.datatableReducer.features.canDownload,
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
+    canCreatePreset: state.datatableReducer.features.canCreatePreset,
     canSearch: state.datatableReducer.features.canSearch,
     canPrint: state.datatableReducer.features.canPrint,
     canAdd: state.datatableReducer.features.canAdd,
