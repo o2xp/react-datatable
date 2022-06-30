@@ -124,6 +124,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .canGlobalEdit | boolean | no | false |  If the user can turn in edit mode all the rows. |
 | features .canPrint | boolean | no | false |  If you want stripped rows. |
 | features .canDownload | boolean | no | false |  If the user can download the data. |
+| features .canCreatePreset | boolean | no | false |  If the user can create preset(list of columns to display). |
 | features .canSearch | boolean | no | false |  If the user can filter the data by text through a search input. |
 | features .canRefreshRows | boolean | no | false |  If the user can click to refresh the rows. |
 | features .canOrderColumns | boolean | false |  no | If the user can select the columns to display. |
@@ -135,7 +136,8 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .userConfiguration .copyToClipboard | boolean | no | false |  If true, when the user click on cell it will copy the value in the clipboard. |
 | features .rowsPerPage .available | array of number and string | no | [10, 25, 50, 100, "All"] |  An array with the numbers of rows per page you want available. |
 | features .rowsPerPage .selected | number or string | no | "All" |  The number of rows per page selected by default. |
-| features .additionalActions | array of object | no | [ ] |  If you want to add actions icon which trigger a function on a row. Click [here](#additional-actions-props) to have more information. |
+| features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
+| features .columnsPresetsToDisplay | array of object | no | [ ] |  If you want to add predefined presets in the Display by presets Tab.
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
