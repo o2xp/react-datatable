@@ -64,7 +64,8 @@ const defaultState = {
   isRefreshing: false,
   stripped: false,
   areSearchFieldsDisplayed: false,
-  searchTerm: "",
+  searchTerms: {},
+  searchResultForEachColumn: {},
   orderBy: [],
   features: {
     canEdit: false,
@@ -271,19 +272,18 @@ const setPagination = ({
   newPageSelected = null,
   newRowsPerPageSelected = null
 }) => {
-  const { searchTerm, orderBy } = state;
-
+  const { searchTerms, orderBy } = state;
   let rowsToUse = state.data.rows;
-
-  // TODO: modif
-  if (searchTerm.length) {
-    const fuse = new Fuse(state.data.rows, {
-      ...optionsFuse,
-      keys: state.features.userConfiguration.columnsOrder
+  // TODO: finish
+  if (Object.keys(searchTerms).length > 0) {
+    Object.keys(searchTerms).forEach(searchTermKey => {
+      const fuse = new Fuse(state.pagination.rowsToUse, {
+        ...optionsFuse,
+        keys: [searchTermKey]
+      });
+      rowsToUse = fuse.search(searchTerms[searchTermKey]);
     });
-    rowsToUse = fuse.search(searchTerm);
   }
-
   if (orderBy) {
     rowsToUse = orderByFunction(
       rowsToUse,
@@ -1101,22 +1101,31 @@ const setRowsGlobalSelected = (state, payload) => {
   };
 };
 
-// Todo: delete all search() and searchTerm
-// const search = (state, payload) => {
-//   const newState = {
-//     ...state,
-//     searchTerm: payload
-//   };
+// TODO: make the second parameter not an array
+const searchInColumn = (state, [searchTerm, columnToSearchIn]) => {
+  const newSearchTerms = { ...state.searchTerms };
+  const newSearchResultForEachColumn = { ...state.searchResultForEachColumn };
 
-//   return {
-//     ...newState,
-//     pagination: setPagination({ state: newState })
-//   };
-// };
+  if (searchTerm.length > 0) {
+    newSearchTerms[columnToSearchIn] = searchTerm;
+    newSearchResultForEachColumn[`${columnToSearchIn}SearchResult`] =
+      state.data.rows;
+  } else {
+    delete newSearchTerms[columnToSearchIn];
+    delete newSearchResultForEachColumn[`${columnToSearchIn}SearchResult`];
+  }
 
-// todo: edit
-const searchInColumn = (state, payload) => {
-  console.log(state, payload);
+  const newState = {
+    ...state,
+    searchTerms: { ...newSearchTerms },
+    searchResultForEachColumn: { ...newSearchResultForEachColumn }
+  };
+
+  console.log("newState", newState);
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
+  };
 };
 
 const setColumnVisibilty = (state, payload) => {
@@ -1216,7 +1225,7 @@ const refreshRowsStarted = state => {
   return {
     ...state,
     isRefreshing: true,
-    searchTerm: "",
+    searchTerms: [],
     rowsEdited: [],
     rowsSelected: []
   };
@@ -1306,7 +1315,6 @@ const duplicateRow = (state, payload) => {
 
 const datatableReducer = (state = defaultState, action) => {
   const { payload, type } = action;
-  console.log(state);
   switch (type) {
     case "INITIALIZE_OPTIONS":
       return initializeOptions(state, payload);
@@ -1346,9 +1354,6 @@ const datatableReducer = (state = defaultState, action) => {
       return setRowsSelected(state, payload);
     case "SET_ROWS_GLOBAL_SELECTED":
       return setRowsGlobalSelected(state, payload);
-    // todo: remove
-    // case "SEARCH":
-    //   return search(state, payload);
     case "TOGGLE_SEARCHFIELDS_DISPLAY":
       return toggleSearchFieldsDisplay(state);
     case "SEARCH_IN_COLUMN":

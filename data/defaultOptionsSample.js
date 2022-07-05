@@ -37,7 +37,8 @@ const defaultOptionsSample = {
   areSearchFieldsDisplayed: false,
   isRefreshing: false,
   stripped: false,
-  searchTerm: "",
+  searchTerms: {},
+  searchResultForEachColumn: {},
   orderBy: [],
   pagination: {
     pageSelected: 1,

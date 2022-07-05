@@ -25,7 +25,7 @@ import {
   areSearchFieldsDisplayedPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
-import { HeaderSearchBar } from "./HeaderSearchBar";
+import HeaderSearchBar from "./HeaderSearchBar";
 
 export class HeaderCell extends Component {
   constructor(props) {
@@ -158,7 +158,6 @@ export class HeaderCell extends Component {
       isScrolling
     } = this.props;
     const { childButtonHovered } = this.state;
-
     let className = "";
     switch (true) {
       case isLastLocked && isScrolling:
