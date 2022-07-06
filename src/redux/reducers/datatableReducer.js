@@ -266,7 +266,7 @@ const toggleSearchFieldsDisplay = state => {
     areSearchFieldsDisplayed: !state.areSearchFieldsDisplayed
   };
 };
-
+//
 const setPagination = ({
   state,
   newPageSelected = null,
