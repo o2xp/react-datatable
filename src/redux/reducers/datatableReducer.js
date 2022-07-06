@@ -283,6 +283,7 @@ const setPagination = ({
         ...optionsFuse,
         keys: [searchTermKey]
       });
+      console.log("test");
       rowsToUse = fuse.search(searchTerms[searchTermKey]);
     });
   }
