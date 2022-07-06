@@ -111,6 +111,11 @@ export const setColumnVisibilty = payload => ({
   payload
 });
 
+export const handlePresetDisplay = payload => ({
+  type: "HANDLE_PRESET_DISPLAY",
+  payload
+});
+
 export const setUserConfiguration = payload => ({
   type: "SET_USER_CONFIGURATION",
   payload
