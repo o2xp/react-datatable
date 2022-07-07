@@ -25,7 +25,7 @@ import {
   areSearchFieldsDisplayedPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
-import HeaderSearchBar from "./HeaderSearchBar";
+import HeaderColumnsSearchBar from "./HeaderColumnsSearchBar";
 
 export class HeaderCell extends Component {
   constructor(props) {
@@ -143,7 +143,9 @@ export class HeaderCell extends Component {
     return (
       <>
         {wrapperType}
-        {areSearchFieldsDisplayed ? <HeaderSearchBar column={column} /> : null}
+        {areSearchFieldsDisplayed ? (
+          <HeaderColumnsSearchBar column={column} />
+        ) : null}
       </>
     );
   };

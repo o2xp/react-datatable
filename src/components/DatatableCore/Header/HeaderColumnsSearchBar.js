@@ -9,7 +9,7 @@ import {
 } from "../../../proptypes";
 import { searchInColumn as searchInColumnAction } from "../../../redux/actions/datatableActions";
 
-export class HeaderSearchBar extends Component {
+export class HeaderColumnsSearchBar extends Component {
   getSearchBarValueFromStore = () => {
     const { searchTerms, column } = this.props;
     if (searchTerms[column.id]) {
@@ -25,7 +25,7 @@ export class HeaderSearchBar extends Component {
         placeholder={column.id}
         style={{ width: "100%" }}
         onChange={e => {
-          searchInColumn([e.target.value, column.id]);
+          searchInColumn([e.target.value, column.label]);
         }}
         disabled={isRefreshing}
         value={this.getSearchBarValueFromStore()}
@@ -34,7 +34,7 @@ export class HeaderSearchBar extends Component {
   }
 }
 
-HeaderSearchBar.propTypes = {
+HeaderColumnsSearchBar.propTypes = {
   column: columnPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
   searchInColumn: searchInColumnPropType,
@@ -62,4 +62,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderSearchBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderColumnsSearchBar);
