@@ -268,25 +268,38 @@ const toggleSearchFieldsDisplay = state => {
     areSearchFieldsDisplayed: !state.areSearchFieldsDisplayed
   };
 };
-//
+
 const setPagination = ({
   state,
   newPageSelected = null,
   newRowsPerPageSelected = null
 }) => {
-  const { searchTerms, orderBy } = state;
+  const { searchTerms, orderBy, searchResultForEachColumn } = state;
   let rowsToUse = state.data.rows;
-  // TODO: finish
-  if (Object.keys(searchTerms).length > 0) {
-    Object.keys(searchTerms).forEach(searchTermKey => {
-      const fuse = new Fuse(state.pagination.rowsToUse, {
+
+  const searchedColumnAmount = Object.keys(searchResultForEachColumn).length;
+  const searchTermsKeys = Object.keys(searchTerms);
+
+  if (searchedColumnAmount > 0) {
+    searchTermsKeys.forEach(key => {
+      const fuse = new Fuse(searchResultForEachColumn[key], {
         ...optionsFuse,
-        keys: [searchTermKey]
+        keys: [key]
       });
-      console.log("test");
-      rowsToUse = fuse.search(searchTerms[searchTermKey]);
+      searchResultForEachColumn[key] = fuse.search(searchTerms[key]);
     });
+
+    if (searchedColumnAmount === 1) {
+      rowsToUse = searchResultForEachColumn[searchTermsKeys[0]];
+    } else {
+      Object.keys(searchResultForEachColumn).forEach(key => {
+        rowsToUse = rowsToUse.filter(row =>
+          searchResultForEachColumn[key].includes(row)
+        );
+      });
+    }
   }
+
   if (orderBy) {
     rowsToUse = orderByFunction(
       rowsToUse,
@@ -1113,11 +1126,10 @@ const searchInColumn = (state, [searchTerm, columnToSearchIn]) => {
 
   if (searchTerm.length > 0) {
     newSearchTerms[columnToSearchIn] = searchTerm;
-    newSearchResultForEachColumn[`${columnToSearchIn}SearchResult`] =
-      state.data.rows;
+    newSearchResultForEachColumn[columnToSearchIn] = state.data.rows;
   } else {
     delete newSearchTerms[columnToSearchIn];
-    delete newSearchResultForEachColumn[`${columnToSearchIn}SearchResult`];
+    delete newSearchResultForEachColumn[columnToSearchIn];
   }
 
   const newState = {
@@ -1126,7 +1138,6 @@ const searchInColumn = (state, [searchTerm, columnToSearchIn]) => {
     searchResultForEachColumn: { ...newSearchResultForEachColumn }
   };
 
-  console.log("newState", newState);
   return {
     ...newState,
     pagination: setPagination({ state: newState })
