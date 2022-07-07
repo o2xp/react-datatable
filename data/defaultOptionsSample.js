@@ -34,9 +34,11 @@ const defaultOptionsSample = {
   rowsDeleted: [],
   actions: null,
   refreshRows: null,
+  areSearchFieldsDisplayed: false,
   isRefreshing: false,
   stripped: false,
-  searchTerm: "",
+  searchTerms: {},
+  searchResultForEachColumn: {},
   orderBy: [],
   pagination: {
     pageSelected: 1,
