@@ -22,10 +22,10 @@ export class HeaderColumnsSearchBar extends Component {
     const { column, isRefreshing, searchInColumn } = this.props;
     return (
       <TextField
-        placeholder={column.id}
+        placeholder={column.label}
         style={{ width: "100%" }}
         onChange={e => {
-          searchInColumn([e.target.value, column.label]);
+          searchInColumn([e.target.value, column.id]);
         }}
         disabled={isRefreshing}
         value={this.getSearchBarValueFromStore()}
