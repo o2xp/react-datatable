@@ -17,6 +17,7 @@ const simpleOptionsSample = {
     canDelete: true,
     canSelectRow: true,
     canSearch: null,
+    canFilter: true,
     canSaveUserConfiguration: undefined,
     selectionIcons
   }

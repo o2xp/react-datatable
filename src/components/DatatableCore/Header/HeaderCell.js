@@ -22,10 +22,10 @@ import {
   stylePropType,
   isLastLockedPropType,
   isScrollingPropType,
-  areSearchFieldsDisplayedPropType
+  areFilterFieldsDisplayedPropType
 } from "../../../proptypes";
 import { orderByColumns as orderByColumnsAction } from "../../../redux/actions/datatableActions";
-import HeaderColumnsSearchBar from "./HeaderColumnsSearchBar";
+import HeaderColumnsFilterBar from "./HeaderColumnsFilterBar";
 
 export class HeaderCell extends Component {
   constructor(props) {
@@ -102,7 +102,7 @@ export class HeaderCell extends Component {
       width,
       column,
       canOrderColumns,
-      areSearchFieldsDisplayed
+      areFilterFieldsDisplayed
     } = this.props;
     const content = canOrderColumns
       ? this.buildButton(column, width)
@@ -143,8 +143,8 @@ export class HeaderCell extends Component {
     return (
       <>
         {wrapperType}
-        {areSearchFieldsDisplayed ? (
-          <HeaderColumnsSearchBar column={column} />
+        {areFilterFieldsDisplayed ? (
+          <HeaderColumnsFilterBar column={column} />
         ) : null}
       </>
     );
@@ -233,7 +233,7 @@ HeaderCell.propTypes = {
   orderByColumns: orderByColumnsPropType,
   orderByText: textPropType,
   dragText: textPropType,
-  areSearchFieldsDisplayed: areSearchFieldsDisplayedPropType
+  areFilterFieldsDisplayed: areFilterFieldsDisplayedPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -245,7 +245,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
-    areSearchFieldsDisplayed: state.datatableReducer.areSearchFieldsDisplayed,
+    areFilterFieldsDisplayed: state.datatableReducer.areFilterFieldsDisplayed,
     orderBy: state.datatableReducer.orderBy,
     orderByText: state.textReducer.orderBy,
     dragText: state.textReducer.drag,
