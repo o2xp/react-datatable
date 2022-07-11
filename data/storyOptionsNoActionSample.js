@@ -19,6 +19,7 @@ const storyOptionsNoActionSample = {
     canPrint: true,
     canDownload: true,
     canSearch: true,
+    canFilter: true,
     canRefreshRows: true,
     canOrderColumns: true,
     canSaveUserConfiguration: true,

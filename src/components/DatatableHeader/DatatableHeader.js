@@ -9,6 +9,7 @@ import {
   canOrderColumnsPropType,
   canDownloadPropType,
   canSearchPropType,
+  canFilterPropType,
   canCreatePresetPropType,
   canPrintPropType,
   canRefreshRowsPropType,
@@ -19,6 +20,7 @@ import SelectionIcons from "./Widgets/SelectionIcons";
 import AdditionalIcons from "./Widgets/AdditionalIcons";
 import DownloadData from "./Widgets/DownloadData";
 import Search from "./Widgets/Search";
+import Filter from "./Widgets/Filter";
 import ColumnsDisplayer from "./Widgets/ColumnsDisplayer";
 import Print from "./Widgets/Print";
 import UserConfiguration from "./Widgets/UserConfiguration";
@@ -38,6 +40,7 @@ class DatatableHeader extends Component {
       canDownload,
       canGlobalEdit,
       canSearch,
+      canFilter,
       canPrint,
       canRefreshRows,
       canSaveUserConfiguration,
@@ -45,6 +48,7 @@ class DatatableHeader extends Component {
     } = this.props;
     const hasBaseIcons =
       canSearch ||
+      canFilter ||
       canDownload ||
       canGlobalEdit ||
       canOrderColumns ||
@@ -58,6 +62,7 @@ class DatatableHeader extends Component {
       <div className="Header" style={{ width, height }}>
         <div className="title">{title}</div>
         {canSearch && <Search />}
+        {canFilter && <Filter />}
         {canDownload && <DownloadData />}
         {canOrderColumns && <ColumnsDisplayer />}
         {canCreatePreset && <CreatePreset />}
@@ -106,6 +111,7 @@ DatatableHeader.propTypes = {
   canOrderColumns: canOrderColumnsPropType.isRequired,
   canDownload: canDownloadPropType.isRequired,
   canSearch: canSearchPropType.isRequired,
+  canFilter: canFilterPropType.isRequired,
   canPrint: canPrintPropType.isRequired,
   canRefreshRows: canRefreshRowsPropType.isRequired,
   canSaveUserConfiguration: canSaveUserConfigurationPropType.isRequired,
@@ -125,6 +131,7 @@ const mapStateToProps = state => {
     canGlobalEdit: state.datatableReducer.features.canGlobalEdit,
     canCreatePreset: state.datatableReducer.features.canCreatePreset,
     canSearch: state.datatableReducer.features.canSearch,
+    canFilter: state.datatableReducer.features.canFilter,
     canPrint: state.datatableReducer.features.canPrint,
     canAdd: state.datatableReducer.features.canAdd,
     canRefreshRows: state.datatableReducer.features.canRefreshRows,

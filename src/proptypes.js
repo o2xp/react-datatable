@@ -18,8 +18,8 @@ export const setIsScrollingPropType = PropTypes.func.isRequired;
 export const selectRowPropType = PropTypes.func.isRequired;
 export const setRowsSelectedPropType = PropTypes.func.isRequired;
 export const setColumnVisibiltyPropType = PropTypes.func.isRequired;
-export const toggleSearchFieldsDisplayPropType = PropTypes.func.isRequired;
-export const searchInColumnPropType = PropTypes.func.isRequired;
+export const toggleFilterFieldsDisplayPropType = PropTypes.func.isRequired;
+export const filterInColumnPropType = PropTypes.func.isRequired;
 export const setMultipleColumnsVisibilityPropType = PropTypes.func.isRequired;
 export const handlePresetDisplayPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
@@ -34,7 +34,7 @@ export const saveAllRowsEditedPropType = PropTypes.func.isRequired;
 export const revertAllRowsToEditedPropType = PropTypes.func.isRequired;
 export const duplicateRowPropType = PropTypes.func.isRequired;
 export const initTextPropType = PropTypes.func.isRequired;
-export const areSearchFieldsDisplayedPropType = PropTypes.bool;
+export const areFilterFieldsDisplayedPropType = PropTypes.bool;
 export const isScrollingPropType = PropTypes.bool;
 export const isLastLockedPropType = PropTypes.bool;
 export const canDeletePropType = PropTypes.bool;
@@ -44,7 +44,7 @@ export const isRefreshingPropType = PropTypes.bool;
 export const strippedPropType = PropTypes.bool;
 // TODO: replace searchTermPropRype and replace where it is used for searchTermsPropType
 export const searchTermPropType = PropTypes.string;
-export const searchTermsPropType = PropTypes.object;
+export const filterTermsPropType = PropTypes.object;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsDeletedPropType = PropTypes.arrayOf(PropTypes.object);
 export const rowsSelectedPropType = PropTypes.arrayOf(PropTypes.object);
@@ -119,8 +119,8 @@ export const canEditPropType = PropTypes.bool;
 export const canGlobalEditPropType = PropTypes.bool;
 export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
-// todo:
 export const canSearchPropType = PropTypes.bool;
+export const canFilterPropType = PropTypes.bool;
 export const canCreatePresetPropType = PropTypes.bool;
 export const canAddPropType = PropTypes.bool;
 export const canRefreshRowsPropType = PropTypes.bool;
@@ -234,8 +234,8 @@ export const featuresPropType = PropTypes.shape({
   canAdd: canAddPropType,
   canPrint: canPrintPropType,
   canDownload: canDownloadPropType,
-  // todo: rename all of the canSearch
   canSearch: canSearchPropType,
+  canFilter: canFilterPropType,
   canCreatePreset: canCreatePresetPropType,
   canRefreshRows: canRefreshRowsPropType,
   canOrderColumns: canOrderColumnsPropType,
