@@ -357,7 +357,7 @@ const toggleFilterFieldsDisplay = state => {
     ...state,
     areFilterFieldsDisplayed: !state.areFilterFieldsDisplayed,
     searchTerm: "",
-    searchTerms: {},
+    filterTerms: {},
     filterResultForEachColumn: {},
     isSearchFieldDisplayed: false
   };
@@ -372,7 +372,7 @@ const toggleSearchFieldDisplay = state => {
     ...state,
     isSearchFieldDisplayed: !state.isSearchFieldDisplayed,
     searchTerm: "",
-    searchTerms: {},
+    filterTerms: {},
     filterResultForEachColumn: {},
     areFilterFieldsDisplayed: false
   };
