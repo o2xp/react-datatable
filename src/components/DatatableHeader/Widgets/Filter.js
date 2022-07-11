@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { IconButton, Tooltip, Zoom } from "@material-ui/core";
-import { Filter as FilterIcon } from "@material-ui/icons";
+import { FilterList as FilterIcon } from "@material-ui/icons";
 import {
   rowsPropType,
   isRefreshingPropType,
