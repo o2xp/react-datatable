@@ -4,56 +4,56 @@ import { connect } from "react-redux";
 import {
   columnPropType,
   isRefreshingPropType,
-  searchInColumnPropType,
-  searchTermsPropType
+  filterInColumnPropType,
+  filterTermsPropType
 } from "../../../proptypes";
-import { searchInColumn as searchInColumnAction } from "../../../redux/actions/datatableActions";
+import { filterInColumn as filterInColumnAction } from "../../../redux/actions/datatableActions";
 
-export class HeaderColumnsSearchBar extends Component {
-  getSearchBarValueFromStore = () => {
-    const { searchTerms, column } = this.props;
-    if (searchTerms[column.id]) {
-      return searchTerms[column.id];
+export class HeaderColumnsFilterBar extends Component {
+  getFilterBarValueFromStore = () => {
+    const { filterTerms, column } = this.props;
+    if (filterTerms[column.id]) {
+      return filterTerms[column.id];
     }
     return "";
   };
 
   render() {
-    const { column, isRefreshing, searchInColumn } = this.props;
+    const { column, isRefreshing, filterInColumn } = this.props;
     return (
       <TextField
         placeholder={column.label}
         style={{ width: "100%" }}
         onChange={e => {
-          searchInColumn([e.target.value, column.id]);
+          filterInColumn([e.target.value, column.id]);
         }}
         disabled={isRefreshing}
-        value={this.getSearchBarValueFromStore()}
+        value={this.getFilterBarValueFromStore()}
       />
     );
   }
 }
 
-HeaderColumnsSearchBar.propTypes = {
+HeaderColumnsFilterBar.propTypes = {
   column: columnPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
-  searchInColumn: searchInColumnPropType,
-  searchTerms: searchTermsPropType.isRequired
+  filterInColumn: filterInColumnPropType,
+  filterTerms: filterTermsPropType.isRequired
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     // TODO: Dispatch an action by sending "the search text" and "the column to search in" to the store
-    searchInColumn: (searchText, column) =>
-      dispatch(searchInColumnAction(searchText, column))
+    filterInColumn: (searchText, column) =>
+      dispatch(filterInColumnAction(searchText, column))
   };
 };
 
 const mapStateToProps = state => {
   return {
-    searchTerms: state.datatableReducer.searchTerms,
+    filterTerms: state.datatableReducer.filterTerms,
     canOrderColumns: state.datatableReducer.features.canOrderColumns,
-    areSearchFieldsDisplayed: state.datatableReducer.areSearchFieldsDisplayed,
+    areFilterFieldsDisplayed: state.datatableReducer.areFilterFieldsDisplayed,
     isRefreshing: state.datatableReducer.isRefreshing,
     orderBy: state.datatableReducer.orderBy,
     orderByText: state.textReducer.orderBy,
@@ -65,4 +65,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HeaderColumnsSearchBar);
+)(HeaderColumnsFilterBar);

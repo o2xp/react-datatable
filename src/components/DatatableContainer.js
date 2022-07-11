@@ -35,6 +35,7 @@ class DatatableContainer extends Component {
       canPrint,
       canDownload,
       canSearch,
+      canFilter,
       canCreatePreset,
       canRefreshRows,
       canOrderColumns,
@@ -47,6 +48,7 @@ class DatatableContainer extends Component {
       canPrint ||
       canDownload ||
       canSearch ||
+      canFilter ||
       canCreatePreset ||
       canRefreshRows ||
       canOrderColumns ||

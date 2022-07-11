@@ -63,9 +63,11 @@ const defaultState = {
   refreshRows: null,
   isRefreshing: false,
   stripped: false,
-  areSearchFieldsDisplayed: false,
-  searchTerms: {},
-  searchResultForEachColumn: {},
+  areFilterFieldsDisplayed: false,
+  isSearchFieldDisplayed: false,
+  filterTerms: {},
+  searchTerm: "",
+  filterResultForEachColumn: {},
   orderBy: [],
   features: {
     canEdit: false,
@@ -262,42 +264,43 @@ const calcComponentSize = state => {
   return newState;
 };
 
-const toggleSearchFieldsDisplay = state => {
-  return {
-    ...state,
-    areSearchFieldsDisplayed: !state.areSearchFieldsDisplayed
-  };
-};
-
 const setPagination = ({
   state,
   newPageSelected = null,
   newRowsPerPageSelected = null
 }) => {
-  const { searchTerms, orderBy, searchResultForEachColumn } = state;
+  const { filterTerms, searchTerm, orderBy, filterResultForEachColumn } = state;
   let rowsToUse = state.data.rows;
 
-  const searchedColumnAmount = Object.keys(searchResultForEachColumn).length;
-  const searchTermsKeys = Object.keys(searchTerms);
+  const amountOfFilteredColumn = Object.keys(filterResultForEachColumn).length;
+  const filterTermsKeys = Object.keys(filterTerms);
 
-  if (searchedColumnAmount > 0) {
-    searchTermsKeys.forEach(key => {
-      const fuse = new Fuse(searchResultForEachColumn[key], {
+  if (amountOfFilteredColumn > 0) {
+    filterTermsKeys.forEach(key => {
+      const fuse = new Fuse(filterResultForEachColumn[key], {
         ...optionsFuse,
         keys: [key]
       });
-      searchResultForEachColumn[key] = fuse.search(searchTerms[key]);
+      filterResultForEachColumn[key] = fuse.search(filterTerms[key]);
     });
 
-    if (searchedColumnAmount === 1) {
-      rowsToUse = searchResultForEachColumn[searchTermsKeys[0]];
+    if (amountOfFilteredColumn === 1) {
+      rowsToUse = filterResultForEachColumn[filterTermsKeys[0]];
     } else {
-      Object.keys(searchResultForEachColumn).forEach(key => {
+      Object.keys(filterResultForEachColumn).forEach(key => {
         rowsToUse = rowsToUse.filter(row =>
-          searchResultForEachColumn[key].includes(row)
+          filterResultForEachColumn[key].includes(row)
         );
       });
     }
+  }
+
+  if (searchTerm.length) {
+    const fuse = new Fuse(state.data.rows, {
+      ...optionsFuse,
+      keys: state.features.userConfiguration.columnsOrder
+    });
+    rowsToUse = fuse.search(searchTerm);
   }
 
   if (orderBy) {
@@ -346,6 +349,36 @@ const setPagination = ({
     rowsPerPageSelected,
     rowsCurrentPage,
     rowsToUse
+  };
+};
+
+const toggleFilterFieldsDisplay = state => {
+  const newState = {
+    ...state,
+    areFilterFieldsDisplayed: !state.areFilterFieldsDisplayed,
+    searchTerm: "",
+    filterTerms: {},
+    filterResultForEachColumn: {},
+    isSearchFieldDisplayed: false
+  };
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
+  };
+};
+
+const toggleSearchFieldDisplay = state => {
+  const newState = {
+    ...state,
+    isSearchFieldDisplayed: !state.isSearchFieldDisplayed,
+    searchTerm: "",
+    filterTerms: {},
+    filterResultForEachColumn: {},
+    areFilterFieldsDisplayed: false
+  };
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
   };
 };
 
@@ -1119,23 +1152,34 @@ const setRowsGlobalSelected = (state, payload) => {
   };
 };
 
-// TODO: make the second parameter not an array
-const searchInColumn = (state, [searchTerm, columnToSearchIn]) => {
-  const newSearchTerms = { ...state.searchTerms };
-  const newSearchResultForEachColumn = { ...state.searchResultForEachColumn };
+const search = (state, payload) => {
+  const newState = {
+    ...state,
+    searchTerm: payload
+  };
+
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
+  };
+};
+
+const filterInColumn = (state, [searchTerm, columnToSearchIn]) => {
+  const newfilterTerms = { ...state.filterTerms };
+  const newfilterResultForEachColumn = { ...state.filterResultForEachColumn };
 
   if (searchTerm.length > 0) {
-    newSearchTerms[columnToSearchIn] = searchTerm;
-    newSearchResultForEachColumn[columnToSearchIn] = state.data.rows;
+    newfilterTerms[columnToSearchIn] = searchTerm;
+    newfilterResultForEachColumn[columnToSearchIn] = state.data.rows;
   } else {
-    delete newSearchTerms[columnToSearchIn];
-    delete newSearchResultForEachColumn[columnToSearchIn];
+    delete newfilterTerms[columnToSearchIn];
+    delete newfilterResultForEachColumn[columnToSearchIn];
   }
 
   const newState = {
     ...state,
-    searchTerms: { ...newSearchTerms },
-    searchResultForEachColumn: { ...newSearchResultForEachColumn }
+    filterTerms: { ...newfilterTerms },
+    filterResultForEachColumn: { ...newfilterResultForEachColumn }
   };
 
   return {
@@ -1360,7 +1404,8 @@ const refreshRowsStarted = state => {
   return {
     ...state,
     isRefreshing: true,
-    searchTerms: [],
+    searchTerm: "",
+    filterTerms: [],
     rowsEdited: [],
     rowsSelected: []
   };
@@ -1489,10 +1534,14 @@ const datatableReducer = (state = defaultState, action) => {
       return setRowsSelected(state, payload);
     case "SET_ROWS_GLOBAL_SELECTED":
       return setRowsGlobalSelected(state, payload);
-    case "TOGGLE_SEARCHFIELDS_DISPLAY":
-      return toggleSearchFieldsDisplay(state);
+    case "SEARCH":
+      return search(state, payload);
+    case "TOGGLE_FILTERFIELDS_DISPLAY":
+      return toggleFilterFieldsDisplay(state);
+    case "TOGGLE_SEARCHFIELD_DISPLAY":
+      return toggleSearchFieldDisplay(state);
     case "SEARCH_IN_COLUMN":
-      return searchInColumn(state, payload);
+      return filterInColumn(state, payload);
     case "SET_COLUMN_VISIBILITY":
       return setColumnVisibilty(state, payload);
     case "HANDLE_PRESET_DISPLAY":
