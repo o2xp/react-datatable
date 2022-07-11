@@ -50,6 +50,7 @@ const defaultOptionsSample = {
   features: {
     canEdit: false,
     canAdd: false,
+    canCreatePreset: false,
     canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
@@ -61,6 +62,7 @@ const defaultOptionsSample = {
     canSelectRow: false,
     canOrderColumns: false,
     canSaveUserConfiguration: false,
+    columnsPresetsToDisplay: [],
     editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],
