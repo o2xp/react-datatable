@@ -35,6 +35,7 @@ const defaultOptionsSample = {
   actions: null,
   refreshRows: null,
   areFilterFieldsDisplayed: false,
+  isSearchFieldDisplayed: false,
   isRefreshing: false,
   stripped: false,
   filterTerms: {},

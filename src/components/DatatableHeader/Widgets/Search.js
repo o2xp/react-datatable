@@ -7,16 +7,18 @@ import {
   searchTermPropType,
   rowsPropType,
   isRefreshingPropType,
-  textPropType
+  textPropType,
+  isSearchFieldDisplayedPropType,
+  toggleSearchFieldDisplayPropType
 } from "../../../proptypes";
-import { search as searchAction } from "../../../redux/actions/datatableActions";
+import {
+  search as searchAction,
+  toggleSearchFieldDisplay as toggleSearchFieldDisplayAction
+} from "../../../redux/actions/datatableActions";
 
 export class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      openSearch: false
-    };
     this.searchInput = React.createRef();
   }
 
@@ -27,24 +29,21 @@ export class Search extends Component {
   };
 
   toggleSearch = () => {
-    const { openSearch } = this.state;
-    const { searchTerm } = this.props;
-    if (!openSearch) {
+    const { toggleSearchFieldDisplay, isSearchFieldDisplayed } = this.props;
+    if (!isSearchFieldDisplayed) {
       this.searchInput.current.focus();
     }
-    if (searchTerm.length === 0) {
-      this.setState({ openSearch: !openSearch });
-    }
+    toggleSearchFieldDisplay();
   };
 
   render() {
-    const { openSearch } = this.state;
     const {
       searchTerm,
       rows,
       isRefreshing,
       searchText,
-      searchPlaceholderText
+      searchPlaceholderText,
+      isSearchFieldDisplayed
     } = this.props;
     const disabled = rows.length === 0 || isRefreshing;
 
@@ -52,7 +51,7 @@ export class Search extends Component {
       <Fragment>
         <TextField
           className={
-            !openSearch
+            !isSearchFieldDisplayed
               ? "searchAnimationInput search-input"
               : "searchAnimationInputActive search-input"
           }
@@ -88,12 +87,15 @@ Search.propTypes = {
   rows: rowsPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
   searchText: textPropType,
-  searchPlaceholderText: textPropType
+  searchPlaceholderText: textPropType,
+  isSearchFieldDisplayed: isSearchFieldDisplayedPropType.isRequired,
+  toggleSearchFieldDisplay: toggleSearchFieldDisplayPropType.isRequired
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    search: term => dispatch(searchAction(term))
+    search: term => dispatch(searchAction(term)),
+    toggleSearchFieldDisplay: () => dispatch(toggleSearchFieldDisplayAction())
   };
 };
 
@@ -104,7 +106,8 @@ const mapStateToProps = state => {
     rows: state.datatableReducer.data.rows,
     searchTerm: state.datatableReducer.searchTerm,
     searchText: state.textReducer.search,
-    searchPlaceholderText: state.textReducer.searchPlaceholder
+    searchPlaceholderText: state.textReducer.searchPlaceholder,
+    isSearchFieldDisplayed: state.datatableReducer.isSearchFieldDisplayed
   };
 };
 

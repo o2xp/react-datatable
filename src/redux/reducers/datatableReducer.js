@@ -64,6 +64,7 @@ const defaultState = {
   isRefreshing: false,
   stripped: false,
   areFilterFieldsDisplayed: false,
+  isSearchFieldDisplayed: false,
   filterTerms: {},
   searchTerm: "",
   filterResultForEachColumn: {},
@@ -263,13 +264,6 @@ const calcComponentSize = state => {
   return newState;
 };
 
-const toggleFilterFieldsDisplay = state => {
-  return {
-    ...state,
-    areFilterFieldsDisplayed: !state.areFilterFieldsDisplayed
-  };
-};
-
 const setPagination = ({
   state,
   newPageSelected = null,
@@ -355,6 +349,36 @@ const setPagination = ({
     rowsPerPageSelected,
     rowsCurrentPage,
     rowsToUse
+  };
+};
+
+const toggleFilterFieldsDisplay = state => {
+  const newState = {
+    ...state,
+    areFilterFieldsDisplayed: !state.areFilterFieldsDisplayed,
+    searchTerm: "",
+    searchTerms: {},
+    filterResultForEachColumn: {},
+    isSearchFieldDisplayed: false
+  };
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
+  };
+};
+
+const toggleSearchFieldDisplay = state => {
+  const newState = {
+    ...state,
+    isSearchFieldDisplayed: !state.isSearchFieldDisplayed,
+    searchTerm: "",
+    searchTerms: {},
+    filterResultForEachColumn: {},
+    areFilterFieldsDisplayed: false
+  };
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
   };
 };
 
@@ -1514,6 +1538,8 @@ const datatableReducer = (state = defaultState, action) => {
       return search(state, payload);
     case "TOGGLE_FILTERFIELDS_DISPLAY":
       return toggleFilterFieldsDisplay(state);
+    case "TOGGLE_SEARCHFIELD_DISPLAY":
+      return toggleSearchFieldDisplay(state);
     case "SEARCH_IN_COLUMN":
       return filterInColumn(state, payload);
     case "SET_COLUMN_VISIBILITY":

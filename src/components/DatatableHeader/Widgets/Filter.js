@@ -57,7 +57,6 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isRefreshing: state.datatableReducer.isRefreshing,
-    areFilterFieldsDisplayed: state.datatableReducer.areFilterFieldsDisplayed,
     rows: state.datatableReducer.data.rows,
     filterText: state.textReducer.filter
   };

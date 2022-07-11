@@ -100,6 +100,10 @@ export const toggleFilterFieldsDisplay = () => ({
   type: "TOGGLE_FILTERFIELDS_DISPLAY"
 });
 
+export const toggleSearchFieldDisplay = () => ({
+  type: "TOGGLE_SEARCHFIELD_DISPLAY"
+});
+
 export const filterInColumn = payload => ({
   type: "SEARCH_IN_COLUMN",
   payload
