@@ -25,6 +25,7 @@ const storyOptionsSample = {
     canPrint: true,
     canDownload: true,
     canSearch: true,
+    canFilter: true,
     canRefreshRows: true,
     canCreatePreset: false,
     canOrderColumns: true,

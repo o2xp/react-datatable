@@ -64,6 +64,7 @@ const mergedMaximumOptionsSample = {
     canDownload: true,
     canDuplicate: true,
     canSearch: true,
+    canFilter: true,
     canDelete: true,
     canRefreshRows: true,
     canCreatePreset: false,

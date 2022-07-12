@@ -28,6 +28,7 @@ const maximumOptionsSample = {
     canDownload: true,
     canDelete: true,
     canSearch: true,
+    canFilter: true,
     canDuplicate: true,
     canRefreshRows: true,
     canCreatePreset: false,
