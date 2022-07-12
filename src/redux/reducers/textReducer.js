@@ -1,5 +1,5 @@
 const defaultState = {
-  search: "Toggle",
+  search: "Global searching",
   filter: "Toggle filtering",
   searchPlaceholder: "Search..",
   edit: "Edit",

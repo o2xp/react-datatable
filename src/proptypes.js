@@ -45,7 +45,6 @@ export const checkedPropType = PropTypes.bool;
 export const orderByPropType = PropTypes.arrayOf(PropTypes.object);
 export const isRefreshingPropType = PropTypes.bool;
 export const strippedPropType = PropTypes.bool;
-// TODO: replace searchTermPropRype and replace where it is used for searchTermsPropType
 export const searchTermPropType = PropTypes.string;
 export const filterTermsPropType = PropTypes.object;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);

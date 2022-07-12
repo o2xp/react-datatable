@@ -1251,91 +1251,57 @@ const setColumnVisibilty = (state, payload) => {
 };
 
 // TODO: make the function more readable
-// FIXME:
 const handlePresetDisplay = (state, payload) => {
-  const selectedPreset = payload;
+  const currentPreset = payload;
   const allColumnsNames = state.data.columns.map(column => column.id);
   const columnsCurrentlyDisplayed =
     state.features.userConfiguration.columnsOrder;
-
   const predefinedPresets = state.features.columnsPresetsToDisplay;
-  const localPresets = JSON.parse(localStorage.getItem("presetList"));
+  const localPresets =
+    localStorage.getItem("presetList") === null
+      ? []
+      : JSON.parse(localStorage.getItem("presetList"));
   const allPresets = predefinedPresets.concat(localPresets);
 
-  if (selectedPreset.type === "predefinedPreset") {
+  if (currentPreset.type === "predefinedPreset") {
     payload.isActive = !payload.isActive;
   } else {
-    // Reverses isActive state of the selectedState in the localStorage and of selectedPreset
+    // Reverses isActive state of the selectedState in the localStorage and of currentPreset
     const presetIndex = localPresets.findIndex(
-      preset => preset.presetName === selectedPreset.presetName
+      preset => preset.presetName === currentPreset.presetName
     );
     localPresets[presetIndex].isActive = !localPresets[presetIndex].isActive;
     localStorage.setItem("presetList", JSON.stringify(localPresets));
-    selectedPreset.isActive = !selectedPreset.isActive;
+    currentPreset.isActive = !currentPreset.isActive;
   }
+
+  let newColumnsOrder = [];
 
   // TODO: mettre dans le localstorage
-  const activePresets = [];
-  allPresets.forEach(preset => {
-    if (preset.isActive) {
-      activePresets.push(preset);
-    }
-  });
+  const activePresets = allPresets.filter(preset => preset.isActive);
 
-  // If the selected preset is the only one active, show only its columns
-  if (selectedPreset.isActive && activePresets.length === 1) {
-    return {
-      ...state,
-      features: {
-        ...state.features,
-        userConfiguration: {
-          ...state.features.userConfiguration,
-          columnsOrder: selectedPreset.columnsToShow
-        }
-      }
-    };
+  if (currentPreset.isActive && activePresets.length === 1) {
+    // If the selected preset is the only one active, show only its columns
+    newColumnsOrder = ["o2xpActions", ...currentPreset.columnsToShow];
   }
-
-  // If there is no more preset selected display all columns again
-  if (!selectedPreset.isActive && activePresets.length === 0) {
-    return {
-      ...state,
-      features: {
-        ...state.features,
-        userConfiguration: {
-          ...state.features.userConfiguration,
-          columnsOrder: allColumnsNames
-        }
-      }
-    };
+  if (!currentPreset.isActive && activePresets.length === 0) {
+    // If no more preset are selected display all columns again
+    newColumnsOrder = allColumnsNames;
   }
-
-  // If more than 2 preset are selected and you add one more, merge their columns (without duplicates) and display them
-  if (selectedPreset.isActive && activePresets.length >= 2) {
-    let columnsToDisplay = [];
+  if (currentPreset.isActive && activePresets.length >= 2) {
+    // If 2 or more presets are selected, merge their columns without duplicates and display them
     activePresets.forEach(() => {
-      columnsToDisplay = [
+      newColumnsOrder = [
         ...new Set([
           ...columnsCurrentlyDisplayed,
-          ...selectedPreset.columnsToShow
+          ...currentPreset.columnsToShow
         ])
       ];
     });
-    return {
-      ...state,
-      features: {
-        ...state.features,
-        userConfiguration: {
-          ...state.features.userConfiguration,
-          columnsOrder: columnsToDisplay
-        }
-      }
-    };
   }
-
-  // If there is more than 2 preset selected and you remove one, remove the columns used by the selected preset and unused by the other ones
-  if (!selectedPreset.isActive && activePresets.length >= 1) {
-    let columnsToDisplay = columnsCurrentlyDisplayed;
+  if (!currentPreset.isActive && activePresets.length >= 1) {
+    // If there are more than 2 preset selected and you remove one, remove the columns used by the selected preset and not used by the others
+    newColumnsOrder = columnsCurrentlyDisplayed;
 
     const activePresetsAllColumns = [];
     activePresets.forEach(activePreset => {
@@ -1344,29 +1310,28 @@ const handlePresetDisplay = (state, payload) => {
       });
     });
 
-    const selectedPresetUniqueColumns = [];
-    selectedPreset.columnsToShow.forEach(col => {
+    const currentPresetUniqueColumns = [];
+    currentPreset.columnsToShow.forEach(col => {
       if (!activePresetsAllColumns.includes(col)) {
-        selectedPresetUniqueColumns.push(col);
+        currentPresetUniqueColumns.push(col);
       }
     });
 
-    selectedPresetUniqueColumns.forEach(col => {
-      columnsToDisplay = columnsToDisplay.filter(column => column !== col);
+    currentPresetUniqueColumns.forEach(col => {
+      newColumnsOrder = newColumnsOrder.filter(column => column !== col);
     });
-
-    return {
-      ...state,
-      features: {
-        ...state.features,
-        userConfiguration: {
-          ...state.features.userConfiguration,
-          columnsOrder: columnsToDisplay
-        }
-      }
-    };
   }
-  return state;
+
+  return {
+    ...state,
+    features: {
+      ...state.features,
+      userConfiguration: {
+        ...state.features.userConfiguration,
+        columnsOrder: newColumnsOrder
+      }
+    }
+  };
 };
 
 const setUserConfiguration = (state, payload) => {
@@ -1405,7 +1370,7 @@ const refreshRowsStarted = state => {
     ...state,
     isRefreshing: true,
     searchTerm: "",
-    filterTerms: [],
+    filterTerms: {},
     rowsEdited: [],
     rowsSelected: []
   };

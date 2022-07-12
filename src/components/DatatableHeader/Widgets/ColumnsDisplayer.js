@@ -67,7 +67,10 @@ export class ColumnsDisplayer extends Component {
   };
 
   createPresetMenuItems = () => {
-    const localPresets = JSON.parse(localStorage.getItem("presetList"));
+    const localPresets =
+      localStorage.getItem("presetList") === null
+        ? []
+        : JSON.parse(localStorage.getItem("presetList"));
     const { handlePresetDisplay, columnsPresetsToDisplay } = this.props;
 
     const allPresets = columnsPresetsToDisplay.concat(localPresets);

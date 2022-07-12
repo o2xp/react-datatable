@@ -21,6 +21,7 @@ const store = mockStore({
       canOrderColumns: true,
       canPrint: true,
       canRefreshRows: true,
+      canCreatePreset: true,
       canSaveUserConfiguration: true,
       additionalIcons: [
         {
@@ -44,6 +45,7 @@ const storeBasicIcons = mockStore({
       canOrderColumns: false,
       canPrint: false,
       canRefreshRows: false,
+      canCreatePreset: false,
       canSaveUserConfiguration: false,
       selectionIcons: []
     }
