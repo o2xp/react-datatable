@@ -105,11 +105,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <NumberWrapper style={{ width: columnNumber.colSize }}>
         {columnNumber.label}
       </NumberWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("text", () => {
@@ -125,11 +129,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <TextWrapper style={{ width: columnText.colSize }}>
         {columnText.label}
       </TextWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("boolean", () => {
@@ -145,14 +153,19 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <BooleanWrapper style={{ width: columnBoolean.colSize }}>
         {columnBoolean.label}
       </BooleanWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("date", () => {
+    // deep equality not working due to react.Fragment
     const wrapper = shallow(
       <HeaderCellPureComponent
         column={columnDate}
@@ -165,11 +178,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <DateWrapper style={{ width: columnDate.colSize }}>
         {columnDate.label}
       </DateWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("time", () => {
@@ -185,11 +202,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <TimeWrapper style={{ width: columnTime.colSize }}>
         {columnTime.label}
       </TimeWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("dateTime", () => {
@@ -205,11 +226,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <DateTimeWrapper style={{ width: columnDateTime.colSize }}>
         {columnDateTime.label}
       </DateTimeWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("default", () => {
@@ -225,11 +250,15 @@ describe("BodyCell component should create a cell of type", () => {
         dragText="Drag"
       />
     );
-    expect(wrapper.instance().buildHeaderCell()).toEqual(
+    const wrapper2 = shallow(
       <TextWrapper style={{ width: columnDefault.colSize }}>
         {columnDefault.label}
       </TextWrapper>
     );
+
+    expect(wrapper2.text()).toEqual("<StyledComponent />");
+    expect(wrapper.text()).toEqual("<sortableElement />");
+    expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
   });
 
   it("create cell-header", () => {

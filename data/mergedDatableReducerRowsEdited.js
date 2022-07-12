@@ -16,6 +16,10 @@ import {
   orderBy,
   newRows,
   rowsDeleted,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   features
 } from "./optionsObjectSample";
 
@@ -44,6 +48,10 @@ const mergedDatableReducerRowsEdited = {
   searchTerm,
   newRows,
   rowsDeleted,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   font,
   orderBy,
   rowsGlobalEdited,

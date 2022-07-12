@@ -146,6 +146,10 @@ export const refreshRows = null;
 export const isRefreshing = false;
 export const stripped = false;
 export const searchTerm = "";
+export const filterResultForEachColumn = {};
+export const filterTerms = {};
+export const areFilterFieldsDisplayed = false;
+export const isSearchFieldDisplayed = false;
 export const orderBy = [];
 export const data = {
   columns,
@@ -200,14 +204,16 @@ export const features = {
   canPrint: true,
   canDownload: true,
   canDuplicate: false,
+  canCreatePreset: true,
   canDelete: true,
   canSearch: false,
-  canFilter: false,
+  canFilter: true,
   canRefreshRows: false,
   canSelectRow: true,
   canOrderColumns: false,
   canSaveUserConfiguration: false,
   editableIdNewRow: [],
+  columnsPresetsToDisplay: [],
   userConfiguration,
   rowsPerPage,
   additionalIcons,

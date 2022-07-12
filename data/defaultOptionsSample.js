@@ -38,6 +38,7 @@ const defaultOptionsSample = {
   isSearchFieldDisplayed: false,
   isRefreshing: false,
   stripped: false,
+  searchTerm: "",
   filterTerms: {},
   filterResultForEachColumn: {},
   orderBy: [],
@@ -51,6 +52,7 @@ const defaultOptionsSample = {
   features: {
     canEdit: false,
     canAdd: false,
+    canCreatePreset: false,
     canEditRow: null,
     canGlobalEdit: false,
     canPrint: false,
@@ -58,11 +60,11 @@ const defaultOptionsSample = {
     canDuplicate: false,
     canDelete: false,
     canSearch: false,
-    canFilter: false,
     canRefreshRows: false,
     canSelectRow: false,
     canOrderColumns: false,
     canSaveUserConfiguration: false,
+    columnsPresetsToDisplay: [],
     editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],

@@ -15,7 +15,11 @@ import {
   newRows,
   rowsDeleted,
   orderBy,
-  rowsPerPage
+  rowsPerPage,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
 } from "./optionsObjectSample";
 
 const mergedMinimumOptionsSample = {
@@ -47,6 +51,10 @@ const mergedMinimumOptionsSample = {
   data,
   orderBy,
   font,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   pagination: {
     ...pagination,
     rowsCurrentPage: data.rows
@@ -60,9 +68,10 @@ const mergedMinimumOptionsSample = {
     canDownload: false,
     canDuplicate: false,
     canSearch: false,
-    canFilter: false,
     canDelete: false,
     canSelectRow: false,
+    canCreatePreset: false,
+    columnsPresetsToDisplay: [],
     canRefreshRows: false,
     canOrderColumns: false,
     canSaveUserConfiguration: false,

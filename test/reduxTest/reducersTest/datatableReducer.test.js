@@ -139,6 +139,9 @@ describe("datatableReducer reducer", () => {
         payload: { optionsInit: cloneDeep(maximumOptionsSample) }
       });
 
+      console.log(initializedOptions);
+      console.log(mergedMaximumOptionsSample);
+
       expect(
         equal(initializedOptions, cloneDeep(mergedMaximumOptionsSample))
       ).toBeTruthy();

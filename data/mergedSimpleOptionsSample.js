@@ -17,6 +17,10 @@ import {
   newRows,
   rowsDeleted,
   searchTerm,
+  filterTerms,
+  filterResultForEachColumn,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
   features
 } from "./optionsObjectSample";
 
@@ -48,6 +52,10 @@ const mergedSimpleOptionsSample = {
   newRows,
   rowsDeleted,
   searchTerm,
+  filterTerms,
+  filterResultForEachColumn,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
   rowsSelected,
   actions: null,
   features: {

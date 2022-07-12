@@ -47,8 +47,8 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
-          searchText='Toggle'
-          searchPlaceholderText='Search..'
+          searchText="Toggle"
+          searchPlaceholderText="Search.."
         />
       );
       const button = wrapper.find("button.search-icon");
@@ -65,15 +65,15 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
-          searchText='Toggle'
-          searchPlaceholderText='Search..'
+          searchText="Toggle"
+          searchPlaceholderText="Search.."
         />
       );
       const button = wrapper.find("button.search-icon");
       button.simulate("click");
       wrapper.setProps({ searchTerm: "sd" });
       button.simulate("click");
-      expect(wrapper.state("openSearch")).toBeTruthy();
+      expect(button.get(0).value).toEqual("sd");
     });
 
     it("should close input", () => {
@@ -85,10 +85,11 @@ describe("Search component", () => {
           rowsSelected={rowsSelected}
           searchTerm={searchTerm}
           rows={rows}
-          searchText='Toggle'
-          searchPlaceholderText='Search..'
+          searchText="Toggle"
+          searchPlaceholderText="Search.."
         />
       );
+
       const button = wrapper.find("button.search-icon");
       button.simulate("click");
       wrapper.setProps({ searchTerm: "" });
@@ -106,8 +107,8 @@ describe("Search component", () => {
         rowsSelected={rowsSelected}
         searchTerm={searchTerm}
         rows={rows}
-        searchText='Toggle'
-        searchPlaceholderText='Search..'
+        searchText="Toggle"
+        searchPlaceholderText="Search.."
       />
     );
     const button = wrapper.find("button.search-icon");
@@ -132,8 +133,8 @@ describe("Search component", () => {
         rowsSelected={rowsSelected}
         searchTerm={searchTerm}
         rows={rows}
-        searchText='Toggle'
-        searchPlaceholderText='Search..'
+        searchText="Toggle"
+        searchPlaceholderText="Search.."
       />
     );
 

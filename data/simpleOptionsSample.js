@@ -13,6 +13,7 @@ const simpleOptionsSample = {
   features: {
     canEdit: true,
     canPrint: true,
+    canCreatePreset: true,
     canDownload: true,
     canDelete: true,
     canSelectRow: true,
