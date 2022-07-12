@@ -10,7 +10,6 @@ import {
 } from "../../../proptypes";
 import { toggleSearchFieldsDisplay as toggleSearchFieldsDisplayAction } from "../../../redux/actions/datatableActions";
 
-// TODO: rename
 export class Search extends Component {
   render() {
     const { rows, isRefreshing, searchText } = this.props;

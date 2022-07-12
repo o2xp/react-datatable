@@ -91,12 +91,6 @@ export const setRowsGlobalSelected = payload => ({
   payload
 });
 
-// todo: remove
-// export const search = payload => ({
-//   type: "SEARCH",
-//   payload
-// });
-
 export const toggleSearchFieldsDisplay = () => ({
   type: "TOGGLE_SEARCHFIELDS_DISPLAY"
 });

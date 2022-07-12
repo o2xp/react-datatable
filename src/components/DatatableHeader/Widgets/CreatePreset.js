@@ -8,19 +8,19 @@ import {
 } from "@material-ui/icons";
 
 import {
-  IconButton,
   Tooltip,
   Zoom,
+  IconButton,
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   DialogActions,
   Input,
-  Button,
-  Checkbox,
+  FormGroup,
   FormControlLabel,
-  FormGroup
+  Checkbox,
+  Button
 } from "@material-ui/core";
 
 import Transition from "./Transition";
@@ -42,11 +42,6 @@ export class CreatePreset extends Component {
     };
   }
 
-  nameInputFocusHandler = () => {
-    const { isNamingInputFocused } = this.state;
-    this.setState({ isNamingInputFocused: !isNamingInputFocused });
-  };
-
   toggleDialog = bool => {
     this.setState({
       dialogOpen: bool,
@@ -55,6 +50,30 @@ export class CreatePreset extends Component {
         columnsToShow: []
       }
     });
+  };
+
+  nameInputFocusHandler = () => {
+    const { isNamingInputFocused } = this.state;
+    this.setState({ isNamingInputFocused: !isNamingInputFocused });
+  };
+
+  createColumnsCheckboxes = column => {
+    if (column.id !== "o2xpActions") {
+      return (
+        <FormControlLabel
+          label={column.label}
+          key={column.id}
+          control={
+            <Checkbox
+              id={column.id}
+              color="primary"
+              onChange={this.handleCheckboxChange}
+            />
+          }
+        />
+      );
+    }
+    return null;
   };
 
   handleCheckboxChange = e => {
@@ -92,11 +111,20 @@ export class CreatePreset extends Component {
     }
   };
 
+  setPresetName = e => {
+    const { newPreset } = this.state;
+    this.setState({
+      newPreset: {
+        ...newPreset,
+        presetName: e.target.value
+      }
+    });
+  };
+
   // TODO: Add an ID to the preset or make presetNames unique
   handleCreatePreset = () => {
     const { newPreset } = this.state;
-    const { presetName } = newPreset;
-    const { columnsToShow } = newPreset;
+    const { presetName, columnsToShow } = newPreset;
 
     const localPresetList = localStorage.getItem("presetList");
 
@@ -110,35 +138,6 @@ export class CreatePreset extends Component {
     } else if (columnsToShow.length <= 0) {
       // TODO: Add pop up "Please select at least one column"
     }
-  };
-
-  createColumnsCheckboxes = column => {
-    if (column.id !== "o2xpActions") {
-      return (
-        <FormControlLabel
-          label={column.label}
-          key={column.id}
-          control={
-            <Checkbox
-              id={column.id}
-              color="primary"
-              onChange={this.handleCheckboxChange}
-            />
-          }
-        />
-      );
-    }
-    return null;
-  };
-
-  setPresetName = e => {
-    const { newPreset } = this.state;
-    this.setState({
-      newPreset: {
-        ...newPreset,
-        presetName: e.target.value
-      }
-    });
   };
 
   render() {

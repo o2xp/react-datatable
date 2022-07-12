@@ -42,7 +42,6 @@ export const checkedPropType = PropTypes.bool;
 export const orderByPropType = PropTypes.arrayOf(PropTypes.object);
 export const isRefreshingPropType = PropTypes.bool;
 export const strippedPropType = PropTypes.bool;
-// TODO: replace searchTermPropRype and replace where it is used for searchTermsPropType
 export const searchTermPropType = PropTypes.string;
 export const searchTermsPropType = PropTypes.object;
 export const rowsEditedPropType = PropTypes.arrayOf(PropTypes.object);
@@ -119,7 +118,6 @@ export const canEditPropType = PropTypes.bool;
 export const canGlobalEditPropType = PropTypes.bool;
 export const canPrintPropType = PropTypes.bool;
 export const canDownloadPropType = PropTypes.bool;
-// todo:
 export const canSearchPropType = PropTypes.bool;
 export const canCreatePresetPropType = PropTypes.bool;
 export const canAddPropType = PropTypes.bool;
@@ -234,7 +232,6 @@ export const featuresPropType = PropTypes.shape({
   canAdd: canAddPropType,
   canPrint: canPrintPropType,
   canDownload: canDownloadPropType,
-  // todo: rename all of the canSearch
   canSearch: canSearchPropType,
   canCreatePreset: canCreatePresetPropType,
   canRefreshRows: canRefreshRowsPropType,

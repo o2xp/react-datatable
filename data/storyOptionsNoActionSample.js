@@ -20,6 +20,7 @@ const storyOptionsNoActionSample = {
     canDownload: true,
     canSearch: true,
     canRefreshRows: true,
+    canCreatePreset: false,
     canOrderColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {

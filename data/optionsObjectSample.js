@@ -203,6 +203,7 @@ export const features = {
   canDelete: true,
   canSearch: false,
   canRefreshRows: false,
+  canCreatePreset: false,
   canSelectRow: true,
   canOrderColumns: false,
   canSaveUserConfiguration: false,

@@ -57,6 +57,7 @@ const defaultOptionsSample = {
     canDuplicate: false,
     canDelete: false,
     canSearch: false,
+    canCreatePreset: false,
     canRefreshRows: false,
     canSelectRow: false,
     canOrderColumns: false,
