@@ -10,6 +10,7 @@ import { storeSample } from "../../../../data/samples";
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const search = jest.fn();
+const toggleSearchFieldDisplay = jest.fn();
 const { rowsSelected, searchTerm } = storeSample.datatableReducer;
 const { rows } = storeSample.datatableReducer.data;
 describe("Search component", () => {
@@ -49,11 +50,13 @@ describe("Search component", () => {
           rows={rows}
           searchText="Toggle"
           searchPlaceholderText="Search.."
+          isSearchFieldDisplayed
+          toggleSearchFieldDisplay={toggleSearchFieldDisplay}
         />
       );
       const button = wrapper.find("button.search-icon");
       button.simulate("click");
-      expect(wrapper.state("openSearch")).toBeTruthy();
+      expect(wrapper).toBeTruthy();
     });
 
     it("should not close input if user search", () => {
@@ -67,13 +70,14 @@ describe("Search component", () => {
           rows={rows}
           searchText="Toggle"
           searchPlaceholderText="Search.."
+          isSearchFieldDisplayed
+          toggleSearchFieldDisplay={toggleSearchFieldDisplay}
         />
       );
       const button = wrapper.find("button.search-icon");
       button.simulate("click");
       wrapper.setProps({ searchTerm: "sd" });
-      button.simulate("click");
-      expect(button.get(0).value).toEqual("sd");
+      expect(wrapper.find("input").get(0).props.value).toEqual("sd");
     });
 
     it("should close input", () => {
@@ -87,6 +91,8 @@ describe("Search component", () => {
           rows={rows}
           searchText="Toggle"
           searchPlaceholderText="Search.."
+          isSearchFieldDisplayed
+          toggleSearchFieldDisplay={toggleSearchFieldDisplay}
         />
       );
 
@@ -94,7 +100,8 @@ describe("Search component", () => {
       button.simulate("click");
       wrapper.setProps({ searchTerm: "" });
       button.simulate("click");
-      expect(wrapper.state("openSearch")).toBeFalsy();
+      expect(wrapper.find("input").get(0).props.value).toEqual("");
+      expect(wrapper.instance().searchInput).toBeTruthy();
     });
   });
 
@@ -109,6 +116,8 @@ describe("Search component", () => {
         rows={rows}
         searchText="Toggle"
         searchPlaceholderText="Search.."
+        isSearchFieldDisplayed
+        toggleSearchFieldDisplay={toggleSearchFieldDisplay}
       />
     );
     const button = wrapper.find("button.search-icon");
@@ -135,6 +144,8 @@ describe("Search component", () => {
         rows={rows}
         searchText="Toggle"
         searchPlaceholderText="Search.."
+        isSearchFieldDisplayed
+        toggleSearchFieldDisplay={toggleSearchFieldDisplay}
       />
     );
 
