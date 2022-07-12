@@ -1257,7 +1257,10 @@ const handlePresetDisplay = (state, payload) => {
   const columnsCurrentlyDisplayed =
     state.features.userConfiguration.columnsOrder;
   const predefinedPresets = state.features.columnsPresetsToDisplay;
-  const localPresets = JSON.parse(localStorage.getItem("presetList"));
+  const localPresets =
+    localStorage.getItem("presetList") === null
+      ? []
+      : JSON.parse(localStorage.getItem("presetList"));
   const allPresets = predefinedPresets.concat(localPresets);
 
   if (currentPreset.type === "predefinedPreset") {
@@ -1367,7 +1370,7 @@ const refreshRowsStarted = state => {
     ...state,
     isRefreshing: true,
     searchTerm: "",
-    filterTerms: [],
+    filterTerms: {},
     rowsEdited: [],
     rowsSelected: []
   };
