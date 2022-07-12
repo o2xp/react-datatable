@@ -69,7 +69,7 @@ export class Search extends Component {
           <span>
             <IconButton
               className={disabled ? "disabled-icon search-icon" : "search-icon"}
-              onClick={() => this.toggleSearch()}
+              onClick={this.toggleSearch}
               disabled={disabled}
             >
               <SearchIcon color="primary" />
@@ -89,7 +89,7 @@ Search.propTypes = {
   searchText: textPropType,
   searchPlaceholderText: textPropType,
   isSearchFieldDisplayed: isSearchFieldDisplayedPropType.isRequired,
-  toggleSearchFieldDisplay: toggleSearchFieldDisplayPropType.isRequired
+  toggleSearchFieldDisplay: toggleSearchFieldDisplayPropType
 };
 
 const mapDispatchToProps = dispatch => {

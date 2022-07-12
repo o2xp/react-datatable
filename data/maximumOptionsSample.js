@@ -5,7 +5,11 @@ import {
   data,
   additionalIcons,
   selectionIcons,
-  additionalActions
+  additionalActions,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn
 } from "./optionsObjectSample";
 
 const maximumOptionsSample = {
@@ -19,6 +23,10 @@ const maximumOptionsSample = {
       height: "33px"
     }
   },
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   keyColumn,
   font,
   data,
@@ -32,6 +40,8 @@ const maximumOptionsSample = {
     canDuplicate: true,
     canRefreshRows: true,
     canOrderColumns: true,
+    canCreatePreset: false,
+    columnsPresetsToDisplay: [],
     canSelectRow: true,
     canSaveUserConfiguration: true,
     userConfiguration: {

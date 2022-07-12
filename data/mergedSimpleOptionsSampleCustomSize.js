@@ -17,7 +17,11 @@ import {
   rowsDeleted,
   searchTerm,
   rowsSelected,
-  features
+  features,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn
 } from "./optionsObjectSample";
 
 const mergedSimpleOptionsSampleCustomSize = {
@@ -39,6 +43,10 @@ const mergedSimpleOptionsSampleCustomSize = {
   isRefreshing,
   newRows,
   rowsDeleted,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   stripped,
   orderBy,
   searchTerm,

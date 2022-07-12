@@ -17,6 +17,10 @@ import {
   searchTerm,
   newRows,
   rowsDeleted,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   features
 } from "./optionsObjectSample";
 
@@ -42,6 +46,10 @@ const mergedSimpleOptionsSampleWidthHeightResize = {
   keyColumn,
   refreshRows,
   isRefreshing,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   stripped,
   newRows,
   rowsDeleted,

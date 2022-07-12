@@ -29,11 +29,6 @@ describe("datatableReducer reducer", () => {
         payload: { optionsInit: cloneDeep(simpleOptionsSample) }
       });
 
-      /* eslint-disable no-debugger, no-console */
-      console.log(initializedOptions);
-      /* eslint-disable no-debugger, no-console */
-      console.log(cloneDeep(mergedSimpleOptionsSample));
-
       expect(
         equal(initializedOptions, cloneDeep(mergedSimpleOptionsSample))
       ).toBeTruthy();
@@ -143,6 +138,9 @@ describe("datatableReducer reducer", () => {
         type: "INITIALIZE_OPTIONS",
         payload: { optionsInit: cloneDeep(maximumOptionsSample) }
       });
+
+      console.log(initializedOptions);
+      console.log(mergedMaximumOptionsSample);
 
       expect(
         equal(initializedOptions, cloneDeep(mergedMaximumOptionsSample))

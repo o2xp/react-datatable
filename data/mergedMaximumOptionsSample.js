@@ -17,7 +17,11 @@ import {
   rowsDeleted,
   orderBy,
   selectionIcons,
-  additionalActions
+  additionalActions,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn
 } from "./optionsObjectSample";
 
 const mergedMaximumOptionsSample = {
@@ -40,6 +44,10 @@ const mergedMaximumOptionsSample = {
   rowsDeleted,
   stripped,
   searchTerm,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   actions: null,
   keyColumn,
   font,
@@ -69,6 +77,8 @@ const mergedMaximumOptionsSample = {
     canRefreshRows: true,
     canSelectRow: true,
     canOrderColumns: true,
+    canCreatePreset: false,
+    columnsPresetsToDisplay: [],
     canSaveUserConfiguration: true,
     editableIdNewRow: [],
     userConfiguration: {

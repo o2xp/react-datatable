@@ -1405,7 +1405,7 @@ const refreshRowsStarted = state => {
     ...state,
     isRefreshing: true,
     searchTerm: "",
-    filterTerms: [],
+    filterTerms: {},
     rowsEdited: [],
     rowsSelected: []
   };
