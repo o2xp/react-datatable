@@ -31,7 +31,6 @@ const maximumOptionsSample = {
     canFilter: true,
     canDuplicate: true,
     canRefreshRows: true,
-    canCreatePreset: false,
     canOrderColumns: true,
     canSelectRow: true,
     canSaveUserConfiguration: true,

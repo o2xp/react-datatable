@@ -21,7 +21,6 @@ const storyOptionsNoActionSample = {
     canSearch: true,
     canFilter: true,
     canRefreshRows: true,
-    canCreatePreset: false,
     canOrderColumns: true,
     canSaveUserConfiguration: true,
     userConfiguration: {

@@ -67,7 +67,6 @@ const mergedMaximumOptionsSample = {
     canFilter: true,
     canDelete: true,
     canRefreshRows: true,
-    canCreatePreset: false,
     canSelectRow: true,
     canOrderColumns: true,
     canSaveUserConfiguration: true,
