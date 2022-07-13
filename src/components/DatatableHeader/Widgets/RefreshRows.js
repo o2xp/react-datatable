@@ -19,7 +19,8 @@ import {
   rowsSelectedPropType,
   rowsEditedPropType,
   isRefreshingPropType,
-  textPropType
+  textPropType,
+  areFilterFieldsDisplayedPropType
 } from "../../../proptypes";
 import Transition from "./Transition";
 
@@ -27,10 +28,11 @@ export class RefreshRows extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dialogOpen: false,
-      searchTermMessage: false,
-      rowsSelectedMessage: false,
-      rowsEditedMessage: false
+      isDialogOpened: false,
+      isSearchUsed: false,
+      isFilteringOpened: false,
+      isARowSelected: false,
+      isARowEdited: false
     };
   }
 
@@ -40,38 +42,42 @@ export class RefreshRows extends Component {
       refreshRowsUser,
       searchTerm,
       rowsSelected,
-      rowsEdited
+      rowsEdited,
+      areFilterFieldsDisplayed
     } = this.props;
-    const searchTermMessage = searchTerm.length > 0;
-    const rowsSelectedMessage = rowsSelected.length > 0;
-    const rowsEditedMessage = rowsEdited.length > 0;
+    const isSearchUsed = searchTerm.length > 0;
+    const isFilteringOpened = areFilterFieldsDisplayed;
+    const isARowSelected = rowsSelected.length > 0;
+    const isARowEdited = rowsEdited.length > 0;
     if (
-      (searchTermMessage || rowsSelectedMessage || rowsEditedMessage) &&
+      (isSearchUsed || isARowSelected || isARowEdited || isFilteringOpened) &&
       !forceRefresh
     ) {
       this.setState({
-        rowsEditedMessage,
-        rowsSelectedMessage,
-        searchTermMessage,
-        dialogOpen: true
+        isARowEdited,
+        isARowSelected,
+        isSearchUsed,
+        isFilteringOpened,
+        isDialogOpened: true
       });
     } else {
-      this.setState({ dialogOpen: false });
+      this.setState({ isDialogOpened: false });
       refreshRows(refreshRowsUser);
     }
   };
 
   toggleDialog = bool => {
-    this.setState({ dialogOpen: bool });
+    this.setState({ isDialogOpened: bool });
   };
 
   render() {
     const { isRefreshing, refreshText } = this.props;
     const {
-      dialogOpen,
-      searchTermMessage,
-      rowsSelectedMessage,
-      rowsEditedMessage
+      isDialogOpened,
+      isSearchUsed,
+      isFilteringOpened,
+      isARowSelected,
+      isARowEdited
     } = this.state;
     return (
       <Fragment>
@@ -89,7 +95,7 @@ export class RefreshRows extends Component {
           </span>
         </Tooltip>
         <Dialog
-          open={dialogOpen}
+          open={isDialogOpened}
           onClose={() => this.toggleDialog(false)}
           TransitionComponent={Transition}
           fullWidth
@@ -109,15 +115,20 @@ export class RefreshRows extends Component {
             Attention, you are trying to refresh data while:
             <span>
               <ul>
-                {searchTermMessage && (
-                  <li className="error-search">You did a search</li>
+                {isSearchUsed && (
+                  <li className="error-search">You are searching</li>
                 )}
-                {rowsSelectedMessage && (
-                  <li className="error-rows-selected">
-                    You have selected row(s)
+                {isFilteringOpened && (
+                  <li className="error-filter">
+                    The filtering option is opened
                   </li>
                 )}
-                {rowsEditedMessage && (
+                {isARowSelected && (
+                  <li className="error-rows-selected">
+                    You have row(s) selected
+                  </li>
+                )}
+                {isARowEdited && (
                   <li className="error-rows-edited">You are editing row(s)</li>
                 )}
               </ul>
@@ -156,6 +167,7 @@ RefreshRows.propTypes = {
   rowsSelected: rowsSelectedPropType.isRequired,
   rowsEdited: rowsEditedPropType.isRequired,
   isRefreshing: isRefreshingPropType.isRequired,
+  areFilterFieldsDisplayed: areFilterFieldsDisplayedPropType.isRequired,
   refreshText: textPropType
 };
 
@@ -172,6 +184,7 @@ const mapStateToProps = state => {
     rowsEdited: state.datatableReducer.rowsEdited,
     isRefreshing: state.datatableReducer.isRefreshing,
     searchTerm: state.datatableReducer.searchTerm,
+    areFilterFieldsDisplayed: state.datatableReducer.areFilterFieldsDisplayed,
     refreshText: state.textReducer.refresh
   };
 };
