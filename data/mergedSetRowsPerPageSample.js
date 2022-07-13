@@ -17,6 +17,10 @@ import {
   searchTerm,
   newRows,
   rowsDeleted,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   features
 } from "./optionsObjectSample";
 
@@ -42,6 +46,10 @@ const mergedSetRowsPerPageSample = {
   stripped,
   orderBy,
   searchTerm,
+  areFilterFieldsDisplayed,
+  isSearchFieldDisplayed,
+  filterTerms,
+  filterResultForEachColumn,
   newRows,
   rowsDeleted,
   actions: null,

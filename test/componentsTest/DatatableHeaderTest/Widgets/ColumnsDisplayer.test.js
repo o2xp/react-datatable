@@ -44,6 +44,7 @@ describe("ColumnsDisplayer component", () => {
 
     const button = wrapper.find("button.display-columns-icon");
     button.simulate("click");
+    wrapper.find("button.display-column").simulate("click");
     wrapper
       .find(MenuItem)
       .at(2)
@@ -103,6 +104,7 @@ describe("ColumnsDisplayer component", () => {
     );
     const button = wrapper.find("button.display-columns-icon");
     button.simulate("click");
+    wrapper.find("button.display-column").simulate("click");
     wrapper
       .find(MenuItem)
       .at(2)
