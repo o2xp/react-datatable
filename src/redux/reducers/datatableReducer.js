@@ -270,6 +270,8 @@ const setPagination = ({
   newRowsPerPageSelected = null
 }) => {
   const { filterTerms, searchTerm, orderBy, filterResultForEachColumn } = state;
+  console.log(filterTerms);
+  console.log(filterResultForEachColumn);
   let rowsToUse = state.data.rows;
 
   const filterTermsKeys = Object.keys(filterTerms);

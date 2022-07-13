@@ -7,10 +7,12 @@ import ColumnsDisplayer, {
   ColumnsDisplayer as ColumnsDisplayerPureComponent
 } from "../../../../src/components/DatatableHeader/Widgets/ColumnsDisplayer";
 import { storeSample } from "../../../../data/samples";
+import CreatePreset from "../../../../src/components/DatatableHeader/Widgets/CreatePreset";
 
 const mockStore = configureStore();
 const store = mockStore(storeSample);
 const setColumnVisibilty = jest.fn();
+const handlePresetDisplay = jest.fn();
 const { columns } = storeSample.datatableReducer.data;
 const {
   columnsOrder
@@ -93,7 +95,7 @@ describe("ColumnsDisplayer component", () => {
     expect(wrapper.state("menuOpen")).toBeFalsy();
   });
 
-  describe("click on element should", () => {
+  describe("click on element display by columns should", () => {
     const wrapper = mount(
       <ColumnsDisplayerPureComponent
         setColumnVisibilty={setColumnVisibilty}
@@ -113,5 +115,62 @@ describe("ColumnsDisplayer component", () => {
     it("should dispatch action setColumnVisibilty", () => {
       expect(setColumnVisibilty).toHaveBeenCalled();
     });
+  });
+
+  describe("click on element display by presets should", () => {
+    const wrapper2 = mount(
+      <Provider store={store}>
+        <CreatePreset
+          createPresetTooltipText="Create a new preset"
+          createPresetTitle="Create New Preset"
+          createPresetNamingPlaceholder="Preset name"
+          createPresetDescription="Select the columns to save in the preset"
+          createPresetCancelBtn="Cancel"
+          createPresetCreateBtn="Create"
+          columns={columns}
+        />
+      </Provider>
+    );
+    const cbutton = wrapper2.find("button.create-preset-icon");
+    cbutton.simulate("click");
+
+    // insert preset name
+    wrapper2
+      .find("input")
+      .at(0)
+      .simulate("change", { target: { value: "NEW PRESET" } });
+
+    // check 1st checkbox
+    const input = wrapper2.find("input");
+    input.at(0).getDOMNode().checked = !input.at(0).getDOMNode().checked;
+    input.at(0).simulate("change");
+
+    // click on Create button
+    const createButton = wrapper2.findWhere(node => {
+      return node.type() && node.name() && node.text() === "Create";
+    });
+    createButton.at(0).simulate("click");
+    const wrapper = mount(
+      <ColumnsDisplayerPureComponent
+        setColumnVisibilty={setColumnVisibilty}
+        columns={columns}
+        columnsOrder={columnsOrder}
+        columnsPresetsToDisplay={[
+          {
+            presetName: "Show column",
+            columnsToShow: ["id"],
+            isActive: false,
+            type: "predefinedPreset"
+          }
+        ]}
+        handlePresetDisplay={handlePresetDisplay}
+        displayText="Display columns"
+      />
+    );
+    const button = wrapper.find("button.display-columns-icon");
+    button.simulate("click");
+    // click on display by presets
+    wrapper.find("button.display-column-preset").simulate("click");
+    expect(wrapper).toBeTruthy();
   });
 });
