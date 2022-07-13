@@ -15,7 +15,6 @@ export class Filter extends Component {
   render() {
     const { rows, isRefreshing, filterText } = this.props;
     const disabled = rows.length === 0 || isRefreshing;
-
     return (
       <Fragment>
         <Tooltip
