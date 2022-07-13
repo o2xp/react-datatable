@@ -1237,7 +1237,9 @@ const setColumnVisibilty = (state, payload) => {
         ...state.features.userConfiguration,
         columnsOrder: newColumnsOrder
       }
-    }
+    },
+    searchTerm: "",
+    filterTerms: {}
   };
 
   return {
@@ -1324,7 +1326,7 @@ const handlePresetDisplay = (state, payload) => {
     });
   }
 
-  return {
+  const newState = {
     ...state,
     features: {
       ...state.features,
@@ -1332,7 +1334,14 @@ const handlePresetDisplay = (state, payload) => {
         ...state.features.userConfiguration,
         columnsOrder: newColumnsOrder
       }
-    }
+    },
+    searchTerm: "",
+    filterTerms: {}
+  };
+
+  return {
+    ...newState,
+    pagination: setPagination({ state: newState })
   };
 };
 
