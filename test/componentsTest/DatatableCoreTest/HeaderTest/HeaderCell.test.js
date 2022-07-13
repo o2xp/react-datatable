@@ -110,7 +110,6 @@ describe("BodyCell component should create a cell of type", () => {
         {columnNumber.label}
       </NumberWrapper>
     );
-
     expect(wrapper2.text()).toEqual("<StyledComponent />");
     expect(wrapper.text()).toEqual("<sortableElement />");
     expect(wrapper.instance().buildHeaderCell()).toBeTruthy();
