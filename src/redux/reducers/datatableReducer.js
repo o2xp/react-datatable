@@ -272,8 +272,11 @@ const setPagination = ({
   const { filterTerms, searchTerm, orderBy, filterResultForEachColumn } = state;
   let rowsToUse = state.data.rows;
 
-  const amountOfFilteredColumn = Object.keys(filterResultForEachColumn).length;
   const filterTermsKeys = Object.keys(filterTerms);
+  const amountOfFilteredColumn =
+    filterTermsKeys.length > 0
+      ? Object.keys(filterResultForEachColumn).length
+      : 0;
 
   if (amountOfFilteredColumn > 0) {
     filterTermsKeys.forEach(key => {
@@ -325,6 +328,7 @@ const setPagination = ({
       : Math.ceil(rowsToUse.length / rowsPerPageSelected);
   pageSelected = pageSelected > pageTotal ? pageTotal : pageSelected;
   pageSelected = pageSelected < 1 ? 1 : pageSelected;
+
   let rowsCurrentPage = [];
   if (rowsToUse.length > 0) {
     rowsCurrentPage =
@@ -358,7 +362,6 @@ const toggleFilterFieldsDisplay = state => {
     areFilterFieldsDisplayed: !state.areFilterFieldsDisplayed,
     searchTerm: "",
     filterTerms: {},
-    filterResultForEachColumn: {},
     isSearchFieldDisplayed: false
   };
   return {
@@ -373,7 +376,6 @@ const toggleSearchFieldDisplay = state => {
     isSearchFieldDisplayed: !state.isSearchFieldDisplayed,
     searchTerm: "",
     filterTerms: {},
-    filterResultForEachColumn: {},
     areFilterFieldsDisplayed: false
   };
   return {
@@ -1366,19 +1368,20 @@ const setUserConfiguration = (state, payload) => {
 };
 
 const refreshRowsStarted = state => {
-  return {
+  const newState = {
     ...state,
     isRefreshing: true,
-    searchTerm: "",
-    filterTerms: {},
     rowsEdited: [],
     rowsSelected: []
   };
+  return newState;
 };
 
 const refreshRowsSuccess = (state, payload) => {
   const newState = {
     ...state,
+    searchTerm: "",
+    filterTerms: {},
     data: {
       ...state.data,
       rows: payload
