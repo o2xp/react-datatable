@@ -143,7 +143,6 @@ export const refreshRows = payload => {
     dispatch(refreshRowsStarted());
     return Promise.resolve(payload())
       .then(res => {
-        console.log(res);
         dispatch(
           enqueueSnackbar({
             message: "Rows have been refreshed.",
