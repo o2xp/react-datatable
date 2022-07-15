@@ -19,7 +19,8 @@ import {
   columnsPresetsPropType,
   handlePresetDisplayPropType,
   textPropType,
-  columnsOrderPropType
+  columnsOrderPropType,
+  currentScreenPropType
 } from "../../../proptypes";
 import {
   setColumnVisibilty as setColumnVisibiltyAction,
@@ -67,11 +68,16 @@ export class ColumnsDisplayer extends Component {
   };
 
   createPresetMenuItems = () => {
-    const localPresets =
-      localStorage.getItem("presetList") === null
-        ? []
-        : JSON.parse(localStorage.getItem("presetList"));
-    const { handlePresetDisplay, columnsPresetsToDisplay } = this.props;
+    const {
+      handlePresetDisplay,
+      columnsPresetsToDisplay,
+      currentScreen
+    } = this.props;
+
+    const parsedPresetList = JSON.parse(localStorage.getItem("presetList"));
+    const localPresets = parsedPresetList.filter(
+      preset => preset.screen === currentScreen
+    );
 
     const allPresets = columnsPresetsToDisplay.concat(localPresets);
 
@@ -204,7 +210,8 @@ ColumnsDisplayer.propTypes = {
   columnsOrder: columnsOrderPropType,
   setColumnVisibilty: setColumnVisibiltyPropType,
   handlePresetDisplay: handlePresetDisplayPropType,
-  displayText: textPropType
+  displayText: textPropType,
+  currentScreen: currentScreenPropType
 };
 
 const mapDispatchToProps = dispatch => {
@@ -221,7 +228,8 @@ const mapStateToProps = state => {
       state.datatableReducer.features.userConfiguration.columnsOrder,
     columnsPresetsToDisplay:
       state.datatableReducer.features.columnsPresetsToDisplay,
-    displayText: state.textReducer.display
+    displayText: state.textReducer.display,
+    currentScreen: state.datatableReducer.currentScreen
   };
 };
 
