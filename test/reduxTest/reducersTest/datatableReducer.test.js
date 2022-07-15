@@ -1646,6 +1646,223 @@ describe("datatableReducer reducer", () => {
     });
   });
 
+  describe("should handle HANDLE_PRESET_DISPLAY and", () => {
+    it("display all the presets one preset", () => {
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "HANDLE_PRESET_DISPLAY",
+        payload: {
+          presetName: "Show one columns",
+          columnsToShow: ["name"],
+          isActive: false,
+          type: "predefinedPreset"
+        }
+      });
+
+      result = {
+        ...result,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          columnsPresetsToDisplay: {
+            presetName: "Show one columns",
+            columnsToShow: ["name"],
+            isActive: false,
+            type: "predefinedPreset"
+          },
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.userConfiguration,
+            columnsOrder: ["name"]
+          }
+        }
+      };
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          columnsPresetsToDisplay: {
+            presetName: "Show one columns",
+            columnsToShow: ["name"],
+            isActive: false,
+            type: "predefinedPreset"
+          },
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.userConfiguration,
+            columnsOrder: ["name"]
+          }
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("display all the presets two columns", () => {
+      let result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "HANDLE_PRESET_DISPLAY",
+        payload: {
+          presetName: "Show one columns",
+          columnsToShow: ["name", "id"],
+          isActive: false,
+          type: "predefinedPreset"
+        }
+      });
+
+      result = {
+        ...result,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          columnsPresetsToDisplay: {
+            presetName: "Show one columns",
+            columnsToShow: ["name", "id"],
+            isActive: false,
+            type: "predefinedPreset"
+          },
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.userConfiguration,
+            columnsOrder: ["name", "id"]
+          }
+        }
+      };
+
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        features: {
+          ...mergedSimpleOptionsSample.features,
+          columnsPresetsToDisplay: {
+            presetName: "Show one columns",
+            columnsToShow: ["name", "id"],
+            isActive: false,
+            type: "predefinedPreset"
+          },
+          userConfiguration: {
+            ...mergedSimpleOptionsSample.userConfiguration,
+            columnsOrder: ["name", "id"]
+          }
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle SET_ROWS_GLOBAL_SELECTED and", () => {
+    it("display only one selected row", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SET_ROWS_GLOBAL_SELECTED",
+        payload: {
+          rows: [mergedSimpleOptionsSample.data.rows[0]],
+          checked: true
+        }
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        rowsSelected: [mergedSimpleOptionsSample.data.rows[0]]
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle TOGGLE_FILTERFIELDS_DISPLAY and", () => {
+    it("display filter fields and reset search/filter terms", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "TOGGLE_FILTERFIELDS_DISPLAY"
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        areFilterFieldsDisplayed: true,
+        searchTerm: "",
+        filterTerms: {},
+        isSearchFieldDisplayed: false
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle TOGGLE_SEARCHFIELD_DISPLAY and", () => {
+    it("display search input and reset search/filter terms", () => {
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "TOGGLE_SEARCHFIELD_DISPLAY"
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        isSearchFieldDisplayed: true,
+        searchTerm: "",
+        filterTerms: {},
+        areFilterFieldsDisplayed: false
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
+  describe("should handle SEARCH_IN_COLUMN and", () => {
+    it("filter rows based on search term and column to apply the filter on - 3 results", () => {
+      const filterToApply = ["Hu", "name"];
+      const expectedRows = [
+        mergedSimpleOptionsSample.data.rows[0],
+        mergedSimpleOptionsSample.data.rows[78],
+        mergedSimpleOptionsSample.data.rows[134]
+      ];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH_IN_COLUMN",
+        payload: filterToApply
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        filterTerms: { name: "Hu" },
+        filterResultForEachColumn: {
+          name: expectedRows
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: expectedRows,
+          rowsToUse: expectedRows
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("filter rows based on search term and column to apply the filter on - 1 result, exact string", () => {
+      const filterToApply = ["Hunter Armstrong", "name"];
+      const expectedRows = [mergedSimpleOptionsSample.data.rows[134]];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH_IN_COLUMN",
+        payload: filterToApply
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        filterTerms: { name: "Hunter Armstrong" },
+        filterResultForEachColumn: {
+          name: expectedRows
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: expectedRows,
+          rowsToUse: expectedRows
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+
+    it("filter rows based on search term and column to apply the filter on - 0 result, not found", () => {
+      const filterToApply = ["Hunter12345", "name"];
+      const expectedRows = [];
+      const result = datatableReducer(mergedSimpleOptionsSample, {
+        type: "SEARCH_IN_COLUMN",
+        payload: filterToApply
+      });
+      const resultExpected = {
+        ...mergedSimpleOptionsSample,
+        filterTerms: { name: "Hunter12345" },
+        filterResultForEachColumn: {
+          name: expectedRows
+        },
+        pagination: {
+          ...mergedSimpleOptionsSample.pagination,
+          rowsCurrentPage: expectedRows,
+          rowsToUse: expectedRows
+        }
+      };
+      expect(equal(result, cloneDeep(resultExpected))).toBeTruthy();
+    });
+  });
+
   describe("should handle SET_USER_CONFIGURATION and", () => {
     it("save it", () => {
       const actions = jest.fn();
