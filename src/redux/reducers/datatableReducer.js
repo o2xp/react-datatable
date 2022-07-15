@@ -20,6 +20,7 @@ const optionsFuse = {
 };
 const defaultState = {
   title: "",
+  currentScreen: "",
   dimensions: {
     datatable: {
       width: "100%",
@@ -85,6 +86,7 @@ const defaultState = {
     canSelectRow: false,
     canSaveUserConfiguration: false,
     columnsPresetsToDisplay: [],
+    localStoragePresets: [],
     editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],
@@ -503,6 +505,9 @@ const initializeOptions = (
 
       newState = {
         ...newState,
+        localStoragePresets: JSON.parse(
+          localStorage.getItem(state.localStoragePresets)
+        ).filter(preset => preset.screen !== state.currentScreen),
         rowsEdited: newRowsEdited,
         newRows: newRowsAdded,
         rowsDeleted: newRowsDeleted,
@@ -1262,10 +1267,12 @@ const handlePresetDisplay = (state, payload) => {
   const columnsCurrentlyDisplayed =
     state.features.userConfiguration.columnsOrder;
   const predefinedPresets = state.features.columnsPresetsToDisplay;
-  const localPresets =
-    localStorage.getItem("presetList") === null
-      ? []
-      : JSON.parse(localStorage.getItem("presetList"));
+
+  const parsedPresetList = JSON.parse(localStorage.getItem("presetList"));
+  const localPresets = parsedPresetList.filter(
+    preset => preset.screen === state.currentScreen
+  );
+
   const allPresets = predefinedPresets.concat(localPresets);
   if (currentPreset.type === "predefinedPreset") {
     payload.isActive = !payload.isActive;
@@ -1275,7 +1282,7 @@ const handlePresetDisplay = (state, payload) => {
       preset => preset.presetName === currentPreset.presetName
     );
     localPresets[presetIndex].isActive = !localPresets[presetIndex].isActive;
-    localStorage.setItem("presetList", JSON.stringify(localPresets));
+    localStorage.setItem("presetList", JSON.stringify(parsedPresetList));
     currentPreset.isActive = !currentPreset.isActive;
   }
 

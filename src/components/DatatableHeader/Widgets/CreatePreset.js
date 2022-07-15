@@ -25,10 +25,15 @@ import {
 
 import Transition from "./Transition";
 
-import { textPropType, columnsPropType } from "../../../proptypes";
+import {
+  textPropType,
+  columnsPropType,
+  currentScreenPropType
+} from "../../../proptypes";
 
 export class CreatePreset extends Component {
   constructor(props) {
+    const { currentScreen } = props;
     super(props);
     this.state = {
       dialogOpen: false,
@@ -37,17 +42,21 @@ export class CreatePreset extends Component {
         presetName: "",
         columnsToShow: [],
         isActive: false,
+        screen: currentScreen,
         type: "localStoragePreset"
       }
     };
   }
 
   toggleDialog = bool => {
+    const { newPreset } = this.state;
     this.setState({
       dialogOpen: bool,
       newPreset: {
+        ...newPreset,
         presetName: "",
-        columnsToShow: []
+        columnsToShow: [],
+        isActive: false
       }
     });
   };
@@ -257,7 +266,8 @@ CreatePreset.propTypes = {
   createPresetDescription: textPropType,
   createPresetCancelBtn: textPropType,
   createPresetCreateBtn: textPropType,
-  columns: columnsPropType.isRequired
+  columns: columnsPropType.isRequired,
+  currentScreen: currentScreenPropType.isRequired
 };
 
 const mapStateToProps = state => {
@@ -269,8 +279,8 @@ const mapStateToProps = state => {
     createPresetDescription: state.textReducer.createPresetDescription,
     createPresetCancelBtn: state.textReducer.createPresetCancelBtn,
     createPresetCreateBtn: state.textReducer.createPresetCreateBtn,
-
-    columns: state.datatableReducer.data.columns
+    columns: state.datatableReducer.data.columns,
+    currentScreen: state.datatableReducer.currentScreen
   };
 };
 

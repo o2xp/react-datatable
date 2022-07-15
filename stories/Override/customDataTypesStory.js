@@ -1,10 +1,10 @@
 import React from "react";
 import { chunk } from "lodash";
 import { Datatable } from "../../src/index";
-import { storyOptionsSample, customDataTypesSample } from "../../data/samples";
+import { storyOptionsSample2, customDataTypesSample } from "../../data/samples";
 
 const refreshRows = () => {
-  const { rows } = storyOptionsSample.data;
+  const { rows } = storyOptionsSample2.data;
   const randomRows = Math.floor(Math.random() * rows.length) + 1;
   const randomTime = Math.floor(Math.random() * 4000) + 1000;
   const randomResolve = Math.floor(Math.random() * 10) + 1;
@@ -21,7 +21,7 @@ const refreshRows = () => {
 const customDataTypesStory = () => {
   return (
     <Datatable
-      options={storyOptionsSample}
+      options={storyOptionsSample2}
       forceRerender
       customDataTypes={customDataTypesSample}
       refreshRows={refreshRows}

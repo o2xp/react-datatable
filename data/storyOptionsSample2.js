@@ -6,9 +6,9 @@ import {
 } from "@material-ui/icons";
 import { title, keyColumn, data } from "./optionsObjectSample";
 import rows from "./rows";
-const storyOptionsSample = {
+const storyOptionsSample2 = {
   title,
-  currentScreen: "testScreen1",
+  currentScreen: "testScreen2",
   dimensions: {
     datatable: {
       width: "100%",
@@ -78,4 +78,4 @@ const storyOptionsSample = {
     ]
   }
 };
-export default storyOptionsSample;
+export default storyOptionsSample2;
