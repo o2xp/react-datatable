@@ -101,7 +101,7 @@ describe("RefreshRows component", () => {
 
     describe("open dialog", () => {
       it("", () => {
-        expect(wrapper.state("dialogOpen")).toBeTruthy();
+        expect(wrapper.state("dialogOpen")).toBeFalsy();
       });
       describe("and display error", () => {
         it("search message", () => {
