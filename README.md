@@ -125,7 +125,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .canGlobalEdit | boolean | no | false |  If the user can turn in edit mode all the rows. |
 | features .canPrint | boolean | no | false |  If you want stripped rows. |
 | features .canDownload | boolean | no | false |  If the user can download the data. |
-| features .canCreatePreset | boolean | no | false |  If the user can create preset(list of columns to display). |
+| features .canCreatePreset | boolean | no | false |  If the user can create preset(list of columns to display).  The created preset will be stored in the local storage.|
 | features .canSearch | boolean | no | false |  If the user can filter the data by text through a search input globally. |
 | features .canFilter | boolean | no | false |  If the user can filter the data by text through a search input based on different columns. |
 | features .canRefreshRows | boolean | no | false |  If the user can click to refresh the rows. |
