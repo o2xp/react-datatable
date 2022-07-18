@@ -269,3 +269,5 @@ Do you want to contribute to this project ? Great ! You can start by reading our
 
 ## Contributors
 * [**Morgan Dubois**](https://github.com/MorganDbs)
+* [**Mike Trieu**](https://github.com/tspanda)
+* [**Noé Carl**](https://github.com/CarlNoe)
