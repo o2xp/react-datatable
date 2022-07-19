@@ -1,4 +1,4 @@
-This example is regrouping the new options(create preset and multiple filter by columns) that offer the datatable.
+This example is regrouping the new options implemented(create preset and multiple filter by columns) that offer the datatable.
 
 [**Live implementation**](https://codesandbox.io/s/create-preset-filter-by-column-for-o2xp-react-datatable-ycxeql?file=/src/index.js)
 
@@ -8,7 +8,6 @@ In your file :
 import ReactDOM from "react-dom";
 import { Datatable } from "@o2xp/react-datatable";
 import React, { Component } from "react";
-import { CallSplit as CallSplitIcon } from "@material-ui/icons";
 
 const options = {
   title: "Test",
