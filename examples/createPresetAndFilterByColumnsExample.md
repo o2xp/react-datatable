@@ -2,6 +2,8 @@ This example is regrouping the new options implemented(create preset and multipl
 
 [**Live implementation**](https://codesandbox.io/s/create-preset-filter-by-column-for-o2xp-react-datatable-ycxeql?file=/src/index.js)
 
+PS : You can also fork the project, and then run the command : npm run storybook to see those features.
+
 In your file : 
 
 ```jsx
