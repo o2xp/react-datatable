@@ -11,6 +11,7 @@ import React, { Component } from "react";
 
 const options = {
   title: "Test",
+  currentScreen: "test",
   dimensions: {
     datatable: {
       width: "100%",
@@ -119,7 +120,6 @@ const options = {
     ],
     rows: [
       {
-        index: 0,
         id: "5cd9307025f4f0572995990f",
         name: "Hunt Valdez",
         age: 2,
@@ -129,7 +129,6 @@ const options = {
         eyeColor: "green"
       },
       {
-        index: 1,
         id: "5cd93070d21a6d52114fe3ef",
         name: "Oneil Osborn",
         age: 75,
@@ -139,7 +138,6 @@ const options = {
         eyeColor: "brown"
       },
       {
-        index: 2,
         id: "5cd930706cc8e22cc8480149",
         name: "Pennington Robinson",
         age: 54,
@@ -180,5 +178,6 @@ class App extends Component {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
+
 
 ```
