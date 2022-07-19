@@ -139,7 +139,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .rowsPerPage .available | array of number and string | no | [10, 25, 50, 100, "All"] |  An array with the numbers of rows per page you want available. |
 | features .rowsPerPage .selected | number or string | no | "All" |  The number of rows per page selected by default. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
-| features .columnsPresetsToDisplay | array of object | no | [ ] |  If you want to add predefined presets in the Display by presets Tab.  Click [here](#columns-presets-to-display-props)
+| features .columnsPresetsToDisplay | array of object | no | [ ] |  If you want to add predefined presets in the Display by presets Tab.  Click [here](#columns-presets-to-display-props) to have more information. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
