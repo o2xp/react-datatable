@@ -5,72 +5,57 @@ This example is regrouping all the options that offer the datatable.
 In your file : 
 
 ```jsx
-import ReactDOM from "react-dom";
-import { Datatable } from "@o2xp/react-datatable";
+// ES6
 import React, { Component } from "react";
-import { CallSplit as CallSplitIcon } from "@material-ui/icons";
+import { Datatable } from "@o2xp/react-datatable";
+import {
+  FreeBreakfast as CoffeeIcon,
+  CallSplit as CallSplitIcon
+} from "@material-ui/icons";
+import { chunk } from "lodash";
 
+// Advanced Example
 const options = {
-  title: "Test",
+  title: "My super datatable",
   dimensions: {
     datatable: {
-      width: "100%",
-      height: "70vh"
+      width: "90%",
+      height: "40%"
+    },
+    row: {
+      height: "48px"
     }
   },
   keyColumn: "id",
+  font: "Arial",
   data: {
     columns: [
       {
         id: "id",
         label: "id",
-        colSize: "200px",
-        editable: false,
-        required: true,
-        dataType: "text",
-        valueVerification: (val) => {
-          const error = val === "whatever";
-          const message = val === "whatever" ? "Value is not valid" : "";
-          return {
-            error,
-            message
-          };
-        }
+        colSize: "150px",
+        editable: false
       },
       {
         id: "name",
         label: "name",
         colSize: "100px",
         editable: true,
-        dataType: "text"
+        dataType: "text",
+        inputType: "input"
       },
       {
         id: "age",
         label: "age",
-        colSize: "60px",
+        colSize: "80px",
         editable: true,
         dataType: "number",
-        valueVerification: (val) => {
-          let error;
-          let message;
-          switch (true) {
-            case val > 100:
-              error = true;
-              message = "Value is too big";
-              break;
-            case val < 1:
-              error = true;
-              message = "Value is too low";
-              break;
-            default:
-              error = false;
-              message = "";
-              break;
-          }
-
+        valueVerification: val => {
+          let error = val > 100 ? true : false;
+          let message = val > 100 ? "Value is too big" : "";
           return {
-            error,
-            message
+            error: error,
+            message: message
           };
         }
       },
@@ -79,75 +64,83 @@ const options = {
         label: "adult",
         colSize: "50px",
         editable: true,
-        dataType: "boolean"
+        dataType: "boolean",
+        inputType: "checkbox"
       },
       {
         id: "birthDate",
         label: "birth date",
-        colSize: "180px",
-        editable: true,
-        dataType: "dateTime",
-        dateFormatIn: "YYYY-MM-DDTHH:mm",
-        dateFormatOut: "YYYY-MM-DDTHH:mm",
-        valueVerification: (val) => {
-          if (new Date().getTime() < new Date(val).getTime()) {
-            return {
-              error: true,
-              message: "Date can't be in the futur"
-            };
-          }
-          return {
-            error: false,
-            message: ""
-          };
-        }
-      },
-      {
-        id: "eyeColor",
-        label: "eyeColor",
         colSize: "120px",
         editable: true,
-        inputType: "select",
-        values: ["blue", "brown", "green"]
+        dataType: "date",
+        inputType: "datePicker",
+        dateFormatIn: "YYYY-MM-DDTHH:MM:ss"
+        dateFormatOut: "YYYY-MM-DDTHH:MM:ss"
       },
       {
-        id: "iban",
-        label: "iban",
-        colSize: "250px",
-        editable: false,
-        dataType: "iban"
+        id: "color",
+        label: "color",
+        colSize: "100px",
+        editable: true,
+        inputType: "select",
+        values: ["green", "blue", "brown"]
+      },
+      {
+        id: "creditCard",
+        label: "Credit Card",
+        colSize: "150px",
+        editable: true,
+        inputType: "input",
+        mask: [
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/
+        ]
       }
     ],
     rows: [
       {
-        index: 0,
-        id: "5cd9307025f4f0572995990f",
-        name: "Hunt Valdez",
-        age: 2,
+        id: "50cf",
+        age: 28,
+        name: "Kerr Mayo",
+        adult: true,
+        birthDate: "1972-09-04T11:09:59",
+        color: "green",
+        creditCard: "4478 7842 2486 8743"
+      },
+      {
+        id: "209",
+        age: 34,
+        name: "Freda Bowman",
+        adult: true,
+        birthDate: "1988-03-14T09:03:19",
+        color: "blue",
+        creditCard: "7845 5789 4236 7861"
+      },
+      {
+        id: "2dd81ef",
+        age: 14,
+        name: "Becky Lawrence",
         adult: false,
-        birthDate: "2017-06-02T11:22",
-        iban: "",
-        eyeColor: "green"
-      },
-      {
-        index: 1,
-        id: "5cd93070d21a6d52114fe3ef",
-        name: "Oneil Osborn",
-        age: 75,
-        adult: true,
-        birthDate: "1944-12-08T04:35",
-        iban: "FR9436905982392049415972699",
-        eyeColor: "brown"
-      },
-      {
-        index: 2,
-        id: "5cd930706cc8e22cc8480149",
-        name: "Pennington Robinson",
-        age: 54,
-        adult: true,
-        birthDate: "1965-02-12T18:38",
-        iban: "",
-        eyeColor: "brown"
+        birthDate: "1969-02-10T04:02:44",
+        color: "green",
+        creditCard: ""
       }
     ]
   },
@@ -161,65 +154,64 @@ const options = {
     canRefreshRows: true,
     canOrderColumns: true,
     canSelectRow: true,
-    canCreatePreset: true,
     canSaveUserConfiguration: true,
-    columnsPresetsToDisplay: [
-      {
-        presetName: "Show blue columns",
-        columnsToShow: ["id", "name", "age"],
-        isActive: false,
-        type: "predefinedPreset"
-      },
-      {
-        presetName: "Show one columns",
-        columnsToShow: ["age"],
-        isActive: false,
-        type: "predefinedPreset"
-      }
-    ],
     userConfiguration: {
-      columnsOrder: [
-        "id",
-        "name",
-        "age",
-        "adult",
-        "birthDate",
-        "eyeColor",
-        "iban"
-      ],
+      columnsOrder: ["id", "name", "age", "birthDate", "creditCard", "color"],
       copyToClipboard: true
     },
-    selectionIcons: [
-      {
-        title: "Action 1",
-        icon: <CallSplitIcon color="secondary" />,
-        onClick: (res) => alert(`You have dispatched ${res.length} rows !`)
-      }
-    ],
-    additionalActions: [
-      {
-        title: "Action 3",
-        icon: <CallSplitIcon color="primary" />,
-        onClick: (res) => alert(res)
-      }
-    ],
+    rowsPerPage: {
+      available: [10, 25, 50, 100],
+      selected: 50
+    },
     additionalIcons: [
       {
-        title: "Action 3",
+        title: "Coffee",
+        icon: <CoffeeIcon color="primary" />,
+        onClick: () => alert("Coffee Time!")
+      }
+    ],
+    selectionIcons: [
+      {
+        title: "Selected Rows",
         icon: <CallSplitIcon color="primary" />,
-        onClick: () => alert("Coffee Time")
+        onClick: rows => console.log(rows)
       }
     ]
   }
 };
 
 class App extends Component {
+  actionsRow = ({ type, payload }) => {
+    console.log(type);
+    console.log(payload);
+  };
+
+  refreshRows = () => {
+    const { rows } = options.data;
+    const randomRows = Math.floor(Math.random() * rows.length) + 1;
+    const randomTime = Math.floor(Math.random() * 4000) + 1000;
+    const randomResolve = Math.floor(Math.random() * 10) + 1;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (randomResolve > 3) {
+          resolve(chunk(rows, randomRows)[0]);
+        }
+        reject(new Error("err"));
+      }, randomTime);
+    });
+  };
+
   render() {
-    return <Datatable options={options} />;
+    return (
+      <Datatable
+        options={options}
+        refreshRows={this.refreshRows}
+        actions={this.actionsRow}
+      />
+    );
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+export default App;
 
 ```
