@@ -241,6 +241,12 @@ Additional selection icons is an array of object construct with these keys :
 | drag | string | no | "Drag" |
 | paginationRows | string | no | "Rows" |
 | paginationPage | string | no | "Page" |
+| createPresetTitle | string | no | "Create New Preset" |
+| createPresetDescription | string | no | "Select the columns to save in the preset" |
+| createPresetTooltipText | string | no | "Create a new preset" |
+| createPresetNamingPlaceholder | string | no | "Preset name" |
+| createPresetCancelBtn | string | no | "Cancel" |
+| createPresetCreateBtn | string | no | "Create" |
 
 ## Overriding
 
