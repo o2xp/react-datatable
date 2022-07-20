@@ -272,6 +272,7 @@ const setPagination = ({
   newRowsPerPageSelected = null
 }) => {
   const { filterTerms, searchTerm, orderBy, filterResultForEachColumn } = state;
+
   let rowsToUse = state.data.rows;
 
   const filterTermsKeys = Object.keys(filterTerms);
@@ -1327,7 +1328,6 @@ const handlePresetDisplay = (state, payload) => {
   );
 
   const allPresets = predefinedPresets.concat(localPresets);
-
   if (currentPreset.type === "predefinedPreset") {
     payload.isActive = !payload.isActive;
   } else {
@@ -1367,7 +1367,6 @@ const handlePresetDisplay = (state, payload) => {
   if (!currentPreset.isActive && activePresets.length >= 1) {
     // If there are more than 2 preset selected and you remove one, remove the columns used by the selected preset and not used by the others
     newColumnsOrder = columnsCurrentlyDisplayed;
-
     const activePresetsAllColumns = [];
     activePresets.forEach(activePreset => {
       activePreset.columnsToShow.forEach(col => {

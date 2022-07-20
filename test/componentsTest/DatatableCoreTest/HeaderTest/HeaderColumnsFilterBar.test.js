@@ -61,7 +61,7 @@ describe("HeaderColumnsFilterBar component should filter", () => {
         />
       </Provider>
     );
-    expect(wrapper.text()).toEqual("<Connect(HeaderColumnsFilterBar) />");
+    expect(wrapper.text()).toEqual("");
   });
 
 });
