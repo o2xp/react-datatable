@@ -116,6 +116,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | dimensions .datatable .height | string | no | "300px" |  Height of the Datatable. (in vh / px / %) |
 | dimensions .row .height | string | no | "33px" |  Height of each row of the Datatable. (in px) Minimum 33px. |
 | keyColumn | string | yes | / |  Name of the column that has unique value and allows to identify a row. |
+| currentScreen | string | no | / |  Name of the screen that will used to differentiate created presets. If you put the same string for 2 datatables, it will show the same created presets. |
 | font | string | no | "Roboto" | Name of the font you are using. It allows the datatable to calculate the overlapping of cells. |
 | data .columns | array of object | yes | / |  An array of objects where each object is defined by this keys. Click [here](#column-props) to have more information. |
 | data .rows | array of object | yes | / |  An array of objects where each object is defined by the columns identifier as key and the value. Click [here](#rows-props) to have more information. |
@@ -124,7 +125,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .canGlobalEdit | boolean | no | false |  If the user can turn in edit mode all the rows. |
 | features .canPrint | boolean | no | false |  If you want stripped rows. |
 | features .canDownload | boolean | no | false |  If the user can download the data. |
-| features .canCreatePreset | boolean | no | false |  If the user can create preset(list of columns to display). |
+| features .canCreatePreset | boolean | no | false |  If the user can create preset(list of columns to display).  The created preset will be stored in the local storage.|
 | features .canSearch | boolean | no | false |  If the user can filter the data by text through a search input globally. |
 | features .canFilter | boolean | no | false |  If the user can filter the data by text through a search input based on different columns. |
 | features .canRefreshRows | boolean | no | false |  If the user can click to refresh the rows. |
@@ -138,7 +139,7 @@ To go **further** check all [**examples**](https://github.com/o2xp/react-datatab
 | features .rowsPerPage .available | array of number and string | no | [10, 25, 50, 100, "All"] |  An array with the numbers of rows per page you want available. |
 | features .rowsPerPage .selected | number or string | no | "All" |  The number of rows per page selected by default. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
-| features .columnsPresetsToDisplay | array of object | no | [ ] |  If you want to add predefined presets in the Display by presets Tab.  Click [here](#columns-presets-to-display-props)
+| features .columnsPresetsToDisplay | array of object | no | [ ] |  If you want to add predefined presets in the Display by presets Tab.  Click [here](#columns-presets-to-display-props) to have more information. |
 | features .additionalIcons | array of object | no | [ ] |  If you want to add icon which trigger a function. Click [here](#additional-icons-props) to have more information. |
 | features .selection .selectionIcons | array of object | no | [ ] |  If you want to add icon which execute a function with the rows selected. Click [here](#additional-selection-icons-props) to have more information. |
 
@@ -240,6 +241,12 @@ Additional selection icons is an array of object construct with these keys :
 | drag | string | no | "Drag" |
 | paginationRows | string | no | "Rows" |
 | paginationPage | string | no | "Page" |
+| createPresetTitle | string | no | "Create New Preset" |
+| createPresetDescription | string | no | "Select the columns to save in the preset" |
+| createPresetTooltipText | string | no | "Create a new preset" |
+| createPresetNamingPlaceholder | string | no | "Preset name" |
+| createPresetCancelBtn | string | no | "Cancel" |
+| createPresetCreateBtn | string | no | "Create" |
 
 ## Overriding
 
@@ -268,3 +275,5 @@ Do you want to contribute to this project ? Great ! You can start by reading our
 
 ## Contributors
 * [**Morgan Dubois**](https://github.com/MorganDbs)
+* [**Mike Trieu**](https://github.com/tspanda)
+* [**Noé Carl**](https://github.com/CarlNoe)
