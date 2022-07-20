@@ -451,6 +451,36 @@ const updateRows = ({
   return { newRowsEdited, newRowsAdded, newRowsDeleted, newRowsGlobalEdited };
 };
 
+const getColumnOrderFromActivePresets = state => {
+  const { columnsOrder } = state.features.userConfiguration;
+  const { currentScreen } = state;
+  const { localStoragePresets } = state.features;
+
+  if (localStoragePresets === null || localStoragePresets === undefined)
+    return columnsOrder;
+
+  const currentScreenLocalPresets = localStoragePresets.filter(
+    preset => preset.screen === currentScreen
+  );
+
+  const currentScreenActivePresets = currentScreenLocalPresets.filter(
+    preset => preset.isActive
+  );
+
+  let newColumnOrder = ["o2xpActions"];
+  if (currentScreenActivePresets.length > 0) {
+    currentScreenActivePresets.forEach(preset => {
+      newColumnOrder = [
+        ...new Set([...newColumnOrder, ...preset.columnsToShow])
+      ];
+    });
+  } else {
+    newColumnOrder = columnsOrder;
+  }
+
+  return newColumnOrder;
+};
+
 const initializeOptions = (
   state,
   {
@@ -505,13 +535,16 @@ const initializeOptions = (
 
       newState = {
         ...newState,
-        localStoragePresets: JSON.parse(
-          localStorage.getItem(state.localStoragePresets)
-        ).filter(preset => preset.screen !== state.currentScreen),
         rowsEdited: newRowsEdited,
         newRows: newRowsAdded,
         rowsDeleted: newRowsDeleted,
-        rowsGlobalEdited: newRowsGlobalEdited
+        rowsGlobalEdited: newRowsGlobalEdited,
+        features: {
+          ...newState.features,
+          localStoragePresets: JSON.parse(
+            localStorage.getItem("presetList")
+          ).filter(preset => preset.screen === state.currentScreen).features
+        }
       };
     }
   }
@@ -644,6 +677,27 @@ const initializeOptions = (
 
   newState.dimensions.body.heightNumber =
     heightNumber - newState.dimensions.header.heightNumber - 50 - 70;
+
+  newState = {
+    ...newState,
+    features: {
+      ...newState.features,
+      localStoragePresets: JSON.parse(localStorage.getItem("presetList"))
+    }
+  };
+
+  newState = {
+    ...newState,
+    features: {
+      ...newState.features,
+      userConfiguration: {
+        ...newState.features.userConfiguration,
+        columnsOrder: getColumnOrderFromActivePresets(newState)
+      }
+    }
+  };
+
+  console.log("state2", newState);
 
   return newState;
 };
