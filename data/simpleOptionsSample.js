@@ -1,7 +1,8 @@
-import { title, keyColumn, data, selectionIcons } from "./optionsObjectSample";
+import { title, keyColumn, data, selectionIcons, currentScreen } from "./optionsObjectSample";
 
 const simpleOptionsSample = {
   title,
+  currentScreen,
   dimensions: {
     datatable: {
       width: "90vw",

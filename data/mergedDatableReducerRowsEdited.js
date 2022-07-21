@@ -1,5 +1,6 @@
 import {
   title,
+  currentScreen,
   dimensions,
   keyColumn,
   font,
@@ -25,6 +26,7 @@ import {
 
 const mergedDatableReducerRowsEdited = {
   title,
+  currentScreen,
   dimensions: {
     ...dimensions,
     datatable: {

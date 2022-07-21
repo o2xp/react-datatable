@@ -3,6 +3,7 @@ import { CallSplit as CallSplitIcon } from "@material-ui/icons";
 import rows from "./rows";
 
 export const title = "My super datatable";
+export const currentScreen = "";
 export const datatable = {
   width: "90vw",
   height: "40vh",
@@ -212,6 +213,7 @@ export const features = {
   canSelectRow: true,
   canOrderColumns: false,
   canSaveUserConfiguration: false,
+  localStoragePresets: null,
   editableIdNewRow: [],
   columnsPresetsToDisplay: [],
   userConfiguration,

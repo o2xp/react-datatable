@@ -533,6 +533,8 @@ const initializeOptions = (
         keyColumn
       });
 
+      const presetList = JSON.parse(localStorage.getItem("presetList"));
+
       newState = {
         ...newState,
         rowsEdited: newRowsEdited,
@@ -541,9 +543,10 @@ const initializeOptions = (
         rowsGlobalEdited: newRowsGlobalEdited,
         features: {
           ...newState.features,
-          localStoragePresets: JSON.parse(
-            localStorage.getItem("presetList")
-          ).filter(preset => preset.screen === state.currentScreen).features
+          localStoragePresets: presetList
+            ? presetList.filter(preset => preset.screen === state.currentScreen)
+                .features
+            : presetList
         }
       };
     }
@@ -696,8 +699,6 @@ const initializeOptions = (
       }
     }
   };
-
-  console.log("state2", newState);
 
   return newState;
 };
@@ -1323,9 +1324,9 @@ const handlePresetDisplay = (state, payload) => {
   const predefinedPresets = state.features.columnsPresetsToDisplay;
 
   const parsedPresetList = JSON.parse(localStorage.getItem("presetList"));
-  const localPresets = parsedPresetList.filter(
-    preset => preset.screen === state.currentScreen
-  );
+  const localPresets = parsedPresetList
+    ? parsedPresetList.filter(preset => preset.screen === state.currentScreen)
+    : parsedPresetList;
 
   const allPresets = predefinedPresets.concat(localPresets);
   if (currentPreset.type === "predefinedPreset") {

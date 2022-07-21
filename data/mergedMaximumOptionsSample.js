@@ -1,5 +1,6 @@
 import { chunk } from "lodash";
 import {
+  currentScreen,
   dimensions,
   keyColumn,
   font,
@@ -26,6 +27,7 @@ import {
 
 const mergedMaximumOptionsSample = {
   title: "My super datatable",
+  currentScreen,
   dimensions: {
     ...dimensions,
     datatable: {
@@ -72,6 +74,7 @@ const mergedMaximumOptionsSample = {
     canDownload: true,
     canDuplicate: true,
     canSearch: true,
+    localStoragePresets: null,
     canFilter: true,
     canDelete: true,
     canRefreshRows: true,
