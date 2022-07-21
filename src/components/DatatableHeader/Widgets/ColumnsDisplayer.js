@@ -75,9 +75,9 @@ export class ColumnsDisplayer extends Component {
     } = this.props;
 
     const parsedPresetList = JSON.parse(localStorage.getItem("presetList"));
-    const localPresets = parsedPresetList.filter(
-      preset => preset.screen === currentScreen
-    );
+    const localPresets = parsedPresetList
+      ? parsedPresetList.filter(preset => preset.screen === currentScreen)
+      : parsedPresetList;
 
     const allPresets = columnsPresetsToDisplay.concat(localPresets);
 

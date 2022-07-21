@@ -1,5 +1,6 @@
 const defaultOptionsSample = {
   title: "",
+  currentScreen: "",
   dimensions: {
     datatable: {
       width: "100%",
@@ -65,6 +66,7 @@ const defaultOptionsSample = {
     canOrderColumns: false,
     canSaveUserConfiguration: false,
     columnsPresetsToDisplay: [],
+    localStoragePresets: [],
     editableIdNewRow: [],
     userConfiguration: {
       columnsOrder: [],

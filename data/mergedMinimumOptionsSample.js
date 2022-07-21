@@ -1,4 +1,5 @@
 import {
+  currentScreen,
   dimensions,
   keyColumn,
   font,
@@ -19,11 +20,12 @@ import {
   areFilterFieldsDisplayed,
   isSearchFieldDisplayed,
   filterTerms,
-  filterResultForEachColumn,
+  filterResultForEachColumn
 } from "./optionsObjectSample";
 
 const mergedMinimumOptionsSample = {
   title: "",
+  currentScreen,
   dimensions: {
     ...dimensions,
     datatable: {
@@ -70,6 +72,7 @@ const mergedMinimumOptionsSample = {
     canSearch: false,
     canDelete: false,
     canSelectRow: false,
+    localStoragePresets: null,
     canCreatePreset: false,
     columnsPresetsToDisplay: [],
     canRefreshRows: false,

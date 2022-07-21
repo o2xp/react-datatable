@@ -26,6 +26,7 @@ import {
 
 const mergedSimpleOptionsSample = {
   title,
+  currentScreen: "",
   dimensions: {
     ...dimensions,
     datatable: {

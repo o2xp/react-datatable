@@ -1,5 +1,6 @@
 import {
   title,
+  currentScreen,
   dimensions,
   keyColumn,
   font,
@@ -26,6 +27,7 @@ import {
 
 const mergedSimpleOptionsSampleCustomSize = {
   title,
+  currentScreen,
   dimensions: {
     ...dimensions,
     datatable: {

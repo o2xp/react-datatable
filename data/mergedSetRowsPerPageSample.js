@@ -1,6 +1,7 @@
 import { chunk } from "lodash";
 import {
   title,
+  currentScreen,
   dimensions,
   keyColumn,
   font,
@@ -26,6 +27,7 @@ import {
 
 const mergedSetRowsPerPageSample = {
   title,
+  currentScreen,
   dimensions: {
     ...dimensions,
     datatable: {
