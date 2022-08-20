@@ -23,6 +23,7 @@ export const toggleSearchFieldDisplayPropType = PropTypes.func.isRequired;
 export const filterInColumnPropType = PropTypes.func.isRequired;
 export const setMultipleColumnsVisibilityPropType = PropTypes.func.isRequired;
 export const handlePresetDisplayPropType = PropTypes.func.isRequired;
+export const notifyOnPresetCreationPropType = PropTypes.func.isRequired;
 export const searchPropType = PropTypes.func.isRequired;
 export const toggleSnackbarPropType = PropTypes.func.isRequired;
 export const setUserConfigurationPropType = PropTypes.func.isRequired;

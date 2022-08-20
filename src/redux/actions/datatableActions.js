@@ -119,6 +119,20 @@ export const handlePresetDisplay = payload => ({
   payload
 });
 
+export const notifyOnPresetCreation = payload => {
+  return dispatch => {
+    dispatch(
+      enqueueSnackbar({
+        message: payload.message,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: payload.variant
+        }
+      })
+    );
+  };
+};
+
 export const setUserConfiguration = payload => ({
   type: "SET_USER_CONFIGURATION",
   payload
