@@ -22,13 +22,15 @@ import {
   Checkbox,
   Button
 } from "@material-ui/core";
+import { notifyOnPresetCreation as notifyOnPresetCreationAction } from "../../../redux/actions/datatableActions";
 
 import Transition from "./Transition";
 
 import {
   textPropType,
   columnsPropType,
-  currentScreenPropType
+  currentScreenPropType,
+  notifyOnPresetCreationPropType
 } from "../../../proptypes";
 
 export class CreatePreset extends Component {
@@ -134,19 +136,27 @@ export class CreatePreset extends Component {
   handleCreatePreset = () => {
     const { newPreset } = this.state;
     const { presetName, columnsToShow } = newPreset;
+    const { notifyOnPresetCreation } = this.props;
 
     const localPresetList = localStorage.getItem("presetList");
+    const notificationData = { message: "Error", variant: "error" };
 
     if (presetName.length > 0 && columnsToShow.length > 0) {
       this.storePresetsInLocalStorage(localPresetList);
       this.setState({ newPreset: { presetName: "", columnsToShow: [] } });
       this.toggleDialog(false);
-      // TODO: Add a success pop up
+
+      notificationData.message = "Preset created";
+      notificationData.variant = "success";
     } else if (presetName.length <= 0) {
-      // TODO: Add pop up "Please enter a preset name"
+      notificationData.message = "Please enter a name";
+      notificationData.variant = "error";
     } else if (columnsToShow.length <= 0) {
-      // TODO: Add pop up "Please select at least one column"
+      notificationData.message = "Please select at least one column";
+      notificationData.variant = "error";
     }
+
+    notifyOnPresetCreation(notificationData);
   };
 
   render() {
@@ -260,6 +270,7 @@ export class CreatePreset extends Component {
 }
 
 CreatePreset.propTypes = {
+  notifyOnPresetCreation: notifyOnPresetCreationPropType,
   createPresetTooltipText: textPropType,
   createPresetTitle: textPropType,
   createPresetNamingPlaceholder: textPropType,
@@ -284,8 +295,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = () => {
-  return {};
+const mapDispatchToProps = dispatch => {
+  return {
+    notifyOnPresetCreation: notificationData =>
+      dispatch(notifyOnPresetCreationAction(notificationData))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePreset);
