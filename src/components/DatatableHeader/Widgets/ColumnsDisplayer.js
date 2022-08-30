@@ -82,15 +82,18 @@ export class ColumnsDisplayer extends Component {
     const allPresets = columnsPresetsToDisplay.concat(localPresets);
 
     return allPresets.map(preset => {
-      return (
-        <MenuItem
-          key={preset.presetName}
-          onClick={() => handlePresetDisplay(preset)}
-        >
-          <Checkbox checked={preset.isActive} color="primary" />
-          {preset.presetName}
-        </MenuItem>
-      );
+      if (preset != null) {
+        return (
+          <MenuItem
+            key={preset.presetName}
+            onClick={() => handlePresetDisplay(preset)}
+          >
+            <Checkbox checked={preset.isActive} color="primary" />
+            {preset.presetName}
+          </MenuItem>
+        );
+      }
+      return <></>;
     });
   };
 
